@@ -46,4 +46,8 @@ public class User {
     @Column(nullable = false)
     private  Role role;
 
+    @ManyToOne
+    private  Store store;
+
+
 }

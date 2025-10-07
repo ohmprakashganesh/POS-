@@ -50,6 +50,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         User user1= Mappings.dtoToUser(userDto);
+        user1.setPassword(passwordEncoder.encode(user1.getPassword()));
 
        User user2= userRepo.save(user1);
 

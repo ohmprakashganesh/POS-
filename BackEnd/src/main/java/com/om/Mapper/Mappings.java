@@ -11,6 +11,7 @@ public class Mappings {
         userDto.setName(user.getName());
         userDto.setPhone(user.getPhone());
         userDto.setEmail(user.getEmail());
+        userDto.setPassword(user.getPassword());
         userDto.setCreatedAt(user.getCreatedAt());
         userDto.setLastLogin(user.getLastLogin());
         userDto.setUpdatedAt(user.getUpdatedAt());
@@ -24,6 +25,7 @@ public class Mappings {
         user.setName(userDto.getName());
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
         user.setCreatedAt(userDto.getCreatedAt());
         user.setLastLogin(userDto.getLastLogin());
         user.setUpdatedAt(userDto.getUpdatedAt());
