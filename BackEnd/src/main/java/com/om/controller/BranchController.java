@@ -21,6 +21,10 @@ public class BranchController {
        return ResponseEntity.ok( branchService.createBranch(branchDto,null)) ;
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<BranchDto> updateBranch(@PathVariable Long id, @RequestBody BranchDto branchDto){
+        return ResponseEntity.ok( branchService.updateBranch(id,branchDto)) ;
+    }
     @GetMapping("/{id}")
     public ResponseEntity<BranchDto> GetBranchById(@PathVariable Long id){
         return ResponseEntity.ok( branchService.getBrandById(id)) ;
@@ -31,10 +35,7 @@ public class BranchController {
         return ResponseEntity.ok( branchService.getAllBranchesByStoreId(id)) ;
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<BranchDto> updateBranch(@PathVariable Long id, @RequestBody BranchDto branchDto){
-        return ResponseEntity.ok( branchService.updateBranch(id,branchDto)) ;
-    }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteBranch(@PathVariable Long id){

@@ -15,6 +15,8 @@ public class Mappings {
         userDto.setCreatedAt(user.getCreatedAt());
         userDto.setLastLogin(user.getLastLogin());
         userDto.setUpdatedAt(user.getUpdatedAt());
+        userDto.setBranchId(user.getBranch().getId());
+        userDto.setStoreId(user.getStore().getId());
         userDto.setRole(user.getRole());
         return  userDto;
     }

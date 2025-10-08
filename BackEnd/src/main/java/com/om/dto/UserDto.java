@@ -33,4 +33,7 @@ public class UserDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime lastLogin;
+
+    private  Long branchId;
+    private  Long storeId;
 }
