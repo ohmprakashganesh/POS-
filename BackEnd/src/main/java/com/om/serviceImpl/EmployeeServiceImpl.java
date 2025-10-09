@@ -58,7 +58,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
      Branch branch = branchRepo.findById(branchId).orElseThrow(()-> new RuntimeException("branch not found"));
 
-     if(employee.getRole()!=Role.BRANCH_CASHIER ||
+     if(employee.getRole()==Role.BRANCH_CASHIER ||
      employee.getRole()==Role.BRANCH_MANAGER
      ){
          User user= Mappings.dtoToUser(employee);
@@ -72,20 +72,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public User updateEmployee(Long employeeId, UserDto employee) throws Exception {
+    public User updateEmployee(Long employeeId, UserDto userDto) throws Exception {
 
+        if (employeeId == null) {
+            throw new IllegalArgumentException("Employee ID cannot be null");
+        }
+        if (userDto.getBranchId() == null) {
+            throw new IllegalArgumentException("Branch ID cannot be null");
+        }
 
-        User existing= userRepo.findById(employeeId).orElseThrow(()->  new RuntimeException("employees does not exist in branch "));
+        User existing = userRepo.findById(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee does not exist"));
 
-        Branch branch=branchRepo.findById(employee.getBranchId()).orElseThrow(()-> new RuntimeException("not found branch "));
+        Branch branch = branchRepo.findById(existing.getBranch().getId())
+                .orElseThrow(() -> new RuntimeException("Branch not found"));
 
-        existing.setEmail(employee.getEmail());
-        existing.setUpdatedAt(employee.getUpdatedAt());
-        existing.setPassword(employee.getPassword());
-        existing.setName(employee.getName());
-        existing.setPhone(employee.getPhone());
+        existing.setEmail(userDto.getEmail());
+        existing.setUpdatedAt(userDto.getUpdatedAt());
+        existing.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        existing.setName(userDto.getName());
+        existing.setPhone(userDto.getPhone());
         existing.setBranch(branch);
-
         return userRepo.save(existing);
     }
 
@@ -108,8 +115,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<User> findBranchEmployees(Long branchId, Role role) {
         Branch branch= branchRepo.findById(branchId).orElseThrow(()-> new RuntimeException("not found store with id "+ branchId));
-        return  userRepo.findByBranchId(branchId).stream().filter(
-                user -> role==null || user.getRole()==role
-        ).collect(Collectors.toList());
+        return  userRepo.findByBranch(branch);
     }
 }

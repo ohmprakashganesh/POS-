@@ -28,7 +28,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/update/{employeeId}")
-    public User updateEmployee(@PathVariable Long employeeId, @RequestBody UserDto employee) throws Exception {
+    public User updateEmployee(@PathVariable("employeeId") Long employeeId, @RequestBody UserDto employee) throws Exception {
         return userService.updateEmployee(employeeId, employee);
     }
 
@@ -46,5 +46,4 @@ public class EmployeeController {
     public List<User> findBranchEmployees(@PathVariable Long branchId, @RequestParam(required = false) Role role) {
         return userService.findBranchEmployees(branchId, role);
     }
-
 }
