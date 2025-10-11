@@ -12,7 +12,7 @@ public class OrderMappings {
        OrderDto orderDto= new OrderDto();
         orderDto.setId(order.getId());
         orderDto.setTotalAmount(order.getTotalAmount());
-        orderDto.setBranchId(orderDto.getBranch().getId());
+        orderDto.setBranchId(order.getBranch().getId());
         orderDto.setCashier(Mappings.userToDto(order.getCashier()));
         orderDto.setCustomer(order.getCustomer());
         orderDto.setPaymentType(order.getPaymentType());

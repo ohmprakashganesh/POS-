@@ -21,7 +21,6 @@ public class EmployeeController {
     public UserDto createStoreEmployee(@RequestBody UserDto employee, @PathVariable Long storeId) throws Exception {
         return userService.createStoreEmployee(employee, storeId);
     }
-
     @PostMapping("/branch/{branchId}")
     public UserDto createBranchEmployee(@RequestBody UserDto employee, @PathVariable Long branchId) throws Exception {
         return userService.createBranchEmployee(employee, branchId);

@@ -6,13 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity()
+@Table(name = "orders")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,8 +36,13 @@ public class Order {
     private Customer customer;
 
 
-    @OneToMany
-    private List<OrderItems> items;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItems> items=new ArrayList<>();
+
+    @PrePersist
+    protected  void onCreate(){
+        createdAt=LocalDateTime.now();
+    }
 
 
 }

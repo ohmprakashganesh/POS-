@@ -12,6 +12,7 @@ public class OrderItemsMappings {
         OrderItemsDto dto= new OrderItemsDto();
         dto.setId(orderItems.getId());
         dto.setProductId(orderItems.getProduct().getId());
+        dto.setOrderId(orderItems.getProduct().getId());
         dto.setProduct(ProductMappings.productToDto(orderItems.getProduct()));
         dto.setPrice(orderItems.getPrice());
         dto.setQuantity(orderItems.getQuantity());

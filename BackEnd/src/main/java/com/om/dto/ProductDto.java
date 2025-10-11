@@ -23,6 +23,8 @@ public class ProductDto {
 
         private  Double mrp;
 
+        private  double sellingPrice;
+
         private String brand;
 
         private  CateogryDto cateogryDto;

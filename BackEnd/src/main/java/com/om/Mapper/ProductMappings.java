@@ -18,6 +18,7 @@ public class ProductMappings {
         product.setSku(dto.getSku());
         product.setDescription(dto.getDescription());
         product.setMrp(dto.getMrp());
+        product.setSellingPrice(dto.getSellingPrice());
         product.setStore(store);
         product.setBrand(dto.getBrand());
         product.setImage(dto.getImage());
@@ -43,6 +44,7 @@ public class ProductMappings {
         dto.setCateogryDto(CategoryMappings.categoryToDto(product.getCategory()));
         dto.setCreatedAt(product.getCreatedAt());
         dto.setUpdatedAt(product.getUpdatedAt());
+        dto.setSellingPrice(product.getSellingPrice());
         return dto;
     }
 
@@ -55,6 +57,7 @@ public class ProductMappings {
         product.setBrand(dto.getBrand());
         product.setImage(dto.getImage());
         product.setUpdatedAt(dto.getUpdatedAt());
+        product.setSellingPrice(dto.getSellingPrice());
         return product;
     }
 

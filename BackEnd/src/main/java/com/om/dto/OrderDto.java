@@ -6,6 +6,7 @@ import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -27,6 +28,6 @@ public class OrderDto {
 
     private Customer customer;
 
-    private List<OrderItemsDto> items;
+    private List<OrderItemsDto> items=new ArrayList<>();
 
 }

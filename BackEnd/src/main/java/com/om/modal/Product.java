@@ -26,6 +26,8 @@ public class Product {
 
     private  Double mrp;
 
+    private  Double sellingPrice;
+
     private String brand;
 
     private  String image;
