@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react'
+import { useTranslation } from 'react-i18next'   // ✅ correct hook
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { t, i18n } = useTranslation(); // ✅ correct usage
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === "en" ? "np" : "en");
+  };
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Wel come the Byte Gurkha</h1>
+        <h2>First POS system</h2>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+
+      <div className="p-4">
+        <h1>{t("welcome")}</h1>
+        <button 
+          onClick={toggleLanguage} 
+          className="bg-blue-500 text-white p-2 rounded"
+        >
+          {t("toggle")}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
