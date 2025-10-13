@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusIcon, MagnifyingGlassIcon, PencilIcon, TrashIcon, UserIcon } from '@heroicons/react/24/outline';
-import { customersData } from '../../data/mockData';
+import { customersData } from '../../../data/mockData';
 
 const CustomerList = () => {
   const [customers, setCustomers] = useState([]);

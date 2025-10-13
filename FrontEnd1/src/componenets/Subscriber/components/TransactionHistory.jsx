@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MagnifyingGlassIcon, DocumentTextIcon, EyeIcon } from '@heroicons/react/24/outline';
-import { transactionsData } from '../../data/mockData';
+import { transactionsData } from '../../../data/mockData';
 
 const TransactionHistory = () => {
   const [transactions, setTransactions] = useState([]);

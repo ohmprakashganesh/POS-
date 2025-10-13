@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusIcon, MagnifyingGlassIcon, PencilIcon, TrashIcon, CubeIcon } from '@heroicons/react/24/outline';
-import { DUMMY_PRODUCTS } from '../../data/mockData';
+import { DUMMY_PRODUCTS } from '../../../data/mockData';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -93,15 +93,16 @@ const   handleUpdate = (product) => {
         </div>
       </div>
  <div className="p-4 sm:p-6">
+
       {/* Grid Container */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 gap-2">
         {filteredProducts.map((product) => (
             
 
           // Product Card
           <div
             key={product.id}
-            className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+            className=" rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
           >
             {/* Checkbox and Product Image */}
             <div className="relative p-4 pb-0 flex flex-col items-center">
@@ -113,16 +114,10 @@ const   handleUpdate = (product) => {
               />
             </div>
 
-            {/* Product Details */}
-            <div className="p-4 pt-0">
-              {/* Source, Rating, Reviews */}
- 
-              {/* Product Name */}
-              <h3 className="text-base font-semibold text-gray-900 mb-1 line-clamp-0">
+            <div className="p-2 pt-0">
+              <h3 className="text-sm font-semibold text-gray-900 mb-">
                 {product.name}
               </h3>
-
-              {/* Price and Min. Order */}
               <div className=" text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-500">Price</span>
@@ -139,12 +134,12 @@ const   handleUpdate = (product) => {
 </span>
               </div>
               </div>
-              {/* Tags */}
+         
             </div>
-            {/* Action Bar */}
-            <div className="p-3 w-full border-t border-gray-200 flex justify-between items-center bg-gray-50">
+          
+            <div className="p-3 w-full border-t border-gray-200 flex justify-between items-center">
               <button
-                className="inline-flex  hover:w-[53%]  transition-all duration-300   w-[45%] items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 "
+                className="inline-flex lg:p-1  hover:w-[53%]  transition-all duration-300   w-[45%] items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 "
               >
                 {/* Shopping Bag/Import Icon (simplified) */}
                 <svg className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -162,7 +157,7 @@ const   handleUpdate = (product) => {
 
               <button
               onClick={() =>handleUpdate( product)}   
-              className="inline-flex   w-[45%] hover:w-[53%]  transition-all duration-300 items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 "
+              className="inline-flex lg:p-1    w-[45%] hover:w-[53%]  transition-all duration-300 items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-500 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 "
               >
                  
                 {/* Shopping Bag/Import Icon (simplified) */}

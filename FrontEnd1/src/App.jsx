@@ -11,14 +11,15 @@ import SubscriberDashboard from './componenets/Subscriber/SubscriberDashboard';
 import SubscriberList from './componenets/Admin/components/subscriberList';
 import Dashboard from './componenets/cashier/CashierDashboard'; // Subscriber dashboard
 import AdminDashboard from './componenets/Admin/AdminDashboard'; // SaaS owner dashboard
-import ProductList from './pages/products/ProductList';
-import AddEditProduct from './pages/products/AddEditProduct';
-import CustomerList from './pages/customers/CustomerList';
-import AddEditCustomer from './pages/customers/AddEditCustomer';
-import POS from './pages/pos/POS';
-import TransactionHistory from './pages/transactions/TransactionHistory';
-import SalesReports from './pages/reports/SalesReports';
-import ProfitLoss from './pages/reports/ProfitLoss';
+import ProductList from './componenets/Subscriber/components/ProductList';
+import AddEditProduct from './componenets/Subscriber/components/AddEditProduct';
+import CustomerList from './componenets/Subscriber/components/CustomerList';
+import Categories from './componenets/Subscriber/components/Category'
+import AddEditCustomer from './componenets/Subscriber/components/AddEditCustomer';
+import POS from './componenets/cashier/layout/POS';
+import TransactionHistory from './componenets/Subscriber/components/TransactionHistory';
+import SalesReports from './componenets/Subscriber/components/SalesReports';
+import ProfitLoss from './componenets/Subscriber/components/ProfitLoss';
 import Subscription from './componenets/Subscriber/components/Subscription';
 import PublicSubscription  from './pages/subscription/Subscription'
 import NotificationCenter from './componenets/notifications/NotificationCenter';
@@ -136,7 +137,7 @@ function App() {
                <Route path="/categories" element={
                 <ProtectedRoute>
                   <SubscriberLayout>
-                    <ProductList />
+                    <Categories />
                   </SubscriberLayout>
                 </ProtectedRoute>
               } />

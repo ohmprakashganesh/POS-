@@ -7,7 +7,7 @@ import {
   UserIcon,
   ShoppingCartIcon
 } from '@heroicons/react/24/outline';
-import { productsData, customersData } from '../../data/mockData';
+import { productsData, customersData } from '../../../data/mockData';
 
 const POS = () => {
   const [cart, setCart] = useState([]);

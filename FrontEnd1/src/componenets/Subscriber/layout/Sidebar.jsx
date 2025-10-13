@@ -13,7 +13,6 @@ import { icons, TypeIcon } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/subscriber', icon: HomeIcon },
-  { name: 'POS', href: '/pos', icon: ShoppingCartIcon },
   { name: 'Products', href: '/products', icon: CubeIcon },
   { name: 'Customers', href: '/customers', icon: UsersIcon },
   { name: 'Transactions', href: '/transactions', icon: DocumentTextIcon },

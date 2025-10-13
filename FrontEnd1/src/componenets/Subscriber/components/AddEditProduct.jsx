@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {  useNavigate, Link, useLocation } from 'react-router-dom';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
-import { productsData } from '../../data/mockData';
-
 const AddEditProduct = () => {
   const navigate = useNavigate();
   const location= useLocation();
@@ -25,7 +23,6 @@ const AddEditProduct = () => {
  
   useEffect(() => {
     if (isEdit) {
-      // Find the product to edit
       if (product) {
         setFormData({
           name: product.name,
@@ -39,7 +36,7 @@ const AddEditProduct = () => {
         });
       }
     }
-  }, [product.id, isEdit]);
+  }, [isEdit]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -241,39 +238,47 @@ const AddEditProduct = () => {
                   </button>
                 </div>
               </div>
+<div>
+  <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">
+    Product Image
+  </label>
+  <input
+    type="file"
+    id="image"
+    name="image"
+    accept="image/*"
+    onChange={(e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setFormData((prev) => ({
+          ...prev,
+          image: file, // store file object
+          imagePreview: URL.createObjectURL(file), // create preview URL
+        }));
+      }
+    }}
+    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+  />
+</div>
 
-              <div>
-                <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">
-                  Product Image URL
-                </label>
-                <input
-                  type="url"
-                  id="image"
-                  name="image"
-                  value={formData.image}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="https://example.com/image.jpg"
-                />
-              </div>
+{formData.imagePreview && (
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-2">
+      Image Preview
+    </label>
+    <div className="w-32 h-32 border border-gray-300 rounded-lg overflow-hidden">
+      <img
+        src={formData.imagePreview}
+        alt="Preview"
+        className="w-full h-full object-cover"
+        onError={(e) => {
+          e.target.style.display = 'none';
+        }}
+      />
+    </div>
+  </div>
+)}
 
-              {formData.image && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Image Preview
-                  </label>
-                  <div className="w-32 h-32 border border-gray-300 rounded-lg overflow-hidden">
-                    <img
-                      src={formData.image}
-                      alt="Preview"
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                      }}
-                    />
-                  </div>
-                </div>
-              )}
 
               <div>
                 <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">

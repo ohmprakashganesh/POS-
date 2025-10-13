@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
-import { customersData } from '../../data/mockData';
+import { customersData } from '../../../data/mockData';
 
 const AddEditCustomer = () => {
   const { id } = useParams();
