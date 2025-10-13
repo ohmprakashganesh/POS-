@@ -1,155 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import { 
-//   ShoppingCartIcon, 
-//   CurrencyDollarIcon, 
-//   ChartBarIcon, 
-//   ArrowUpIcon,
-//   ArrowDownIcon
-// } from '@heroicons/react/24/outline';
-
-// const Dashboard = () => {
-//   const [metrics, setMetrics] = useState({
-//     todaySales: 0,
-//     totalSales: 0,
-//     monthlySales: 0,
-//     profit: 0,
-//     expenses: 0
-//   });
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     // Simulate async data loading
-//     const loadData = async () => {
-//       setLoading(true);
-//       // Simulate API call delay
-//       await new Promise(resolve => setTimeout(resolve, 1000));
-      
-//       setMetrics({
-//         todaySales: 2540.00,
-//         totalSales: 45678.00,
-//         monthlySales: 18450.00,
-//         profit: 8234.00,
-//         expenses: 2340.00
-//       });
-//       setLoading(false);
-//     };
-
-//     loadData();
-//   }, []);
-
-//   const metricCards = [
-//     {
-//       title: "Today's Sales",
-//       value: metrics.todaySales,
-//       change: 12,
-//       icon: ShoppingCartIcon,
-//       color: "blue"
-//     },
-//     {
-//       title: "Total Sales",
-//       value: metrics.totalSales,
-//       change: 8,
-//       icon: CurrencyDollarIcon,
-//       color: "green"
-//     },
-//     {
-//       title: "Monthly Sales",
-//       value: metrics.monthlySales,
-//       change: 5,
-//       icon: ChartBarIcon,
-//       color: "purple"
-//     },
-//     {
-//       title: "Profit",
-//       value: metrics.profit,
-//       change: 15,
-//       icon: CurrencyDollarIcon,
-//       color: "emerald"
-//     }
-//   ];
-
-//   if (loading) {
-//     return (
-//       <div className="flex items-center justify-center h-64">
-//         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="space-y-6">
-//       <div className="flex justify-between items-center">
-//         <h1 className="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
-//         <div className="text-sm text-gray-500">
-//           Last updated: {new Date().toLocaleDateString()}
-//         </div>
-//       </div>
-
-//       {/* Metrics Grid */}
-//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-//         {metricCards.map((card) => (
-//           <div key={card.title} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-//             <div className="flex items-center justify-between">
-//               <div>
-//                 <p className="text-sm font-medium text-gray-600">{card.title}</p>
-//                 <p className="text-2xl font-bold text-gray-900 mt-2">
-//                   ${card.value.toLocaleString()}
-//                 </p>
-//                 <div className={`flex items-center mt-1 text-sm ${
-//                   card.change >= 0 ? 'text-green-600' : 'text-red-600'
-//                 }`}>
-//                   {card.change >= 0 ? (
-//                     <ArrowUpIcon className="h-4 w-4 mr-1" />
-//                   ) : (
-//                     <ArrowDownIcon className="h-4 w-4 mr-1" />
-//                   )}
-//                   {Math.abs(card.change)}% from last period
-//                 </div>
-//               </div>
-//               <div className={`p-3 rounded-full bg-${card.color}-100`}>
-//                 <card.icon className={`h-6 w-6 text-${card.color}-600`} />
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-
-//       {/* Charts and Recent Activity */}
-//       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-//         {/* Sales Chart */}
-//         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-//           <h3 className="text-lg font-semibold text-gray-900 mb-4">Sales Overview</h3>
-//           <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-//             <p className="text-gray-500">Sales chart will be implemented with Chart.js</p>
-//           </div>
-//         </div>
-
-//         {/* Recent Activity */}
-//         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-//           <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Sales</h3>
-//           <div className="space-y-4">
-//             {[1, 2, 3, 4, 5].map((i) => (
-//               <div key={i} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-//                 <div>
-//                   <p className="font-medium text-gray-900">Sale #ORD-00{i}</p>
-//                   <p className="text-sm text-gray-500">Customer {i}</p>
-//                 </div>
-//                 <div className="text-right">
-//                   <p className="font-semibold text-gray-900">${(100 + i * 20).toFixed(2)}</p>
-//                   <p className="text-sm text-gray-500">2 hours ago</p>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
-
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -164,7 +12,7 @@ import {
   ExclamationTriangleIcon,
   PlusIcon
 } from '@heroicons/react/24/outline';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../../contexts/NotificationContext';
 
 const Dashboard = () => {
   const [metrics, setMetrics] = useState({
@@ -198,7 +46,7 @@ const Dashboard = () => {
         totalCustomers: 128,
         lowStockItems: 3
       });
-
+      
       setRecentTransactions([
         { id: 1, customer: 'John Doe', amount: 120.00, items: 2, time: '2 hours ago' },
         { id: 2, customer: 'Jane Smith', amount: 85.50, items: 3, time: '4 hours ago' },
@@ -297,7 +145,7 @@ const Dashboard = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Business Dashboard</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Subscriber Dashboard</h1>
           <p className="text-gray-600">Overview of your store performance</p>
         </div>
         <div className="text-sm text-gray-500">

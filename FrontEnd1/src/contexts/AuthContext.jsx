@@ -12,7 +12,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [subscriptionStatus, setSubscriptionStatus] = useState('active');
+  const [subscriptionStatus, setSubscriptionStatus] = useState('deActive');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -38,28 +38,26 @@ const login = async (email, password) => {
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     // Demo: If email contains 'admin', give admin role
-    const isAdmin = email.includes('admin');
-    
+       let role = 'subscriber';
+      if (email.includes('admin')) role = 'admin';
+      else if (email.includes('cashier')) role = 'cashier';
+
     const userData = {
-      id: 1,
-      email,
-      name: isAdmin ? 'Admin User' : 'Business Owner',
-      role: isAdmin ? 'admin' : 'subscriber'
-    };
-    
+        id: 1,
+        email,
+        name:
+          role === "admin"
+            ? "Admin User"
+            : role === "cashier"
+            ? "Cashier User"
+            : "Subscriber User",
+        role
+      };
     setUser(userData);
     localStorage.setItem('pos_user', JSON.stringify(userData));
-    
-    if (isAdmin) {
-      setSubscriptionStatus('active');
-      localStorage.setItem('pos_subscription', 'active');
-    } else {
-      // For subscribers, check their subscription status
-      const subStatus = localStorage.getItem('pos_subscription') || 'active';
-      setSubscriptionStatus(subStatus);
-    }
-    
-    return { success: true };
+
+   
+    return { success: true,user: userData };
   } catch (error) {
     return { success: false, error: error.message };
   } finally {

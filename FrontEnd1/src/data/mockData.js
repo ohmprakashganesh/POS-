@@ -21,7 +21,7 @@ export const productsData = [
     cost: 15.00,
     stock: 3,
     sku: "WM-002",
-    image: "",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
     description: "Ergonomic wireless mouse with long battery life"
   },
   {
@@ -120,4 +120,162 @@ export const transactionsData = [
       { product: "Headphones", quantity: 1, price: 79.99 }
     ]
   }
+  
 ];
+// src/data/pricingData.js or simply define this array inside the component file
+
+export const pricingPlans = [
+  {
+    name: "Basic",
+    price: "$29",
+    duration: "/month",
+    isPopular: false,
+    features: [
+      "5 Users",
+      "5 GB Storage",
+      "Basic Analytics",
+      "Email Support",
+      "Community Access"
+    ],
+    buttonText: "Get Started",
+    buttonClass: "bg-indigo-50 text-indigo-700 hover:bg-indigo-100"
+  },
+  {
+    name: "Pro (Recommended)",
+    price: "$59",
+    duration: "/month",
+    isPopular: true,
+    features: [
+      "Unlimited Users",
+      "50 GB Storage",
+      "Advanced Analytics",
+      "Priority Support",
+      "All Integrations"
+    ],
+    buttonText: "Start Free Trial",
+    buttonClass: "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md"
+  },
+  {
+    name: "Enterprise",
+    price: "$199",
+    duration: "/month",
+    isPopular: false,
+    features: [
+      "Unlimited Seats",
+      "Unlimited Storage",
+      "Custom Reporting",
+      "Dedicated Account Manager",
+      "SLA Guarantee"
+    ],
+    buttonText: "Contact Sales",
+    buttonClass: "bg-gray-500 text-white hover:bg-gray-600"
+  }
+];
+
+
+ export const DUMMY_PRODUCTS = [
+  {
+    id: 1,
+    name: 'Macbook Pro M1 Pro 14" 512GB',
+    image: '/path/to/macbook_pro_14.jpg', // Replace with a real image path or URL
+    source: 'Ali Express',
+    rating: 4.8,
+    reviews: 1345,
+    priceRange: '$180-$220',
+    minOrder: '12 unit',
+    tags: ['Apple', 'Electronic'],
+  },
+  {
+    id: 2,
+    name: 'Monitor MSI 27" Modern MD271UL 4K',
+    image: '/path/to/msi_monitor.jpg', // Replace with a real image path or URL
+    source: 'Amazon',
+    rating: 4.9,
+    reviews: 976,
+    priceRange: '$175-$200',
+    minOrder: '11 unit',
+    tags: ['MSI', 'Electronic', 'Display'],
+  },
+  {
+    id: 3,
+    name: 'Macbook Pro M1 2020 13" 512GB',
+    image: '/path/to/macbook_pro_13.jpg', // Replace with a real image path or URL
+    source: 'Tokopedia',
+    rating: 4.7,
+    reviews: 1654,
+    priceRange: '$180-$250',
+    minOrder: '10 unit',
+    tags: ['Apple', 'Electronic'],
+  },
+  {
+    id: 4,
+    name: 'Monitor MSI 27" Modern MD271UL 4K',
+    image: '/path/to/msi_monitor_2.jpg', // Replace with a real image path or URL
+    source: 'Shopify',
+    rating: 4.8,
+    reviews: 886,
+    priceRange: '$197-$224',
+    minOrder: '8 unit',
+    tags: ['MSI', 'Electronic', 'Display'],
+  },
+  // Added some products from the second row for completeness
+  {
+    id: 5,
+    name: 'Macbook Pro M1 Pro 14"',
+    image: '/path/to/macbook_pro_14_ebay.jpg', // Replace with a real image path or URL
+    source: 'eBay',
+    rating: 4.5,
+    reviews: 1256,
+    priceRange: '$185-$210',
+    minOrder: '15 unit',
+    tags: ['Apple', 'Electronic'],
+  },
+  {
+    id: 6,
+    name: 'Macbook Pro M1 Pro 14"',
+    image: '/path/to/macbook_pro_14_shopee.jpg', // Replace with a real image path or URL
+    source: 'Shopee',
+    rating: 4.6,
+    reviews: 1276,
+    priceRange: '$190-$230',
+    minOrder: '14 unit',
+    tags: ['Apple', 'Electronic'],
+  },
+  {
+    id: 7,
+    name: 'Macbook Air M1 2020 13"',
+    image: '/path/to/macbook_air_13.jpg', // Replace with a real image path or URL
+    source: 'Lazada',
+    rating: 4.8,
+    reviews: 1334,
+    priceRange: '$150-$190',
+    minOrder: '18 unit',
+    tags: ['Apple', 'Electronic'],
+  },
+  {
+    id: 8,
+    name: 'Apple 32" Pro Display XDR',
+    image: '/path/to/pro_display_xdr.jpg', // Replace with a real image path or URL
+    source: 'BigCommerce',
+    rating: 4.7,
+    reviews: 1967,
+    priceRange: '$500-$650',
+    minOrder: '5 unit',
+    tags: ['Apple', 'Display', 'Electronic'],
+  },
+];
+
+// Helper function to get the appropriate source text color (simplified)
+ export const getSourceColor = (source) => {
+  switch (source) {
+    case 'Ali Express': return 'text-red-600 bg-red-100';
+    case 'Amazon': return 'text-orange-600 bg-orange-100';
+    case 'Tokopedia': return 'text-green-600 bg-green-100';
+    case 'Shopify': return 'text-green-800 bg-green-200';
+    case 'eBay': return 'text-blue-600 bg-blue-100';
+    case 'Shopee': return 'text-orange-500 bg-orange-100';
+    case 'Lazada': return 'text-blue-800 bg-blue-200';
+    case 'BigCommerce': return 'text-pink-600 bg-pink-100';
+    default: return 'text-gray-600 bg-gray-100';
+  }
+};

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { AlignRight } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ const Login = () => {
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
-
+  const user=localStorage.getItem("pos_user");
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -23,9 +24,19 @@ const Login = () => {
     setError('');
 
     const result = await login(email, password);
-    if (result.success) {
-      navigate('/');
-    } else {
+  if (result.success) {
+    alert(result.user.role)
+
+      if (result.user?.role === "admin") {
+    navigate("/admin");
+  } else if (result.user?.role === "subscriber") {
+    navigate("/subscriber");
+  } else{
+    navigate("/");
+  }
+  }
+  
+  else {
       setError(result.error || 'Login failed');
     }
     setIsLoading(false);

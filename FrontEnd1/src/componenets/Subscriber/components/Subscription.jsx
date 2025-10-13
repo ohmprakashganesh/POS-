@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../../contexts/AuthContext';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
-import { HandIcon, Move3dIcon, MoveRight } from 'lucide-react';
 
 const Subscription = () => {
   const { user, subscriptionStatus, updateSubscription } = useAuth();
@@ -133,8 +131,6 @@ const Subscription = () => {
                   </div>
                 ))}
               </div>
-              <div>
-              </div>
             </div>
 
             <div className="mt-6 flex space-x-4">
@@ -145,8 +141,6 @@ const Subscription = () => {
                 Cancel Subscription
                 
               </button>
-               <button  className='outline-1  flex px-3 py-1 rounded-md bg-blue-400  '>  <Link to='/subscriber' className='flex'> <p>go to Dashboard</p><MoveRight/> </Link> </button>
-
             </div>
           </div>
         </div>

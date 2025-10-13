@@ -48,6 +48,7 @@ const AddEditProduct = () => {
     }));
   };
 
+
   const generateSKU = () => {
     const prefix = formData.category ? formData.category.substring(0, 3).toUpperCase() : 'PRO';
     const random = Math.random().toString(36).substring(2, 8).toUpperCase();
@@ -100,6 +101,14 @@ const AddEditProduct = () => {
             </h1>
             <p className="text-gray-600">
               {isEdit ? 'Update product information' : 'Add a new product to your inventory'}
+            </p>
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">
+                Add Category
+            </h1>
+            <p className="text-gray-600">
+              {isEdit ? '' : 'Add a new product to your inventory'}
             </p>
           </div>
         </div>
