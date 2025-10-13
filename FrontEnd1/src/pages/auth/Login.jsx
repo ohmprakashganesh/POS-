@@ -5,6 +5,7 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { AlignRight } from 'lucide-react';
 
 const Login = () => {
+ 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -18,22 +19,33 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+   if (user?.role === "admin") {
+    navigate("/admin");
+  } else if (user?.role === "subscriber") {
+    navigate("/subscriber");
+  } else{
+    navigate("/");
+  }
+
   const handlePasswordLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
 
+
+
     const result = await login(email, password);
   if (result.success) {
     alert(result.user.role)
 
-      if (result.user?.role === "admin") {
+   if (result.user?.role === "admin") {
     navigate("/admin");
   } else if (result.user?.role === "subscriber") {
     navigate("/subscriber");
   } else{
     navigate("/");
   }
+  
   }
   
   else {

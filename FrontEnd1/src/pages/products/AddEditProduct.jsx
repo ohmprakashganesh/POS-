@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import {  useNavigate, Link, useLocation } from 'react-router-dom';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { productsData } from '../../data/mockData';
 
 const AddEditProduct = () => {
-  const { id } = useParams();
   const navigate = useNavigate();
-  const isEdit = Boolean(id);
+  const location= useLocation();
+  const product= location.state?.product;
+  const isEdit = Boolean(product?.id);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -20,25 +21,25 @@ const AddEditProduct = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-
+ 
+ 
   useEffect(() => {
     if (isEdit) {
       // Find the product to edit
-      const product = productsData.find(p => p.id === parseInt(id));
       if (product) {
         setFormData({
           name: product.name,
-          category: product.category,
-          price: product.price.toString(),
-          cost: product.cost.toString(),
-          stock: product.stock.toString(),
-          sku: product.sku,
-          description: product.description || '',
+          category:null,
+          price: product.priceRange.toString(),
+          cost:"500",
+          stock: product.minOrder.toString(),
+          sku: "random",
+          description: "custom desc",
           image: product.image || ''
         });
       }
     }
-  }, [id, isEdit]);
+  }, [product.id, isEdit]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -104,9 +105,7 @@ const AddEditProduct = () => {
             </p>
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
-                Add Category
-            </h1>
+           
             <p className="text-gray-600">
               {isEdit ? '' : 'Add a new product to your inventory'}
             </p>
