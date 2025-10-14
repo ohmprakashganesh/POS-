@@ -19,13 +19,27 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-   if (user?.role === "admin") {
-    navigate("/admin");
-  } else if (storedUser.role === "subscriber") {
-    navigate("/subscriber");
-  } else{
-    navigate("/");
-  }
+  useEffect(()=>{
+      try {
+      const raw = localStorage.getItem('pos_user');
+      if (!raw) return; // nothing stored
+      const parsed = JSON.parse(raw);
+      if (!parsed || !parsed.role) return;
+
+      // Redirect based on role
+      if (parsed.role === 'admin') {
+        navigate('/admin', { replace: true });
+      } else if (parsed.role === 'subscriber') {
+        navigate('/subscriber', { replace: true });
+      } else {
+        navigate('/', { replace: true });
+      }
+    } catch (err) {
+      // If stored value is corrupted, clear it (optional) or ignore
+      console.warn('Failed to parse pos_user from localStorage', err);
+    }
+    // empty deps -> runs once
+  }, [navigate]);
 
   const handlePasswordLogin = async (e) => {
     e.preventDefault();
