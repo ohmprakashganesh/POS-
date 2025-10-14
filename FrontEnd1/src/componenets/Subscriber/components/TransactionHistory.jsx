@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MagnifyingGlassIcon, DocumentTextIcon, EyeIcon } from '@heroicons/react/24/outline';
 import { transactionsData } from '../../../data/mockData';
+import InvoiceViewer from './Invoice';
 
 const TransactionHistory = () => {
   const [transactions, setTransactions] = useState([]);
@@ -10,6 +11,7 @@ const TransactionHistory = () => {
     start: '',
     end: ''
   });
+  const[invoice,setInvoice]= useState(false);
 
   useEffect(() => {
     // In real app, this would be an API call
@@ -57,11 +59,16 @@ const TransactionHistory = () => {
 
   const viewInvoice = (transactionId) => {
     // In real app, this would open a modal or navigate to invoice page
-    alert(`Viewing invoice for transaction ${transactionId}`);
+    console.log(transactionId);
+    setInvoice(true);
   };
 
   return (
     <div className="space-y-6">
+      {invoice &&(
+        <InvoiceViewer setInvoice={setInvoice} invoice ={invoice} />
+      )}
+    
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Transaction History</h1>
         <p className="text-gray-600">View and manage all sales transactions</p>
