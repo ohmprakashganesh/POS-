@@ -7,6 +7,7 @@ import AdminLayout from './componenets/admin/layout/AdminLayout'
 import SubscriberLayout from './componenets/Subscriber/layout/SubscriberLayout'
 
 import SignUp from './pages/auth/SignUp';
+import Orders from './componenets/cashier/components/Orders'
 import AddEditCashier from './componenets/Subscriber/components/AddEditCashier';
 import CashierList from './componenets/Subscriber/components/CashierList';
 import SubscriberDashboard from './componenets/Subscriber/SubscriberDashboard';
@@ -18,7 +19,7 @@ import AddEditProduct from './componenets/Subscriber/components/AddEditProduct';
 import CustomerList from './componenets/Subscriber/components/CustomerList';
 import Categories from './componenets/Subscriber/components/Category'
 import AddEditCustomer from './componenets/Subscriber/components/AddEditCustomer';
-import POS from './componenets/cashier/layout/POS';
+import POS from './componenets/cashier/components/POS';
 import TransactionHistory from './componenets/Subscriber/components/TransactionHistory';
 import SalesReports from './componenets/Subscriber/components/SalesReports';
 import ProfitLoss from './componenets/Subscriber/components/ProfitLoss';
@@ -26,6 +27,9 @@ import Subscription from './componenets/Subscriber/components/Subscription';
 import PublicSubscription  from './pages/subscription/Subscription'
 import NotificationCenter from './componenets/notifications/NotificationCenter';
 import SubscriptionPlans from './componenets/Admin/components/SubscriptionPlans';
+import CashierProductList from './componenets/cashier/components/ProductList'
+import CashierCustomerList from './componenets/cashier/components/CustomerList';
+import CashierAddEditCustomer from './componenets/cashier/components/AddEditCustomer'
 
 function ProtectedRoute({ children, requireAdmin = false }) {
   const { user, subscriptionStatus } = useAuth();
@@ -62,10 +66,7 @@ function App() {
         <NotificationProvider>
           <div className="App">
             <Routes>
-              <Route path="/login" element={<Login />} />
-            
-              <Route path="/signup" element={<SignUp />} />
-
+             
                <Route path="/admin" element={
                 <ProtectedRoute requireAdmin={true}>
                   <AdminLayout>
@@ -75,6 +76,12 @@ function App() {
               } />
 
               
+
+
+ {/* subscriber ============================================================================= routes  */}
+
+
+              {/* subscriber routes  */}
                <Route path="/subscriptionPlans" element={
                 <ProtectedRoute requireAdmin={true}>
                   <AdminLayout>
@@ -181,23 +188,8 @@ function App() {
                   </SubscriberLayout>
                 </ProtectedRoute>
               } />
-            
-             
-              <Route path="/pos" element={
-                <ProtectedRoute>
-                  <Layout>
-                    <POS />
-                  </Layout>
-                </ProtectedRoute>
-              } />
-              <Route path="/transactions" element={
-                <ProtectedRoute>
-                  <SubscriberLayout>
-                    <TransactionHistory />
-                  </SubscriberLayout>
-                </ProtectedRoute>
-              } />
-              <Route path="/reports/sales" element={
+
+                <Route path="/reports/sales" element={
                 <ProtectedRoute>
                   <SubscriberLayout>
                     <SalesReports /> 
@@ -219,8 +211,75 @@ function App() {
                   </SubscriberLayout>
                 </ProtectedRoute>
               } />
+            
+             
+ {/* cashier============================================================================= routes  */}
 
-<Route path="/publicSubscription" element={ <PublicSubscription/> } />
+
+              <Route path="/pos" element={
+                <ProtectedRoute>
+                  <Layout>
+                    <POS />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
+              <Route path="/c-transactions" element={
+                <ProtectedRoute>
+                  <Layout>
+                    <TransactionHistory />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
+              <Route path="/c-Products" element={
+                <ProtectedRoute>
+                  <Layout>
+                    <CashierProductList />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+              <Route path="/c-customers" element={
+                <ProtectedRoute>
+                  <Layout>
+                    <CashierCustomerList />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
+             <Route path="/c-customers/add" element={
+                <ProtectedRoute>
+                  <Layout>
+                    <CashierAddEditCustomer />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
+                <Route path="/c-customers/edit/:id" element={
+                <ProtectedRoute>
+                  <Layout>
+                    <CashierAddEditCustomer />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
+               <Route path="/c-orders" element={
+                <ProtectedRoute>
+                  <Layout>
+                    <Orders />
+                  </Layout>
+                </ProtectedRoute>
+              } />
+
+ {/* public routes ============================================================================= routes  */}
+
+
+            <Route path="/publicSubscription" element={ <PublicSubscription/> } />
+             <Route path="/login" element={<Login />} />         
+              <Route path="/signup" element={<SignUp />} />
+
+
+
             </Routes>
             <NotificationCenter />
           </div>

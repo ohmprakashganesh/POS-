@@ -102,6 +102,7 @@ const Dashboard = () => {
     }
   ];
 
+  
   const quickActions = [
     {
       title: "New Sale",

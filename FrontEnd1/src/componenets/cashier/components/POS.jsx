@@ -102,9 +102,9 @@ const POS = () => {
   };
 
   return (
-    <div className="h-full flex flex-col lg:flex-row gap-6">
+    <div className="h-full w-full flex flex-col lg:flex-row gap-6">
       {/* Left Panel - Product Selection */}
-      <div className="flex-1 bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+      <div className="flex-1   border-gray-200 p-4">
         <div className="mb-4">
           <div className="relative">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -113,13 +113,12 @@ const POS = () => {
               placeholder="Search products..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full pl-10 pr-4 py-3 border border-white bg-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
         </div>
-
         {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+        <div className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[calc(100vh-200px)] overflow-y-auto">
           {filteredProducts.map((product) => (
             <button
               key={product.id}
@@ -149,7 +148,7 @@ const POS = () => {
       </div>
 
       {/* Right Panel - Cart & Checkout */}
-      <div className="w-full lg:w-96 bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+      <div className="  bg-white rounded-lg shadow-sm border border-gray-200 p-4">
         <div className="space-y-4">
           {/* Customer Selection */}
           <div>

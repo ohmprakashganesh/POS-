@@ -10,12 +10,14 @@ import {
   CreditCardIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
-import { icons, TypeIcon } from 'lucide-react';
+import { ComputerIcon, CurrencyIcon, icons, ShoppingBasketIcon, TypeIcon, UserIcon } from 'lucide-react';
 
 const navigation = [
   { name: 'POS', href: '/pos', icon: ShoppingCartIcon },
-  { name: 'Products', href: '/products', icon: CubeIcon },
-  { name: 'Customers', href: '/customers', icon: UsersIcon }
+  { name: 'Products', href: '/c-products', icon:ComputerIcon },
+  { name: 'Customers', href: '/c-customers', icon: UsersIcon },
+  { name: 'Orders', href: '/c-orders', icon: ShoppingBasketIcon }
+
 ];
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -33,7 +35,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       
       {/* Sidebar */}
       <div className={`
-        fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out
+        fixed inset-y-0 left-0 z-50 w-54 bg-white shadow-xl transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0
       `}>
         <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">

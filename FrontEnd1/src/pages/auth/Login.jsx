@@ -31,7 +31,7 @@ const Login = () => {
   } else if (user?.role === "subscriber") {
     navigate("/subscriber");
   } else if (user) {
-    navigate("/");
+    navigate("/pos");
   } 
     }catch(error)
     {
@@ -53,7 +53,7 @@ const Login = () => {
   } else if (result.user?.role === "subscriber") {
     navigate("/subscriber");
   } else{
-    navigate("/");
+    navigate("/pos");
   }
   }
   else{
