@@ -20,6 +20,12 @@ const Login = () => {
   const navigate = useNavigate();
 
    useEffect(() => {
+    try{
+      const raw= localStorage.getItem("pos_user");
+       if(!raw) return;
+       const parsed= JSON.parse(raw);
+       if(!parsed|| !parsed.role) return;
+  
   if (user?.role === "admin") {
     navigate("/admin");
   } else if (user?.role === "subscriber") {
@@ -27,7 +33,11 @@ const Login = () => {
   } else if (user) {
     navigate("/");
   } 
-}, [user, navigate]);
+    }catch(error)
+    {
+ console.warn("failed to parse pos user form localstorage",error);
+    }
+}, [ navigate]);
 
   const handlePasswordLogin = async (e) => {
     e.preventDefault();
@@ -47,15 +57,12 @@ const Login = () => {
   } else{
     navigate("/");
   }
-  
   }
-  
   else {
       setError(result.error || 'Login failed');
     }
     setIsLoading(false);
   };
-
   const handleSendOtp = async (e) => {
     e.preventDefault();
     setIsLoading(true);

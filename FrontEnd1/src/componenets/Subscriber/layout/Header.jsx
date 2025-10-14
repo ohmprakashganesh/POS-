@@ -24,7 +24,7 @@ const Header = ({ onMenuClick, user }) => {
             <Bars3Icon className="h-6 w-6" />
           </button>
           <div className="ml-4 lg:ml-0">
-            <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
+            <h1 className="text-2xl font-bold text-gray-900">{user.name}</h1>
           </div>
         </div>
 
