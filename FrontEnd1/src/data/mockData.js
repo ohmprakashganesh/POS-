@@ -173,56 +173,55 @@ export const pricingPlans = [
 ];
 
 
- export const DUMMY_PRODUCTS = [
+export const DUMMY_PRODUCTS = [
   {
     id: 1,
-     category: "Accessories",
+    category: "Accessories",
     name: 'Macbook Pro M1 Pro 14" 512GB',
     image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
     source: 'Ali Express',
     rating: 4.8,
     reviews: 1345,
-    priceRange: '$180-$220',
+    price: 200,
     minOrder: '12',
     tags: ['Apple', 'Electronic'],
   },
   {
     id: 2,
+    category: "Accessories",
     name: 'Monitor MSI 27" Modern MD271UL 4K',
     image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
     source: 'Amazon',
     rating: 4.9,
-     category: "Accessories",
     reviews: 976,
-    priceRange: '$175-$200',
+    price: 187,
     minOrder: '11',
     tags: ['MSI', 'Electronic', 'Display'],
   },
   {
     id: 3,
+    category: "Accessories",
     name: 'Macbook Pro M1 2020 13" 512GB',
     image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
     source: 'Tokopedia',
-     category: "Accessories",
     rating: 4.7,
     reviews: 1654,
-    priceRange: '$180-$250',
+    price: 215,
     minOrder: '10',
     tags: ['Apple', 'Electronic'],
   },
   {
     id: 4,
+    category: "laptop",
     name: 'Monitor MSI 27" Modern MD271UL 4K',
     image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
     source: 'Shopify',
     rating: 4.8,
     reviews: 886,
-    category: "laptop",
-    priceRange: '$197-$224',
+    price: 210,
     minOrder: '8',
     tags: ['MSI', 'Electronic', 'Display'],
   },
-  // Added some products from the second row for completeness
   {
     id: 5,
     name: 'Macbook Pro M1 Pro 14"',
@@ -230,7 +229,7 @@ export const pricingPlans = [
     source: 'eBay',
     rating: 4.5,
     reviews: 1256,
-    priceRange: '$185-$210',
+    price: 197,
     minOrder: '15',
     tags: ['Apple', 'Electronic'],
   },
@@ -241,7 +240,7 @@ export const pricingPlans = [
     source: 'Shopee',
     rating: 4.6,
     reviews: 1276,
-    priceRange: '$190-$230',
+    price: 210,
     minOrder: '14',
     tags: ['Apple', 'Electronic'],
   },
@@ -252,7 +251,7 @@ export const pricingPlans = [
     source: 'Lazada',
     rating: 4.8,
     reviews: 1334,
-    priceRange: '$150-$190',
+    price: 170,
     minOrder: '18',
     tags: ['Apple', 'Electronic'],
   },
@@ -263,11 +262,12 @@ export const pricingPlans = [
     source: 'BigCommerce',
     rating: 4.7,
     reviews: 1967,
-    priceRange: '$500-$650',
+    price: 575,
     minOrder: '5',
     tags: ['Apple', 'Display', 'Electronic'],
   },
 ];
+
 
 // Helper function to get the appropriate source text color (simplified)
  export const getSourceColor = (source) => {

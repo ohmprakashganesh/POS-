@@ -6,6 +6,7 @@ import {
   PencilIcon,
   TrashIcon,
   CubeIcon,
+  EllipsisVerticalIcon,
 } from "@heroicons/react/24/outline";
 import { DUMMY_PRODUCTS } from "../../../data/mockData";
 
@@ -16,6 +17,12 @@ const ProductList = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [product, setProduct] = useState(null);
   const col = "";
+
+  const [openDropdownId, setOpenDropdownId] = useState(null);
+
+  const toggleDropdown = (id) => {
+    setOpenDropdownId(openDropdownId === id ? null : id);
+  };
   useEffect(() => {
     // In real app, this would be an API call
     setProducts(DUMMY_PRODUCTS);
@@ -42,6 +49,7 @@ const ProductList = () => {
     setFilteredProducts(filtered);
   }, [searchTerm, selectedCategory, products]);
   const categories = ["all", ...new Set(products.map((p) => p.category))];
+  console.log("category",categories)
 
   const handleDelete = (productId) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
@@ -58,7 +66,9 @@ const ProductList = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Products</h1>
+          <h1 className="text-2xl font-bold text-gray-900 uppercase">
+            Products Inventory
+          </h1>
           <p className="text-gray-600">Manage your product inventory</p>
         </div>
         <Link
@@ -89,8 +99,8 @@ const ProductList = () => {
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
-            {categories.map((category) => (
-              <option key={category} value={category}>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
                 {category === "all" ? "All Categories" : category}
               </option>
             ))}
@@ -102,16 +112,42 @@ const ProductList = () => {
         </div>
       </div>
       <div className="p-4 sm:p-6">
-        {/* Grid Container */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 xl:grid-cols-4 gap-2">
           {filteredProducts.map((product) => (
-            // Product Card
             <div
               key={product.id}
-              className=" rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+              className="relative rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden bg-white"
             >
-              {/* Checkbox and Product Image */}
-              <div className="relative p-4 pb-0 flex flex-col items-center">
+              {/* Three-dot menu */}
+              <div className="absolute top-3 right-3 z-10">
+                <button
+                  onClick={() => toggleDropdown(product.id)}
+                  className="p-1  rounded-full hover:bg-gray-100 shadow"
+                >
+                  <EllipsisVerticalIcon className="h-6 w-6 text-white hover:text-black" />
+                </button>
+
+                {openDropdownId === product.id && (
+                  <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-md shadow-lg">
+                    <Link
+                      to="/products/add"
+                      state={{ product }}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() => handleUpdate(product)}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Product Image */}
+              <div className="p-4 pb-0 flex flex-col items-center">
                 <img
                   src={
                     product.image ||
@@ -123,84 +159,140 @@ const ProductList = () => {
                 />
               </div>
 
-              <div className="p-2 pt-0">
-                <h3 className="text-sm font-semibold text-gray-900 mb-">
-                  {product.name}
-                </h3>
-                <div className=" text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Price</span>
-                    <span className="font-medium text-gray-900">
-                      {product.priceRange}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="">stock</span>
-                    <span
-                      className={`font-medium ${
-                        product.minOrder <= 10
-                          ? "text-red-600"
-                          : "text-green-700"
-                      }`}
-                    >
-                      {product.minOrder}
-                    </span>
+              {/* Product Details */}
+              <div className="flex flex-col justify-between h-full">
+                {/* Product Info */}
+                <div className="p-2 pt-0 flex-1">
+                  <h3 className="text-sm  font-semibold text-gray-900 mb-1 line-clamp-2 h-10">
+                    {product.name}
+                  </h3>
+                  <div className="text-sm">
+                    <div className="flex justify-between">
+                      <span className="font-medium text-orange-700">
+                        Rs. <span className="text-xl"> {product.price}</span>
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Stock</span>
+                      <span
+                        className={`font-medium ${
+                          product.minOrder <= 10
+                            ? "text-red-600"
+                            : "text-green-700"
+                        }`}
+                      >
+                        {product.minOrder}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="p-2 w-full border-t border-gray-200 flex justify-between items-center">
-                <button className="inline-flex lg:p-1  hover:w-[53%]  transition-all duration-300  
-                 w-[45%] items-center px-3  border border-transparent
-                  text-sm font-medium rounded-md shadow-sm text-black
-                   bg-green-300 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 ">
-                  {/* Shopping Bag/Import Icon (simplified) */}
-                  <svg
-                    className="h-5 w-5 mr-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 8h14M5 8a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V8z"
-                    />
-                  </svg>
-                  <Link to="/products/add" state={{ product: product }}>
-                    Edit
-                  </Link>
-                </button>
-
-                <button
-                  onClick={() => handleUpdate(product)}
-                  className="inline-flex lg:p-1    w-[45%] hover:w-[53%] 
-                   transition-all duration-300 items-center px-3 py-2 
-                   border border-transparent text-sm font-medium rounded-md 
-                   shadow-sm text-black bg-red-300 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 "
-                >
-                  {/* Shopping Bag/Import Icon (simplified) */}
-                  <svg
-                    className="h-5  w-2/5 mr-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 8h14M5 8a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V8z"
-                    />
-                  </svg>
-                  Delete
-                </button>
               </div>
             </div>
           ))}
         </div>
       </div>
+      {/* Products Table */}
+      {/* <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Product
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Category
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Price
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Cost
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Stock
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {filteredProducts.map((product) => {
+                const stockStatus = getStockStatus(product.stock);
+                return (
+                  <tr key={product.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <div className="h-10 w-10 flex-shrink-0 bg-gray-200 rounded-lg flex items-center justify-center">
+                          {product.image ? (
+                            <img src={product.image} alt={product.name} className="h-10 w-10 rounded-lg object-cover" />
+                          ) : (
+                            <CubeIcon className="h-6 w-6 text-gray-400" />
+                          )}
+                        </div>
+                        <div className="ml-4">
+                          <div className="text-sm font-medium text-gray-900">{product.name}</div>
+                          <div className="text-sm text-gray-500">{product.sku}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {product.category}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      ${product.price}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      ${product.cost}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {product.stock}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${stockStatus.color}`}>
+                        {stockStatus.text}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <div className="flex justify-end space-x-2">
+                        <Link
+                          to={`/products/edit/${product.id}`}
+                          className="text-blue-600 hover:text-blue-900 p-1"
+                        >
+                          <PencilIcon className="h-4 w-4" />
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(product.id)}
+                          className="text-red-600 hover:text-red-900 p-1"
+                        >
+                          <TrashIcon className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        
+        {filteredProducts.length === 0 && (
+          <div className="text-center py-12">
+            <CubeIcon className="mx-auto h-12 w-12 text-gray-400" />
+            <h3 className="mt-2 text-sm font-medium text-gray-900">No products found</h3>
+            <p className="mt-1 text-sm text-gray-500">
+              {searchTerm || selectedCategory !== 'all' 
+                ? 'Try changing your search or filter criteria.'
+                : 'Get started by creating a new product.'
+              }
+            </p>
+          </div>
+        )}
+      </div> */}
     </div>
   );
 };

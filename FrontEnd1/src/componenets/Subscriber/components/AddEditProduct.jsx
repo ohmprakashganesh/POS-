@@ -27,7 +27,7 @@ const AddEditProduct = () => {
         setFormData({
           name: product.name,
           category:null,
-          price: product.priceRange.toString(),
+          price: product.price.toString(),
           cost:"500",
           stock: product.minOrder.toString(),
           sku: "random",
