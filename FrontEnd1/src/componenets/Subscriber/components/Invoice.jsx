@@ -1,71 +1,69 @@
 import React, { useState } from "react";
 
-const InvoiceViewer = ({setInvoice,invoice}) => {
-
+const InvoiceViewer = ({ setInvoice, invoice }) => {
   // Static invoice data
-  const data={
-  "billId": "BBSM-2025-10-14-001245",
-  "branch": {
-    "name": " BHATBHATENI SUPERMARKET-MAHARAJGANJ",
-    "address": "MAHARAJGANJ, Kathmandu, Nepal",
-    "type": "TAX INVOICE",
-    "contact": "+977-1-4721234"
-  },
-  "cashier": {
-    "id": "EMP-0192",
-    "name": "Sita Shrestha"
-  },
-  "customer": {
-    "name": "Ganesh Prasad",
-    "phone": "9801234567",
-    "address":"jhapa"
-  },
-  "items": [
-    {
-      "itemCode": "ITM-1001",
-      "name": "Sunflower Oil 1L",
-      "category": "Grocery",
-      "quantity": 2,
-      "unit": "pcs",
-      "unitPrice": 420,
-      "discount": 5,
-      "total": 798
+  const data = {
+    billId: "BBSM-2025-10-14-001245",
+    branch: {
+      name: " BHATBHATENI SUPERMARKET-MAHARAJGANJ",
+      address: "MAHARAJGANJ, Kathmandu, Nepal",
+      type: "TAX INVOICE",
+      contact: "+977-1-4721234",
     },
-    {
-      "itemCode": "ITM-2035",
-      "name": "Rice 25kg (Mansuli)",
-      "category": "Grocery",
-      "quantity": 1,
-      "unit": "bag",
-      "unitPrice": 1850,
-      "discount": 0,
-      "total": 1850
+    cashier: {
+      id: "EMP-0192",
+      name: "Sita Shrestha",
     },
-    {
-      "itemCode": "ITM-5021",
-      "name": "Colgate Toothpaste 150g",
-      "category": "Personal Care",
-      "quantity": 2,
-      "unit": "pcs",
-      "unitPrice": 135,
-      "discount": 10,
-      "total": 243
-    }
-  ],
-  "subtotal": 2891,
-  "discountTotal": 77,
-  "vatPercent": 13,
-  "vatAmount": 376,
-  "grandTotal": 3267,
-  "payment": {
-    "type": "Card",
-    "bank": "Nabil Bank",
-    "transactionId": "TXN-BB-20251014001245"
-  },
-  "timestamp": "2025-10-14T11:35:22",
-  "remarks": "Thank you for shopping with Bhatbhateni!"
-}
-
+    customer: {
+      name: "Ganesh Prasad",
+      phone: "9801234567",
+      address: "jhapa",
+    },
+    items: [
+      {
+        itemCode: "ITM-1001",
+        name: "Sunflower Oil 1L",
+        category: "Grocery",
+        quantity: 2,
+        unit: "pcs",
+        unitPrice: 420,
+        discount: 5,
+        total: 798,
+      },
+      {
+        itemCode: "ITM-2035",
+        name: "Rice 25kg (Mansuli)",
+        category: "Grocery",
+        quantity: 1,
+        unit: "bag",
+        unitPrice: 1850,
+        discount: 0,
+        total: 1850,
+      },
+      {
+        itemCode: "ITM-5021",
+        name: "Colgate Toothpaste 150g",
+        category: "Personal Care",
+        quantity: 2,
+        unit: "pcs",
+        unitPrice: 135,
+        discount: 10,
+        total: 243,
+      },
+    ],
+    subtotal: 2891,
+    discountTotal: 77,
+    vatPercent: 13,
+    vatAmount: 376,
+    grandTotal: 3267,
+    payment: {
+      type: "Card",
+      bank: "Nabil Bank",
+      transactionId: "TXN-BB-20251014001245",
+    },
+    timestamp: "2025-10-14T11:35:22",
+    remarks: "Thank you for shopping with Bhatbhateni!",
+  };
 
   // Generate and download CSV file
   const handleDownloadCSV = () => {
@@ -111,7 +109,9 @@ const InvoiceViewer = ({setInvoice,invoice}) => {
               .join("")}
           </tbody>
         </table>
-        <h3 style="text-align:right; margin-top: 10px;">Total: $${invoice.total}</h3>
+        <h3 style="text-align:right; margin-top: 10px;">Total: $${
+          invoice.total
+        }</h3>
       </body>
       </html>`;
     win.document.write(html);
@@ -133,45 +133,64 @@ const InvoiceViewer = ({setInvoice,invoice}) => {
             {/* header section */}
 
             <div className="header-section mb-3   text-sm font-serif">
-                <p className="w-full text-center">{data.branch.name}</p>
-                <p className="w-full text-center">{data.branch.address}</p>
-                <p className="w-full text-center">{data.branch.contact}</p>
+              <p className="w-full text-center">{data.branch.name}</p>
+              <p className="w-full text-center">{data.branch.address}</p>
+              <p className="w-full text-center">{data.branch.contact}</p>
             </div>
-             
-             {/* section */}
+
+            {/* section */}
 
             <div className="text-gray-black  text-sm">
-              <p>BILL NO:  {data.billId}</p>
+              <p>BILL NO: {data.billId}</p>
               <p>transaction Date: {data.timestamp}</p>
             </div>
 
-        {/* customer details */}
-         <div className="text-gray-black  text-sm">
-              <p><strong>Name:</strong> {data.customer.name}</p>
-              <p><strong>phone:</strong> {invoice.phone}</p>
-               <p><strong>Address</strong> {invoice.address}</p>
+            {/* customer details */}
+            <div className="text-gray-black  text-sm">
+              <p>
+                <strong>Name:</strong> {data.customer.name}
+              </p>
+              <p>
+                <strong>phone:</strong> {invoice.phone}
+              </p>
+              <p>
+                <strong>Address</strong> {invoice.address}
+              </p>
             </div>
-            <div><p>payment:{data.payment.type} </p></div>
+            <div>
+              <p>payment:{data.payment.type} </p>
+            </div>
 
-
-<table className="w-full mt-4 border border-black border-dotted border-collapse">
-                  <thead>
-                   <tr className=" border border-black border-dotted">
-                  <td >sn </td>
-                  <td className="border border-black border-dotted ">product</td>
+            <table className="w-full mt-4 border border-black border-dotted border-collapse">
+              <thead>
+                <tr className=" border border-black border-dotted">
+                  <td>sn </td>
+                  <td className="border border-black border-dotted ">
+                    product
+                  </td>
                   <td className="border border-black border-dotted ">Qty </td>
-                   <td className=" border border-black border-dotted">rate</td>
+                  <td className=" border border-black border-dotted">rate</td>
                   <td className=" border border-black border-dotted">amount</td>
                 </tr>
               </thead>
               <tbody>
                 {data.items.map((item, index) => (
                   <tr key={index} border border-black border-dotted>
-                    <td  className="p-2 border border-black border-dotted">{index+1}</td>
-                    <td className="p-2 border border-black border-dotted">{item.name}</td>
-                    <td className="p-2 border border-black border-dotted">{item.quantity} {item.unit}</td>
-                    <td className="p-2 border border-black border-dotted">{item.unitPrice}</td>
-                     <td className="p-2 border border-black border-dotted" >{item.total} </td>
+                    <td className="p-2 border border-black border-dotted">
+                      {index + 1}
+                    </td>
+                    <td className="p-2 border border-black border-dotted">
+                      {item.name}
+                    </td>
+                    <td className="p-2 border border-black border-dotted">
+                      {item.quantity} {item.unit}
+                    </td>
+                    <td className="p-2 border border-black border-dotted">
+                      {item.unitPrice}
+                    </td>
+                    <td className="p-2 border border-black border-dotted">
+                      {item.total}{" "}
+                    </td>
                     <td></td>
                   </tr>
                 ))}
@@ -185,7 +204,7 @@ const InvoiceViewer = ({setInvoice,invoice}) => {
             <div className="mt-5 flex justify-center space-x-4">
               <button
                 onClick={handleDownloadCSV}
-                className="bg-gray-600 text-black hover:text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+                className="bg-gray-400 text-black hover:text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
               >
                 Download CSV
               </button>
