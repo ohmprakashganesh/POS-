@@ -7,7 +7,7 @@ import {
   TrashIcon,
   CubeIcon,
 } from "@heroicons/react/24/outline";
-import { DUMMY_PRODUCTS } from "../../../data/mockData";
+import { productsData } from "../../../data/mockData";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -18,8 +18,8 @@ const ProductList = () => {
   const col = "";
   useEffect(() => {
     // In real app, this would be an API call
-    setProducts(DUMMY_PRODUCTS);
-    setFilteredProducts(DUMMY_PRODUCTS);
+    setProducts(productsData);
+    setFilteredProducts(productsData);
   }, []);
 
   useEffect(() => {
@@ -95,7 +95,7 @@ const ProductList = () => {
             // Product Card
             <div
               key={product.id}
-              className=" rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+              className=" rounded-lg  shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden"
             >
               {/* Checkbox and Product Image */}
               <div className="relative p-4 pb-0 flex flex-col items-center">
@@ -105,7 +105,7 @@ const ProductList = () => {
                     "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80"
                   }
                   alt={product.name}
-                  className="w-full hover:scale-110 hover:rounded-t-xl transition-all duration-300 max-h-48 object-contain mb-3"
+                  className="w-full hover:scale-110 rounded-md hover:rounded-t-xl transition-all duration-300 max-h-48 object-contain mb-3"
                   style={{ objectFit: "contain" }}
                 />
               </div>
@@ -118,19 +118,19 @@ const ProductList = () => {
                   <div className="flex justify-between">
                     <span className="text-gray-500">Price</span>
                     <span className="font-medium text-gray-900">
-                      {product.priceRange}
+                      {product.price}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="">stock</span>
                     <span
                       className={`font-medium ${
-                        product.minOrder <= 10
+                        product.stock <= 10
                           ? "text-red-600"
                           : "text-green-700"
                       }`}
                     >
-                      {product.minOrder}
+                      {product.stock}
                     </span>
                   </div>
                 </div>

@@ -21,8 +21,7 @@ const navigation = [
 ];
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const location = useLocation();
-
+ const location = useLocation();
   return (
     <>
       {/* Mobile overlay */}
@@ -31,8 +30,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           className="fixed inset-0 bg-gray-900/80 z-40 lg:hidden"
           onClick={onClose}
         />
-      )}
-      
+      )} 
       {/* Sidebar */}
       <div className={`
         fixed inset-y-0 left-0 z-50 w-54 bg-white shadow-xl transform transition-transform duration-300 ease-in-out
@@ -59,10 +57,10 @@ const Sidebar = ({ isOpen, onClose }) => {
                 key={item.name}
                 to={item.href}
                 className={`
-                  group flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors
+                  group flex items-center px-4 py-3 hover:[letter-spacing:2px,font:bold] text-sm font-medium rounded-lg transition-colors
                   ${isActive 
-                    ? 'bg-blue-50 text-blue-700 border border-blue-200' 
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    ? 'bg-blue-50 text-blue-700 [letter-spacing:2px]  border border-blue-200' 
+                    : 'text-gray-600 hover:bg-gray-50  hover:text-gray-900'
                   }
                 `}
                 onClick={() => window.innerWidth < 1024 && onClose()}

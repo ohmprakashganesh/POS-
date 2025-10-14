@@ -2,6 +2,50 @@
 import { CubeIcon } from '@heroicons/react/24/outline';
 
 export const productsData = [
+   {
+    id: 7,
+    name: "Laptop",
+    category: "Electronics",
+    price: 999.99,
+    cost: 750.00,
+    stock: 15,
+    sku: "LP-001",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+    description: "High-performance laptop for business and gaming"
+  },
+  {
+    id: 8,
+    name: "Wireless Mouse",
+    category: "Accessories",
+    price: 25.99,
+    cost: 15.00,
+    stock: 3,
+    sku: "WM-002",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+    description: "Ergonomic wireless mouse with long battery life"
+  },
+  {
+    id: 9,
+    name: "Mechanical Keyboard",
+    category: "Accessories",
+    price: 45.99,
+    cost: 28.00,
+    stock: 0,
+    sku: "MK-003",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+    description: "Mechanical keyboard with RGB lighting"
+  },
+  {
+    id: 10,
+    name: "Monitor 24inch",
+    category: "Electronics",
+    price: 299.99,
+    cost: 220.00,
+    stock: 22,
+    sku: "MN-004",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+    description: "24-inch Full HD monitor with IPS panel"
+  },
   {
     id: 1,
     name: "Laptop",
@@ -10,7 +54,7 @@ export const productsData = [
     cost: 750.00,
     stock: 15,
     sku: "LP-001",
-    image: "",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
     description: "High-performance laptop for business and gaming"
   },
   {
@@ -32,7 +76,7 @@ export const productsData = [
     cost: 28.00,
     stock: 0,
     sku: "MK-003",
-    image: "",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
     description: "Mechanical keyboard with RGB lighting"
   },
   {
@@ -43,7 +87,7 @@ export const productsData = [
     cost: 220.00,
     stock: 22,
     sku: "MN-004",
-    image: "",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
     description: "24-inch Full HD monitor with IPS panel"
   },
   {
@@ -54,7 +98,7 @@ export const productsData = [
     cost: 45.00,
     stock: 7,
     sku: "HP-005",
-    image: "",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
     description: "Noise-cancelling wireless headphones"
   }
 ];

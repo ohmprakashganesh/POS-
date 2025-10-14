@@ -118,28 +118,28 @@ const POS = () => {
           </div>
         </div>
         {/* Product Grid */}
-        <div className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+        <div className="grid grid-cols-2 overflow-y-auto  w-full  gap-y-4 gap-x-2  md:grid-cols-4 lg:grid-cols-4 gap-1 h-fit  max-h-[calc(100vh-200px)] py-2 px-2">
           {filteredProducts.map((product) => (
             <button
               key={product.id}
               onClick={() => addToCart(product)}
               disabled={product.stock === 0}
-              className={`bg-white border border-gray-200 rounded-lg p-4 text-left hover:shadow-md transition-shadow ${
+              className={` w-34  border shadow-lg   border-gray-200   rounded-lg p-1 text-left hover:shadow-md transition-shadow ${
                 product.stock === 0 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
               }`}
             >
-              <div className="h-20 bg-gray-100 rounded-lg mb-3 flex items-center justify-center">
+              <div className="h-22 w-26  bg-gray-500 rounded-lg mb-1 flex mx-auto  justify-center items-center">
                 {product.image ? (
-                  <img src={product.image} alt={product.name} className="h-16 w-16 object-cover rounded" />
+                  <img src={product.image} alt={product.name} className="w-full h-full rounded-xl object-cover justify-center items-center " />
                 ) : (
                   <div className="text-gray-400 text-sm text-center">
                     No Image
                   </div>
                 )}
               </div>
-              <h3 className="font-medium text-gray-900 text-sm mb-1">{product.name}</h3>
-              <p className="text-lg font-bold text-blue-600">${product.price}</p>
-              <p className="text-xs text-gray-500">
+              <h3 className="font-medium pl-3 text-gray-900 text-sm ">{product.name}</h3>
+              <p className="text-sm pl-3 font-bold text-blue-600">${product.price}</p>
+              <p className="text-xs pl-3 text-gray-500">
                 Stock: {product.stock} {product.stock <= 5 && '• Low stock'}
               </p>
             </button>
@@ -148,12 +148,12 @@ const POS = () => {
       </div>
 
       {/* Right Panel - Cart & Checkout */}
-      <div className="  bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-        <div className="space-y-4">
+      <div className="  bg-white rounded-lg shadow-sm border border-gray-200 p-2">
+        <div className="space-y-2">
           {/* Customer Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Customer
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+               Cart Items
             </label>
             <select
               value={selectedCustomer}
@@ -170,13 +170,13 @@ const POS = () => {
           </div>
 
           {/* Cart Items */}
-          <div className="border-t border-gray-200 pt-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Order Items</h3>
-            <div className="space-y-3 max-h-64 overflow-y-auto">
+          <div className="border-t  border-gray-500 pt-1">
+            <h3 className="text-lg  font-semibold text-gray-900 mb-0">Order Items</h3>
+            <div className=" max-h-52 overflow-y-scroll">
               {cart.map((item) => (
-                <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div key={item.id} className="flex items-center justify-between mb-1 shadow-md  bg-gray-300   rounded-sm">
                   <div className="flex-1">
-                    <h4 className="font-medium text-gray-900 text-sm">{item.name}</h4>
+                    <h4 className="font-medium text-black text-sm">{item.name}</h4>
                     <p className="text-blue-600 font-semibold">${item.price}</p>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -184,7 +184,7 @@ const POS = () => {
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
                       className="p-1 text-gray-400 hover:text-gray-600"
                     >
-                      <MinusIcon className="h-4 w-4" />
+                      <MinusIcon className="h-4 text-black hover:cursor-pointer  w-6" />
                     </button>
                     <span className="w-8 text-center font-medium">{item.quantity}</span>
                     <button
@@ -192,7 +192,7 @@ const POS = () => {
                       disabled={item.quantity >= item.stock}
                       className="p-1 text-gray-400 hover:text-gray-600 disabled:opacity-50"
                     >
-                      <PlusIcon className="h-4 w-4" />
+                      <PlusIcon className="h-6 text-2xl  text-black hover:cursor-pointer w-4" />
                     </button>
                     <button
                       onClick={() => removeFromCart(item.id)}
@@ -215,7 +215,7 @@ const POS = () => {
 
           {/* Totals */}
           {cart.length > 0 && (
-            <div className="border-t border-gray-200 pt-4 space-y-2">
+            <div className="border-t border-gray-200 pt-1 ">
               <div className="flex justify-between">
                 <span className="text-gray-600">Subtotal:</span>
                 <span className="font-medium">${subtotal}</span>
@@ -225,13 +225,8 @@ const POS = () => {
                 <span className="text-gray-600">Discount ({discount}%):</span>
                 <span className="font-medium text-red-600">-${discountAmount}</span>
               </div>
-              
-              <div className="flex justify-between">
-                <span className="text-gray-600">Tax ({taxRate}%):</span>
-                <span className="font-medium">+${taxAmount}</span>
-              </div>
-              
-              <div className="flex justify-between text-lg font-bold border-t border-gray-200 pt-2">
+             
+              <div className="flex h-4 justify-between text-md font-bold border-t border-gray-200 ">
                 <span>Total:</span>
                 <span>${total}</span>
               </div>
@@ -241,7 +236,7 @@ const POS = () => {
           {/* Discount Input */}
           {cart.length > 0 && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 ">
                 Discount (%)
               </label>
               <input
@@ -250,7 +245,7 @@ const POS = () => {
                 max="100"
                 value={discount}
                 onChange={(e) => setDiscount(Number(e.target.value))}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border border-gray-300 rounded-lg px-3 py-1 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
           )}
