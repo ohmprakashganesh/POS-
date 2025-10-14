@@ -104,10 +104,10 @@ const Dashboard = () => {
 
   const quickActions = [
     {
-      title: "New Sale",
-      description: "Process a new transaction",
+      title: "Cashiers",
+      description: "view Cashiers",
       icon: ShoppingCartIcon,
-      link: "/pos",
+      link: "/cashierList",
       color: "blue"
     },
     {

@@ -7,6 +7,8 @@ import AdminLayout from './componenets/admin/layout/AdminLayout'
 import SubscriberLayout from './componenets/Subscriber/layout/SubscriberLayout'
 
 import SignUp from './pages/auth/SignUp';
+import AddEditCashier from './componenets/Subscriber/components/AddEditCashier';
+import CashierList from './componenets/Subscriber/components/CashierList';
 import SubscriberDashboard from './componenets/Subscriber/SubscriberDashboard';
 import SubscriberList from './componenets/Admin/components/subscriberList';
 import Dashboard from './componenets/cashier/CashierDashboard'; // Subscriber dashboard
@@ -123,6 +125,28 @@ function App() {
                 <ProtectedRoute>
                   <SubscriberLayout>
                     <AddEditCustomer />
+                  </SubscriberLayout>
+                </ProtectedRoute>
+              } />
+
+               <Route path="/cashierList" element={
+                <ProtectedRoute>
+                  <SubscriberLayout>
+                    <CashierList />
+                  </SubscriberLayout>
+                </ProtectedRoute>
+              } />
+               <Route path="/cashier/add" element={
+                <ProtectedRoute>
+                  <SubscriberLayout>
+                    <AddEditCashier />
+                  </SubscriberLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/cashier/edit/:id" element={
+                <ProtectedRoute>
+                  <SubscriberLayout>
+                    <AddEditCashier />
                   </SubscriberLayout>
                 </ProtectedRoute>
               } />

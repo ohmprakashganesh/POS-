@@ -19,20 +19,13 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
- const storedUser = JSON.parse(localStorage.getItem("pos_user") || "null");
-
-useEffect(() => {
-  if (!storedUser) return;
-
-  if (storedUser.role === "admin") {
+   if (user?.role === "admin") {
     navigate("/admin");
   } else if (storedUser.role === "subscriber") {
     navigate("/subscriber");
-  } else {
+  } else{
     navigate("/");
   }
-}, [navigate]);
-
 
   const handlePasswordLogin = async (e) => {
     e.preventDefault();

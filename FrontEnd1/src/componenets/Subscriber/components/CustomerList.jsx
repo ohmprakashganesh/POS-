@@ -60,7 +60,7 @@ const CustomerList = () => {
       </div>
 
       {/* Customers Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredCustomers.map((customer) => (
           <div key={customer.id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
             <div className="flex items-start justify-between mb-4">
@@ -116,7 +116,78 @@ const CustomerList = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
+
+<div className="overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200">
+  <table className="min-w-full text-sm text-gray-700">
+    <thead className="bg-gray-100 text-gray-700 uppercase text-xs font-semibold">
+      <tr>
+        <th className="px-4 py-3 text-left">Name</th>
+        <th className="px-4 py-3 text-left">Phone</th>
+        <th className="px-4 py-3 text-left">Email</th>
+        <th className="px-4 py-3 text-left">Address</th>
+        <th className="px-4 py-3 text-center">Total Orders</th>
+        <th className="px-4 py-3 text-center">Total Spent</th>
+        <th className="px-4 py-3 text-center">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {filteredCustomers.map((customer) => (
+        <tr
+          key={customer.id}
+          className="border-t hover:bg-gray-50 transition duration-150"
+        >
+          {/* Customer Name + Icon */}
+          <td className="px-4 py-3 flex items-center space-x-3">
+            <div className="w-9 h-9 bg-blue-100 rounded-full flex items-center justify-center">
+              <UserIcon className="h-5 w-5 text-blue-600" />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-900">{customer.name}</p>
+              <p className="text-xs text-gray-500">Customer</p>
+            </div>
+          </td>
+
+          {/* Phone */}
+          <td className="px-4 py-3">{customer.phone}</td>
+
+          {/* Email */}
+          <td className="px-4 py-3 truncate max-w-[200px]">{customer.email}</td>
+
+          {/* Address */}
+          <td className="px-4 py-3 truncate max-w-[180px]">{customer.address}</td>
+
+          {/* Total Orders */}
+          <td className="px-4 py-3 text-center font-medium text-gray-800">12</td>
+
+          {/* Total Spent */}
+          <td className="px-4 py-3 text-center font-semibold text-green-600">
+            $2,450.00
+          </td>
+
+          {/* Actions */}
+          <td className="px-4 py-3 text-center">
+            <div className="flex justify-center space-x-2">
+              <Link
+                to={`/customers/edit/${customer.id}`}
+                className="p-1.5 rounded-full hover:bg-blue-50 text-blue-600 hover:text-blue-800 transition"
+              >
+                <PencilIcon className="h-4 w-4" />
+              </Link>
+              <button
+                onClick={() => handleDelete(customer.id)}
+                className="p-1.5 rounded-full hover:bg-red-50 text-red-600 hover:text-red-800 transition"
+              >
+                <TrashIcon className="h-4 w-4" />
+              </button>
+            </div>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
       {filteredCustomers.length === 0 && (
         <div className="text-center py-12 bg-white rounded-lg shadow-sm border border-gray-200">

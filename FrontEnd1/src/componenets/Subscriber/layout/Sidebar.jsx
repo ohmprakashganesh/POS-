@@ -9,7 +9,7 @@ import {
   ChartBarIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
-import { icons, TypeIcon } from 'lucide-react';
+import { BanknoteIcon, BookAIcon, UserIcon } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/subscriber', icon: HomeIcon },
@@ -17,8 +17,11 @@ const navigation = [
   { name: 'Customers', href: '/customers', icon: UsersIcon },
   { name: 'Transactions', href: '/transactions', icon: DocumentTextIcon },
   { name: 'Reports', href: '/reports/sales', icon: ChartBarIcon },
-  {name:'Categories', href:'/categories',icon:TypeIcon},
-    {name:'Subscription', href:'/subscription',icon:TypeIcon}
+  {name:'Categories', href:'/categories',icon:BookAIcon},
+   {name:'Subscription', href:'/subscription',icon:BanknoteIcon},
+   {name:'Cashiers', href:'/cashierList',icon:UserIcon}
+
+   
 
 ];
 
