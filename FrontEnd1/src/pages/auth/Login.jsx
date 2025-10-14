@@ -44,8 +44,6 @@ const Login = () => {
     setIsLoading(true);
     setError('');
 
-
-
     const result = await login(email, password);
   if (result.success) {
     alert(result.user.role)
@@ -58,7 +56,7 @@ const Login = () => {
     navigate("/");
   }
   }
-  else {
+  else{
       setError(result.error || 'Login failed');
     }
     setIsLoading(false);
