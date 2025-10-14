@@ -19,34 +19,30 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(()=>{
-      try {
-      const raw = localStorage.getItem('pos_user');
-      if (!raw) return; // nothing stored
-      const parsed = JSON.parse(raw);
-      if (!parsed || !parsed.role) return;
-
-      // Redirect based on role
-      if (parsed.role === 'admin') {
-        navigate('/admin', { replace: true });
-      } else if (parsed.role === 'subscriber') {
-        navigate('/subscriber', { replace: true });
-      } else {
-        navigate('/', { replace: true });
-      }
-    } catch (err) {
-      // If stored value is corrupted, clear it (optional) or ignore
-      console.warn('Failed to parse pos_user from localStorage', err);
+   useEffect(() => {
+    try{
+      const raw= localStorage.getItem("pos_user");
+       if(!raw) return;
+       const parsed= JSON.parse(raw);
+       if(!parsed|| !parsed.role) return;
+  
+  if (user?.role === "admin") {
+    navigate("/admin");
+  } else if (user?.role === "subscriber") {
+    navigate("/subscriber");
+  } else if (user) {
+    navigate("/");
+  } 
+    }catch(error)
+    {
+ console.warn("failed to parse pos user form localstorage",error);
     }
-    // empty deps -> runs once
-  }, [navigate]);
+}, [ navigate]);
 
   const handlePasswordLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-
-
 
     const result = await login(email, password);
   if (result.success) {
@@ -59,15 +55,12 @@ const Login = () => {
   } else{
     navigate("/");
   }
-  
   }
-  
-  else {
+  else{
       setError(result.error || 'Login failed');
     }
     setIsLoading(false);
   };
-
   const handleSendOtp = async (e) => {
     e.preventDefault();
     setIsLoading(true);
