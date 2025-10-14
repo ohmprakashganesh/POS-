@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
@@ -19,13 +19,20 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-   if (user?.role === "admin") {
+ const storedUser = JSON.parse(localStorage.getItem("pos_user") || "null");
+
+useEffect(() => {
+  if (!storedUser) return;
+
+  if (storedUser.role === "admin") {
     navigate("/admin");
-  } else if (user?.role === "subscriber") {
+  } else if (storedUser.role === "subscriber") {
     navigate("/subscriber");
-  } else{
+  } else {
     navigate("/");
   }
+}, [navigate]);
+
 
   const handlePasswordLogin = async (e) => {
     e.preventDefault();
