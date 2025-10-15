@@ -44,10 +44,8 @@ const Login = () => {
     setIsLoading(true);
     setError('');
 
-    const result = await login(email, password);
+  const result = await login(email, password);
   if (result.success) {
-    alert(result.user.role)
-
    if (result.user?.role === "admin") {
     navigate("/admin");
   } else if (result.user?.role === "subscriber") {

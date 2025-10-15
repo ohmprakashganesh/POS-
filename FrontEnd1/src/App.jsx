@@ -2,34 +2,45 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { NotificationProvider } from './contexts/NotificationContext';
 import Login from './pages/auth/Login';
+import SignUp from './pages/auth/SignUp';
+import PublicSubscription  from './pages/subscription/Subscription'
+import NotificationCenter from './componenets/notifications/NotificationCenter';
+
+
 import Layout from './componenets/cashier/layout/CashierLayout'
 import AdminLayout from './componenets/admin/layout/AdminLayout'
 import SubscriberLayout from './componenets/Subscriber/layout/SubscriberLayout'
 
-import SignUp from './pages/auth/SignUp';
-import Orders from './componenets/cashier/components/Orders'
-import AddEditCashier from './componenets/Subscriber/components/AddEditCashier';
-import CashierList from './componenets/Subscriber/components/CashierList';
-import SubscriberDashboard from './componenets/Subscriber/SubscriberDashboard';
-import SubscriberList from './componenets/Admin/components/subscriberList';
-import Dashboard from './componenets/cashier/CashierDashboard'; // Subscriber dashboard
-import AdminDashboard from './componenets/Admin/AdminDashboard'; // SaaS owner dashboard
+
+
+// subscriber components 
 import ProductList from './componenets/Subscriber/components/ProductList';
 import AddEditProduct from './componenets/Subscriber/components/AddEditProduct';
 import CustomerList from './componenets/Subscriber/components/CustomerList';
 import Categories from './componenets/Subscriber/components/Category'
 import AddEditCustomer from './componenets/Subscriber/components/AddEditCustomer';
-import POS from './componenets/cashier/components/POS';
 import TransactionHistory from './componenets/Subscriber/components/TransactionHistory';
 import SalesReports from './componenets/Subscriber/components/SalesReports';
 import ProfitLoss from './componenets/Subscriber/components/ProfitLoss';
 import Subscription from './componenets/Subscriber/components/Subscription';
-import PublicSubscription  from './pages/subscription/Subscription'
-import NotificationCenter from './componenets/notifications/NotificationCenter';
+import AddEditCashier from './componenets/Subscriber/components/AddEditCashier';
+import CashierList from './componenets/Subscriber/components/CashierList';
+import Product from './componenets/Subscriber/components/Product';
+import SubscriberDashboard from './componenets/Subscriber/SubscriberDashboard';
+
+// admin components 
+import SubscriberList from './componenets/Admin/components/subscriberList';
+import AdminDashboard from './componenets/Admin/AdminDashboard';
 import SubscriptionPlans from './componenets/Admin/components/SubscriptionPlans';
+
+// cashier components 
+import Dashboard from './componenets/cashier/CashierDashboard'; 
 import CashierProductList from './componenets/cashier/components/ProductList'
 import CashierCustomerList from './componenets/cashier/components/CustomerList';
 import CashierAddEditCustomer from './componenets/cashier/components/AddEditCustomer'
+import Orders from './componenets/cashier/components/Orders'
+import POS from './componenets/cashier/components/POS';
+
 
 function ProtectedRoute({ children, requireAdmin = false }) {
   const { user, subscriptionStatus } = useAuth();
@@ -91,19 +102,26 @@ function App() {
               } />
 
               <Route path='/subscriberList' element={
-                <ProtectedRoute>
+                <ProtectedRoute requireAdmin={true}>
                   <AdminLayout>
                    <SubscriberList />
                   </AdminLayout>
                 </ProtectedRoute>
               }/>
-
+{/* ===================================================================================== */}
 
               <Route path="/subscriber" element={
                 <ProtectedRoute>
                   <SubscriberLayout>
                     <SubscriberDashboard />
                    </SubscriberLayout>
+                </ProtectedRoute>
+              } />
+                <Route path="/transactions" element={
+                <ProtectedRoute >
+                  <SubscriberLayout>
+                    <TransactionHistory />
+                  </SubscriberLayout>
                 </ProtectedRoute>
               } />
              <Route path="/" element={
@@ -185,6 +203,13 @@ function App() {
                 <ProtectedRoute>
                   <SubscriberLayout>
                     <AddEditProduct />
+                  </SubscriberLayout>
+                </ProtectedRoute>
+              } />
+               <Route path="/product" element={
+                <ProtectedRoute>
+                  <SubscriberLayout>
+                    <Product />
                   </SubscriberLayout>
                 </ProtectedRoute>
               } />

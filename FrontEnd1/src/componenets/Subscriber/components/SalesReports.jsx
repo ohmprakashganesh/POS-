@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { CalendarIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+import { BarChart } from '@mui/x-charts/BarChart';
+import { Container, Typography, Paper, Grow } from '@mui/material';
+import { motion } from 'framer-motion';
+
 
 const SalesReports = () => {
   const [dateRange, setDateRange] = useState({
@@ -48,6 +52,25 @@ const SalesReports = () => {
   const totalSales = salesData.reduce((sum, item) => sum + item.sales, 0);
   const totalOrders = salesData.reduce((sum, item) => sum + item.orders, 0);
   const averageOrderValue = totalSales / totalOrders;
+
+  // 1. Define the data structure
+const chartData = [
+  { month: 'Jan', totalSales: 15000 },
+  { month: 'Feb', totalSales: 22000 },
+  { month: 'Mar', totalSales: 18000 },
+  { month: 'Apr', totalSales: 27000 },
+  { month: 'May', totalSales: 35000 },
+  { month: 'Jun', totalSales: 29000 },
+];
+
+// 2. A formatter function for the value axis/tooltip
+const salesValueFormatter = (value) => {
+  // Simple function to format the value as currency (e.g., $15k)
+  if (value >= 1000) {
+    return `$${(value / 1000).toFixed(0)}k`;
+  }
+  return `$${value}`;
+};
 
   return (
     <div className="space-y-6">
@@ -148,19 +171,68 @@ const SalesReports = () => {
       </div>
 
       {/* Sales Chart */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-2">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Sales Overview</h3>
         {isLoading ? (
           <div className="flex items-center justify-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
         ) : (
-          <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-            <div className="text-center">
-              <ChartBarIcon className="mx-auto h-12 w-12 text-gray-400" />
-              <p className="mt-2 text-gray-500">Sales chart visualization</p>
-              <p className="text-sm text-gray-400">(Chart.js integration would go here)</p>
-            </div>
+          <div className="h-[450px] bg-red-50 rounded-lg flex  justify-center">
+        <Container className='h-12'  maxWidth="md"  sx={{ mt: 4}}>
+          <Paper elevation={3} >
+        <Typography variant="h5" gutterBottom>
+          Quarterly Sales Performance
+        </Typography>
+        <BarChart
+        borderRadius={16}
+        onAnimationStart={Grow}
+          dataset={chartData} // The array of data objects
+          
+          xAxis={[
+            { 
+              scaleType: 'band', 
+              dataKey: 'month', // Key from the dataset to use for the categories
+              label: 'Month',
+            },
+          ]}
+          
+          // Y-Axis Configuration (Numerical)
+          yAxis={[
+            {
+              label: 'Sales (USD)',
+              valueFormatter: salesValueFormatter, // Apply the formatter to Y-axis labels
+            },
+          ]}
+
+          // Series Configuration (The actual bars)
+          series={[
+            { 
+              dataKey: 'totalSales', // Key from the dataset for the bar height
+              label: 'Total Sales', 
+              valueFormatter: salesValueFormatter, // Apply the formatter to tooltips
+              color: '#1976D2', // Customize bar color (MUI Primary color)
+            },
+          ]}
+          
+          // Chart dimensions
+          width={550}
+          height={300}
+           sx={{
+              '& .MuiBarElement-root': {
+                transformOrigin: 'bottom',
+                borderRadius:16,
+                animation: 'growBars 1.5s ease-out forwards',
+              },
+              '@keyframes growBars': {
+                from: { transform: 'scaleY(0)' },
+                to: { transform: 'scaleY(1)' },
+              },
+            }}
+        />
+      </Paper>
+    </Container>
+
           </div>
         )}
       </div>

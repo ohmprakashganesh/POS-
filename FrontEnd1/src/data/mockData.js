@@ -327,3 +327,13 @@ export const DUMMY_PRODUCTS = [
     default: return 'text-gray-600 bg-gray-100';
   }
 };
+
+const tenant = [
+  { id: 1, name: 'The Corner Cafe', status: 'Active', plan: 'Pro', users: 12, lastActivity: '2025-10-12', revenue: 1200 },
+  { id: 2, name: 'Quick Mart Retail', status: 'Active', plan: 'Enterprise', users: 50, lastActivity: '2025-10-14', revenue: 4500 },
+  { id: 3, name: 'Vintage Threads Co.', status: 'Pending Churn', plan: 'Basic', users: 3, lastActivity: '2025-09-28', revenue: 50 },
+  { id: 4, name: 'Green Garden Supplies', status: 'Suspended', plan: 'Basic', users: 1, lastActivity: '2025-08-01', revenue: 0 },
+  { id: 5, name: 'Tech Repair Hub', status: 'Active', plan: 'Pro', users: 7, lastActivity: '2025-10-14', revenue: 890 },
+  { id: 6, name: 'Local Artisan Bakery', status: 'Active', plan: 'Basic', users: 5, lastActivity: '2025-10-13', revenue: 320 },
+  { id: 7, name: 'Elite Fitness Center', status: 'Trial', plan: 'Enterprise', users: 20, lastActivity: '2025-10-14', revenue: 0 },
+              ];
