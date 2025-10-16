@@ -143,7 +143,7 @@ const ProductList = () => {
               onClick={(e) => e.stopPropagation()} // prevent route change when clicking inside dropdown
             >
               <Link
-                to="/products/add"
+                to={`/products/edit/${product.id}`}
                 state={{ product }}
                 className="
                   block w-full text-left 

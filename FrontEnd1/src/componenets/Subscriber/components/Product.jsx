@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom';
+import { DUMMY_PRODUCTS } from '@/data/mockData';
 
 const Product = () => {
   // Get the product id from the URL

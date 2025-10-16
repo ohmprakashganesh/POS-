@@ -198,7 +198,7 @@ const Subscription = () => {
 
               <button
                 onClick={() => setSelectedPlan(key)}
-                className={`w-full mt-6 py-3 px-4 rounded-lg font-semibold ${
+                className={`w-full mt-6 py-3 px-4 cursor-pointer rounded-lg font-semibold ${
                   selectedPlan === key
                     ? 'bg-green-600 text-white '
                     : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
@@ -221,7 +221,7 @@ const Subscription = () => {
                    
                   </>
                 )}
-                 <div className='w-full text-center  p-3 bg-green-800 rounded-sm font-semibold   text-white' onClick={()=> navigate(`/payment/${plan.name}`)}> Enroll </div>
+                 <div className='w-full text-center  p-3 bg-green-800 rounded-sm font-semibold  cursor-pointer  text-white' onClick={()=> navigate(`/payment/${plan.name}`)}> Enroll </div>
               </div>
             </div>
           ))}

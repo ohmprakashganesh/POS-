@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import {  useNavigate, Link, useLocation } from 'react-router-dom';
+import {  useNavigate, Link, useLocation, useParams } from 'react-router-dom';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
-const AddEditProduct = () => {
-  const navigate = useNavigate();
-  const location= useLocation();
-  const product= location.state?.product;
-  const isEdit = Boolean(product?.id);
+import { DUMMY_PRODUCTS } from '@/data/mockData';
 
+import { VENDORS } from '@/data/mockData';
+const AddEditProduct = () => {
+    const {id}= useParams();
+  const navigate = useNavigate();  
+  const isEdit = Boolean(id);
+
+
+  const product=DUMMY_PRODUCTS.filter(prod=> prod.id==id);
+  const [vendors, setVendors]= useState(VENDORS);
   const [formData, setFormData] = useState({
+     name: '',
     vendor:"",
-    name: '',
     category: '',
     price: '',
     cost: '',
@@ -17,29 +22,31 @@ const AddEditProduct = () => {
     sku: '',
     description: '',
     image: '',
-    expiry:"",
+    purchase_date:'',
+    expiry_date:"",
 
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
- 
- 
-  useEffect(() => {
-    if (isEdit) {
-      if (product) {
-        setFormData({
-          name: product.name,
-          category:null,
-          price: product.price.toString(),
-          cost:"500",
-          stock: product.minOrder.toString(),
-          sku: "random",
-          description: "custom desc",
-          image: product.image || ''
-        });
-      }
-    }
-  }, [isEdit]);
+useEffect(() => {
+  if (isEdit && product) {
+    setFormData({
+      name: product.name || '',
+      vendor: product.vendor || '',
+      category: product.category || '',
+      price: product.selling_price?.toString() || '', // ✅ map selling_price → price
+      cost: product.purchase_price?.toString() || '', // ✅ map purchase_price → cost
+      stock: product.stock?.toString() || '',
+      sku: product.sku || '',
+      description: product.description || '',
+      image: product.image || '',
+      purchase_date:product.purchase_date,
+      expiry_date: product.expiry_date || '', // ✅ map expiry_date → expiry
+    });
+  }
+}, [id]);
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -105,10 +112,6 @@ const AddEditProduct = () => {
             </p>
           </div>
           <div>
-           
-            <p className="text-gray-600">
-              {isEdit ? '' : 'Add a new product to your inventory'}
-            </p>
           </div>
         </div>
       </div>
@@ -142,6 +145,24 @@ const AddEditProduct = () => {
 
               <div>
                 <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
+                  Vendor *
+                </label>
+                <select
+                  id="vendor"
+                  name="vendor"
+                  required
+                  value={formData.vendor}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">Select a Vendor</option>
+                  {vendors.map(vendor => (
+                    <option key={vendor.id} value={vendor.name}>{vendor.name}</option>
+                  ))}
+                </select>
+              </div>
+               <div>
+                <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
                   Category *
                 </label>
                 <select
@@ -158,8 +179,24 @@ const AddEditProduct = () => {
                   ))}
                 </select>
               </div>
-
               <div className="grid grid-cols-2 gap-4">
+                 <div>
+                  <label htmlFor="cost" className="block text-sm font-medium text-gray-700 mb-1">
+                    Cost Price ($) *
+                  </label>
+                  <input
+                    type="number"
+                    id="cost"
+                    name="cost"
+                    step="0.01"
+                    min="0"
+                    required
+                    value={formData.cost}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="0.00"
+                  />
+                </div>
                 <div>
                   <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">
                     Sale Price ($) *
@@ -178,23 +215,39 @@ const AddEditProduct = () => {
                   />
                 </div>
 
-                <div>
+               
+              </div>
+               <div className="grid grid-cols-2 gap-4">
+                 <div>
                   <label htmlFor="cost" className="block text-sm font-medium text-gray-700 mb-1">
-                    Cost Price ($) *
+                    purchase Date 
                   </label>
                   <input
-                    type="number"
-                    id="cost"
-                    name="cost"
-                    step="0.01"
-                    min="0"
-                    required
-                    value={formData.cost}
+                    type="date"
+                    id="purchase"
+                    name="purchase"
+                    value={formData.purchase_date}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="0.00"
                   />
                 </div>
+                <div>
+                  <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">
+                    expiry Date
+                  </label>
+                  <input
+                    type="date"
+                    id="expiry"
+                    name="expiry"
+                    value={formData.expiry_date}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="0.00"
+                  />
+                </div>
+
+               
               </div>
 
               <div>

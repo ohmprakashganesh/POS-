@@ -32,10 +32,10 @@ const EnrollmentSummary = ({ summary, totalAmount }) => {
                 index < Object.keys(summary).length - 1 ? "border-green-700" : ""
               }`}
             >
-              <span className="font-bold text-gray-700">{key}</span>
-              <span className="font-medium text-black">{value}</span>
+              <span className="font-xl text-gray-700">{key}</span>
+              <span className=" font-xl text-black">{value}</span>
             </div>
-          ))}
+          ))}  
         </div>
       </div>
 
@@ -48,7 +48,7 @@ const EnrollmentSummary = ({ summary, totalAmount }) => {
           <span className="text-green-600">{totalAmount}</span>
         </div>
 
-        <button   onClick={()=>navigate('/success')} className="w-full text-white opacity-75 py-3 bg-green-500 text-lg hover:bg-green-600 hover:[letter-spacing:1px] transition duration-150 shadow-lg">
+        <button   onClick={()=>navigate('/success')} className="w-full outline bg-green-300 hover:font-semibold cursor-pointer hover:bg-green-500 hover:text-white py-3 mt-6 flex items-center justify-center text-sm text-black transition duration-15">
           Complete Enrollment
         </button>
 
@@ -56,10 +56,10 @@ const EnrollmentSummary = ({ summary, totalAmount }) => {
           By completing enrollment, you agree to our terms and conditions
         </p>
       </div>
-
+      
       <button
         onClick={() => navigate("/")} 
-        className="w-full outline hover:bg-green-500 hover:text-white py-3 mt-6 flex items-center justify-center text-sm text-black transition duration-150"
+        className="w-full outline hover:bg-green-500 hover:text-white py-3 mt-6 flex items-center cursor-pointer justify-center text-sm text-black transition duration-150"
       >
         <ArrowLeft className="w-4 h-4 mr-2" />
         Back to Course Details
