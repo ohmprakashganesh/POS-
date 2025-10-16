@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Product = () => {
 
@@ -130,4 +130,4 @@ const productData = {
 
 
 
-export default Product
+export default Product;

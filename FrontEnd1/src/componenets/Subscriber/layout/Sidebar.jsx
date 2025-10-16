@@ -19,10 +19,9 @@ const navigation = [
   { name: 'Reports', href: '/reports/sales', icon: ChartBarIcon },
   {name:'Categories', href:'/categories',icon:BookAIcon},
    {name:'Subscription', href:'/subscription',icon:BanknoteIcon},
-   {name:'Cashiers', href:'/cashierList',icon:UserIcon}
-
-   
-
+   {name:'Cashiers', href:'/cashierList',icon:UserIcon},
+   {name:'product', href:'/product',icon:UserIcon},
+    {name:'vendors', href:'/vendors',icon:UserIcon}
 ];
 
 const Sidebar = ({ isOpen, onClose }) => {

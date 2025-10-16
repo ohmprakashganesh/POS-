@@ -79,7 +79,6 @@ const ProductList = () => {
           Add Product
         </Link>
       </div>
-
       {/* Search and Filters */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

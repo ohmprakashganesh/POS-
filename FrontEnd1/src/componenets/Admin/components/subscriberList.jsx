@@ -70,33 +70,7 @@ const [list, setList] = useState(null); // store hovered subscriber ID
           className="w-full p-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
-        {/* ➕ Add new subscriber */}
-        {/* <div className="flex gap-2 mb-6">
-          <input
-            type="text"
-            placeholder="Name"
-            value={newSubscriber.name}
-            onChange={(e) =>
-              setNewSubscriber({ ...newSubscriber, name: e.target.value })
-            }
-            className="flex-1 p-2 border border-gray-300 rounded-lg"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={newSubscriber.email}
-            onChange={(e) =>
-              setNewSubscriber({ ...newSubscriber, email: e.target.value })
-            }
-            className="flex-1 p-2 border border-gray-300 rounded-lg"
-          />
-          <button
-            onClick={handleAdd}
-            className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
-          >
-            Add
-          </button>
-        </div> */}
+   
 
         {/* 📋 Table */}
         <div className="overflow-x-auto">
@@ -175,9 +149,6 @@ const [list, setList] = useState(null); // store hovered subscriber ID
                    67 days
                  
                   </td>
-                  
-               
-
                  <td className="p-3 text-center md:block hidden space-x-2">
                
                   {editSubscriber?.id === s.id ? (
@@ -197,10 +168,12 @@ const [list, setList] = useState(null); // store hovered subscriber ID
                   )}
 
                   <button
+                   onMouseEnter={() => setStatus(s.id)}
+                   onMouseLeave={() => setStatus(null)}
                     onClick={() => handleToggle(s.id)}
                     className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
                   >
-                    {s.active ? "Deactivate" : "Activate"}
+                   update status
                   </button>
 
                   <button
@@ -208,8 +181,7 @@ const [list, setList] = useState(null); // store hovered subscriber ID
                     className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                   >
                     Delete
-                  </button>
-                  
+                  </button> 
                 </td> 
                     <td
                 onMouseEnter={() => setList(s.id)}
@@ -225,7 +197,7 @@ const [list, setList] = useState(null); // store hovered subscriber ID
       {/* Dropdown menu on hover */}
       {list ===s.id && (
         <ul className="absolute top-12 bg-white shadow-lg border rounded-md p-2 space-y-2 z-10">
-          {editSubscriber?.id === s.id ? (
+          {editSubscriber?.id === s.id && (
             <li>
               <button
                 onClick={handleSave}
@@ -234,16 +206,8 @@ const [list, setList] = useState(null); // store hovered subscriber ID
                 Save
               </button>
             </li>
-          ) : (
-            <li>
-              <button
-                onClick={() => setEditSubscriber(s)}
-                className="w-full px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-              >
-                Edit
-              </button>
-            </li>
-          )}
+          ) 
+          }
 
           <li>
             <button

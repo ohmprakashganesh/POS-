@@ -8,6 +8,7 @@ const AddEditProduct = () => {
   const isEdit = Boolean(product?.id);
 
   const [formData, setFormData] = useState({
+    vendor:"",
     name: '',
     category: '',
     price: '',
@@ -15,7 +16,9 @@ const AddEditProduct = () => {
     stock: '',
     sku: '',
     description: '',
-    image: ''
+    image: '',
+    expiry:"",
+
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');

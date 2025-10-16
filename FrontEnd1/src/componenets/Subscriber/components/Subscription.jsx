@@ -161,26 +161,6 @@ const Subscription = () => {
         {/* Billing Toggle */}
         <div className="mt-8 flex justify-center">
           <div className="bg-white rounded-lg p-1 border border-gray-200">
-            <button
-              onClick={() => setBillingCycle('monthly')}
-              className={`px-4 py-2 rounded-md text-sm font-medium ${
-                billingCycle === 'monthly'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setBillingCycle('yearly')}
-              className={`px-4 py-2 rounded-md text-sm font-medium ${
-                billingCycle === 'yearly'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              Yearly (Save 17%)
-            </button>
           </div>
         </div>
 

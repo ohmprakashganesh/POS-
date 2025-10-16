@@ -3,8 +3,10 @@ import { useAuth } from '../../contexts/AuthContext';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { HandIcon, Move3dIcon, MoveRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Subscription = () => {
+  const navigate= useNavigate();
   const { user, subscriptionStatus, updateSubscription } = useAuth();
   const [billingCycle, setBillingCycle] = useState('monthly');
   const [selectedPlan, setSelectedPlan] = useState('pro');
@@ -24,8 +26,8 @@ const Subscription = () => {
   const plans = {
     basic: {
       name: 'Basic',
+      time:3,
       monthly: 29,
-      yearly: 290, // 2 months free
       features: [
         'Up to 100 products',
         '1 user account',
@@ -42,6 +44,7 @@ const Subscription = () => {
     pro: {
       name: 'Professional',
       monthly: 79,
+      time:6,
       yearly: 790, // 2 months free
       features: [
         'Up to 500 products',
@@ -56,8 +59,8 @@ const Subscription = () => {
     },
     enterprise: {
       name: 'Enterprise',
-      monthly: 199,
-      yearly: 1990, // 2 months free
+      monthly: 1990,
+      time:12,
       features: [
         'Unlimited products',
         '20+ user accounts',
@@ -155,7 +158,7 @@ const Subscription = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-6 px-4 sm:px-3 lg:px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-gray-900">Choose Your Plan</h1>
@@ -164,44 +167,20 @@ const Subscription = () => {
           </p>
         </div>
 
-        {/* Billing Toggle */}
-        <div className="mt-8 flex justify-center">
-          <div className="bg-white rounded-lg p-1 border border-gray-200">
-            <button
-              onClick={() => setBillingCycle('monthly')}
-              className={`px-4 py-2 rounded-md text-sm font-medium ${
-                billingCycle === 'monthly'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setBillingCycle('yearly')}
-              className={`px-4 py-2 rounded-md text-sm font-medium ${
-                billingCycle === 'yearly'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              Yearly (Save 17%)
-            </button>
-          </div>
-        </div>
+
 
         {/* Plans Grid */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-8">
           {Object.entries(plans).map(([key, plan]) => (
             <div
               key={key}
               className={`bg-white rounded-lg shadow-sm border-2 ${
-                selectedPlan === key ? 'border-blue-500' : 'border-gray-200'
+                selectedPlan === key ? 'border-green-500' : 'border-gray-200'
               } p-6 relative`}
             >
               {selectedPlan === key && (
                 <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-2">
-                  <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
                     Popular
                   </span>
                 </div>
@@ -210,24 +189,18 @@ const Subscription = () => {
               <h3 className="text-xl font-bold text-gray-900">{plan.name}</h3>
               <div className="mt-4">
                 <span className="text-4xl font-bold text-gray-900">
-                  ${billingCycle === 'monthly' ? plan.monthly : plan.yearly}
+                  ${billingCycle? plan.monthly:"100"}
                 </span>
-                <span className="text-gray-600 ml-2">
-                  /{billingCycle === 'monthly' ? 'month' : 'year'}
+                <span className=" text-xl font-semibold text-emerald-800 ml-2">
+                 /{plan.time} Months
                 </span>
               </div>
-
-              {billingCycle === 'yearly' && (
-                <p className="mt-2 text-green-600 text-sm font-medium">
-                  Save ${(plan.monthly * 12 - plan.yearly)} per year
-                </p>
-              )}
 
               <button
                 onClick={() => setSelectedPlan(key)}
                 className={`w-full mt-6 py-3 px-4 rounded-lg font-semibold ${
                   selectedPlan === key
-                    ? 'bg-blue-600 text-white hover:bg-blue-700'
+                    ? 'bg-green-600 text-white '
                     : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                 }`}
               >
@@ -238,77 +211,25 @@ const Subscription = () => {
                 <h4 className="font-semibold text-gray-900">Features included:</h4>
                 {plan.features.map((feature, index) => (
                   <div key={index} className="flex items-center">
-                    <CheckIcon className="h-5 w-5 text-green-500 mr-2" />
+                    <CheckIcon className="h-5 w-5 text-blue-500 mr-2" />
                     <span className="text-gray-700 text-sm">{feature}</span>
                   </div>
                 ))}
                 {plan.limitations.length > 0 && (
                   <>
                     <h4 className="font-semibold text-gray-900 mt-4">Limitations:</h4>
-                    {plan.limitations.map((limitation, index) => (
-                      <div key={index} className="flex items-center">
-                        <XMarkIcon className="h-5 w-5 text-red-500 mr-2" />
-                        <span className="text-gray-700 text-sm">{limitation}</span>
-                      </div>
-                    ))}
+                   
                   </>
                 )}
+                 <div className='w-full text-center  p-3 bg-green-800 rounded-sm font-semibold   text-white' onClick={()=> navigate(`/payment/${plan.name}`)}> Enroll </div>
               </div>
             </div>
           ))}
         </div>
+       
 
-        {/* Payment Section */}
-        <div className="mt-12 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Complete Subscription</h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="font-medium text-gray-900 mb-3">Selected Plan</h4>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold">{plans[selectedPlan].name}</span>
-                  <span className="text-xl font-bold text-blue-600">
-                    ${billingCycle === 'monthly' ? plans[selectedPlan].monthly : plans[selectedPlan].yearly}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-600 mt-1">
-                  {billingCycle === 'monthly' ? 'Per month' : 'Per year'}
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-medium text-gray-900 mb-3">Payment Method</h4>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={() => handlePayment('eSewa')}
-                  disabled={isProcessing}
-                  className="p-4 border border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 flex items-center justify-center disabled:opacity-50"
-                >
-                  <span className="font-semibold text-orange-600">eSewa</span>
-                </button>
-                <button
-                  onClick={() => handlePayment('Khalti')}
-                  disabled={isProcessing}
-                  className="p-4 border border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 flex items-center justify-center disabled:opacity-50"
-                >
-                  <span className="font-semibold text-purple-600">Khalti</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {isProcessing && (
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <div className="flex items-center">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
-                <span className="text-blue-700">Processing payment...</span>
-              </div>
-            </div>
-          )}
-        </div>
       </div>
+
     </div>
   );
 };

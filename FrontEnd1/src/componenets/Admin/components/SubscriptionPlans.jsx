@@ -13,37 +13,7 @@ const initialPlans = {
       "Mobile POS access",
     ],
     limitations: ["No advanced analytics", "No API access", "Limited customer support"],
-  },
-  pro: {
-    name: "Professional",
-    monthly: 79,
-    yearly: 790,
-    features: [
-      "Up to 500 products",
-      "5 user accounts",
-      "Advanced reporting",
-      "Priority support",
-      "API access",
-      "Custom branding",
-      "Inventory forecasting",
-    ],
-    limitations: [],
-  },
-  enterprise: {
-    name: "Enterprise",
-    monthly: 199,
-    yearly: 1990,
-    features: [
-      "Unlimited products",
-      "20+ user accounts",
-      "Custom reporting",
-      "24/7 phone support",
-      "Full API access",
-      "White-label solution",
-      "Dedicated account manager",
-    ],
-    limitations: [],
-  },
+  }
 };
 
 const PlanManagement = () => {
@@ -111,12 +81,18 @@ const PlanManagement = () => {
 
       {/* Add New Plan */}
       <div className="mb-6 border p-4 rounded-lg bg-gray-50">
-        <h2 className="font-semibold mb-2">Add New Plan</h2>
+        {!editKey &&(
+          <h2 className="font-semibold mb-2"> Add New Plan</h2>
+        )}
+         {editKey &&(
+         <h2 className="font-semibold mb-2"> Edit Existing Plan </h2>
+        )}
+       
         <div className="flex flex-wrap gap-2">
           <input
             type="text"
             placeholder="Plan Key (e.g., silver)"
-            value={newPlan.key}
+            value={ editKey? editKey:newPlan.key}
             onChange={(e) => setNewPlan({ ...newPlan, key: e.target.value })}
             className="p-2 border rounded"
           />
@@ -159,11 +135,17 @@ const PlanManagement = () => {
             onClick={handleAdd}
             className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
           >
-            Add Plan
+            {editKey?(
+              <h1>SAVE </h1>
+            ):<h1>ADD</h1>}
+
+            
           </button>
         </div>
       </div>
 
+
+{/* plat table ======================================================================= */}
       {/* Plans Table */}
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">

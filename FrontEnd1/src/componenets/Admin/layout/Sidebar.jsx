@@ -16,11 +16,9 @@ import { HandGrab, icons, TypeIcon } from 'lucide-react';
 const navigation = [
   { name: 'ADashboard', href: '/admin', icon: HomeIcon },
   { name: 'Manage-Subscriber', href: '/subscriberList', icon: UsersIcon },
-  { name: 'Reports', href: '/subscription/report', icon: ChartBarIcon },
+  { name: 'Report', href: '/report', icon: ChartBarIcon },
   { name: 'Manage-plans', href: '/subscriptionPlans', icon: CreditCardIcon },
-    { name: 'Report', href: '/report', icon: CreditCardIcon },
     { name: 'Support', href: '/support', icon: BuildingStorefrontIcon },
-
 
 ];
 
