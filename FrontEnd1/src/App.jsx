@@ -246,7 +246,7 @@ function App() {
                   </SubscriberLayout>
                 </ProtectedRoute>
               } />
-               <Route path="/product" element={
+               <Route path="/product/:id" element={
                 <ProtectedRoute>
                   <SubscriberLayout>
                     <Product />
