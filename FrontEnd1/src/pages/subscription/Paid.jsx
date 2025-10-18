@@ -7,8 +7,7 @@ import { useNavigate } from 'react-router-dom'
 const Paid = () => {
      
  const { subscriptionStatus, updateSubscription } = useAuth();
- const [status, setStatus] = useState(subscriptionStatus)
-    useEffect(()=>{
+  useEffect(()=>{
  updateSubscription('active');
     },[]);
   
@@ -24,7 +23,7 @@ const Paid = () => {
          <h1>  credentials will be provided through Gmail</h1> 
          <div>
         <button
-        onClick={() => navigate("/")} 
+        onClick={() => navigate("/login")} 
         className="w-full outline bg-green-500 hover:text-white py-3 mt-6 flex items-center justify-center text-sm text-black transition duration-150"
       >
         <ArrowLeft className="w-4 h-4 mr-2" />

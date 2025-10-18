@@ -4,7 +4,18 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
+ 
+  /* custom codes  */
+  --font-rubik-mono:"Rubik Mono One", monospace;
+
+   /* Pure White (Order List/Canvas) */
+    
+    /* Text/Font */
+    --color-primary-green: #3e8a55;
+   
+
+
+   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);

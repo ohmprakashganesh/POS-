@@ -58,7 +58,6 @@ const TransactionHistory = () => {
   };
 
   const viewInvoice = (transactionId) => {
-    // In real app, this would open a modal or navigate to invoice page
     console.log(transactionId);
     setInvoice(true);
   };

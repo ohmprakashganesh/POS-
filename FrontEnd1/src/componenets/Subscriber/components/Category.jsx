@@ -51,7 +51,7 @@ const CategoryCard = React.memo(({ category, onDelete, onToggleActive }) => {
   const { id, name, items, imageUrl, active, color } = category;
 
   return (
-    <div className={`p-4 border border-gray-200 rounded-xl shadow-md transition duration-300 hover:shadow-lg ${active ? 'bg-gray-100 opacity-50' : 'bg-gray-50 opacity-100'}`}>
+    <div className={` border border-gray-200 rounded-xl shadow-md transition duration-300 hover:shadow-lg ${active ? 'bg-gray-100 opacity-50' : 'bg-gray-50 opacity-100'}`}>
       <div className="flex items-center justify-between">
         <div className="grid grid-cols-[80px_2fr_1fr] gap-1 items-center space-x-4">
           {/* Image/Color Circle */}
@@ -227,10 +227,10 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-inter">
-      <h1 className="text-3xl font-extrabold text-gray-900 mb-6"> Category Management</h1>
+    <div className="min-h-screen  font-inter">
+      <h1 className="text-2xl  font-extrabold text-gray-900 mb-4"> Category Management</h1>
 
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col lg:flex-row gap-2">
         {/* LEFT COLUMN: Category List (Cards) - SCROLLABLE */}
         <div className="w-full lg:w-2/3">
           {/* NEW: Search Field */}
@@ -272,8 +272,8 @@ const App = () => {
             <span>Create New Category</span>
           </h2>
           {/* Sticky container for the form */}
-          <div className="bg-white p-6 rounded-xl shadow-xl border border-gray-100 sticky top-4">
-            <form onSubmit={handleAddCategory} className="space-y-5">
+          <div className="bg-white p-4 rounded-xl shadow-xl border border-gray-100 sticky top-4">
+            <form onSubmit={handleAddCategory} className="space-y-3">
 
               {/* Name Field */}
               <div>

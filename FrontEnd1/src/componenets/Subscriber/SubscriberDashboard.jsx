@@ -240,7 +240,7 @@ const Dashboard = () => {
       </div>
 
       {/* Recent Activity & Low Stock Alerts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 shadow-md lg:grid-cols-2 gap-4">
         {/* Recent Transactions */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-4">
@@ -249,14 +249,14 @@ const Dashboard = () => {
               View all
             </Link>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-2">
             {recentTransactions.map((transaction) => (
-              <div key={transaction.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-3">
+              <div key={transaction.id} className="flex outline-green-500 outline-1 items-center justify-between px-2  py-1 bg-gray-50 ">
+                <div className="flex  items-center space-x-3">
                   <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
                     <ShoppingCartIcon className="h-5 w-5 text-green-600" />
                   </div>
-                  <div>
+                  <div className=' flex-col space-y-0 '>
                     <p className="font-medium text-gray-900">{transaction.customer}</p>
                     <p className="text-sm text-gray-500">{transaction.items} items • {transaction.time}</p>
                   </div>

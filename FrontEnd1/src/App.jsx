@@ -47,6 +47,8 @@ import Orders from './componenets/cashier/components/Orders'
 import POS from './componenets/cashier/components/POS';
 import Paid from './pages/subscription/Paid';
 import VendorList from './componenets/Subscriber/components/VendorsList';
+import Profile from './componenets/Subscriber/components/Profile';
+import Support from './componenets/Subscriber/components/Support';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
@@ -127,6 +129,20 @@ function App() {
                    </SubscriberLayout>
                 </ProtectedRoute>
               } />
+               <Route path="/profile" element={
+                <ProtectedRoute>
+                  <SubscriberLayout>
+                    <Profile />
+                   </SubscriberLayout>
+                </ProtectedRoute>
+              } />
+               <Route path="/profile/edit/:id" element={
+                <ProtectedRoute>
+                  <SubscriberLayout>
+                    <Profile />
+                   </SubscriberLayout>
+                </ProtectedRoute>
+              } />
                 <Route path="/transactions" element={
                 <ProtectedRoute >
                   <SubscriberLayout>
@@ -163,7 +179,7 @@ function App() {
                   </SubscriberLayout>
                 </ProtectedRoute>
               } />
-
+              
                <Route path="/cashierList" element={
                 <ProtectedRoute>
                   <SubscriberLayout>
@@ -276,6 +292,14 @@ function App() {
                   </SubscriberLayout>
                 </ProtectedRoute>
               } />
+
+               <Route path="/support" element={
+                <ProtectedRoute>
+                  <SubscriberLayout>
+                   <Support/>
+                  </SubscriberLayout>
+                </ProtectedRoute>
+              } />
             
              
  {/* cashier============================================================================= routes  */}
@@ -342,9 +366,8 @@ function App() {
             <Route path="/publicSubscription" element={ <PublicSubscription/> } />
              <Route path="/login" element={<Login />} />         
               <Route path="/signup" element={<SignUp />} />
-                            <Route path="/success" element={<Paid />} />
-
-            <Route path="/payment/:name" element={<PaymentScreen />} />
+               <Route path="/success" element={<Paid />} />
+            <Route path="/payment" element={<PaymentScreen />} />
          
 
 

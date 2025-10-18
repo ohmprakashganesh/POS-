@@ -131,7 +131,7 @@ const salesValueFormatter = (value) => {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-red-200 shadow-sm border border-red-200 p-6">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <ChartBarIcon className="h-8 w-8 text-blue-600" />
@@ -143,7 +143,7 @@ const salesValueFormatter = (value) => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-red-200 shadow-sm border border-gray-200 p-6">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <CalendarIcon className="h-8 w-8 text-green-600" />
@@ -155,7 +155,7 @@ const salesValueFormatter = (value) => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-red-200  shadow-sm border border-gray-200 p-6">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <div className="h-8 w-8 bg-purple-100 rounded-full flex items-center justify-center">
@@ -171,16 +171,16 @@ const salesValueFormatter = (value) => {
       </div>
 
       {/* Sales Chart */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-2">
+      <div className="bg-white  rounded-lg shadow-sm border border-gray-200 p-2">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Sales Overview</h3>
         {isLoading ? (
           <div className="flex items-center justify-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
         ) : (
-          <div className="h-[450px] bg-red-50 rounded-lg flex  justify-center">
-        <Container className='h-12'  maxWidth="md"  sx={{ mt: 4}}>
-          <Paper elevation={3} >
+          <div className="h-fit bg-red-400   shadow-neutral-50  rounded-lg flex justify-start">
+        <div  className="bg-green-400  w-[100%]   ">
+          <Paper elevation={0} >
         <Typography variant="h5" gutterBottom>
           Quarterly Sales Performance
         </Typography>
@@ -231,7 +231,7 @@ const salesValueFormatter = (value) => {
             }}
         />
       </Paper>
-    </Container>
+    </div>
 
           </div>
         )}

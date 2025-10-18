@@ -7,10 +7,12 @@ import {
   UserCircleIcon
 } from '@heroicons/react/24/outline';
 
-const Header = ({ onMenuClick, user }) => {
+import { useNavigate } from 'react-router-dom';
+const Header = ({ onMenuClick }) => {
+  const navigate = useNavigate();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { notifications, unreadCount, markAsRead } = useNotifications();
-  const { logout } = useAuth();
+  const { logout,user } = useAuth();
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
@@ -65,6 +67,12 @@ const Header = ({ onMenuClick, user }) => {
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Sign out
+                </button>
+                 <button
+                  onClick={()=>{navigate("/profile"),setUserMenuOpen(!userMenuOpen)}}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                 Profile
                 </button>
               </div>
             )}

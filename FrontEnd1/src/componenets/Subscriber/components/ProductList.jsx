@@ -105,9 +105,7 @@ const ProductList = () => {
             ))}
           </select>
 
-          <div className="text-sm text-gray-600 flex items-center">
-            Showing {filteredProducts.length} of {products.length} products
-          </div>
+        
         </div>
       </div>
 

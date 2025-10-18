@@ -1,5 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import qr from '../../../public/qr.jpg';
+
 import {
   CreditCard,
   Banknote,
@@ -16,7 +18,7 @@ const EnrollmentSummary = ({ summary, totalAmount }) => {
   return (
     <>
       <div className="w-full text-white rounded-xl shadow-2xl h-fit flex flex-col">
-        <div className="bg-green-700 p-4 w-full">
+        <div className="bg-primary-green p-4 w-full">
           <h2 className="text-2xl text-white font-bold pb-4">
             Enrollment Summary
           </h2>
@@ -45,10 +47,10 @@ const EnrollmentSummary = ({ summary, totalAmount }) => {
         </h3>
         <div className="flex px-6 justify-between items-center text-xl font-bold mb-6 text-gray-600">
           <span>Total Amount</span>
-          <span className="text-green-600">{totalAmount}</span>
+          <span className="text-primary-green">{totalAmount}</span>
         </div>
 
-        <button   onClick={()=>navigate('/success')} className="w-full outline bg-green-300 hover:font-semibold cursor-pointer hover:bg-green-500 hover:text-white py-3 mt-6 flex items-center justify-center text-sm text-black transition duration-15">
+        <button   onClick={()=>navigate('/success')} className="w-full outline bg-primary-green opacity-80 hover:font-semibold cursor-pointer hover:opacity-100  hover:text-white py-3 mt-6 flex items-center justify-center text-sm text-black transition duration-15">
           Complete Enrollment
         </button>
 
@@ -59,7 +61,7 @@ const EnrollmentSummary = ({ summary, totalAmount }) => {
       
       <button
         onClick={() => navigate("/")} 
-        className="w-full outline hover:bg-green-500 hover:text-white py-3 mt-6 flex items-center cursor-pointer justify-center text-sm text-black transition duration-150"
+        className="w-full outline hover:bg-primary-green hover:text-white py-3 mt-6 flex items-center cursor-pointer justify-center text-sm text-black transition duration-150"
       >
         <ArrowLeft className="w-4 h-4 mr-2" />
         Back to Course Details
@@ -199,23 +201,21 @@ const App = () => {
           {selectedMethod === "eSewa" && (
             <PaymentSection
               title="eSewa Payment"
-               url="https://placehold.co/160x160/02b662/ffffff/png?text=eSewa+Payment
-"
-
+               url="../../../public/qr.jpg"
               paymentInstructions={paymentInstructions}
             />
           )}
           {selectedMethod === "BankTransfer" && (
             <PaymentSection
               title="Bank Transfer"
-              url="https://placehold.co/160x160/000000/FFFFFF/png?text=QR+Code"
+              url="../../../public/qr.jpg"
               paymentInstructions={paymentInstructions}
             />
           )}
 
           {/* 3. Upload Payment Screenshot */}
           <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100">
-            <h2 className="text-xl font-bold mb-4 text-gray-800">
+            <h2 className="text-xl font-bold mb-4 ">
               Upload Payment Screenshot
             </h2>
             <label
@@ -288,9 +288,9 @@ const PaymentSection = ({ title, paymentInstructions,url }) => (
     </div>
 
     {/* QR Code and Label */}
-    <div className="flex justify-center flex-col items-center space-y-2">
-     <img src='https://placehold.co/160x160/000000/FFFFFF/png?text=QR+Code' alt="" />
-      <p className="mt-2 text-sm font-medium text-gray-700">Byte Gurkha</p>
+    <div className="flex   justify-center flex-col  w-full items-center space-y-2">
+     <img className="w-[250px]" src='../../../public/qr.jpg' alt="" />
+      <p className="mt-2 text-sm font-medium w-[250px] text-gray-700">Byte Gurkha</p>
     </div>
 
     {/* Payment Instructions */}

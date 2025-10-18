@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import { HandIcon, Move3dIcon, MoveRight } from 'lucide-react';
+import { ArrowRight, HandIcon, Move3dIcon, MoveRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { plans } from '@/data/mockData';
 
 const Subscription = () => {
   const navigate= useNavigate();
@@ -20,59 +21,6 @@ const Subscription = () => {
     }
 
    const sts= localStorage.getItem('pos_subscription');
-
-
-
-  const plans = {
-    basic: {
-      name: 'Basic',
-      time:3,
-      monthly: 29,
-      features: [
-        'Up to 100 products',
-        '1 user account',
-        'Basic reporting',
-        'Email support',
-        'Mobile POS access'
-      ],
-      limitations: [
-        'No advanced analytics',
-        'No API access',
-        'Limited customer support'
-      ]
-    },
-    pro: {
-      name: 'Professional',
-      monthly: 79,
-      time:6,
-      yearly: 790, // 2 months free
-      features: [
-        'Up to 500 products',
-        '5 user accounts',
-        'Advanced reporting',
-        'Priority support',
-        'API access',
-        'Custom branding',
-        'Inventory forecasting'
-      ],
-      limitations: []
-    },
-    enterprise: {
-      name: 'Enterprise',
-      monthly: 1990,
-      time:12,
-      features: [
-        'Unlimited products',
-        '20+ user accounts',
-        'Custom reporting',
-        '24/7 phone support',
-        'Full API access',
-        'White-label solution',
-        'Dedicated account manager'
-      ],
-      limitations: []
-    }
-  };
 
   const handleSubscribe = async (plan) => {
     setIsProcessing(true);
@@ -221,7 +169,9 @@ const Subscription = () => {
                    
                   </>
                 )}
-                 <div className='w-full text-center  p-3 bg-green-800 rounded-sm font-semibold  cursor-pointer  text-white' onClick={()=> navigate(`/payment/${plan.name}`)}> Enroll </div>
+                 {/* <div className='w-full text-center  p-3 bg-green-800 rounded-sm font-semibold  cursor-pointer  text-white' onClick={()=>navigate(`/payment/${plan.name}`)}> Enroll      <ArrowRight className="w-4 h-4 mr-2" /></div> */}
+                   <div className='w-full text-center  p-3 bg-green-800 rounded-sm font-semibold  cursor-pointer  text-white' onClick={()=>navigate(`/signUp`)}> Enroll      <ArrowRight className="w-4 h-4 mr-2" /></div>
+
               </div>
             </div>
           ))}

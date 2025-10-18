@@ -1,6 +1,67 @@
 // Add CubeIcon import at the top of the file
 import { CubeIcon } from '@heroicons/react/24/outline';
 
+
+
+ export const plans = {
+    basic: {
+      id:1,
+      name: 'Basic',
+      status:'active',
+      time:3,
+      price:4440,
+      features: [
+        'Up to 100 products',
+        '1 user account',
+        'Basic reporting',
+        'Email support',
+        'Mobile POS access'
+      ],
+      limitations: [
+        'No advanced analytics',
+        'No API access',
+        'Limited customer support'
+      ]
+    },
+    pro: {
+      id:2,
+      name: 'Professional',
+            status:'active',
+
+      time:6,
+      price: 790, // 2 months free
+      features: [
+        'Up to 500 products',
+        '5 user accounts',
+        'Advanced reporting',
+        'Priority support',
+        'API access',
+        'Custom branding',
+        'Inventory forecasting'
+      ],
+      limitations: []
+    },
+    enterprise: {
+      name: 'Enterprise',
+     status:'inactive',
+
+      price: 1990,
+      time:12,
+      features: [
+        'Unlimited products',
+        '20+ user accounts',
+        'Custom reporting',
+        '24/7 phone support',
+        'Full API access',
+        'White-label solution',
+        'Dedicated account manager'
+      ],
+      limitations: []
+    }
+  };
+
+
+
 export const productsData = [
    {
     id: 7,

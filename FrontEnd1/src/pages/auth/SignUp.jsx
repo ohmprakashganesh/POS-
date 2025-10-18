@@ -1,215 +1,225 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    type: '',
+    pan: '',
     phone: '',
-    password: '',
-    confirmPassword: '',
     businessName: '',
-    address: ''
+    address: '',
+    file: null,
   });
-  const [showPassword, setShowPassword] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
 
-  const { signup } = useAuth();
   const navigate = useNavigate();
 
+  // ✅ Handle Input Change
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value, files } = e.target;
+    if (name === 'file') {
+      setFormData({ ...formData, file: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
+  // ✅ Validate Input Fields
+  const validateForm = () => {
+    if (!formData.name.trim()) return 'Business Name is required';
+    if (!formData.type.trim()) return 'Business Type is required';
+    if (!formData.pan.trim()) return 'PAN Number is required';
+    if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/))
+      return 'Invalid email format';
+    if (!formData.phone.match(/^\+?\d{7,15}$/))
+      return 'Invalid phone number';
+    if (!formData.file) return 'Please upload a logo file';
+    return null;
+  };
+
+  // ✅ Submit Handler
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccessMsg('');
 
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters');
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
     setIsLoading(true);
 
-    const result = await signup(formData);
-    if (result.success) {
-      navigate('/');
-    } else {
-      setError(result.error || 'Signup failed');
+
+    //   const formDataToSend = new FormData();
+    //   Object.keys(formData).forEach((key) => {
+    //     formDataToSend.append(key, formData[key]);
+    //   });
+
+    //   // ✅ Replace with your actual backend URL
+    //   const response = await fetch('http://localhost:8080/api/register', {
+    //     method: 'POST',
+    //     body: formDataToSend,
+    //   });
+
+    //   if (!response.ok) {
+    //     throw new Error('Registration failed');
+    //   }
+
+    //   const data = await response.json();
+
+      // if (data.success) {
+      //   setSuccessMsg('Account created successfully! Redirecting...');
+      //   setTimeout(() => navigate('/login'), 1500);
+      // } else {
+      //   setError(data.message || 'Registration failed');
+      // }
+
+          try {
+          navigate('/payment');
+
+    
+    } catch (err) {
+      setError(err.message || 'Something went wrong');
     }
+
     setIsLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center">
-          <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-xl">POS</span>
-          </div>
-        </div>
-        <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
-          Create your account
-        </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Or{' '}
-          <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
-            sign in to your existing account
-          </Link>
-        </p>
-      </div>
+    <div className="min-h-screen bg-[url('../public/bg1.jpg')] bg-center bg-cover bg-no-repeat flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="mt-8 sm:mx-auto bg-white sm:w-full sm:max-w-md shadow-lg rounded-lg">
+        <div className="py-8 px-4 sm:px-10">
+          <h2 className="text-center text-3xl font-bold text-gray-900">
+            Register Company
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Or{' '}
+            <Link
+              to="/login"
+              className="font-medium text-blue-600 hover:text-blue-500"
+            >
+              sign in to your existing account
+            </Link>
+          </p>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          {/* Error Message */}
           {error && (
-            <div className="mb-4 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
+            <div className="mt-4 bg-red-50 border border-red-200 text-red-600 px-4 py-2 rounded">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Success Message */}
+          {successMsg && (
+            <div className="mt-4 bg-green-50 border border-green-200 text-green-700 px-4 py-2 rounded">
+              {successMsg}
+            </div>
+          )}
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-3 mt-6">
             <div>
-              <label htmlFor="businessName" className="block text-sm font-medium text-gray-700">
-                Business Name
+              <label className="block text-sm font-medium text-gray-700">
+                Business Name *
               </label>
-              <div className="mt-1">
-                <input
-                  id="businessName"
-                  name="businessName"
-                  type="text"
-                  required
-                  value={formData.businessName}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+              <input
+                name="name"
+                type="text"
+                placeholder="Enter business name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
 
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Your Name
+              <label className="block text-sm font-medium text-gray-700">
+                Business Type *
               </label>
-              <div className="mt-1">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+              <input
+                name="type"
+                type="text"
+                placeholder="Enter type of business"
+                value={formData.type}
+                onChange={handleChange}
+                className="w-full border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
+              <label className="block text-sm font-medium text-gray-700">
+                PAN Number *
               </label>
-              <div className="mt-1">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+              <input
+                name="pan"
+                type="text"
+                placeholder="48305B"
+                value={formData.pan}
+                onChange={handleChange}
+                className="w-full border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                Phone Number
+              <label className="block text-sm font-medium text-gray-700">
+                Email address *
               </label>
-              <div className="mt-1">
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  required
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+              <input
+                name="email"
+                type="email"
+                placeholder="chiyabari@gmail.com"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
 
             <div>
-              <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
+                Phone Number *
+              </label>
+              <input
+                name="phone"
+                type="tel"
+                placeholder="+97712645879"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
                 Business Address
               </label>
-              <div className="mt-1">
-                <textarea
-                  id="address"
-                  name="address"
-                  rows={3}
-                  value={formData.address}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+              <textarea
+                name="address"
+                rows={3}
+                placeholder="Barhadashi 4 Jhapa, Nepal"
+                value={formData.address}
+                onChange={handleChange}
+                className="w-full border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              ></textarea>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
+              <label className="block text-sm font-medium text-gray-700">
+                Upload Logo *
               </label>
-              <div className="mt-1 relative">
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  autoComplete="new-password"
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeSlashIcon className="h-5 w-5 text-gray-400" />
-                  ) : (
-                    <EyeIcon className="h-5 w-5 text-gray-400" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                Confirm Password
-              </label>
-              <div className="mt-1">
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+              <input
+                name="file"
+                type="file"
+                accept="image/*"
+                onChange={handleChange}
+                className="w-full border-gray-300 rounded-md px-3 py-2"
+              />
             </div>
 
             <div className="flex items-center">
@@ -218,9 +228,12 @@ const SignUp = () => {
                 name="terms"
                 type="checkbox"
                 required
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                className="h-4 w-4 text-blue-600 border-gray-300 rounded"
               />
-              <label htmlFor="terms" className="ml-2 block text-sm text-gray-900">
+              <label
+                htmlFor="terms"
+                className="ml-2 block text-sm text-gray-900"
+              >
                 I agree to the{' '}
                 <a href="#" className="text-blue-600 hover:text-blue-500">
                   Terms and Conditions
@@ -228,15 +241,13 @@ const SignUp = () => {
               </label>
             </div>
 
-            <div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-              >
-                {isLoading ? 'Creating account...' : 'Create account'}
-              </button>
-            </div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md font-medium hover:bg-blue-700 disabled:opacity-50"
+            >
+              {isLoading ? 'Creating account...' : 'Create Account'}
+            </button>
           </form>
         </div>
       </div>

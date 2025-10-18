@@ -9,7 +9,7 @@ const SubscriberLayout = ({ children }) => {
   const { user } = useAuth();
 
   return (
-    <div className="flex h-screen bg-gray-200">
+    <div className="flex h-screen bg-white">
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
