@@ -1,176 +1,207 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-import { AlignRight } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { EyeIcon, EyeSlashIcon, TvIcon } from "@heroicons/react/24/outline";
+import { AlignRight, CheckIcon, PyramidIcon } from "lucide-react"; // AlignRight might not be directly used in the form, but keeping it as it was in your imports.
 
 const Login = () => {
- 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [loginMethod, setLoginMethod] = useState('password'); // 'password' or 'otp'
-  const user=localStorage.getItem("pos_user");
-  const { login ,  } = useAuth();
+  const [error, setError] = useState("");
+  const [loginMethod, setLoginMethod] = useState("password"); // 'password' or 'otp'
+  const [otpSent, setOtpSent] = useState(false); // Added for OTP flow, assuming it's part of your future plan
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-   useEffect(() => {
-    try{
-      const raw= localStorage.getItem("pos_user");
-       if(!raw) return;
-       const parsed= JSON.parse(raw);
-       if(!parsed|| !parsed.role) return;
-  
-  if (user?.role === "admin") {
-    navigate("/admin");
-  } else if (user?.role === "subscriber") {
-    navigate("/subscriber");
-  } else if (user) {
-    navigate("/pos");
-  } 
-    }catch(error)
-    {
- console.warn("failed to parse pos user form localstorage",error);
+  // It's safer to parse user once and then check its properties.
+  const user = (() => {
+    try {
+      const raw = localStorage.getItem("pos_user");
+      return raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      console.warn("failed to parse pos user from localstorage", error);
+      return null;
     }
-}, [ navigate]);
+  })();
+
+  useEffect(() => {
+    if (user && user.role) {
+      if (user.role === "admin") {
+        navigate("/admin");
+      } else if (user.role === "subscriber") {
+        navigate("/subscriber");
+      } else {
+        // Default or other roles
+        navigate("/pos");
+      }
+    }
+  }, [user, navigate]);
 
   const handlePasswordLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
-  const result = await login(email, password);
-  if (result.success) {
-   if (result.user?.role === "admin") {
-    navigate("/admin");
-  } else if (result.user?.role === "subscriber") {
-    navigate("/subscriber");
-  } else{
-    navigate("/pos");
-  }
-  }
-  else{
-      setError(result.error || 'Login failed');
+    const result = await login(email, password);
+    if (result.success) {
+      if (result.user?.role === "admin") {
+        navigate("/admin");
+      } else if (result.user?.role === "subscriber") {
+        navigate("/subscriber");
+      } else {
+        navigate("/pos");
+      }
+    } else {
+      setError(result.error || "Login failed");
     }
     setIsLoading(false);
   };
+
   const handleSendOtp = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
-    // Simulate OTP sending
+    // Simulate OTP sending (replace with actual API call)
     setTimeout(() => {
       setOtpSent(true);
       setIsLoading(false);
+      // In a real app, you might navigate to an OTP verification page
+      // or show an OTP input field here.
     }, 1000);
   };
+
   return (
-    <div className=" login min-h-screen w-full bg-[url('../public/bg1.jpg')] bg-center bg-cover bg-no-repeat  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-          <div className="w-full py-12 h-screen flex flex-col justify-center">
-
-      <div className=" bg-white sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center">
-        </div>
-        <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
-          Sign in to your account
-        </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Or{' '}
-          <Link to="/signup" className="font-medium text-blue-600 hover:text-blue-500">
-            create a new account
-          </Link>
-        </p>
-      </div>
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          {/* Login Method Tabs */}
-          <div className="flex border-b border-gray-200 mb-6">
-           
-
+    <div className="login min-h-screen w-full  bg-center bg-cover bg-no-repeat flex flex-col justify-center items-center">
+      {/* Main container for the two columns */}
+      <div className="w-full h-screen bg-white grid grid-cols-1 md:grid-cols-2 shadow-lg rounded-lg overflow-hidden ">
+        {/* left Column: Login Form */}
+        <div className=" items-center flex flex-col justify-center p-2">
+          <div className="w-full flex  mt-8 justify-around">
+            <p className="flex font-bold gap-2  ">
+              <PyramidIcon /> <span> SMART-BILL </span>
+            </p>
+            <select className="border-2  rounded-md bg-gray-300 hover:border-primary-green px-2 py-1">
+              <option className="font-bold text-black bg-gray-300" value="English">
+          
+                English <TvIcon color="green" />
+              </option>
+              <option value="Nepali">
+                नेपाली <CheckIcon />
+              </option>
+            </select>
           </div>
 
-          {error && (
-            <div className="mb-4 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
-              {error}
+          <div className="w-full md:w2/3 lg:w-2/3 mt-16 bg-white flex flex-col justify-center items-center ">
+            <div className="text-center ">
+              <div className=" mb-2"></div>
+              <h2 className=" text-3xl font-bold text-gray-900">
+                Lets Get Started
+              </h2>
+              <p className="text-gray-400 mt-4 ">Please Login to continue</p>
+             
             </div>
-          )}
-            <form onSubmit={handlePasswordLogin} className="space-y-6">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Email address
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-              </div>
 
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  Password
-                </label>
-                <div className="mt-1 relative">
-                  <input
-                    id="password"
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    autoComplete="current-password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  />
-                  <button
-                    type="button"
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? (
-                      <EyeSlashIcon className="h-5 w-5 text-gray-400" />
-                    ) : (
-                      <EyeIcon className="h-5 w-5 text-gray-400" />
-                    )}
-                  </button>
+            <div className="mt-4 bg-white py-1 px-8  w-full shadow sm:rounded-lg ">
+              {error && (
+                <div className="mb-4 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
+                  {error}
                 </div>
-              </div>
+              )}
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                    Remember me
-                  </label>
-                </div>
-              </div>
+              {/* Password Login Form */}
+              {loginMethod === "password" && (
+                <form onSubmit={handlePasswordLogin} className="space-y-2 ">
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Email address
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+                  </div>
 
-              <div>
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-                >
-                  {isLoading ? 'Signing in...' : 'Sign in'}
-                </button>
-              </div>
-            </form>
+                  <div>
+                    <label
+                      htmlFor="password"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Password
+                    </label>
+                    <div className="mt-1 relative">
+                      <input
+                        id="password"
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        autoComplete="current-password"
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      />
+                      <button
+                        type="button"
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (
+                          <EyeSlashIcon className="h-5 w-5 text-gray-400" />
+                        ) : (
+                          <EyeIcon className="h-5 w-5 text-gray-400" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                     
+                    </div>
+                    <div className="text-sm">
+                      <Link
+                        to="/forgot-password"
+                        className="font-medium text-blue-600 hover:text-blue-500"
+                      >
+                        Forgot your password?
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div>
+                    <button
+                      type="submit"
+                      disabled={isLoading}
+                      className="w-full mt-5 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-primary-green focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+                    >
+                      {isLoading ? "Signing in..." : "Sign in"}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
+        <div className="hidden md:flex items-center justify-center bg-green-400 p-8">
+          <img
+            src="https://images.unsplash.com/photo-1579547621113-e4d2719a4087?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Example image
+            alt="Login Illustration"
+            className="object-cover w-full h-full rounded-md"
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Mail, Tag, MessageSquare, Send, AlignRight } from 'lucide-react';
+import { Mail, Tag, MessageSquare, Send, AlignRight, CheckCircle, CheckIcon } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
-const SupportForm = ({title}) => {
+const SupportForm = ({setShowForm}) => {
     const {user}= useAuth();
     const [formData, setFormData] = useState({
     name: '',
@@ -11,12 +11,7 @@ const SupportForm = ({title}) => {
     subject: '',
     description: '',
   });
-    if(user){
-        formData.name=user.role;
-        alert("hello")
-        formData.topic=title;
-    }
-  
+ 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState(null);
 
@@ -57,27 +52,30 @@ const SupportForm = ({title}) => {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-lg border border-gray-100">
-      <h2 className="text-3xl font-bold text-gray-900 mb-2">Request Support</h2>
-      <p className="text-gray-500 mb-8">
-        Please fill out the details below, and our support team will get back to you shortly.
-      </p>
+<div className="max-w-full md:w-[40%]  w-full bg-white mx-auto pt-4 px-5 pb-5 rounded-xl shadow-lg border border-gray-200 relative">
+
+  <p onClick={()=>setShowForm(false)} className=' text-end font-bold'>X</p>
+      <h2 className="text-2xl text-center font-bold text-gray-600 "> {submissionStatus==='success'?
+        <div className="flex  items-center mb-5 justify-center text-green-600">
+        <CheckIcon className="mx-auto bg-blue-100 rounded-full h-16 w-16 text-green-500" />
+      </div> :"Request Support"} </h2>
+      
 
       {submissionStatus === 'success' ? (
-        <div className="p-4 bg-green-50 border border-green-300 rounded-lg text-green-700">
+        <div className=" bg-green-50 border rounded-lg text-green-700">
           <p className="font-semibold">Thank you for your request!</p>
-          <p className="text-sm">We have received your ticket and will respond within 24 hours.</p>
+          <p className="text-sm">We have received your request and will respond within 24 hours.</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-1">
           {/* Email Input */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-600">
               Your Email Address <span className="text-red-500">*</span>
             </label>
             <div className="mt-1 relative rounded-md shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-gray-400" />
+                <Mail className="h-3 w-5 text-gray-400" />
               </div>
               <input
                 type="email"
@@ -94,12 +92,12 @@ const SupportForm = ({title}) => {
 
           {/* Topic Dropdown */}
           <div>
-            <label htmlFor="topic" className="block text-sm font-medium text-gray-700">
-              Related Help Topic <span className="text-red-500">*</span>
+            <label htmlFor="topic" className="block text-sm h-4 font-medium text-gray-600">
+               Help Topic <span className="text-red-500">*</span>
             </label>
             <div className="mt-1 relative rounded-md shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Tag className="h-5 w-5 text-gray-400" />
+                <Tag className="h-3 w-5 text-gray-400" />
               </div>
               <select
                 id="topic"
@@ -115,23 +113,22 @@ const SupportForm = ({title}) => {
                 ))}
               </select>
             </div>
-            <p className="mt-2 text-xs text-gray-500">Choosing the right topic helps us route your request faster.</p>
           </div>
 
           {/* Subject/Summary Input */}
           <div>
-            <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
-              Subject / Short Summary <span className="text-red-500">*</span>
+            <label htmlFor="subject" className="block text-sm font-medium text-gray-500">
+              Please Upload ScreenShort <span className="text-red-500">*</span>
             </label>
             <div className="mt-1">
               <input
-                type="text"
+                type="file"
                 name="subject"
                 id="subject"
                 required
                 value={formData.subject}
                 onChange={handleChange}
-                placeholder="e.g., Party balance seems incorrect after a transaction."
+                placeholder="please upload screenshot."
                 className="block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
@@ -139,7 +136,7 @@ const SupportForm = ({title}) => {
 
           {/* Description Textarea */}
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="description" className="block text-sm font-medium text-gray-600">
               Detailed Description <span className="text-red-500">*</span>
             </label>
             <div className="mt-1 relative rounded-md shadow-sm">
@@ -164,7 +161,7 @@ const SupportForm = ({title}) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 transition duration-150 ease-in-out"
+              className="w-full flex mt-4 justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-green hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 transition duration-150 ease-in-out"
             >
               {isSubmitting ? (
                 <>

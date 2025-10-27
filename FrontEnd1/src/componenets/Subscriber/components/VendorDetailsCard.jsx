@@ -3,9 +3,6 @@ import { Building2, MapPin, Phone, CreditCard, Package, DollarSign, FileText, Wa
 import { VENDORS } from "@/data/mockData";
 import { useParams } from "react-router-dom";
 const VendorDetailsCard = () => {
-
-  
-
   const { id } = useParams(); // get '4' from /vendor/4
   const [vendor, setVendor] = useState(null);
 
@@ -18,7 +15,7 @@ const VendorDetailsCard = () => {
 
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-100 p-6 hover:shadow-xl transition duration-300">
+    <div className="w-full bg-red-500 shadow-lg rounded-2xl overflow-hidden border border-gray-100 p-6 hover:shadow-xl transition duration-300">
       
       {/* Header Section with Icon and Name */}
       <div className="flex flex-col items-center text-center mb-6">
@@ -47,6 +44,10 @@ const VendorDetailsCard = () => {
           <Package className="w-4 h-4 text-green-500" />
           <span><strong>Total Products:</strong> {vendor.total_product}</span>
         </div>
+         <div className="flex items-center gap-2">
+          <Package className="w-4 h-4 text-green-500" />
+          <span><strong>Total Categories:</strong> {vendor.total_categories}</span>
+        </div>
         <div className="flex items-center gap-2">
           <DollarSign className="w-4 h-4 text-green-500" />
           <span><strong>Total Cost:</strong> NPR {vendor.total_cost}</span>
@@ -59,19 +60,6 @@ const VendorDetailsCard = () => {
           <FileText className="w-4 h-4 text-green-500" />
           <span><strong>Total Due:</strong> NPR {vendor.total_due}</span>
         </div>
-      </div>
-
-      {/* Payment Slip Button */}
-      <div className="mt-6 text-center">
-        <a
-          href={vendor.payment_slip_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-200"
-        >
-          <FileText className="w-4 h-4 mr-2" />
-          View Payment Slip
-        </a>
       </div>
     </div>
   );

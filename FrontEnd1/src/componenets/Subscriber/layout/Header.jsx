@@ -23,7 +23,7 @@ const Header = ({ onMenuClick }) => {
             onClick={onMenuClick}
             className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600"
           >
-            <Bars3Icon className="h-6 w-6" />
+            <Bars3Icon className="h-6 z-50 w-6" />
           </button>
           <div className="ml-4 lg:ml-0">
             <h1 className="text-2xl font-bold text-gray-900">{user.name}</h1>
@@ -38,7 +38,7 @@ const Header = ({ onMenuClick }) => {
               onClick={() => markAsRead()}
               className="p-2 text-gray-400 hover:text-gray-600 relative"
             >
-              <BellIcon className="h-6 w-6" />
+              <BellIcon className="h-6 w-6 " />
               {unreadCount > 0 && (
                 <span className="absolute top-1 right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                   {unreadCount}

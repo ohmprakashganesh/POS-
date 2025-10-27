@@ -34,30 +34,15 @@ const NotificationCenter = () => {
   const getNotificationIcon = (type) => {
     switch (type) {
       case 'success':
-        return <CheckIcon className="h-5 w-5 text-green-500" />;
+        return <CheckIcon className="h-5 w-5 text-green-500 'border-l-green-500'" />;
       case 'warning':
-        return <ExclamationTriangleIcon className="h-5 w-5 text-yellow-500" />;
+        return <ExclamationTriangleIcon className="h-5 w-5 text-yellow-500 border-l-yellow-500" />;
       case 'error':
-        return <ShieldExclamationIcon className="h-5 w-5 text-red-500" />;
+        return <ShieldExclamationIcon className="h-5 w-5 text-red-500 border-l-red-500" />;
       case 'info':
-        return <InformationCircleIcon className="h-5 w-5 text-blue-500" />;
+        return <InformationCircleIcon className="h-5 w-5 text-blue-500 border-l-blue-500" />;
       default:
-        return <BellIcon className="h-5 w-5 text-gray-500" />;
-    }
-  };
-
-  const getNotificationColor = (type) => {
-    switch (type) {
-      case 'success':
-        return 'border-l-green-500';
-      case 'warning':
-        return 'border-l-yellow-500';
-      case 'error':
-        return 'border-l-red-500';
-      case 'info':
-        return 'border-l-blue-500';
-      default:
-        return 'border-l-gray-500';
+        return <BellIcon className="h-5 w-5 text-gray-500 border-l-gray-500" />;
     }
   };
 
@@ -82,7 +67,6 @@ const NotificationCenter = () => {
     if (!notification.read) {
       markAsRead(notification.id);
     }
-    
     // Handle notification actions based on type
     switch (notification.action) {
       case 'low_stock':

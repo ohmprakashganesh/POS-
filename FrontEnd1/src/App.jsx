@@ -49,6 +49,7 @@ import Paid from './pages/subscription/Paid';
 import VendorList from './componenets/Subscriber/components/VendorsList';
 import Profile from './componenets/Subscriber/components/Profile';
 import Support from './componenets/Subscriber/components/Support';
+import SupportReq from './componenets/Admin/components/Support';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
@@ -109,6 +110,13 @@ function App() {
                 <ProtectedRoute requireAdmin={true}>
                   <AdminLayout>
                    <SubscriberList />
+                  </AdminLayout>
+                </ProtectedRoute>
+              }/>
+               <Route path='/support' element={
+                <ProtectedRoute requireAdmin={true}>
+                  <AdminLayout>
+                   <SupportReq />
                   </AdminLayout>
                 </ProtectedRoute>
               }/>

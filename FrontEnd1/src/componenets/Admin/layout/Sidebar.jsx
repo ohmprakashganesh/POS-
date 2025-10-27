@@ -19,6 +19,7 @@ const navigation = [
   { name: 'Report', href: '/report', icon: ChartBarIcon },
   { name: 'Manage-plans', href: '/subscriptionPlans', icon: CreditCardIcon },
     { name: 'Support', href: '/support', icon: BuildingStorefrontIcon },
+   
 
 ];
 

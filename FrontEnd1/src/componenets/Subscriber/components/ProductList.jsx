@@ -64,7 +64,7 @@ const ProductList = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 uppercase">
             Products Inventory
@@ -73,14 +73,14 @@ const ProductList = () => {
         </div>
         <Link
           to="/products/add"
-          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center px-4 py-2 hover:bg-primary-green text-white rounded-lg bg-green-500 transition-colors"
         >
           <PlusIcon className="h-5 w-5 mr-2" />
           Add Product
         </Link>
       </div>
       {/* Search and Filters */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+      <div className="bg-white rounded-lg  pb-2  ">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="relative">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -110,8 +110,8 @@ const ProductList = () => {
       </div>
 
       {/* product card  */}
-     <div className="p-4 sm:p-6">
-  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 xl:grid-cols-4 gap-2">
+     <div className="">
+  <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6 gap-2">
     {filteredProducts.map((product) => (
       <div
         key={product.id}
