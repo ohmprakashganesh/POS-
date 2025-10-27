@@ -36,9 +36,9 @@ const Header = ({ onMenuClick, user }) => {
               onClick={() => markAsRead()}
               className="p-2 text-gray-400 hover:text-gray-600 relative"
             >
-              <BellIcon className="h-6 w-6" />
+              <BellIcon className="h-6  w-6" />
               {unreadCount > 0 && (
-                <span className="absolute top-1 right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                <span className="absolute top-1  right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                   {unreadCount}
                 </span>
               )}

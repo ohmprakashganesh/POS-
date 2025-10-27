@@ -68,7 +68,7 @@ const SupportReq = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 bg-white rounded-xl shadow-2xl border border-gray-100 max-w-6xl mx-auto">
+    <div className="p-4 sm:p-6 rounded-md  shadow-2xl border border-gray-100 max-w-6xl mx-auto">
       <h2 className="text-3xl font-extrabold text-gray-800 mb-6 border-b pb-3">
         Admin Support Dashboard
       </h2>

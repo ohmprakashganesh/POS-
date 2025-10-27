@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 import { useNotifications } from '../../../contexts/NotificationContext';
 import { 
   BellIcon,
@@ -8,7 +9,9 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { useNavigate } from 'react-router-dom';
+import LanguageToggle from '@/locales/LanguageToggle';
 const Header = ({ onMenuClick }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { notifications, unreadCount, markAsRead } = useNotifications();
@@ -32,6 +35,10 @@ const Header = ({ onMenuClick }) => {
 
         {/* Right section */}
         <div className="flex items-center space-x-4">
+          <div className='relative'>
+           <LanguageToggle/>
+
+          </div>
           {/* Notifications */}
           <div className="relative">
             <button
@@ -39,8 +46,8 @@ const Header = ({ onMenuClick }) => {
               className="p-2 text-gray-400 hover:text-gray-600 relative"
             >
               <BellIcon className="h-6 w-6 " />
-              {unreadCount > 0 && (
-                <span className="absolute top-1 right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+              {unreadCount > 0 && ( 
+                <span className="absolute  top-1 right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                   {unreadCount}
                 </span>
               )}

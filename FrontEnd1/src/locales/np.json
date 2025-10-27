@@ -1,4 +1,69 @@
 {
   "welcome": "हाम्रो साइटमा स्वागत छ!",
-  "toggle": "नेपालीमा स्विच गर्नुहोस्"
+  "toggle": "नेपालीमा स्विच गर्नुहोस्",
+   "subscriber": {
+    "Dashboard": "ड्यासबोर्ड",
+    "Items": "वस्तुहरू",
+    "Categories": "श्रेणीहरू",
+    "Vendors": "विक्रेता",
+    "Cashiers": "क्यासियरहरू",
+    "Customers": "ग्राहकहरू",
+    "Transactions": "लेनदेनहरू",
+    "Reports": "प्रतिवेदनहरू"
+  },
+    "settings": {
+     "title": "सेटिङहरू",
+    "ActivePlan": "सक्रिय योजना",
+    "Help": "सहयोग",
+    "UpdateProfile": "प्रोफाइल अद्यावधिक गर्नुहोस्",
+    "Tutorials": "ट्युटोरियलहरू"
+  },
+  "dashboard": {
+    "title": "सदस्य ड्यासबोर्ड",
+    "subtitle": "तपाईंको स्टोरको प्रदर्शनको अवलोकन",
+    "lastUpdated": "अन्तिम अद्यावधिक",
+    "metrics": {
+      "todaysSales": "आजको बिक्री",
+      "monthlyRevenue": "मासिक आम्दानी",
+      "netProfit": "नाफा",
+      "totalCustomers": "कुल ग्राहक",
+      "totalProducts": "कुल वस्तुहरू",
+      "monthlyExpenses": "मासिक खर्च",
+      "lowStockItems": "स्टक कम भएका वस्तुहरू",
+      "salesToday": "आजको बिक्री",
+      "thisMonth": "यो महिना",
+      "afterExpenses": "खर्च पछि",
+      "registeredCustomers": "दर्ता गरिएका ग्राहकहरू",
+      "inInventory": "इन्वेन्टरीमा",
+      "operatingCosts": "सञ्चालन खर्च",
+      "needRestocking": "फेरि भर्न आवश्यक",
+      "completed": "पूरा भयो",
+      "outOfStock": "स्टक सकियो",
+      "unitsLeft": "{{count}} वटा बाँकी",
+      "percentChange": "हिजोको तुलनामा {{value}}%"
+    },
+    "quickActions": {
+      "cashiers": "क्यासियरहरू",
+      "addProduct": "वस्तु थप्नुहोस्",
+      "addCustomer": "ग्राहक थप्नुहोस्",
+      "viewReports": "प्रतिवेदन हेर्नुहोस्",
+      "viewCashiers": "क्यासियरहरू हेर्नुहोस्",
+      "addNewProduct": "इन्वेन्टरीमा नयाँ वस्तु थप्नुहोस्",
+      "registerCustomer": "नयाँ ग्राहक दर्ता गर्नुहोस्",
+      "salesAndAnalytics": "बिक्री र विश्लेषण"
+    },
+    "sections": {
+      "recentTransactions": "भर्खरका लेनदेनहरू",
+      "viewAll": "सबै हेर्नुहोस्",
+      "lowStockAlerts": "स्टक कम भएका वस्तुहरूको चेतावनी",
+      "manageInventory": "इन्वेन्टरी व्यवस्थापन गर्नुहोस्",
+      "restock": "फेरि भर्नुहोस्",
+      "salesOverview": "बिक्री अवलोकन",
+      "dailySalesChart": "दैनिक बिक्री प्रदर्शन चार्ट",
+      "visualization": "तपाईंको व्यवसाय वृद्धिको दृश्य प्रतिनिधित्व"
+    }
+  }
 }
+
+  
+

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { href, Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { 
   HomeIcon, 
   ShoppingCartIcon, 
@@ -11,27 +12,25 @@ import {
 } from '@heroicons/react/24/outline';
 import { BanknoteIcon, BookAIcon, HelpingHandIcon, MoveRightIcon, Settings2Icon, SettingsIcon, UserIcon, VideotapeIcon } from 'lucide-react';
 
-const navigation = [
-  { name: 'Dashboard', href: '/subscriber', icon: HomeIcon },
-  { name: 'Items', href: '/products', icon: CubeIcon },
-  {name:'Categories', href:'/categories',icon:BookAIcon},
-   {name:'Vendors', href:'/vendors',icon:UserIcon},
-  {name:'Cashiers', href:'/cashierList',icon:UserIcon},
-  { name: 'Customers', href: '/customers', icon: UsersIcon },
-  { name: 'Transactions', href: '/transactions', icon: DocumentTextIcon },
-  { name: 'Reports', href: '/reports/sales', icon: ChartBarIcon },
-];
-const settings = [
-    {name:'Active-plan', href:'/subscription',icon:Settings2Icon},
-    { name:'Help',href:'/support',icon:HelpingHandIcon},
-     { name:'update-Profile',href:'/update-profile',icon:UserIcon},
-     {name:'Tutorials', href:'/youtube.com',icon:VideotapeIcon}
-
-    
-];
-
-
 const Sidebar = ({ isOpen, onClose }) => {
+  const {t}=useTranslation();
+  const navigation = [
+  { name: t("subscriber.Dashboard"), href: '/subscriber', icon: HomeIcon },
+  { name:t("subscriber.Items") , href: '/products', icon: CubeIcon },
+  {name: t("subscriber.Categories"), href:'/categories',icon:BookAIcon},
+   {name: t("subscriber.Vendors"), href:'/vendors',icon:UserIcon},
+  {name:t("subscriber.Cashiers"), href:'/cashierList',icon:UserIcon},
+  { name: t("subscriber.Customers") , href: '/customers', icon: UsersIcon },
+  { name:t("subscriber.Transactions") , href: '/transactions', icon: DocumentTextIcon },
+  { name:t("subscriber.Reports") , href: '/reports/sales', icon: ChartBarIcon },
+];
+ const settings = [
+    { name: t("settings.ActivePlan"), href: "/subscription", icon: Settings2Icon },
+    { name: t("settings.title"), href: "/support", icon: HelpingHandIcon },
+    { name: t("settings.UpdateProfile"), href: "/update-profile", icon: UserIcon },
+    { name: t("settings.Tutorials"), href: "/youtube.com", icon: VideotapeIcon }
+  ];
+
   const location = useLocation();
 
 
@@ -98,7 +97,7 @@ const setToggle=()=>{
         className="flex gap-2 px-4 py-2 text-sm w-full text-gray-600 border-t border-black font-medium transition-colors hover:bg-gray-50"
       >
         <SettingsIcon className="mr-3 h-5 w-5 flex-shrink-0" />
-        <p>Settings</p>
+      <p>{t("settings.title")}</p>
       </button>
 
       {/* Dropdown menu */}

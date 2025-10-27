@@ -125,7 +125,7 @@ const Report = () => {
       <h3 className="text-xl font-semibold mb-4 text-gray-800">Subscription Breakdown</h3>
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
-          <tr>
+          <tr className='bg-gray-300'>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Period</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Subscribers</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Active Subscribers</th>
@@ -155,7 +155,7 @@ const Report = () => {
   // ----------------------------------------------------------------------
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
+    <div className="p-8 rounded-md bg-gray-50 min-h-screen">
       <h1 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Subscription Analytics Report</h1>
 
       {/* 1. Filters & Controls Section */}
@@ -194,12 +194,10 @@ const Report = () => {
               ))}
             </select>
           </div>
-     
         </div>
       </div>
 
-      
-
+  
       {!isGenerating && summaryMetrics && (
         <>
           {/* Key Metrics / Summary Cards */}
@@ -216,13 +214,42 @@ const Report = () => {
 
           {/* Optional: Export Button */}
           <div className="mt-6 text-right">
-             <button
-               onClick={() => alert(`Exporting ${timeRange} data with Status=${statusFilter}`)}
-               className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-md text-sm font-medium shadow-md transition duration-150"
-             >
-               Export to CSV
-             </button>
-          </div>
+  <button
+    onClick={() => {
+      if (!filteredData || filteredData.length === 0) {
+        alert("No data available to export");
+        return;
+      }
+
+      // Get headers dynamically from the first object
+      const headers = Object.keys(filteredData[0]);
+
+      // Map rows to CSV lines
+      const rows = filteredData.map(row =>
+        headers.map(header => JSON.stringify(row[header] ?? "")).join(",")
+      );
+
+      // Join headers + rows
+      const csvContent = [headers.join(","), ...rows].join("\n");
+
+      // Create a downloadable blob
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+
+      // Create a temporary link and trigger download
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `Subscription_Report_${timeRange}_${statusFilter}.csv`;
+      link.click();
+
+      URL.revokeObjectURL(url); // cleanup
+    }}
+    className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-md text-sm font-medium shadow-md transition duration-150"
+  >
+    Export to CSV
+  </button>
+  </div>
+
         </>
       )}
     </div>

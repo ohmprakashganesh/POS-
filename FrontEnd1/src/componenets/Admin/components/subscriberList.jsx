@@ -1,4 +1,5 @@
 
+import { DeleteIcon, Edit3Icon, EditIcon, FilterXIcon, SaveIcon } from "lucide-react";
 import React, { useState } from "react";
 
 const SubscriberList = () => {
@@ -77,12 +78,12 @@ const [list, setList] = useState(null); // store hovered subscriber ID
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-gray-100 text-left text-gray-700">
-                <th className="p-3">#</th>
+                <th className="p-3">SN</th>
                 <th className="p-3">Name</th>
                 <th className="p-3 ">Email</th>
-                <th className="p-3">Status</th>
-               <th className="p-3">plan</th>
-                <th className="p-3">expire after</th>
+                <th className="lg:p-3 md:p-1">Status</th>
+               <th className="lg:p-3 md:p-1">plan</th>
+                <th className="lg:p-3 md:p-1">expire </th>
                 <th className="p-3 text-center">Actions</th>
               </tr>
             </thead>
@@ -154,16 +155,18 @@ const [list, setList] = useState(null); // store hovered subscriber ID
                   {editSubscriber?.id === s.id ? (
                     <button
                       onClick={handleSave}
-                      className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                      className={`px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 `}
                     >
-                      Save
+                    save
                     </button>
                   ) : (
                     <button
                       onClick={() => setEditSubscriber(s)}
                       className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
                     >
-                      Edit
+                      <EditIcon className="lg:hidden w-3 h-3 xl:hidden block"/>
+                      <span className="lg:block xl:block hidden">Edit</span>
+                      
                     </button>
                   )}
 
@@ -173,14 +176,16 @@ const [list, setList] = useState(null); // store hovered subscriber ID
                     onClick={() => handleToggle(s.id)}
                     className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
                   >
-                   update status
+                    <FilterXIcon className="lg:hidden w-3 h-3 xl:hidden block"/>
+                      <span className="lg:block xl:block hidden">status</span>
                   </button>
 
                   <button
                     onClick={() => handleDelete(s.id)}
                     className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                   >
-                    Delete
+                    <DeleteIcon className="lg:hidden w-3 h-3 xl:hidden block"/>
+                      <span className="lg:block xl:block hidden">Delete</span>
                   </button> 
                 </td> 
                     <td

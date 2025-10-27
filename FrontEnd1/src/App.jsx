@@ -80,6 +80,7 @@ if (subscriptionStatus !== "active" && user.role !== "admin") {
   return children;
 }
 
+
 function App() {
   return (
     <Router>
@@ -376,8 +377,6 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
                <Route path="/success" element={<Paid />} />
             <Route path="/payment" element={<PaymentScreen />} />
-         
-
 
             </Routes>
             <NotificationCenter />
