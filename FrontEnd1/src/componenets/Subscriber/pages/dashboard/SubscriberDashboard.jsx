@@ -323,7 +323,6 @@
 //     </div>
 //   );
 // };
-
 // export default Dashboard;
 
 import React, { useState, useEffect } from 'react';
@@ -340,8 +339,10 @@ import {
   PlusIcon,
   CheckIcon
 } from '@heroicons/react/24/outline';
-import { useNotifications } from '../../contexts/NotificationContext';
+import { useNotifications } from '../../../../contexts/NotificationContext';
 import { useTranslation } from 'react-i18next';
+import { getMetricCards } from './SubDatas';
+
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -355,6 +356,7 @@ const Dashboard = () => {
     totalCustomers: 0,
     lowStockItems: 0
   });
+
   const [recentTransactions, setRecentTransactions] = useState([]);
   const [lowStockProducts, setLowStockProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -363,8 +365,7 @@ const Dashboard = () => {
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise(resolve => setTimeout(resolve, 1000)); 
       setMetrics({
         todaySales: 2540.00,
         totalSales: 45678.00,
@@ -396,41 +397,42 @@ const Dashboard = () => {
     loadData();
   }, [addNotification]);
 
-  const metricCards = [
-    {
-      title: t('dashboard.metrics.todaysSales'),
-      value: metrics.todaySales,
-      change: 12,
-      icon: ShoppingCartIcon,
-      color: "blue",
-      description: t('dashboard.metrics.salesToday')
-    },
-    {
-      title: t('dashboard.metrics.monthlyRevenue'),
-      value: metrics.monthlySales,
-      change: 8,
-      icon: CurrencyDollarIcon,
-      color: "green",
-      description: t('dashboard.metrics.thisMonth')
-    },
-    {
-      title: t('dashboard.metrics.netProfit'),
-      value: metrics.profit,
-      change: 15,
-      icon: ChartBarIcon,
-      color: "emerald",
-      description: t('dashboard.metrics.afterExpenses')
-    },
-    {
-      title: t('dashboard.metrics.totalCustomers'),
-      value: metrics.totalCustomers,
-      change: 5,
-      icon: UsersIcon,
-      color: "purple",
-      description: t('dashboard.metrics.registeredCustomers')
-    }
-  ];
+  const metricCards=getMetricCards(t,metrics);
 
+  // const metricCards = [
+  //   {
+  //     title: t('dashboard.metrics.todaysSales'),
+  //     value: metrics.todaySales,
+  //     change: 12,
+  //     icon: ShoppingCartIcon,
+  //     color: "blue",
+  //     description: t('dashboard.metrics.salesToday')
+  //   },
+  //   {
+  //     title: t('dashboard.metrics.monthlyRevenue'),
+  //     value: metrics.monthlySales,
+  //     change: 8,
+  //     icon: CurrencyDollarIcon,
+  //     color: "green",
+  //     description: t('dashboard.metrics.thisMonth')
+  //   },
+  //   {
+  //     title: t('dashboard.metrics.netProfit'),
+  //     value: metrics.profit,
+  //     change: 15,
+  //     icon: ChartBarIcon,
+  //     color: "emerald",
+  //     description: t('dashboard.metrics.afterExpenses')
+  //   },
+  //   {
+  //     title: t('dashboard.metrics.totalCustomers'),
+  //     value: metrics.totalCustomers,
+  //     change: 5,
+  //     icon: UsersIcon,
+  //     color: "purple",
+  //     description: t('dashboard.metrics.registeredCustomers')
+  //   }
+  // ];
   const quickActions = [
     {
       title: t('dashboard.quickActions.cashiers'),
@@ -488,7 +490,7 @@ const Dashboard = () => {
           <div key={card.title} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">{card.title}</p>
+                <p className="text-xl font-semibold  text-gray-600">{card.title}</p>
                 <p className="text-2xl font-bold text-gray-900 mt-2">
                   {(card.title.includes(t('dashboard.metrics.monthlyRevenue')) || 
                     card.title.includes(t('dashboard.metrics.todaysSales')) || 
@@ -516,7 +518,7 @@ const Dashboard = () => {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">{t('dashboard.metrics.totalProducts')}</p>
+              <p className="text-xl font-semibold  text-gray-600">{t('dashboard.metrics.totalProducts')}</p>
               <p className="text-2xl font-bold text-gray-900">{metrics.totalProducts}</p>
               <p className="text-sm text-gray-500">{t('dashboard.metrics.inInventory')}</p>
             </div>
@@ -527,7 +529,7 @@ const Dashboard = () => {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">{t('dashboard.metrics.monthlyExpenses')}</p>
+              <p className=" text-xl font-semibold  text-gray-600">{t('dashboard.metrics.monthlyExpenses')}</p>
               <p className="text-2xl font-bold text-gray-900">${metrics.expenses.toLocaleString()}</p>
               <p className="text-sm text-gray-500">{t('dashboard.metrics.operatingCosts')}</p>
             </div>
@@ -535,10 +537,10 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-lg  shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">{t('dashboard.metrics.lowStockItems')}</p>
+              <p className=" text-xl font-semibold  text-gray-600">{t('dashboard.metrics.lowStockItems')}</p>
               <p className="text-2xl font-bold text-gray-900">{metrics.lowStockItems}</p>
               <p className="text-sm text-gray-500">{t('dashboard.metrics.needRestocking')}</p>
             </div>
@@ -549,7 +551,7 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('dashboard.quickActions.title')}</h3>
+        <h3 className="text- font-semibold text-gray-900 mb-4">{t('dashboard.quickActions.title')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {quickActions.map((action) => (
             <Link

@@ -1,42 +1,42 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { NotificationProvider } from './contexts/NotificationContext';
-import Login from './pages/auth/Login';
-import SignUp from './pages/auth/SignUp';
-import PublicSubscription  from './pages/subscription/Subscription'
+import Login from './globalPages/auth/Login';
+import SignUp from './globalPages/auth/SignUp';
+import PublicSubscription  from './globalPages/subscription/Subscription'
 import NotificationCenter from './componenets/notifications/NotificationCenter';
 
 
 import Layout from './componenets/cashier/layout/CashierLayout'
 import AdminLayout from './componenets/admin/layout/AdminLayout'
-import PaymentScreen from './pages/subscription/PaymentScreen';
+import PaymentScreen from './globalPages/subscription/PaymentScreen';
 import SubscriberLayout from './componenets/Subscriber/layout/SubscriberLayout'
 
 
 
 // subscriber components 
-import ProductList from './componenets/Subscriber/components/ProductList';
-import AddEditProduct from './componenets/Subscriber/components/AddEditProduct';
-import CustomerList from './componenets/Subscriber/components/CustomerList';
-import Categories from './componenets/Subscriber/components/Category'
-import AddEditCustomer from './componenets/Subscriber/components/AddEditCustomer';
-import TransactionHistory from './componenets/Subscriber/components/TransactionHistory';
-import SalesReports from './componenets/Subscriber/components/SalesReports';
-import ProfitLoss from './componenets/Subscriber/components/ProfitLoss';
-import Subscription from './componenets/Subscriber/components/Subscription';
-import AddEditCashier from './componenets/Subscriber/components/AddEditCashier';
-import CashierList from './componenets/Subscriber/components/CashierList';
-import Product from './componenets/Subscriber/components/Product';
-import SubscriberDashboard from './componenets/Subscriber/SubscriberDashboard';
-import AddEditVendor from './componenets/Subscriber/components/AddEditVendor';
-import VendorDetailsCard from './componenets/Subscriber/components/VendorDetailsCard';
+import ProductList from './componenets/Subscriber/pages/items/ProductList';
+import AddEditProduct from './componenets/Subscriber/pages/items/AddEditProduct';
+import CustomerList from './componenets/Subscriber/pages/customers/CustomerList';
+import Categories from './componenets/Subscriber/pages/categories/Category'
+import AddEditCustomer from './componenets/Subscriber/pages/customers/AddEditCustomer';
+import TransactionHistory from './componenets/Subscriber/pages/transactions/TransactionHistory';
+import SalesReports from './componenets/Subscriber/pages/reports/SalesReports';
+import ProfitLoss from './componenets/Subscriber/pages/dashboard/ProfitLoss';
+import Subscription from './componenets/Subscriber/pages/settings/active-plan/Subscription';
+import AddEditCashier from './componenets/Subscriber/pages/cashiers/AddEditCashier';
+import CashierList from './componenets/Subscriber/pages/cashiers/CashierList';
+import Product from './componenets/Subscriber/pages/items/Product';
+import SubscriberDashboard from './componenets/Subscriber/pages/dashboard/SubscriberDashboard';
+import AddEditVendor from './componenets/Subscriber/pages/vendors/AddEditVendor';
+import VendorDetailsCard from './componenets/Subscriber/pages/vendors/VendorDetailsCard';
 
 
 // admin components 
-import SubscriberList from './componenets/Admin/components/subscriberList';
+import SubscriberList from './componenets/Admin/pages/subscriberList';
 import AdminDashboard from './componenets/Admin/AdminDashboard';
-import SubscriptionPlans from './componenets/Admin/components/SubscriptionPlans';
-import Report from './componenets/Admin/components/Report';
+import SubscriptionPlans from './componenets/Admin/pages/SubscriptionPlans';
+import Report from './componenets/Admin/pages/Report';
 
 // cashier components 
 import Dashboard from './componenets/cashier/CashierDashboard'; 
@@ -45,11 +45,11 @@ import CashierCustomerList from './componenets/cashier/components/CustomerList';
 import CashierAddEditCustomer from './componenets/cashier/components/AddEditCustomer'
 import Orders from './componenets/cashier/components/Orders'
 import POS from './componenets/cashier/components/POS';
-import Paid from './pages/subscription/Paid';
-import VendorList from './componenets/Subscriber/components/VendorsList';
-import Profile from './componenets/Subscriber/components/Profile';
-import Support from './componenets/Subscriber/components/Support';
-import SupportReq from './componenets/Admin/components/Support';
+import Paid from './globalPages/subscription/Paid';
+import VendorList from './componenets/Subscriber/pages/vendors/VendorsList';
+import Profile from './componenets/Subscriber/pages/settings/profile/Profile';
+import Support from './componenets/Subscriber/pages/settings/help/Support';
+import SupportReq from './componenets/Admin/pages/Support';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
@@ -302,7 +302,7 @@ function App() {
                 </ProtectedRoute>
               } />
 
-               <Route path="/support" element={
+               <Route path="/help" element={
                 <ProtectedRoute>
                   <SubscriberLayout>
                    <Support/>

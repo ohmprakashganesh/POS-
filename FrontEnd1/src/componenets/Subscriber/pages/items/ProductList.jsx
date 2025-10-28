@@ -8,7 +8,7 @@ import {
   CubeIcon,
   EllipsisVerticalIcon,
 } from "@heroicons/react/24/outline";
-import { DUMMY_PRODUCTS } from "../../../data/mockData";
+import { DUMMY_PRODUCTS } from "../../../../data/mockData";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -19,7 +19,6 @@ const ProductList = () => {
   const col = "";
 
   const [openDropdownId, setOpenDropdownId] = useState(null);
-
   const toggleDropdown = (id) => {
     setOpenDropdownId(openDropdownId === id ? null : id);
   };
@@ -79,6 +78,7 @@ const ProductList = () => {
           Add Product
         </Link>
       </div>
+
       {/* Search and Filters */}
       <div className="bg-white rounded-lg  pb-2  ">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -104,11 +104,9 @@ const ProductList = () => {
               </option>
             ))}
           </select>
-
-        
         </div>
       </div>
-
+      
       {/* product card  */}
      <div className="">
   <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6 gap-2">

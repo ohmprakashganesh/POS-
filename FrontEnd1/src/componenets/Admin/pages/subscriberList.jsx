@@ -71,8 +71,6 @@ const [list, setList] = useState(null); // store hovered subscriber ID
           className="w-full p-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
 
-   
-
         {/* 📋 Table */}
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
@@ -109,7 +107,6 @@ const [list, setList] = useState(null); // store hovered subscriber ID
                       s.name
                     )}
                   </td>
-
                   <td className="p-3">
                     {editSubscriber?.id === s.id ? (
                       <input

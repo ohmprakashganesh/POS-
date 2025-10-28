@@ -3,7 +3,7 @@
 import React, { useState, useEffect, use } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusIcon, MagnifyingGlassIcon, PencilIcon, TrashIcon, UserIcon, EyeIcon } from '@heroicons/react/24/outline';
-import { VENDORS } from '../../../data/mockData';
+import { VENDORS } from '../../../../data/mockData';
 import { useNavigate } from 'react-router-dom';
 
 const Vendor = () => {

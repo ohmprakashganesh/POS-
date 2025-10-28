@@ -141,7 +141,7 @@ const Profile = () => {
                  <span>Last Login:</span>
                 <span>Registered On:</span>
                 </p>
-             
+
                <p className="flex flex-col">
                  <span>Wednesday 12 th , 2025 @11:09:22 am</span>
                  <span>july 12th, 2023</span>

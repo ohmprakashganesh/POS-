@@ -2,6 +2,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Languages } from "lucide-react"; // optional icon
+import { LanguageIcon } from "@heroicons/react/24/outline";
 
 const LanguageToggle = () => {
   const { i18n } = useTranslation();
@@ -15,10 +16,10 @@ const LanguageToggle = () => {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center gap-2 px-3 py-1 rounded-md bg-blue-600 hover:bg-blue-700 text-white text-sm transition duration-150"
+      className="flex items-center gap-2 px-3 py-1 rounded-md  text-gray-800 underlin text-sm transition duration-150"
     >
-      <Languages size={16} />
-      {i18n.language === "en" ? "नेपाली" : "English"}
+      <LanguageIcon size={16} />
+      {i18n.language === "en" ? "NE" : "EN"}
     </button>
   );
 };

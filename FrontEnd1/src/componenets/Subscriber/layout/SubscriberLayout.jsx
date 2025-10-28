@@ -11,7 +11,7 @@ const SubscriberLayout = ({ children }) => {
   return (
     <div className="flex h-screen w-full ">
   {/* Sidebar */}
-  <div className="lg:fixed md:fixed flex  bg-green-100 lg:w-[16%] h-full">
+  <div className="lg:fixed md:fixed flex    bg-green-100 lg:w-[16%] h-full">
     <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
   </div>
 
@@ -28,9 +28,6 @@ const SubscriberLayout = ({ children }) => {
     </div>
   </div>
 
-
-
-
       {/* <div className=" fixed md:ml-[20%] lg:ml-[20%] xl:ml-[20%] w-[100%]  flex-col overflow-hidden"> */}
         {/* Main content area */}
         {/* <main className="flex-1 relative lg:px-12 overflow-auto p-4 md:p-6"> */}
@@ -38,6 +35,7 @@ const SubscriberLayout = ({ children }) => {
           {children}
         </main> */}
       {/* </div> */}
+      
     </div>
   );
 };

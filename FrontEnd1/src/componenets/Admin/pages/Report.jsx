@@ -79,14 +79,11 @@ const Report = () => {
     // Simulate a brief loading period
     setTimeout(() => {
       setIsGenerating(false);
-      // In a real app, this is where you'd trigger data fetching and set the state.
+      //  add the real time data here
     }, 500);
   };
 
 
-  // ----------------------------------------------------------------------
-  // RENDER HELPERS
-  // ----------------------------------------------------------------------
 
   const renderSummaryCards = (summary) => (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

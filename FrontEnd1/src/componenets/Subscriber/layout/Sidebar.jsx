@@ -26,7 +26,7 @@ const Sidebar = ({ isOpen, onClose }) => {
 ];
  const settings = [
     { name: t("settings.ActivePlan"), href: "/subscription", icon: Settings2Icon },
-    { name: t("settings.title"), href: "/support", icon: HelpingHandIcon },
+    { name: t("settings.Help"), href: "/help", icon: HelpingHandIcon },
     { name: t("settings.UpdateProfile"), href: "/update-profile", icon: UserIcon },
     { name: t("settings.Tutorials"), href: "/youtube.com", icon: VideotapeIcon }
   ];

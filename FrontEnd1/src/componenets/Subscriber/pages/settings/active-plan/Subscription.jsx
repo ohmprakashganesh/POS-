@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from '../../../../../contexts/AuthContext';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { plans } from '@/data/mockData';
 
