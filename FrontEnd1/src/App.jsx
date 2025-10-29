@@ -8,7 +8,7 @@ import NotificationCenter from './componenets/notifications/NotificationCenter';
 
 
 import Layout from './componenets/cashier/layout/CashierLayout'
-import AdminLayout from './componenets/admin/layout/AdminLayout'
+import AdminLayout from './componenets/Admin/layout/AdminLayout'
 import SubscriberLayout from './componenets/Subscriber/layout/SubscriberLayout'
 
 
