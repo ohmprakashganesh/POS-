@@ -5,7 +5,7 @@ import Header from './Header';
 import { useAuth } from '../../../contexts/AuthContext';
 
 
-const CashierLayout = ({ children }) => {
+const CashierLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user } = useAuth();
 
@@ -20,7 +20,7 @@ const CashierLayout = ({ children }) => {
         
         {/* Main content area */}
         <main className="flex-1 overflow-auto p-4 md:p-6">
-       {children}
+       <Outlet/>
         </main>
       </div>
     </div>

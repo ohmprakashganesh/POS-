@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import { useAuth } from '../../../contexts/AuthContext';
+import { Outlet } from 'react-router-dom';
 
-const AdminLayout = ({ children }) => {
+const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user } = useAuth();
 
@@ -18,7 +19,7 @@ const AdminLayout = ({ children }) => {
         
         {/* Main content area */}
         <main className="flex-1 overflow-auto p-4 md:p-6">
-          {children}
+          <Outlet/>
         </main>
       </div>
     </div>
