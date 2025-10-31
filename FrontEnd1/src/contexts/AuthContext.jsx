@@ -12,6 +12,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const[profile,setProfile]=useState(null);
   const [subscriptionStatus, setSubscriptionStatus] = useState('deActive');
   const [loading, setLoading] = useState(true);
 
@@ -76,8 +77,8 @@ const login = async (email, password) => {
       
       setUser(newUser);
       localStorage.setItem('pos_user', JSON.stringify(newUser));
-      localStorage.setItem('pos_subscription', 'active');
-      setSubscriptionStatus('active');
+      localStorage.setItem('pos_subscription', 'inactive');
+      setSubscriptionStatus('inactive');
       
       return { success: true };
     } catch (error) {
@@ -91,8 +92,9 @@ const login = async (email, password) => {
     setUser(null);
     localStorage.removeItem('pos_user');
     localStorage.removeItem('pos_subscription');
+    
   };
-
+ 
   const updateSubscription = (status) => {
     setSubscriptionStatus(status);
     localStorage.setItem('pos_subscription', status);

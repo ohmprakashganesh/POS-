@@ -1,6 +1,67 @@
 // Add CubeIcon import at the top of the file
 import { CubeIcon } from '@heroicons/react/24/outline';
 
+
+
+ export const plans = {
+    basic: {
+      id:1,
+      name: 'Basic',
+      status:'active',
+      time:3,
+      price:4440,
+      features: [
+        'Up to 100 products',
+        '1 user account',
+        'Basic reporting',
+        'Email support',
+        'Mobile POS access'
+      ],
+      limitations: [
+        'No advanced analytics',
+        'No API access',
+        'Limited customer support'
+      ]
+    },
+    pro: {
+      id:2,
+      name: 'Professional',
+            status:'active',
+
+      time:6,
+      price: 790, // 2 months free
+      features: [
+        'Up to 500 products',
+        '5 user accounts',
+        'Advanced reporting',
+        'Priority support',
+        'API access',
+        'Custom branding',
+        'Inventory forecasting'
+      ],
+      limitations: []
+    },
+    enterprise: {
+      name: 'Enterprise',
+     status:'inactive',
+
+      price: 1990,
+      time:12,
+      features: [
+        'Unlimited products',
+        '20+ user accounts',
+        'Custom reporting',
+        '24/7 phone support',
+        'Full API access',
+        'White-label solution',
+        'Dedicated account manager'
+      ],
+      limitations: []
+    }
+  };
+
+
+
 export const productsData = [
    {
     id: 7,
@@ -216,6 +277,113 @@ export const pricingPlans = [
   }
 ];
 
+ export const VENDORS=[
+  {
+    "id": 101,
+    "name": "Everest Supplies Pvt. Ltd.",
+    "address": "New Baneshwor, Kathmandu, Nepal",
+    "phone": "+977-9801234567",
+    "PAN": "606789321",
+    "total_product": 25,
+    "total_cost": 150000,
+    "total_paid": 120000,
+    "total_due": 30000,
+    "total_categories":4,
+    "payment_slip_url": "https://example.com/uploads/payment_slips/everest_supplies_slip_2025-10-15.pdf"
+  },
+  {
+    "id": 102,
+    "name": "Himalayan Traders",
+    "address": "Pokhara-5, Kaski, Nepal",
+    "phone": "+977-9816543210",
+    "PAN": "508745962",
+    "total_product": 18,
+    "total_cost": 89000,
+    "total_paid": 89000,
+    "total_due": 0,
+     "total_categories":4,
+    "payment_slip_url": "https://example.com/uploads/payment_slips/himalayan_traders_slip_2025-09-22.pdf"
+  },
+  {
+    "id": 103,
+    "name": "Lumbini Hardware & Tools",
+    "address": "Butwal-11, Rupandehi, Nepal",
+    "phone": "+977-9823014578",
+    "PAN": "478520963",
+    "total_product": 12,
+    "total_cost": 45000,
+    "total_paid": 25000,
+     "total_categories":4,
+    "total_due": 20000,
+    "payment_slip_url": "https://example.com/uploads/payment_slips/lumbini_hardware_slip_2025-08-10.pdf"
+  },
+  {
+    "id": 104,
+    "name": "Kathmandu Electronics Hub",
+    "address": "Putalisadak, Kathmandu, Nepal",
+    "phone": "+977-9856041122",
+    "PAN": "635874120",
+    "total_product": 40,
+    "total_cost": 320000,
+    "total_paid": 300000,
+     "total_categories":4,
+    "total_due": 20000,
+    "payment_slip_url": "https://example.com/uploads/payment_slips/kathmandu_electronics_slip_2025-07-18.pdf"
+  },
+  {
+    "id": 105,
+    "name": "Nepal Agro Suppliers",
+    "address": "Bharatpur-3, Chitwan, Nepal",
+    "phone": "+977-9861230987",
+    "PAN": "596413287",
+    "total_product": 30,
+    "total_cost": 210000,
+    "total_paid": 150000,
+    "total_due": 60000,
+     "total_categories":4,
+    "payment_slip_url": "https://example.com/uploads/payment_slips/nepal_agro_slip_2025-06-09.pdf"
+  },
+  {
+    "id": 106,
+    "name": "Janakpur Construction Co.",
+    "address": "Janakpur-9, Dhanusha, Nepal",
+    "phone": "+977-9841203698",
+    "PAN": "487320654",
+    "total_product": 10,
+    "total_cost": 95000,
+    "total_paid": 80000,
+     "total_categories":4,
+    "total_due": 15000,
+    "payment_slip_url": "https://example.com/uploads/payment_slips/janakpur_construction_slip_2025-05-12.pdf"
+  },
+  {
+    "id": 107,
+    "name": "Biratnagar Auto Parts",
+    "address": "Main Road, Biratnagar, Nepal",
+    "phone": "+977-9811100099",
+    "PAN": "516904872",
+    "total_product": 22,
+    "total_cost": 130000,
+    "total_paid": 100000,
+    "total_due": 30000,
+     "total_categories":4,
+    "payment_slip_url": "https://example.com/uploads/payment_slips/biratnagar_auto_slip_2025-04-08.pdf"
+  },
+  {
+    "id": 108,
+    "name": "Pokhara Fashion House",
+    "address": "Lakeside, Pokhara, Nepal",
+    "phone": "+977-9808776655",
+    "PAN": "609478531",
+    "total_product": 16,
+    "total_cost": 78000,
+    "total_paid": 78000,
+    "total_due": 0,
+     "total_categories":4,
+    "payment_slip_url": "https://example.com/uploads/payment_slips/pokhara_fashion_slip_2025-03-02.pdf"
+  }
+]
+
 
 export const DUMMY_PRODUCTS = [
   {
@@ -225,10 +393,15 @@ export const DUMMY_PRODUCTS = [
     image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
     source: 'Ali Express',
     rating: 4.8,
+      sku: "WM-002",
+    purchase_price:5000,
+    selling_price:5600,
     reviews: 1345,
     price: 200,
-    minOrder: '12',
-    tags: ['Apple', 'Electronic'],
+    stock:50,
+    purchase_date:"2025-10-23",
+    expiry_date:"2030-10-23",
+        tags: ['Apple', 'Electronic'],
   },
   {
     id: 2,
@@ -237,10 +410,15 @@ export const DUMMY_PRODUCTS = [
     image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
     source: 'Amazon',
     rating: 4.9,
-    reviews: 976,
-    price: 187,
-    minOrder: '11',
-    tags: ['MSI', 'Electronic', 'Display'],
+      sku: "WM-002",
+     purchase_price:5000,
+    selling_price:5600,
+    reviews: 1345,
+    price: 200,
+    stock:50,
+    purchase_date:"2025-10-23",
+    expiry_date:"2030-10-23",
+        tags: ['Apple', 'Electronic'],
   },
   {
     id: 3,
@@ -248,11 +426,15 @@ export const DUMMY_PRODUCTS = [
     name: 'Macbook Pro M1 2020 13" 512GB',
     image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
     source: 'Tokopedia',
-    rating: 4.7,
-    reviews: 1654,
-    price: 215,
-    minOrder: '10',
-    tags: ['Apple', 'Electronic'],
+      sku: "WM-002",
+    purchase_price:5000,
+    selling_price:5600,
+    reviews: 1345,
+    price: 200,
+    stock:50,
+    purchase_date:"2025-10-23",
+    expiry_date:"2030-10-23",
+        tags: ['Apple', 'Electronic'],
   },
   {
     id: 4,
@@ -260,56 +442,59 @@ export const DUMMY_PRODUCTS = [
     name: 'Monitor MSI 27" Modern MD271UL 4K',
     image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
     source: 'Shopify',
-    rating: 4.8,
-    reviews: 886,
-    price: 210,
-    minOrder: '8',
-    tags: ['MSI', 'Electronic', 'Display'],
+      sku: "WM-002",
+    purchase_price:5000,
+    selling_price:5600,
+    reviews: 1345,
+    price: 200,
+    stock:50,
+    purchase_date:"2025-10-23",
+    expiry_date:"2030-10-23",
+        tags: ['Apple', 'Electronic'],
   },
   {
     id: 5,
     name: 'Macbook Pro M1 Pro 14"',
     image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
-    source: 'eBay',
-    rating: 4.5,
-    reviews: 1256,
-    price: 197,
-    minOrder: '15',
-    tags: ['Apple', 'Electronic'],
+   purchase_price:5000,
+     sku: "WM-002",
+    selling_price:5600,
+    reviews: 1345,
+    price: 200,
+    stock:50,
+    purchase_date:"2025-10-23",
+    expiry_date:"2030-10-23",
+        tags: ['Apple', 'Electronic'],
   },
   {
     id: 6,
     name: 'Macbook Pro M1 Pro 14"',
     image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
-    source: 'Shopee',
-    rating: 4.6,
-    reviews: 1276,
-    price: 210,
-    minOrder: '14',
-    tags: ['Apple', 'Electronic'],
+      sku: "WM-002",
+    purchase_price:5000,
+    selling_price:5600,
+    reviews: 1345,
+    price: 200,
+    stock:50,
+    purchase_date:"2025-10-23",
+    expiry_date:"2030-10-23",
+        tags: ['Apple', 'Electronic'],
   },
   {
     id: 7,
     name: 'Macbook Air M1 2020 13"',
     image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
-    source: 'Lazada',
-    rating: 4.8,
-    reviews: 1334,
-    price: 170,
-    minOrder: '18',
-    tags: ['Apple', 'Electronic'],
+      sku: "WM-002",
+   purchase_price:5000,
+    selling_price:5600,
+    reviews: 1345,
+    price: 200,
+    stock:50,
+    purchase_date:"2025-10-23",
+    expiry_date:"2030-10-23",
+        tags: ['Apple', 'Electronic'],
   },
-  {
-    id: 8,
-    name: 'Apple 32 Pro Display XDR',
-    image: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80', 
-    source: 'BigCommerce',
-    rating: 4.7,
-    reviews: 1967,
-    price: 575,
-    minOrder: '5',
-    tags: ['Apple', 'Display', 'Electronic'],
-  },
+  
 ];
 
 
@@ -336,4 +521,25 @@ const tenant = [
   { id: 5, name: 'Tech Repair Hub', status: 'Active', plan: 'Pro', users: 7, lastActivity: '2025-10-14', revenue: 890 },
   { id: 6, name: 'Local Artisan Bakery', status: 'Active', plan: 'Basic', users: 5, lastActivity: '2025-10-13', revenue: 320 },
   { id: 7, name: 'Elite Fitness Center', status: 'Trial', plan: 'Enterprise', users: 20, lastActivity: '2025-10-14', revenue: 0 },
+              ];
+
+            export  const STATIC_SUBSCRIPTION_DATA = [
+                { id: 1, month: 'Jan 2024', totalSubscribers: 1500, activeSubscribers: 1400, revenue: 15000, status: 'Active', plan: 'Pro', churned: 100 },
+                { id: 2, month: 'Feb 2024', totalSubscribers: 1600, activeSubscribers: 1450, revenue: 16500, status: 'Active', plan: 'Pro', churned: 150 },
+                { id: 3, month: 'Mar 2024', totalSubscribers: 1750, activeSubscribers: 1600, revenue: 18000, status: 'Active', plan: 'Basic', churned: 150 },
+                { id: 4, month: 'Apr 2024', totalSubscribers: 1800, activeSubscribers: 1650, revenue: 18500, status: 'Active', plan: 'Basic', churned: 150 },
+                { id: 5, month: 'May 2024', totalSubscribers: 1950, activeSubscribers: 1700, revenue: 20000, status: 'Active', plan: 'Pro', churned: 250 },
+                { id: 6, month: 'Jun 2024', totalSubscribers: 2000, activeSubscribers: 1800, revenue: 21000, status: 'Active', plan: 'Basic', churned: 200 },
+                { id: 7, month: 'Jul 2024', totalSubscribers: 2200, activeSubscribers: 2000, revenue: 23000, status: 'Pending', plan: 'Pro', churned: 200 },
+                { id: 8, month: 'Aug 2024', totalSubscribers: 2400, activeSubscribers: 2200, revenue: 25000, status: 'Active', plan: 'Basic', churned: 200 },
+                { id: 9, month: 'Sep 2024', totalSubscribers: 2500, activeSubscribers: 2300, revenue: 26000, status: 'Cancelled', plan: 'Pro', churned: 200 },
+                { id: 10, month: 'Oct 2024', totalSubscribers: 2650, activeSubscribers: 2400, revenue: 27500, status: 'Active', plan: 'Basic', churned: 250 },
+                { id: 11, month: 'Nov 2025', totalSubscribers: 2800, activeSubscribers: 2550, revenue: 29000, status: 'Active', plan: 'Pro', churned: 250 },
+                { id: 12, month: 'Dec 2025', totalSubscribers: 3000, activeSubscribers: 2800, revenue: 32000, status: 'Active', plan: 'Basic', churned: 200 },
+                { id: 17, month: 'Jul 2025', totalSubscribers: 2200, activeSubscribers: 2000, revenue: 23000, status: 'Pending', plan: 'Pro', churned: 200 },
+                { id: 81, month: 'Aug 2023', totalSubscribers: 2400, activeSubscribers: 2200, revenue: 25000, status: 'Active', plan: 'Basic', churned: 200 },
+                { id: 91, month: 'Sep 2026', totalSubscribers: 2500, activeSubscribers: 2300, revenue: 26000, status: 'Cancelled', plan: 'Pro', churned: 200 },
+                { id: 110, month: 'Oct 2024', totalSubscribers: 2650, activeSubscribers: 2400, revenue: 27500, status: 'Active', plan: 'Basic', churned: 250 },
+                { id: 111, month: 'Nov 2029', totalSubscribers: 2800, activeSubscribers: 2550, revenue: 29000, status: 'Active', plan: 'Pro', churned: 250 },
+                { id: 112, month: 'Dec 2000', totalSubscribers: 3000, activeSubscribers: 2800, revenue: 32000, status: 'Active', plan: 'Basic', churned: 200 },
               ];
