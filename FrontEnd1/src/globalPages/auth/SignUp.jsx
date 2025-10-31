@@ -1,3 +1,5 @@
+import Button from "@/componenets/ui/Button";
+import Input from "@/componenets/ui/Input";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -70,22 +72,20 @@ const SignUp = () => {
     }
   };
 
-  //  handling the input field design
-  const inputClassName = "w-full rounded-lg border-0 bg-gray-100 focus:bg-white focus:ring-1 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 text-gray-800 transition duration-150 ease-in-out placeholder-gray-500";
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-100 px-4">
-      <div className="w-full md:w-[40%] bg-white rounded-2xl shadow-2xl border border-gray-100 p-8">
+    <div className="min-h-screen flex items-center justify-center  px-4">
+      <div className="w-full md:w-[40%] bg-white rounded-xl shadow-sm p-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+          <h1 className="text-3xl font-extrabold  tracking-tight">
             Register Your Company
           </h1>
           <p className="text-gray-500 mt-2 text-sm">
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-blue-600 font-medium hover:underline"
+              className="text-primary font-medium hover:text-primary-hover"
             >
               Sign in here
             </Link>
@@ -94,7 +94,7 @@ const SignUp = () => {
 
         {/* Alerts */}
         {error && (
-          <div className="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-red-600 text-sm" role="alert">
+          <div className="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-destructive text-sm" role="alert">
             {error}
           </div>
         )}
@@ -106,90 +106,46 @@ const SignUp = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Business Name, Type, PAN: Grouped in one row for better visual balance */}
-          <div className="grid grid-cols-1 gap-6">
             {/* Name (Business Name) */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Business Name *
-              </label>
-              <input
-                name="name"
+            <Input label="Business Name *" name="name"
                 type="text"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Enter your business name"
-                className={inputClassName}
-              />
-            </div>
-
-            {/* Type */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Business Type *
-              </label>
-              <input
-                name="type"
+                placeholder="Enter your business name"/>
+                {/* Type */}
+             <Input label="Business Type *" name="type"
                 type="text"
                 value={formData.type}
                 onChange={handleChange}
-                placeholder="Enter type of business"
-                className={inputClassName}
-              />
-            </div>
+                placeholder="Enter type of business"/>
+      
             
             {/* PAN */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
-                PAN Number *
-              </label>
-              <input
-                name="pan"
+            <Input label="PAN Number *"  name="pan"
                 type="text"
                 value={formData.pan}
                 onChange={handleChange}
-                placeholder="E.g. 48305B"
-                className={inputClassName}
-              />
-            </div>
-          </div>
-
+                placeholder="E.g. 48305B"/>
           {/* Email and Phone: Grouped in one row */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Email */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Email Address *
-              </label>
-              <input
-                name="email"
+            <Input label="Email Address *"  name="email"
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="example@company.com"
-                className={inputClassName}
-              />
-            </div>
-
-            {/* Phone */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Phone Number *
-              </label>
-              <input
-                name="phone"
+                placeholder="example@company.com" />
+                {/* Phone */}
+            <Input label="Phone Number *"  name="phone"
                 type="tel"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="+977 98XXXXXXXX"
-                className={inputClassName}
-              />
-            </div>
-          </div>
+                placeholder="+977 98XXXXXXXX"/>
+
+           </div>
 
           {/* Address */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
+            <label className="block mb-1">
               Business Address
             </label>
             <textarea
@@ -198,25 +154,18 @@ const SignUp = () => {
               value={formData.address}
               onChange={handleChange}
               placeholder="E.g. Barhadashi 4, Jhapa, Nepal"
-              className={inputClassName}
+              className="w-full border border-gray-300 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             ></textarea>
           </div>
 
           {/* File Upload */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Upload Logo *
-            </label>
-            <input
-              name="file"
+          <Input label="Upload Logo *" name="file"
               type="file"
               accept="image/*"
               onChange={handleChange}
-              // Adjusted file input styling to match the flat/no-border theme
-              className="block w-full text-sm text-gray-800 border-0 rounded-lg cursor-pointer bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 file:mr-4 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition duration-150 ease-in-out"
-            />
-          </div>
-
+               className="cursor-pointer focus:outline-none p-0 file:mr-3  file:py-3 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary-hover transition duration-150 ease-in-out"
+              
+              />
           {/* Terms */}
           <div className="flex items-start gap-2 pt-2">
             <input
@@ -224,21 +173,21 @@ const SignUp = () => {
               name="terms"
               type="checkbox"
               required
-              className="h-4 w-4 mt-1 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              className="h-4 w-4 mt-1 text-primary border-gray-300 rounded focus:ring-primary"
             />
-            <label htmlFor="terms" className="text-sm text-gray-600">
+            <label htmlFor="terms" className="text-sm text-muted">
               I agree to the{" "}
-              <a href="#" className="text-blue-600 font-medium hover:underline">
+              <a href="#" className="text-primary font-medium hover:underline">
                 Terms and Conditions
               </a>
             </label>
           </div>
 
           {/* Submit */}
-          <button
+          <Button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3 rounded-lg font-semibold shadow-lg hover:from-blue-700 hover:to-blue-600 focus:ring-4 focus:ring-blue-300 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed mt-8"
+            className="w-full"
           >
             {isLoading ? (
                 <span className="flex items-center justify-center">
@@ -251,7 +200,7 @@ const SignUp = () => {
             ) : (
                 "Create Account"
             )}
-          </button>
+          </Button>
         </form>
       </div>
     </div>
