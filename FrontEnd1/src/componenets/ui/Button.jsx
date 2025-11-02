@@ -16,7 +16,6 @@ const Button = forwardRef(({ className = "",secondary=false,outline=false,destru
     />
   )
 })
-
 Button.displayName = "Button"
 
 export default Button

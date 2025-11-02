@@ -7,7 +7,6 @@ const Input = forwardRef(({className="",id,label="",error="", ...props }, ref) =
   return (
     <div >
  {label && <label htmlFor={inputId} className="block mb-1  capitalize">{label}</label>}
-
     <input
      id={inputId}
       ref={ref}

@@ -123,8 +123,8 @@ function App() {
                 <Route path="/cashier/edit/:id" element={<AddEditCashier />} />
                 <Route path="/Vendors" element={ <VendorList />}/>
                  <Route path="/vendor/add" element={ <AddEditVendor />}/>
-                  <Route path="/vendor/edit/:id" element={<AddEditVendor />}/>
-                   <Route  path="/vendor/detail/:id" element={<VendorDetailsCard />}/>
+                <Route path="/vendor/edit/:id" element={<AddEditVendor />}/>
+                 <Route  path="/vendor/detail/:id" element={<VendorDetailsCard />}/>
                 <Route path="/products" element={<ProductList />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/products/add" element={<AddEditProduct />} />
