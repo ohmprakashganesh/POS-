@@ -1,89 +1,115 @@
-import React, { useState } from 'react';
-import { useAuth } from '../../../contexts/AuthContext';
-import { useTranslation } from 'react-i18next';
-import { useNotifications } from '../../../contexts/NotificationContext';
-import { 
+import React, { useState } from "react";
+import { useAuth } from "../../../contexts/AuthContext";
+import { useTranslation } from "react-i18next";
+import { useNotifications } from "../../../contexts/NotificationContext";
+import {
   BellIcon,
   Bars3Icon,
-  UserCircleIcon
-} from '@heroicons/react/24/outline';
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
 
-import { useNavigate } from 'react-router-dom';
-import LanguageToggle from '@/locales/LanguageToggle';
-const Header = ({ onMenuClick }) => {
+import { Link, useNavigate } from "react-router-dom";
+import LanguageToggle from "@/locales/LanguageToggle";
+import { LogOut, X } from "lucide-react";
+import Button from "@/componenets/ui/Button";
+const Header = ({ openSidebar }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { notifications, unreadCount, markAsRead } = useNotifications();
-  const { logout,user } = useAuth();
+  const { logout, user } = useAuth();
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
-      <div className="flex items-center justify-between h-16 px-4 sm:px-6">
-        {/* Left section */}
-        <div className="flex items-center">
+    <header className="h-16 bg-white shadow-sm flex items-center justify-between px-2 sm:px-5 sticky top-0">
+      {/* Left section */}
+      <div className="flex items-center gap-2">
+        <button
+          onClick={openSidebar}
+          className="lg:hidden  rounded-md text-muted hover:text-muted-hover"
+        >
+          <Bars3Icon className="h-6 w-6" />
+        </button>
+        <h1 className="text-xl sm:text-2xl font-bold">{user.name}</h1>
+      </div>
+
+      {/* Right section */}
+      <div className="flex items-center gap-2 ">
+        <LanguageToggle />
+        {/* Notifications */}
+        <div className="relative ">
           <button
-            onClick={onMenuClick}
-            className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600"
+            onClick={() => markAsRead()}
+            className="p-2 text-muted hover:text-muted-hover relative"
           >
-            <Bars3Icon className="h-6 z-50 w-6" />
+            <BellIcon className="h-6 w-6 " />
+            {unreadCount > 0 && (
+              <span
+                className="absolute 
+                top-1 right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+              >
+                {unreadCount}
+              </span>
+            )}
           </button>
-          <div className="ml-4 lg:ml-0">
-            <h1 className="text-2xl font-bold text-gray-900">{user.name}</h1>
-          </div>
         </div>
 
-        {/* Right section */}
-        <div className="flex items-center space-x-4">
-          <div className='relative'>
-           <LanguageToggle/>
+        {/* User menu */}
+        <div className="relative">
+          <button
+            onClick={() => setUserMenuOpen(!userMenuOpen)}
+            className="flex items-center space-x-3 text-sm focus:outline-none"
+          >
+            <UserCircleIcon className="h-8 w-8 text-muted" />
+            <div className="hidden md:block text-left">
+              <div className="font-medium ">{user?.name}</div>
+              <div className="text-muted text-xs">{user?.role}</div>
+            </div>
+          </button>
+          {userMenuOpen && (
+            <>
+              <div
+                className="overlay fixed inset-0 z-10"
+                onClick={() => setUserMenuOpen(false)}
+              />
+              <div className="dropdown absolute w-70 z-20 top-10 right-0 h-fit bg-white shadow-sm  py-3 px-2">
+                <X
+                  className="absolute right-2 top-2 size-8 p-1.5  rounded-full hover:bg-background"
+                  onClick={() => setUserMenuOpen(false)}
+                />
+                <div className="px-4">
+                  <div className="flex items-center gap-2">
+                    <div className="size-10 bg-primary text-white rounded-full capitalize flex items-center justify-center text-lg font-bold">
+                      {user?.name[0]}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold truncate capitalize">
+                        {user?.name}
+                      </h3>
+                      <p className="text-sm font-light truncate">
+                        {user?.role}
+                      </p>
+                    </div>
+                  </div>
+                </div>
 
-          </div>
-          {/* Notifications */}
-          <div className="relative">
-            <button
-              onClick={() => markAsRead()}
-              className="p-2 text-gray-400 hover:text-gray-600 relative"
-            >
-              <BellIcon className="h-6 w-6 " />
-              {unreadCount > 0 && ( 
-                <span className="absolute  top-1 right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                  {unreadCount}
-                </span>
-              )}
-            </button>
-          </div>
+                <button
+                  
+                  onClick={()=>{navigate("/profile"),setUserMenuOpen(false)}}
+                  className="w-full mt-2 justify-start rounded-lg flex items-center px-4 py-2 gap-2 font-semibold hover:bg-background "
+                >
+                  <UserCircleIcon className="size-7" /> Profile
+                </button>
 
-          {/* User menu */}
-          <div className="relative">
-            <button
-              onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="flex items-center space-x-3 text-sm focus:outline-none"
-            >
-              <UserCircleIcon className="h-8 w-8 text-gray-400" />
-              <div className="hidden md:block text-left">
-                <div className="font-medium text-gray-900">{user?.name}</div>
-                <div className="text-gray-500 text-xs">{user?.role}</div>
-              </div>
-            </button>
-
-            {userMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
                 <button
                   onClick={logout}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="px-4 py-2  rounded-lg w-full flex gap-2 font-semibold items-center justify-start hover:bg-background text-red-500"
                 >
-                  Sign out
-                </button>
-                 <button
-                  onClick={()=>{navigate("/profile"),setUserMenuOpen(!userMenuOpen)}}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                 Profile
+                  <LogOut />
+                  Logout
                 </button>
               </div>
-            )}
-          </div>
+            </>
+          )}
         </div>
       </div>
     </header>

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import qr from '../../../public/qr.jpg';
+import qr from '/qr.jpg';
 
 import {
   CreditCard,
