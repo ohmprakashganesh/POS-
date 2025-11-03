@@ -1,6 +1,67 @@
 // Add CubeIcon import at the top of the file
 import { CubeIcon } from '@heroicons/react/24/outline';
 
+
+
+ export const plans = {
+    basic: {
+      id:1,
+      name: 'Basic',
+      status:'active',
+      time:3,
+      price:4440,
+      features: [
+        'Up to 100 products',
+        '1 user account',
+        'Basic reporting',
+        'Email support',
+        'Mobile POS access'
+      ],
+      limitations: [
+        'No advanced analytics',
+        'No API access',
+        'Limited customer support'
+      ]
+    },
+    pro: {
+      id:2,
+      name: 'Professional',
+            status:'active',
+
+      time:6,
+      price: 790, // 2 months free
+      features: [
+        'Up to 500 products',
+        '5 user accounts',
+        'Advanced reporting',
+        'Priority support',
+        'API access',
+        'Custom branding',
+        'Inventory forecasting'
+      ],
+      limitations: []
+    },
+    enterprise: {
+      name: 'Enterprise',
+     status:'inactive',
+
+      price: 1990,
+      time:12,
+      features: [
+        'Unlimited products',
+        '20+ user accounts',
+        'Custom reporting',
+        '24/7 phone support',
+        'Full API access',
+        'White-label solution',
+        'Dedicated account manager'
+      ],
+      limitations: []
+    }
+  };
+
+
+
 export const productsData = [
    {
     id: 7,
@@ -227,6 +288,7 @@ export const pricingPlans = [
     "total_cost": 150000,
     "total_paid": 120000,
     "total_due": 30000,
+    "total_categories":4,
     "payment_slip_url": "https://example.com/uploads/payment_slips/everest_supplies_slip_2025-10-15.pdf"
   },
   {
@@ -239,6 +301,7 @@ export const pricingPlans = [
     "total_cost": 89000,
     "total_paid": 89000,
     "total_due": 0,
+     "total_categories":4,
     "payment_slip_url": "https://example.com/uploads/payment_slips/himalayan_traders_slip_2025-09-22.pdf"
   },
   {
@@ -250,6 +313,7 @@ export const pricingPlans = [
     "total_product": 12,
     "total_cost": 45000,
     "total_paid": 25000,
+     "total_categories":4,
     "total_due": 20000,
     "payment_slip_url": "https://example.com/uploads/payment_slips/lumbini_hardware_slip_2025-08-10.pdf"
   },
@@ -262,6 +326,7 @@ export const pricingPlans = [
     "total_product": 40,
     "total_cost": 320000,
     "total_paid": 300000,
+     "total_categories":4,
     "total_due": 20000,
     "payment_slip_url": "https://example.com/uploads/payment_slips/kathmandu_electronics_slip_2025-07-18.pdf"
   },
@@ -275,6 +340,7 @@ export const pricingPlans = [
     "total_cost": 210000,
     "total_paid": 150000,
     "total_due": 60000,
+     "total_categories":4,
     "payment_slip_url": "https://example.com/uploads/payment_slips/nepal_agro_slip_2025-06-09.pdf"
   },
   {
@@ -286,6 +352,7 @@ export const pricingPlans = [
     "total_product": 10,
     "total_cost": 95000,
     "total_paid": 80000,
+     "total_categories":4,
     "total_due": 15000,
     "payment_slip_url": "https://example.com/uploads/payment_slips/janakpur_construction_slip_2025-05-12.pdf"
   },
@@ -299,6 +366,7 @@ export const pricingPlans = [
     "total_cost": 130000,
     "total_paid": 100000,
     "total_due": 30000,
+     "total_categories":4,
     "payment_slip_url": "https://example.com/uploads/payment_slips/biratnagar_auto_slip_2025-04-08.pdf"
   },
   {
@@ -311,6 +379,7 @@ export const pricingPlans = [
     "total_cost": 78000,
     "total_paid": 78000,
     "total_due": 0,
+     "total_categories":4,
     "payment_slip_url": "https://example.com/uploads/payment_slips/pokhara_fashion_slip_2025-03-02.pdf"
   }
 ]

@@ -3,8 +3,9 @@ import Sidebar from './Sidebar';
 import { useAuth } from '../../../contexts/AuthContext';
 
 import Header from './Header';
+import { Outlet } from 'react-router-dom';
 
-const SubscriberLayout = ({ children }) => {
+const SubscriberLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user } = useAuth();
 
@@ -19,7 +20,7 @@ const SubscriberLayout = ({ children }) => {
         
         {/* Main content area */}
         <main className="flex-1 overflow-auto p-4 md:p-6">
-          {children}
+          <Outlet/>
         </main>
       </div>
     </div>
