@@ -9,6 +9,8 @@ import {
   EllipsisVerticalIcon,
 } from "@heroicons/react/24/outline";
 import { DUMMY_PRODUCTS } from "../../../../data/mockData";
+import { OptionComponent, SelectComponent } from "@/componenets/ui/Select";
+import Input from "@/componenets/ui/Input";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -65,159 +67,143 @@ const ProductList = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 uppercase">
+          <h1 className="text-2xl font-bold uppercase">
             Products Inventory
           </h1>
-          <p className="text-gray-600">Manage your product inventory</p>
+          <p className="text-muted">Manage your product inventory</p>
         </div>
         <Link
           to="/products/add"
-          className="inline-flex items-center px-4 py-2 hover:bg-primary-green text-white rounded-lg bg-green-500 transition-colors"
+          className="inline-flex gap-2 items-center px-4 py-2 text-secondary-foreground font-semibold hover:bg-secondary-hover bg-secondary rounded-md  transition-colors"
         >
-          <PlusIcon className="h-5 w-5 mr-2" />
+          <PlusIcon className="size-5" strokeWidth={3} />
           Add Product
         </Link>
       </div>
 
       {/* Search and Filters */}
-      <div className="bg-white rounded-lg  pb-2  ">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
           <div className="relative">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
+            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
+            <Input placeholder="Search products..."  value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)} className="pl-9"/>
+           
           </div>
-
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          >
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
+              <SelectComponent  value={selectedCategory} onChange={(e)=>setSelectedCategory(e.target.value)}>
+                {categories.map((category, index) => (
+              <OptionComponent key={index} value={category}>
                 {category === "all" ? "All Categories" : category}
-              </option>
+              </OptionComponent>
             ))}
-          </select>
+              </SelectComponent>
+         
         </div>
-      </div>
       
-      {/* product card  */}
-     <div className="">
-  <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6 gap-2">
+      
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-5">
     {filteredProducts.map((product) => (
       <div
         key={product.id}
-        className="relative rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden bg-white cursor-pointer"
+        className="group relative flex flex-col bg-white shadow-sm rounded-md"
       >
-        {/* Three-dot menu */}
-        <div className="absolute top-3 right-3 z-20">
+        <div className="top-options  w-full flex items-center justify-between p-2 h-12">
+              {/* Stock badge */}
+              <span
+                className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
+                  product.stock <= 10
+                    ? "bg-red-100 text-red-700"
+                    : "bg-green-100 text-green-700"
+                }`}
+              >
+                {product.stock <= 10 ? product.stock==0 ? "Out of Stock" : "Low Stock" : "In Stock"}
+              </span>
+            
+            {/* Three-dot menu */}
+        
           <button
             onClick={(e) => {
-              e.stopPropagation(); // prevent navigation when clicking menu
+              e.stopPropagation();
               toggleDropdown(product.id);
             }}
-            className="p-1 rounded-full hover:bg-gray-100 shadow"
+            className="p-2 rounded-full hover:bg-black/10 text-muted hover:text-muted-hover"
           >
-            <EllipsisVerticalIcon className="h-6 w-6 text-gray-600 hover:text-black" />
+            <EllipsisVerticalIcon className="h-5 w-5"/>
           </button>
 
-          {openDropdownId === product.id && (
+          {openDropdownId === product.id && <>
             <div
-              className="
-                absolute right-0 mt-2 
-                w-40 sm:w-44 md:w-48 lg:w-52 
-                bg-white border border-gray-200 
-                rounded-lg shadow-xl 
-                z-50
-              "
-              onClick={(e) => e.stopPropagation()} // prevent route change when clicking inside dropdown
-            >
+              className="absolute z-100 right-2 top-12  w-44 bg-background  rounded-md shadow-lg  overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+              >
               <Link
                 to={`/products/edit/${product.id}`}
                 state={{ product }}
-                className="
-                  block w-full text-left 
-                  px-4 py-2 
-                  text-sm sm:text-base 
-                  text-gray-700 hover:bg-gray-100 
-                  transition-colors duration-200
-                "
-              >
-                Edit
+                className="flex items-center gap-2 w-full px-4 py-2 text-sm text-muted hover:bg-primary/30 hover:text-primary transition-colors duration-200"
+                >
+                <span>✏️</span> Edit
               </Link>
 
               <button
                 onClick={() => handleUpdate(product)}
-                className="
-                  w-full text-left 
-                  px-4 py-2 
-                  text-sm sm:text-base 
-                  text-gray-700 hover:bg-gray-100 
-                  transition-colors duration-200
-                "
-              >
-                Delete
+                className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-muted hover:bg-destructive/30 hover:text-destructive transition-colors duration-200 border-t border-gray-100"
+                >
+                <span>🗑️</span> Delete
               </button>
             </div>
-          )}
+              <div className="overlay absolute  inset-0 z-50" onClick={()=>toggleDropdown(product.id)} />
+                </>
+          }
+        
         </div>
+        
 
-        {/* Product Card Click → Navigate to Product Details */}
-        <Link
-          to={`/product/${product.id}`}
-          className="block"
-        >
-          {/* Product Image */}
-          <div className="p-4 pb-0 flex flex-col items-center">
+        {/* Product image */}
+        <Link to={`/product/${product.id}`} className="p-2 grow flex flex-col ">
             <img
               src={
                 product.image ||
                 "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80"
               }
               alt={product.name}
-              className="w-full hover:scale-110 hover:rounded-t-xl transition-all duration-300 max-h-48 object-contain mb-3"
-              style={{ objectFit: "contain" }}
+              className="inline-block w-full aspect-[16/9]  rounded-md"
             />
-          </div>
+            
+          
 
           {/* Product Details */}
-          <div className="flex flex-col justify-between h-full">
-            <div className="p-2 pt-0 flex-1">
-              <h3 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-2 h-10">
-                {product.name}
-              </h3>
-              <div className="text-sm">
-                <div className="flex justify-between">
-                  <span className="font-medium text-orange-700">
-                    Rs. <span className="text-xl">{product.price}</span>
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Stock</span>
-                  <span
-                    className={`font-medium ${
-                      product.minOrder <= 10
-                        ? "text-red-600"
-                        : "text-green-700"
-                    }`}
-                  >
-                    {product.minOrder}
-                  </span>
-                </div>
+          <div className="mt-1.5 grow  flex flex-col justify-between">
+            <h3 className="text-lg font-semibold line-clamp-2 leading-tight">
+              {product.name}
+            </h3>
+
+            
+             <div className="details">
+               <div className="flex items-baseline gap-1">
+                <span className="text-xs text-muted">Rs.</span>
+                <span className="text-2xl font-bold text-destructive">
+                  {product.price}
+                </span>
               </div>
-            </div>
+
+              <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                <span className="text-xs text-muted">Available</span>
+                <span
+                  className={`text-sm font-semibold ${
+                    product.stock <= 10
+                      ? "text-red-600"
+                      : "text-green-600"
+                  }`}
+                >
+                  {product.stock} units
+                </span>
+              </div>
+             </div>
+            
           </div>
         </Link>
       </div>
     ))}
   </div>
-</div>
 
     </div>
   );

@@ -6,7 +6,6 @@ export const SelectComponent = ({
   children,
   placeholder = "Select",
   value,
-  selectedLabel,
   onChange,
   className = "",
 }) => {
@@ -24,19 +23,24 @@ export const SelectComponent = ({
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  // Find the selected option's label
+  const selectedLabel = React.Children.toArray(children).find(
+    (child) => child.props?.value === value
+  )?.props?.children;
+
   return (
-    <SelectContext.Provider value={{ open, setOpen, value, selectedLabel, onChange }}>
+    <SelectContext.Provider value={{ open, setOpen, value, onChange }}>
       <div ref={selectRef} className="relative inline-block w-full">
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className={`w-full border rounded-md px-3 py-2 bg-white hover:bg-gray-50 flex items-center justify-start gap-2 min-h-[40px] ${className}`}
+          className={`w-full focus:ring-primary focus:ring-2 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed  border-gray-300  border rounded-md  px-3 py-2 flex items-center justify-start gap-2 min-h-[40px] ${className}`}
         >
           {selectedLabel || <span className="text-gray-400">{placeholder}</span>}
         </button>
 
         {open && (
-          <div className="absolute mt-1 w-full bg-white border rounded-md shadow-lg z-20 py-1">
+          <div className="absolute mt-1.5 w-full bg-white overflow-hidden rounded-md shadow-sm z-50 ">
             {children}
           </div>
         )}
@@ -47,9 +51,14 @@ export const SelectComponent = ({
 
 export const OptionComponent = ({ children, value }) => {
   const ctx = useContext(SelectContext);
+  const isActive = ctx?.value === value;
 
   const handleSelect = () => {
-    ctx?.onChange(value, children);
+    // Create a synthetic event object like native select
+    const syntheticEvent = {
+      target: { value }
+    };
+    ctx?.onChange(syntheticEvent);
     ctx?.setOpen(false);
   };
 
@@ -57,7 +66,11 @@ export const OptionComponent = ({ children, value }) => {
     <button
       type="button"
       onClick={handleSelect}
-      className="w-full px-3 py-2 hover:bg-gray-100 flex items-center justify-start gap-2 min-h-[40px]"
+      className={`w-full px-3 py-2 flex items-center justify-start gap-2 min-h-[40px] ${
+        isActive 
+          ? 'bg-primary/40 text-primary hover:bg-primary-hover/40' 
+          : 'hover:bg-neutral-200'
+      }`}
     >
       {children}
     </button>
