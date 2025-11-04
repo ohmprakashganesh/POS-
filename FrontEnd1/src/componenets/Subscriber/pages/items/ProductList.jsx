@@ -86,10 +86,10 @@ const ProductList = () => {
           <div className="relative">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
             <Input placeholder="Search products..."  value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} className="pl-9"/>
+              onChange={(e) => setSearchTerm(e.target.value)} className="pl-9 bg-white"/>
            
           </div>
-              <SelectComponent  value={selectedCategory} onChange={(e)=>setSelectedCategory(e.target.value)}>
+              <SelectComponent  value={selectedCategory} onChange={(e)=>setSelectedCategory(e.target.value)} placeholder="Select a Category" className="bg-white">
                 {categories.map((category, index) => (
               <OptionComponent key={index} value={category}>
                 {category === "all" ? "All Categories" : category}
