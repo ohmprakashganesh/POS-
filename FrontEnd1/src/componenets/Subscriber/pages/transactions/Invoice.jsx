@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import Button from "@/componenets/ui/Button";
+import { X } from "lucide-react";
 
 const InvoiceViewer = ({ setInvoice, invoice }) => {
   // Static invoice data
@@ -120,105 +121,145 @@ const InvoiceViewer = ({ setInvoice, invoice }) => {
   };
 
   return (
-    <div className="p-6">
-      {invoice && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-2xl shadow-lg max-w-[200] min-w-[200] relative">
-            <button
-              onClick={() => setInvoice(false)}
-              className="absolute top-2 bg-gray-300 w-8 h-8 rounded-sm right-3 text-gray-600 hover:text-black text-xl"
-            >
-              ×
-            </button>
-            {/* header section */}
+    invoice && (
+      <>
+        <div
+          className="overlay fixed inset-0 bg-black/30 z-50"
+          onClick={() => setInvoice(false)}
+        >
+          <X strokeWidth={2.5} className="size-12 p-2 rounded-full text-primary-foreground hover:bg-black/40 absolute top-2 right-2"/>
+        </div>
+        <div className="bill w-[95dvw] overflow-auto  max-w-7xl max-h-4/5 bg-white shadow-sm p-3 z-100 rounded-md mx-auto fixed top-1/2 left-1/2 -translate-1/2">
+          {/* Header Section */}
+          <div className="text-center border-b border-gray-200 pb-4 mb-6">
+            <h1 className="text-xl md:text-2xl font-bold mb-1">{data.branch.name}</h1>
+            <p className="text-sm text-muted">{data.branch.address}</p>
+            <p className="text-sm text-muted">Contact: {data.branch.contact}</p>
 
-            <div className="header-section mb-3   text-sm font-serif">
-              <p className="w-full text-center">{data.branch.name}</p>
-              <p className="w-full text-center">{data.branch.address}</p>
-              <p className="w-full text-center">{data.branch.contact}</p>
+            <span className="inline-block mt-1 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">
+              TAX INVOICE
+            </span>
+          </div>
+          {/* Invoice Details & Customer Info */}
+          <div className="grid grid-cols-2 gap-5 mb-5">
+            <div className="w-full">
+              <h3 className="font-semibold text-sm uppercase tracking-wide mb-1">
+                Invoice Details
+              </h3>
+              <div className="text-sm space-y-1">
+                <p>
+                  <span className="text-muted">Bill No:</span>{" "}
+                  <span className="font-semibold">{data.billId}</span>
+                </p>
+                <p>
+                  <span className="text-muted">Date:</span>{" "}
+                  <span className="font-semibold">
+                    {data.timestamp.split("T")[0]}
+                  </span>
+                </p>
+                <p>
+                  <span className="text-muted">Payment:</span>{" "}
+                  <span className="font-semibold">{data.payment.type}</span>
+                </p>
+              </div>
             </div>
-
-            {/* section */}
-
-            <div className="text-gray-black  text-sm">
-              <p>BILL NO: {data.billId}</p>
-              <p>transaction Date: {data.timestamp}</p>
-            </div>
-
-            {/* customer details */}
-            <div className="text-gray-black  text-sm">
-              <p>
-                <strong>Name:</strong> {data.customer.name}
-              </p>
-              <p>
-                <strong>phone:</strong> {invoice.phone}
-              </p>
-              <p>
-                <strong>Address</strong> {invoice.address}
-              </p>
-            </div>
-            <div>
-              <p>payment:{data.payment.type} </p>
-            </div>
-
-            <table className="w-full mt-4 border border-black border-dotted border-collapse">
-              <thead>
-                <tr className=" border border-black border-dotted">
-                  <td>sn </td>
-                  <td className="border border-black border-dotted ">
-                    product
-                  </td>
-                  <td className="border border-black border-dotted ">Qty </td>
-                  <td className=" border border-black border-dotted">rate</td>
-                  <td className=" border border-black border-dotted">amount</td>
-                </tr>
-              </thead>
-              <tbody>
-                {data.items.map((item, index) => (
-                  <tr key={index} border border-black border-dotted>
-                    <td className="p-2 border border-black border-dotted">
-                      {index + 1}
-                    </td>
-                    <td className="p-2 border border-black border-dotted">
-                      {item.name}
-                    </td>
-                    <td className="p-2 border border-black border-dotted">
-                      {item.quantity} {item.unit}
-                    </td>
-                    <td className="p-2 border border-black border-dotted">
-                      {item.unitPrice}
-                    </td>
-                    <td className="p-2 border border-black border-dotted">
-                      {item.total}{" "}
-                    </td>
-                    <td></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-
-            <h3 className="text-right mt-3 font-semibold">
-              Total: Rs {data.subtotal}
-            </h3>
-
-            <div className="mt-5 flex justify-center space-x-4">
-              <button
-                onClick={handleDownloadCSV}
-                className="bg-gray-400 text-black hover:text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
-              >
-                Download CSV
-              </button>
-              <button
-                onClick={handleDownloadPDF}
-                className="bg-gray-400 text-black hover:text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
-              >
-                Download PDF
-              </button>
+            <div className="w-full">
+              <h3 className="font-semibold text-sm uppercase tracking-wide mb-1">
+                Customer Details
+              </h3>
+              <div className="text-sm space-y-1">
+                <p>
+                  <span className="text-muted">Name:</span>{" "}
+                  <span className="font-semibold">{data.customer.name}</span>
+                </p>
+                <p>
+                  <span className="text-muted">Phone:</span>{" "}
+                  <span className="font-semibold">{data.customer.phone}</span>
+                </p>
+                <p>
+                  <span className="text-muted">Address:</span>{" "}
+                  <span className="font-semibold">{data.customer.address}</span>
+                </p>
+              </div>
             </div>
           </div>
+          <table className="w-full mb-5 text-xs sm:text-sm">
+            <thead className="bg-secondary text-secondary-foreground font-semibold">
+              <tr>
+                <th className="px-3 py-2">S.N</th>
+                <th className="px-3 py-2">Product</th>
+                <th className="px-3 py-2">Qty</th>
+                <th className="px-3 py-2 text-right">Rate</th>
+                <th className="px-3 py-2 text-right">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.items.map((item, index) => (
+                <tr key={index}>
+                  <td className="border border-gray-200 px-3 py-2">
+                    {index + 1}
+                  </td>
+                  <td className="border border-gray-200 px-3 py-2">
+                    {item.name}
+                  </td>
+                  <td className="border border-gray-200 px-3 py-2  text-center">
+                    {item.quantity} {item.unit}
+                  </td>
+                  <td className="border border-gray-200 px-3 py-2 text-right">
+                    Rs. {item.unitPrice.toFixed(2)}
+                  </td>
+                  <td className="border border-gray-200 px-3 py-2 text-right font-semibold">
+                    Rs. {item.total.toFixed(2)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* Totals Section */}
+          <div className="flex justify-end mb-6">
+            <div className="w-64 space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted">Subtotal:</span>
+                <span className="font-semibold">Rs. {data.subtotal}</span>
+              </div>
+              {data.vatAmount > 0 && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted">VAT {data.vatPercent}%:</span>
+                  <span className="font-semibold">Rs. {data.vatAmount}</span>
+                </div>
+              )}
+              {data.discountTotal > 0 && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted">Discount:</span>
+                  <span className="font-semibold">
+                    - Rs. {data.discountTotal}
+                  </span>
+                </div>
+              )}
+              <div className="flex justify-between text-base pt-2 border-t border-gray-200">
+                <span className="font-bold">Grand Total:</span>
+                <span className="font-bold">Rs. {data.grandTotal}</span>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-200 pt-4 text-center text-xs text-muted mb-6">
+            <p>Thank you for your business!</p>
+            <p className="mt-1">
+              This is a computer-generated invoice and does not require a
+              signature.
+            </p>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex justify-end gap-4">
+            <Button outline onClick={handleDownloadCSV}>
+              Download CSV
+            </Button>
+            <Button onClick={handleDownloadPDF}>Download PDF</Button>
+          </div>
         </div>
-      )}
-    </div>
+      </>
+    )
   );
 };
 
