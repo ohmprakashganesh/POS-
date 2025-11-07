@@ -49,7 +49,7 @@ const Vendor = () => {
         </div>
         <Link
           to="/vendor/add"
-          className="inline-flex items-center gap-2 px-3 py-2 font-semibold bg-secondary hover:bg-secondary-hover text-secondary-foreground rounded-md"
+          className="inline-flex items-center gap-2 px-3 py-2 font-semibold bg-primary hover:bg-primary-hover text-primary-foreground rounded-md"
         >
           <PlusIcon className="h-5 w-5" strokeWidth={2.5} />
           Add vendor
@@ -101,7 +101,7 @@ const Vendor = () => {
 
                 <td className="px-4 py-3">{vendor.total_cost}</td>
 
-                <td className="px-4 py-3">{vendor.total_paid}</td>
+                <td className="px-4 py-3 font-semibold">{vendor.total_paid}</td>
 
                 {/* Actions */}
                 <td className="px-4  py-3 flex items-center gap-2">

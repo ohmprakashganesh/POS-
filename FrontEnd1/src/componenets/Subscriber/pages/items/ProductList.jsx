@@ -74,7 +74,7 @@ const ProductList = () => {
         </div>
         <Link
           to="/products/add"
-          className="inline-flex gap-2 items-center px-4 py-2 text-secondary-foreground font-semibold hover:bg-secondary-hover bg-secondary rounded-md  transition-colors"
+          className="inline-flex gap-2 items-center px-4 py-2 text-primary-foreground font-semibold hover:bg-primary-hover bg-primary rounded-md  transition-colors"
         >
           <PlusIcon className="size-5" strokeWidth={3} />
           Add Product
@@ -180,7 +180,7 @@ const ProductList = () => {
              <div className="details">
                <div className="flex items-baseline gap-1">
                 <span className="text-xs text-muted">Rs.</span>
-                <span className="text-2xl font-bold text-destructive">
+                <span className="text-2xl font-bold">
                   {product.price}
                 </span>
               </div>

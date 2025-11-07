@@ -46,7 +46,7 @@ const CustomerList = () => {
         </div>
         <Link
           to="/customers/add"
-          className="inline-flex items-center gap-2 px-4 py-2 font-semibold bg-secondary text-secondary-foreground hover:bg-secondary-hover rounded-md"
+          className="inline-flex items-center gap-2 px-4 py-2 font-semibold bg-primary hover:bg-primary-hover text-primary-foreground rounded-md"
         >
           <PlusIcon className="h-5 w-5 " strokeWidth={2.5} />
           Add Customer

@@ -466,7 +466,7 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex items-center justify-center h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -487,7 +487,7 @@ const Dashboard = () => {
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
         {metricCards.map((card) => (
-          <div key={card.title} className="bg-gradient-to-r from-white/50  to-secondary/10   rounded-md shadow-sm p-5">
+          <div key={card.title} className="bg-linear-to-r from-white/50  to-secondary/10   rounded-md shadow-sm p-5">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xl font-semibold ">{card.title}</p>

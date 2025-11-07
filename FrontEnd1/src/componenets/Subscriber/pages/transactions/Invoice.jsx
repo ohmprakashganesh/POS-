@@ -129,7 +129,7 @@ const InvoiceViewer = ({ setInvoice, invoice }) => {
         >
           <X strokeWidth={2.5} className="size-12 p-2 rounded-full text-primary-foreground hover:bg-black/40 absolute top-2 right-2"/>
         </div>
-        <div className="bill w-[95dvw] overflow-auto  max-w-7xl max-h-4/5 bg-white shadow-sm p-3 z-100 rounded-md mx-auto fixed top-1/2 left-1/2 -translate-1/2">
+        <div className="bill w-[95dvw] overflow-auto  max-w-4xl max-h-4/5 bg-white shadow-sm p-3 z-100 rounded-md mx-auto fixed top-1/2 left-1/2 -translate-1/2">
           {/* Header Section */}
           <div className="text-center border-b border-gray-200 pb-4 mb-6">
             <h1 className="text-xl md:text-2xl font-bold mb-1">{data.branch.name}</h1>
