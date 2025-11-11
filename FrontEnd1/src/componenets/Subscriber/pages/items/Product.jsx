@@ -19,9 +19,9 @@ const Product = () => {
     );
   }
 
-  // State to manage selected tag (optional)
+  // State to manage selected tag (optional) 
   const [selectedTag, setSelectedTag] = useState(
-    productData.tags ? productData.tags[0] : ""
+    productData.tags ? productData?.tags[0] : ""
   );
 
   return (

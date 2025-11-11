@@ -16,7 +16,7 @@ const LanguageToggle = () => {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center gap-2 px-3 py-1 rounded-md  text-gray-800 underlin text-sm transition duration-150"
+      className="flex items-center rounded-md underline text-sm transition duration-150"
     >
       <LanguageIcon size={16} />
       {i18n.language === "en" ? "NE" : "EN"}

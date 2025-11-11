@@ -466,7 +466,7 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex items-center justify-center h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -485,13 +485,13 @@ const Dashboard = () => {
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
         {metricCards.map((card) => (
-          <div key={card.title} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div key={card.title} className="bg-linear-to-r from-white/50  to-secondary/10   rounded-md shadow-sm p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xl font-semibold  text-gray-600">{card.title}</p>
-                <p className="text-2xl font-bold text-gray-900 mt-2">
+                <p className="text-xl font-semibold ">{card.title}</p>
+                <p className="text-2xl font-bold mt-2">
                   {(card.title.includes(t('dashboard.metrics.monthlyRevenue')) || 
                     card.title.includes(t('dashboard.metrics.todaysSales')) || 
                     card.title.includes(t('dashboard.metrics.netProfit')))
@@ -499,7 +499,7 @@ const Dashboard = () => {
                     : card.value.toLocaleString()
                   }
                 </p>
-                <p className="text-sm text-gray-500 mt-1">{card.description}</p>
+                <p className="text-sm text-muted mt-1">{card.description}</p>
                 <div className={`flex items-center mt-1 text-sm ${card.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                   {card.change >= 0 ? <ArrowUpIcon className="h-4 w-4 mr-1" /> : <ArrowDownIcon className="h-4 w-4 mr-1" />}
                   {t('dashboard.metrics.percentChange', { value: Math.abs(card.change) })}
@@ -514,50 +514,50 @@ const Dashboard = () => {
       </div>
 
       {/* Additional Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="bg-white rounded-lg shadow-sm  p-5">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xl font-semibold  text-gray-600">{t('dashboard.metrics.totalProducts')}</p>
-              <p className="text-2xl font-bold text-gray-900">{metrics.totalProducts}</p>
-              <p className="text-sm text-gray-500">{t('dashboard.metrics.inInventory')}</p>
+              <p className="text-xl font-semibold">{t('dashboard.metrics.totalProducts')}</p>
+              <p className="text-2xl font-bold ">{metrics.totalProducts}</p>
+              <p className="text-sm text-muted">{t('dashboard.metrics.inInventory')}</p>
             </div>
-            <CubeIcon className="h-8 w-8 text-blue-600" />
+            <CubeIcon className="h-8 w-8 text-primary" />
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-md shadow-sm p-5">
           <div className="flex items-center justify-between">
             <div>
-              <p className=" text-xl font-semibold  text-gray-600">{t('dashboard.metrics.monthlyExpenses')}</p>
-              <p className="text-2xl font-bold text-gray-900">${metrics.expenses.toLocaleString()}</p>
-              <p className="text-sm text-gray-500">{t('dashboard.metrics.operatingCosts')}</p>
+              <p className=" text-xl font-semibold  ">{t('dashboard.metrics.monthlyExpenses')}</p>
+              <p className="text-2xl font-bold ">${metrics.expenses.toLocaleString()}</p>
+              <p className="text-sm text-muted">{t('dashboard.metrics.operatingCosts')}</p>
             </div>
-            <CurrencyDollarIcon className="h-8 w-8 text-red-600" />
+            <CurrencyDollarIcon className="h-8 w-8 text-secondary" />
           </div>
         </div>
 
-        <div className="bg-white rounded-lg  shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-md  shadow-sm p-5">
           <div className="flex items-center justify-between">
             <div>
-              <p className=" text-xl font-semibold  text-gray-600">{t('dashboard.metrics.lowStockItems')}</p>
-              <p className="text-2xl font-bold text-gray-900">{metrics.lowStockItems}</p>
-              <p className="text-sm text-gray-500">{t('dashboard.metrics.needRestocking')}</p>
+              <p className=" text-xl font-semibold ">{t('dashboard.metrics.lowStockItems')}</p>
+              <p className="text-2xl font-bold ">{metrics.lowStockItems}</p>
+              <p className="text-sm text-muted">{t('dashboard.metrics.needRestocking')}</p>
             </div>
-            <ExclamationTriangleIcon className="h-8 w-8 text-yellow-600" />
+            <ExclamationTriangleIcon className="h-8 w-8 text-tertiary" />
           </div>
         </div>
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <div className="quick-actions">
         <h3 className="text- font-semibold text-gray-900 mb-4">{t('dashboard.quickActions.title')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {quickActions.map((action) => (
             <Link
               key={action.title}
               to={action.link}
-              className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors text-center group"
+              className="p-4 bg-white shadow-sm rounded-md  hover:bg-gradient-to-r hover:from-transparent  hover:via-primary/10  text-center group"
             >
               <action.icon className={`h-8 w-8 text-${action.color}-600 mx-auto group-hover:scale-110 transition-transform`} />
               <p className="mt-2 font-medium text-gray-900">{action.title}</p>
@@ -568,46 +568,46 @@ const Dashboard = () => {
       </div>
 
       {/* Recent Transactions & Low Stock Alerts */}
-      <div className="grid grid-cols-1 shadow-md lg:grid-cols-2 gap-4">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
+        <div className="bg-white rounded-md shadow-sm p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900">{t('dashboard.sections.recentTransactions')}</h3>
-            <Link to="/transactions" className="text-sm text-blue-600 hover:text-blue-800">{t('dashboard.sections.viewAll')}</Link>
+            <h3 className="text-lg font-semibold">{t('dashboard.sections.recentTransactions')}</h3>
+            <Link to="/transactions" className="text-sm text-primary hover:text-primary-hover">{t('dashboard.sections.viewAll')}</Link>
           </div>
           <div className="space-y-2">
             {recentTransactions.map((transaction) => (
-              <div key={transaction.id} className="flex outline-green-500 outline-1 items-center justify-between px-2 py-1 bg-gray-50">
+              <div key={transaction.id} className="flex items-center justify-between p-2 bg-background rounded-md">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                    <ShoppingCartIcon className="h-5 w-5 text-green-600" />
+                  <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center">
+                    <ShoppingCartIcon className="h-5 w-5 text-green-500" />
                   </div>
-                  <div className="flex-col space-y-0">
-                    <p className="font-medium text-gray-900">{transaction.customer}</p>
-                    <p className="text-sm text-gray-500">{transaction.items} items • {transaction.time}</p>
+                  <div className="flex-col">
+                    <p className="font-medium ">{transaction.customer}</p>
+                    <p className="text-sm text-muted">{transaction.items} items • {transaction.time}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="font-semibold text-gray-900">${transaction.amount}</p>
-                  <p className="text-sm text-green-600">{t('dashboard.metrics.completed')}</p>
+                  <p className="font-semibold">${transaction.amount}</p>
+                  <p className="text-sm text-green-500">{t('dashboard.metrics.completed')}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white h-fit rounded-md shadow-sm p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900">{t('dashboard.sections.lowStockAlerts')}</h3>
-            <Link to="/products" className="text-sm text-blue-600 hover:text-blue-800">{t('dashboard.sections.manageInventory')}</Link>
+            <h3 className="text-lg font-semibold ">{t('dashboard.sections.lowStockAlerts')}</h3>
+            <Link to="/products" className="text-sm text-primary hover:text-primary-hover">{t('dashboard.sections.manageInventory')}</Link>
           </div>
           <div className="space-y-3">
             {lowStockProducts.map((product) => (
-              <div key={product.id} className="flex items-center justify-between p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <div key={product.id} className="flex items-center justify-between p-3 bg-background rounded-md">
                 <div className="flex items-center space-x-3">
-                  <ExclamationTriangleIcon className="h-5 w-5 text-yellow-600" />
+                  <ExclamationTriangleIcon className={`h-5 w-5 ${product.stock===0? "text-destructive" :"text-tertiary"}`} />
                   <div>
-                    <p className="font-medium text-gray-900">{product.name}</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="font-medium">{product.name}</p>
+                    <p className="text-sm text-muted">
                       {product.stock === 0 
                         ? t('dashboard.metrics.outOfStock') 
                         : t('dashboard.metrics.unitsLeft', { count: product.stock })}
@@ -616,15 +616,15 @@ const Dashboard = () => {
                 </div>
                 <Link
                   to={`/products/edit/${product.id}`}
-                  className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded text-sm hover:bg-yellow-200"
+                  className={`px-3 py-1 text-sm  rounded ${product.stock===0 ? "bg-destructive text-destructive-foreground":"bg-tertiary text-tertiary-foreground"}`}
                 >
                   {t('dashboard.sections.restock')}
                 </Link>
               </div>
             ))}
             {lowStockProducts.length === 0 && (
-              <div className="text-center py-4 text-gray-500">
-                <CheckIcon className="h-8 w-8 text-green-400 mx-auto" />
+              <div className="text-center py-4 text-muted">
+                <CheckIcon className="h-8 w-8 text-green-500 mx-auto" />
                 <p className="mt-2">{t('dashboard.metrics.allProductsWellStocked')}</p>
               </div>
             )}
@@ -633,13 +633,13 @@ const Dashboard = () => {
       </div>
 
       {/* Sales Overview */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('dashboard.sections.salesOverview')}</h3>
-        <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-          <div className="text-center">
-            <ChartBarIcon className="mx-auto h-12 w-12 text-gray-400" />
-            <p className="mt-2 text-gray-500">{t('dashboard.sections.dailySalesChart')}</p>
-            <p className="text-sm text-gray-400">{t('dashboard.sections.visualization')}</p>
+      <div className="p-5 bg-white rounded-md shadow-sm min-h-100 -fit flex flex-col">
+        <h3 className="text-lg font-semibold mb-4">{t('dashboard.sections.salesOverview')}</h3>
+        <div className="grow bg-background rounded-md flex items-center justify-center">
+          <div className="text-center text-muted">
+            <ChartBarIcon className="mx-auto size-12" />
+            <p className="mt-2 ">{t('dashboard.sections.dailySalesChart')}</p>
+            <p className="text-sm">{t('dashboard.sections.visualization')}</p>
           </div>
         </div>
       </div>
