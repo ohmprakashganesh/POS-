@@ -1,4 +1,12 @@
-import React, { createContext, useContext, useState, useRef, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { ChevronDown } from "lucide-react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+} from "react";
 
 const SelectContext = createContext();
 
@@ -34,13 +42,18 @@ export const SelectComponent = ({
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className={`w-full focus:ring-primary focus:ring-2 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed  border-gray-300  border rounded-md  px-3 py-2 flex items-center justify-start gap-2 min-h-[40px] ${className}`}
+          className={cn(
+            `w-full focus:ring-primary focus:ring-2 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed  border-gray-300  border rounded-md  px-3 py-2 flex items-center justify-between gap-2 min-h-10 ${className}`
+          )}
         >
-          {selectedLabel || <span className="text-gray-400">{placeholder}</span>}
+          {selectedLabel || (
+            <span className="text-gray-400">{placeholder}</span>
+          )}
+          <ChevronDown />
         </button>
 
         {open && (
-          <div className="absolute mt-1.5 w-full bg-white overflow-hidden rounded-md shadow-sm z-50 ">
+          <div className="absolute mt-1.5 w-full min-w-40 bg-white overflow-hidden rounded-md shadow-sm z-50 ">
             {children}
           </div>
         )}
@@ -56,7 +69,7 @@ export const OptionComponent = ({ children, value }) => {
   const handleSelect = () => {
     // Create a synthetic event object like native select
     const syntheticEvent = {
-      target: { value }
+      target: { value },
     };
     ctx?.onChange(syntheticEvent);
     ctx?.setOpen(false);
@@ -66,10 +79,10 @@ export const OptionComponent = ({ children, value }) => {
     <button
       type="button"
       onClick={handleSelect}
-      className={`w-full px-3 py-2 flex items-center justify-start gap-2 min-h-[40px] ${
-        isActive 
-          ? 'bg-primary/40 text-primary hover:bg-primary-hover/40' 
-          : 'hover:bg-neutral-200'
+      className={`w-full px-3 py-2 flex items-center justify-start gap-2 min-h-10 ${
+        isActive
+          ? "bg-primary/40 text-primary hover:bg-primary-hover/40"
+          : "hover:bg-neutral-200"
       }`}
     >
       {children}

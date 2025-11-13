@@ -71,7 +71,7 @@ const Sidebar = ({closeSidebar,className=""}) => {
     setIsSettingOPen(!isSettingOpen);
   };
   return (
-      <aside className={cn("min-w-70 overflow-y-auto max-w-80 h-screen bg-white",className)}>
+      <aside className={cn("min-w-70 overflow-y-auto max-w-80 h-screen bg-white shadow-sm",className)}>
         <div className="flex items-center justify-start h-16 px-4">
           <ShoppingCartIcon className="h-8 w-8 text-primary" />
           <span className="ml-2 text-xl font-bold">POS System</span>
@@ -92,7 +92,7 @@ const Sidebar = ({closeSidebar,className=""}) => {
                   onClick={handleLinkCLick}
             >
               <item.icon
-                className="mr-3 h-5 w-5 flex-shrink-0 "/>
+                className="mr-3 h-5 w-5 shrink-0 "/>
               {item.name}
             </NavLink>
           ))}
@@ -101,7 +101,7 @@ const Sidebar = ({closeSidebar,className=""}) => {
             onClick={handleSettingToggle}
             className="flex gap-2 px-4 py-2.5 text-sm w-full rounded-md text-muted hover:text-foreground font-medium transition-colors hover:bg-background"
           >
-            <SettingsIcon className="mr-3 h-5 w-5 flex-shrink-0" />
+            <SettingsIcon className="mr-3 h-5 w-5 shrink-0" />
             <p>{t("settings.title")}</p>
           </button>
 
@@ -125,7 +125,7 @@ const Sidebar = ({closeSidebar,className=""}) => {
 
                 onClick={handleLinkCLick}
               >
-                <item.icon className="mr-3 h-5 w-5 flex-shrink-0" />
+                <item.icon className="mr-3 h-5 w-5 shrink-0" />
                 {item.name}
               </NavLink>
             ))}

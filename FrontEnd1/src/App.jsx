@@ -53,8 +53,7 @@ import SupportReq from './componenets/Admin/pages/Support';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
-  const { user, subscriptionStatus } = useAuth();
-  console.log(user?.role);
+  const { user, subscriptionStatus } = useAuth(); 
   const location = useLocation();
 
   if (!user) {

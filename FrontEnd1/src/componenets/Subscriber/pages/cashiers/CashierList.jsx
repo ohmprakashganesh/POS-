@@ -122,7 +122,7 @@ const CashierList = () => {
                 {/* Actions */}
                 <td className="px-4 py-3 flex items-center gap-2">
                   <Link
-                    to={`/cashiers/edit/${cashier.id}`}
+                    to={`/cashier/edit/${cashier.id}`}
                     className="p-1.5 rounded-full hover:bg-primary/10 text-primary"
                   >
                     <PencilIcon className="h-4 w-4" />

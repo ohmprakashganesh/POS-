@@ -165,14 +165,14 @@ const ProductList = () => {
                 "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80"
               }
               alt={product.name}
-              className="inline-block w-full aspect-[16/9]  rounded-md"
+              className="inline-block w-full aspect-video  rounded-md"
             />
             
           
 
           {/* Product Details */}
           <div className="mt-1.5 grow  flex flex-col justify-between">
-            <h3 className="text-lg font-semibold line-clamp-2 leading-tight">
+            <h3 className="text-lg font-medium line-clamp-2 leading-tight">
               {product.name}
             </h3>
 
