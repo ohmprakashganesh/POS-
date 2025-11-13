@@ -18,10 +18,10 @@ const LanguageToggle = () => {
     <SelectComponent
   value={i18n.language}
   onChange={toggleLanguage}
-  className=" bg-white text-sm min-w-[10px]"
+  className=" bg-white text-sm w-fit min-w-[25px]"
 >
-  <OptionComponent value="en">🇺🇸 English</OptionComponent>
-  <OptionComponent value="np">🇳🇵 नेपाली</OptionComponent>
+  <OptionComponent className="w-fit p-5" value="en">English</OptionComponent>
+  <OptionComponent value="np">नेपाली</OptionComponent>
 </SelectComponent>
   );
 };

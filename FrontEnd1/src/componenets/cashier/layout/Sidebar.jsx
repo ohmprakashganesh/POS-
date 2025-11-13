@@ -10,18 +10,21 @@ import {
   CreditCardIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
+import { useTranslation } from 'react-i18next';
 import { ComputerIcon, CurrencyIcon, icons, ShoppingBasketIcon, TypeIcon, UserIcon } from 'lucide-react';
 
-const navigation = [
-  { name: 'POS', href: '/pos', icon: HomeIcon },
-  { name: 'Products', href: '/c-products', icon:ComputerIcon },
-  { name: 'Customers', href: '/c-customers', icon: UsersIcon },
-   { name: 'Cart', href: '/c-cart', icon: ShoppingCartIcon },
-  { name: 'Orders', href: '/c-orders', icon: ShoppingBasketIcon }
 
-];
 
 const Sidebar = ({ isOpen, onClose }) => {
+  const {t}= useTranslation("cashier");
+    const navigation = [
+  { name: t("general.pos"), href: '/', icon: HomeIcon },
+  { name: t("general.products"), href: '/c-products', icon:ComputerIcon },
+  { name: t("general.customers"), href: '/c-customers', icon: UsersIcon },
+   { name: t("general.cart"), href: '/c-cart', icon: ShoppingCartIcon },
+  { name: t("general.history"), href: '/c-orders', icon: ShoppingBasketIcon }
+
+];
  const location = useLocation();
   return (
     <>
@@ -58,10 +61,10 @@ const Sidebar = ({ isOpen, onClose }) => {
                 key={item.name}
                 to={item.href}
                 className={`
-                  group flex items-center px-4 py-3 hover:[letter-spacing:2px,font:bold] text-sm font-medium rounded-lg transition-colors
+                  group flex items-center z-50 px-4 py-3 hover:[letter-spacing:2px,font:bold] text-sm font-medium rounded-lg transition-colors
                   ${isActive 
                     ? 'bg-blue-50 text-blue-700 [letter-spacing:2px]  border border-blue-200' 
-                    : 'text-gray-600 hover:bg-gray-50  hover:text-gray-900'
+                    : 'text hover:bg-gray-50  hover:text-gray-900'
                   }
                 `}
                 onClick={() => window.innerWidth < 1024 && onClose()}

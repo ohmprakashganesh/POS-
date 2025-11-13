@@ -1,9 +1,10 @@
 import { forwardRef } from "react"
 import { cn } from "@/lib/utils"
 
-const Button = forwardRef(({ className = "",secondary=false,outline=false,destructive=false, ...props }, ref) => {
+const Button = forwardRef(({ className = "", onClick, secondary=false,outline=false,destructive=false, ...props }, ref) => {
   return (
     <button
+    onClick={onClick}
       ref={ref}
       {...props}
       className={cn(
@@ -17,5 +18,4 @@ const Button = forwardRef(({ className = "",secondary=false,outline=false,destru
   )
 })
 Button.displayName = "Button"
-
 export default Button;

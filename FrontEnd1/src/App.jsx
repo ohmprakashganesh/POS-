@@ -39,11 +39,9 @@ import SubscriptionPlans from './componenets/Admin/pages/SubscriptionPlans';
 import Report from './componenets/Admin/pages/Report';
 
 // cashier components 
-import Dashboard from './componenets/cashier/CashierDashboard'; 
 import CashierProductList from './componenets/cashier/pages/products/ProductList'
 import CashierCustomerList from './componenets/cashier/pages/customer/CustomerList';
-// import CashierAddEditCustomer from './componenets/cashier/components/AddEditCustomer'
-import Orders from './componenets/cashier/pages/orders/Orders'
+import Orders from './componenets/cashier/pages/history/Orders'
 import POS from './componenets/cashier/pages/pos/POS';
 import Paid from './globalPages/subscription/Paid';
 import VendorList from './componenets/Subscriber/pages/vendors/VendorsList';
@@ -149,8 +147,8 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/pos" element={<POS />} />
+                {/* <Route path="/" element={<Dashboard />} /> */}
+                <Route path="/" element={<POS />} />
                 <Route path="/c-transactions" element={<TransactionHistory />} />
                 <Route path="/c-Products" element={<CashierProductList />} />
                 <Route path="/c-cart" element={<Cart />} />
@@ -159,6 +157,7 @@ function App() {
                 <Route path="/c-customers/edit/:id" element={<CashierAddEditCustomer />} /> */}
                 <Route path="/c-orders" element={<Orders />} />
                   <Route path="/c-product/:id" element={<CProduct />} />
+
 
               </Route>
             

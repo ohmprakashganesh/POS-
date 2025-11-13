@@ -42,7 +42,7 @@ export const SelectComponent = ({
         </button>
 
         {open && (
-          <div className="absolute mt-1.5 w-full bg-white overflow-hidden rounded-md shadow-sm z-50 ">
+          <div className="absolute mt-1.5 w-fit bg-white overflow-hidden rounded-md shadow-sm z-50 ">
             {children}
           </div>
         )}
@@ -68,7 +68,7 @@ export const OptionComponent = ({ children, value }) => {
     <button
       type="button"
       onClick={handleSelect}
-      className={`w-full px-3 py-2 flex items-center justify-start gap-2 min-h-[40px] ${
+      className={`w-full px-3 py-2  flex items-center justify-start gap-2 min-h-[40px] ${
         isActive 
           ? 'bg-primary/40 text-primary hover:bg-primary-hover/40' 
           : 'hover:bg-neutral-200'

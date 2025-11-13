@@ -1,14 +1,53 @@
 {
   "general": {
-    "searchProducts": "Search Products",
+    "logOut":"Log Out",
+    "searchProducts": "Search Items",
     "pos": "POS",
     "products": "Products",
     "customers": "Customers",
     "cart": "Cart",
-    "orders": "Orders",
+    "history": "History",
     "dashboard": "Dashboard"
   },
+   "cart": {
+    "storeTitle": "Your E-Commerce Store",
+    "generatingQR": "Generating Dynamic QR...",
+    "errorGeneratingQR": "Error generating QR:",
+    "tryAgain": "Try Again",
+    "scanPay": "Scan & Pay with eSewa",
+    "esewaInstruction": "Open your eSewa app and scan the QR code above to complete the payment.",
+    "cartItems": "Cart Items",
+    "item": "item",
+    "price":"price",
+    "items": "items",
+    "emptyCart": "Your cart is empty.",
+    "addItems": "Please add some items.",
+    "paymentSummary": "Payment Summary",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "rs": "Rs",
+    "discountRate": "Discount Rate",
+    "netAmount": "Net Amount",
+    "selectPaymentMethod": "Select Payment Method",
+    "prepareMessage": "Please prepare",
+    "cashOnDelivery": "for Cash on Delivery",
+    "cartOverview":"Cart OverView",
+     "selectType": "Select Payment Type",
+    "generateBill": "Generate Bill"
+  },
+  "products": {
+    "all": "All Categories",
+    "searchProducts": "Search products...",
+    "outOfStock": "Out of Stock",
+    "lowStock": "Low Stock",
+    "inStock": "In Stock",
+    "rs": "Rs",
+    "available": "Available",
+    "units": "units"
+  },
   "customers": {
+    "customers":"customers",
+     "search": "Search customer by name, email, number ...",
     "manageCustomers": "Manage your customer database",
     "addCustomer": "Add Customer",
     "tableHeaders": {
@@ -22,21 +61,18 @@
       "actions": "Actions"
     }
   },
-  "cartSection": {
-    "cartItems": "Cart Items",
-    "paymentSummary": "Payment Summary",
-    "subtotal": "Subtotal",
-    "discountPercent": "Discount %",
-    "discountedAmount": "Discounted Amount",
-    "netTotal": "Net Total",
-    "generateBill": "Generate Bill"
-  },
   "transactions": {
     "transactionHistory": "Transaction History",
     "description": "View and manage all sales transactions",
+    "totalTransactions": "Total Transactions",
     "totalRevenue": "Total Revenue",
     "completed": "Completed",
     "pending": "Pending",
+    "searchPlaceholder": "Search by invoice or customer...",
+    "noTransactionsFound": "No transactions found",
+    "noTransactionsMessage": "No transactions have been recorded yet.",
+    "tryChangingFilters": "Try changing your search or filter criteria.",
+    "view": "View",
     "tableHeaders": {
       "invoiceNo": "Invoice No",
       "customer": "Customer",

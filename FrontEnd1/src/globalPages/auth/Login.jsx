@@ -34,7 +34,7 @@ const Login = () => {
         navigate("/subscriber");
       } else {
         // Default or other roles
-        navigate("/pos");
+        navigate("/");
       }
     }
   }, [user, navigate]);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Translation, useTranslation } from "react-i18next";
 import {
   PlusIcon,
   MagnifyingGlassIcon,
@@ -11,6 +12,7 @@ import { productsData } from "@/data/mockData";
 import { EllipsisVerticalIcon } from "lucide-react";
 
 const ProductList = () => {
+  const {t}=useTranslation("cashier");
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -39,7 +41,6 @@ const ProductList = () => {
         (product) => product.category === selectedCategory
       );
     }
-
     setFilteredProducts(filtered);
   }, [searchTerm, selectedCategory, products]);
   const categories = ["all", ...new Set(products.map((p) => p.category))];
@@ -65,7 +66,7 @@ const ProductList = () => {
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input
               type="text"
-              placeholder="Search products..."
+              placeholder={t("products.searchProducts")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -99,9 +100,9 @@ const ProductList = () => {
                 className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${product.stock <= 10
                     ? "bg-red-100 text-red-700"
                     : "bg-green-100 text-green-700"
-                  }`}
+                  }`}                                   
               >
-                {product.stock <= 10 ? product.stock == 0 ? "Out of Stock" : "Low Stock" : "In Stock"}
+                {product.stock <= 10 ? product.stock == 0 ? t("products.outOfStock") : t("products.inStock"): t("products.inStock") }
               </span>
             </div>
             
@@ -122,21 +123,21 @@ const ProductList = () => {
                 </h3>
                 <div className="details">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-xs text-muted">Rs.</span>
+                    <span className="text-xs text-muted">{t("products.rs")}</span>
                     <span className="text-xl text-muted-hover font-bold">
                       {product.price}
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between pt-2 border-t border-gray-200">
-                    <span className="text-xs text-muted">Available</span>
+                    <span className="text-xs text-muted">{t("products.available")}</span>
                     <span
                       className={`text-sm font-semibold ${product.stock <= 10
                           ? "text-red-600"
                           : "text-green-600"
                         }`}
                     >
-                      {product.stock} units
+                      {product.stock} {t("products.units")}
                     </span>
                   </div>
                 </div>

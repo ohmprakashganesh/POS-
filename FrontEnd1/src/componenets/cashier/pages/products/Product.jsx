@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 // Ensure the path to your mock data is correct!
 import { productsData } from '@/data/mockData'; 
-
+import Button from '@/componenets/ui/Button';
+import { useCart } from '../../context/CartContext';
 const CProduct = () => {
   // Get the product id from the URL, e.g., /product/8
   const { id } = useParams();
@@ -10,7 +11,8 @@ const CProduct = () => {
 
   // Find product by id
   const productData = productsData.find((p) => p.id === productId);
-  console.log(productData);
+  const {addToCart}= useCart();
+  
 
   // --- Product Not Found Error Handler ---
   if (!productData) {
@@ -90,6 +92,12 @@ const CProduct = () => {
               </div>
             </div>
           )}
+          <div>
+            <Button  onClick={() => {
+      addToCart(productData); 
+      alert("clicked"); 
+    }}className="lg:w-1/2 md:w-1/2 w-full">Add To Cart </Button>
+          </div>
           <h2 className="text-2xl sm:text-3xl font-bold mb-5 text-gray-900 dark:text-gray-100">
           Product Details
         </h2>
