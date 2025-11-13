@@ -1,0 +1,50 @@
+{
+  "general": {
+    "searchProducts": "उत्पादन खोज्नुहोस्",
+    "pos": "बिक्री बिन्दु (POS)",
+    "products": "उत्पादनहरू",
+    "customers": "ग्राहकहरू",
+    "cart": "कार्ट",
+    "orders": "अर्डरहरू",
+    "dashboard": "ड्यासबोर्ड"
+  },
+  "customers": {
+    "manageCustomers": "तपाईंको ग्राहक डेटाबेस व्यवस्थापन गर्नुहोस्",
+    "addCustomer": "ग्राहक थप्नुहोस्",
+    "tableHeaders": {
+      "sn": "क्रम सङ्ख्या",
+      "name": "नाम",
+      "phone": "फोन",
+      "email": "इमेल",
+      "address": "ठेगाना",
+      "totalOrders": "कुल अर्डर",
+      "totalSpent": "जम्मा खर्च",
+      "actions": "कार्यहरू"
+    }
+  },
+  "cartSection": {
+    "cartItems": "कार्टका वस्तुहरू",
+    "paymentSummary": "भुक्तानी सारांश",
+    "subtotal": "उप-योग",
+    "discountPercent": "छूट %",
+    "discountedAmount": "छूट गरिएको रकम",
+    "netTotal": "जम्मा रकम",
+    "generateBill": "बिल बनाउनुहोस्"
+  },
+  "transactions": {
+    "transactionHistory": "लेनदेन इतिहास",
+    "description": "सबै बिक्री लेनदेन हेर्नुहोस् र व्यवस्थापन गर्नुहोस्",
+    "totalRevenue": "जम्मा आम्दानी",
+    "completed": "पूरा भएको",
+    "pending": "बाकी",
+    "tableHeaders": {
+      "invoiceNo": "चलानी नम्बर",
+      "customer": "ग्राहक",
+      "date": "मिति",
+      "items": "वस्तुहरू",
+      "total": "जम्मा",
+      "status": "स्थिति",
+      "actions": "कार्यहरू"
+    }
+  }
+}

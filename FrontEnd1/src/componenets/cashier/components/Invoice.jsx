@@ -122,7 +122,7 @@ const InvoiceViewer = ({ setInvoice, invoice }) => {
   return (
     <div className="p-6">
       {invoice && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-2xl shadow-lg max-w-[200] min-w-[200] relative">
             <button
               onClick={() => setInvoice(false)}

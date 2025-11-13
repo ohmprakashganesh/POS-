@@ -1,0 +1,50 @@
+{
+  "general": {
+    "searchProducts": "Search Products",
+    "pos": "POS",
+    "products": "Products",
+    "customers": "Customers",
+    "cart": "Cart",
+    "orders": "Orders",
+    "dashboard": "Dashboard"
+  },
+  "customers": {
+    "manageCustomers": "Manage your customer database",
+    "addCustomer": "Add Customer",
+    "tableHeaders": {
+      "sn": "S.N",
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "totalOrders": "Total Orders",
+      "totalSpent": "Total Spent",
+      "actions": "Actions"
+    }
+  },
+  "cartSection": {
+    "cartItems": "Cart Items",
+    "paymentSummary": "Payment Summary",
+    "subtotal": "Subtotal",
+    "discountPercent": "Discount %",
+    "discountedAmount": "Discounted Amount",
+    "netTotal": "Net Total",
+    "generateBill": "Generate Bill"
+  },
+  "transactions": {
+    "transactionHistory": "Transaction History",
+    "description": "View and manage all sales transactions",
+    "totalRevenue": "Total Revenue",
+    "completed": "Completed",
+    "pending": "Pending",
+    "tableHeaders": {
+      "invoiceNo": "Invoice No",
+      "customer": "Customer",
+      "date": "Date",
+      "items": "Items",
+      "total": "Total",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  }
+}

@@ -7,7 +7,8 @@ import {
   TrashIcon,
   CubeIcon,
 } from "@heroicons/react/24/outline";
-import { productsData } from "../../../data/mockData";
+import { productsData } from "@/data/mockData";
+import { EllipsisVerticalIcon } from "lucide-react";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -58,8 +59,8 @@ const ProductList = () => {
     <div className="space-y-6">
       
       {/* Search and Filters */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="bg-primary-foreground  rounded-lg shadow-sm border border-gray-200 p-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 ">
           <div className="relative">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input
@@ -82,64 +83,69 @@ const ProductList = () => {
               </option>
             ))}
           </select>
-
-          <div className="text-sm text-gray-600 flex items-center">
-            Showing {filteredProducts.length} of {products.length} products
-          </div>
         </div>
       </div>
-      <div className="p-4 sm:p-6">
+      <div >
         {/* Grid Container */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 gap-2">
-          {filteredProducts.map((product) => (
-            // Product Card
-            <div
-              key={product.id}
-              className=" rounded-lg  shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden"
-            >
-              {/* Checkbox and Product Image */}
-              <div className="relative p-4 pb-0 flex flex-col items-center">
-                <img
-                  src={
-                    product.image ||
-                    "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80"
-                  }
-                  alt={product.name}
-                  className="w-full hover:scale-110 rounded-md hover:rounded-t-xl transition-all duration-300 max-h-48 object-contain mb-3"
-                  style={{ objectFit: "contain" }}
-                />
-              </div>
-
-              <div className="p-2 pt-0">
-                <h3 className="text-sm font-semibold text-gray-900 mb-">
+       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-5">
+        {filteredProducts.map((product) => (
+          <div
+            key={product.id}
+            className="group relative flex flex-col bg-white shadow-sm rounded-md"
+          >
+            <div className="top-options  w-full flex items-center justify-between p-2 h-12">
+              {/* Stock badge */}
+              <span
+                className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${product.stock <= 10
+                    ? "bg-red-100 text-red-700"
+                    : "bg-green-100 text-green-700"
+                  }`}
+              >
+                {product.stock <= 10 ? product.stock == 0 ? "Out of Stock" : "Low Stock" : "In Stock"}
+              </span>
+            </div>
+            
+            {/* Product image */}
+            <Link to={`/c-product/${product.id}`} className="p-2 grow flex flex-col ">
+              <img
+                src={
+                  product.image ||
+                  "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80"
+                }
+                alt={product.name}
+                className="inline-block w-full aspect-[16/9]  rounded-md"
+              />
+              {/* Product Details */}
+              <div className="mt-1.5 grow  flex flex-col justify-between">
+                <h3 className="text-lg font-semibold line-clamp-2 leading-tight">
                   {product.name}
                 </h3>
-                <div className=" text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Price</span>
-                    <span className="font-medium text-gray-900">
+                <div className="details">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-xs text-muted">Rs.</span>
+                    <span className="text-xl text-muted-hover font-bold">
                       {product.price}
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="">stock</span>
+
+                  <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                    <span className="text-xs text-muted">Available</span>
                     <span
-                      className={`font-medium ${
-                        product.stock <= 10
+                      className={`text-sm font-semibold ${product.stock <= 10
                           ? "text-red-600"
-                          : "text-green-700"
-                      }`}
+                          : "text-green-600"
+                        }`}
                     >
-                      {product.stock}
+                      {product.stock} units
                     </span>
                   </div>
                 </div>
-              </div>
 
-            
-            </div>
-          ))}
-        </div>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
       </div>
     </div>
   );

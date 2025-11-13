@@ -13,11 +13,13 @@ const SubscriberLayout = () => {
 
   return (
     <div className="flex h-screen w-screen overflow-hidden">
-      {/* mobile sidebar    */}
+
+      {/* mobile sidebar  */}
       <div className="mobile-sidebar lg:hidden">
         <Sidebar closeSidebar={closeSidebar} className={`fixed  z-100  lg:hidden transition-all duration-300 ${isSidebarOpen ? "translate-x-0":"-translate-x-full"}`}/>
        <div className={`overlay fixed inset-0 h-screen w-screen bg-black/40 z-50 lg:hidden  transition-opacity duration-300 ${isSidebarOpen ? "opacity-100": "pointer-events-none opacity-0"}`} onClick={closeSidebar}/>
       </div>
+
       {/* Sidebar */}
       <Sidebar className="hidden lg:block"/>
       

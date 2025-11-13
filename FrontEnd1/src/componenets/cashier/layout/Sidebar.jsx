@@ -13,9 +13,10 @@ import {
 import { ComputerIcon, CurrencyIcon, icons, ShoppingBasketIcon, TypeIcon, UserIcon } from 'lucide-react';
 
 const navigation = [
-  { name: 'POS', href: '/pos', icon: ShoppingCartIcon },
+  { name: 'POS', href: '/pos', icon: HomeIcon },
   { name: 'Products', href: '/c-products', icon:ComputerIcon },
   { name: 'Customers', href: '/c-customers', icon: UsersIcon },
+   { name: 'Cart', href: '/c-cart', icon: ShoppingCartIcon },
   { name: 'Orders', href: '/c-orders', icon: ShoppingBasketIcon }
 
 ];

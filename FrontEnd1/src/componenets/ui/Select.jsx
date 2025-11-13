@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useRef, useEffect } from "r
 
 const SelectContext = createContext();
 
+
+
 export const SelectComponent = ({
   children,
   placeholder = "Select",
@@ -14,7 +16,7 @@ export const SelectComponent = ({
 
   // click outside to close
   useEffect(() => {
-    const handleClick = (e) => {
+    const handleClick = (e) =>{
       if (selectRef.current && !selectRef.current.contains(e.target)) {
         setOpen(false);
       }

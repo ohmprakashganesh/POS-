@@ -40,16 +40,19 @@ import Report from './componenets/Admin/pages/Report';
 
 // cashier components 
 import Dashboard from './componenets/cashier/CashierDashboard'; 
-import CashierProductList from './componenets/cashier/components/ProductList'
-import CashierCustomerList from './componenets/cashier/components/CustomerList';
-import CashierAddEditCustomer from './componenets/cashier/components/AddEditCustomer'
-import Orders from './componenets/cashier/components/Orders'
-import POS from './componenets/cashier/components/POS';
+import CashierProductList from './componenets/cashier/pages/products/ProductList'
+import CashierCustomerList from './componenets/cashier/pages/customer/CustomerList';
+// import CashierAddEditCustomer from './componenets/cashier/components/AddEditCustomer'
+import Orders from './componenets/cashier/pages/orders/Orders'
+import POS from './componenets/cashier/pages/pos/POS';
 import Paid from './globalPages/subscription/Paid';
 import VendorList from './componenets/Subscriber/pages/vendors/VendorsList';
 import Profile from './componenets/Subscriber/pages/settings/profile/Profile';
 import Support from './componenets/Subscriber/pages/settings/help/Support';
 import SupportReq from './componenets/Admin/pages/Support';
+import { CartProvider } from './componenets/cashier/context/CartContext';
+import Cart from './componenets/cashier/pages/cart/cart';
+import CProduct from './componenets/cashier/pages/products/Product';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
@@ -87,6 +90,7 @@ function App() {
     <Router>
       <AuthProvider>
         <NotificationProvider>
+           <CartProvider>
             <Routes>
               <Route
                 element={
@@ -137,7 +141,7 @@ function App() {
               </Route>
 
               {/* cashier============================================================================= routes  */}
-
+             
               <Route
                 element={
                   <ProtectedRoute>
@@ -149,11 +153,15 @@ function App() {
                 <Route path="/pos" element={<POS />} />
                 <Route path="/c-transactions" element={<TransactionHistory />} />
                 <Route path="/c-Products" element={<CashierProductList />} />
+                <Route path="/c-cart" element={<Cart />} />
                 <Route path="/c-customers" element={<CashierCustomerList />} />
-                <Route path="/c-customers/add" element={<CashierAddEditCustomer />} />
-                <Route path="/c-customers/edit/:id" element={<CashierAddEditCustomer />} />
+                {/* <Route path="/c-customers/add" element={<CashierAddEditCustomer />} />
+                <Route path="/c-customers/edit/:id" element={<CashierAddEditCustomer />} /> */}
                 <Route path="/c-orders" element={<Orders />} />
+                  <Route path="/c-product/:id" element={<CProduct />} />
+
               </Route>
+            
 
               {/* public routes ============================================================================= routes  */}
 
@@ -164,6 +172,7 @@ function App() {
             <Route path="/payment" element={<PaymentScreen />} />
 
             </Routes>
+              </CartProvider>
             <NotificationCenter />
         </NotificationProvider>
       </AuthProvider>

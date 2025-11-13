@@ -7,16 +7,21 @@ import {
   UserIcon,
   ShoppingCartIcon
 } from '@heroicons/react/24/outline';
-import { productsData, customersData } from '../../../data/mockData';
+import { productsData, customersData } from '@/data/mockData';
+import { Link } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 
 const POS = () => {
-  const [cart, setCart] = useState([]);
+
   const [products, setProducts] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState('walk-in');
   const [searchTerm, setSearchTerm] = useState('');
   const [discount, setDiscount] = useState(0);
-  const [taxRate, setTaxRate] = useState(13);
+    const [cart, setCart] = useState([]);
+   const {addToCart}=useCart();
+   
+
 
   useEffect(() => {
     setProducts(productsData);
@@ -27,22 +32,6 @@ const POS = () => {
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     product.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const addToCart = (product) => {
-    setCart(currentCart => {
-      const existingItem = currentCart.find(item => item.id === product.id);
-      if (existingItem) {
-        return currentCart.map(item =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...currentCart, { ...product, quantity: 1 }];
-      }
-    });
-  };
-
   const updateQuantity = (productId, newQuantity) => {
     if (newQuantity < 1) {
       removeFromCart(productId);
@@ -65,7 +54,7 @@ const POS = () => {
   const calculateTotals = () => {
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const discountAmount = (subtotal * discount) / 100;
-    const taxAmount = ((subtotal - discountAmount) * taxRate) / 100;
+    const taxAmount = ((subtotal - discountAmount) ) / 100;
     const total = subtotal - discountAmount + taxAmount;
 
     return {
@@ -94,8 +83,8 @@ const POS = () => {
 
     // In real app, this would be an API call
     console.log('Processing payment:', paymentData);
-    
     // Clear cart after successful payment
+
     setCart([]);
     setDiscount(0);
     alert('Payment processed successfully!');
@@ -117,38 +106,59 @@ const POS = () => {
             />
           </div>
         </div>
-        {/* Product Grid */}
-        <div className="grid grid-cols-2 overflow-y-auto  w-full  gap-y-4 gap-x-2  md:grid-cols-4 lg:grid-cols-4 gap-1 h-fit  max-h-[calc(100vh-200px)] py-2 px-2">
-          {filteredProducts.map((product) => (
-            <button
-              key={product.id}
-              onClick={() => addToCart(product)}
-              disabled={product.stock === 0}
-              className={` w-34  border shadow-lg   border-gray-200   rounded-lg p-1 text-left hover:shadow-md transition-shadow ${
-                product.stock === 0 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-              }`}
-            >
-              <div className="h-22 w-26  bg-gray-500 rounded-lg mb-1 flex mx-auto  justify-center items-center">
-                {product.image ? (
-                  <img src={product.image} alt={product.name} className="w-full h-full rounded-xl object-cover justify-center items-center " />
-                ) : (
-                  <div className="text-gray-400 text-sm text-center">
-                    No Image
+
+         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-5">
+        {filteredProducts.map((product) => (
+          <div
+            key={product.id}
+            onClick={() => addToCart(product)}
+            className="group relative cursor-pointer flex flex-col bg-white shadow-sm rounded-md"
+          >
+            {/* Product image */}
+            <div  className="p-2 grow flex flex-col ">
+              <img
+                src={
+                  product.image ||
+                  "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80"
+                }
+                alt={product.name}
+                className="inline-block w-full aspect-[16/9]  rounded-md"
+              />
+              {/* Product Details */}
+              <div className="mt-1.5 grow  flex flex-col justify-between">
+                <h3 className="text-lg font-semibold line-clamp-2 leading-tight">
+                  {product.name}
+                </h3>
+                <div className="details">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-xs text-muted">Rs.</span>
+                    <span className="text-xl text-muted-hover font-bold">
+                      {product.price}
+                    </span>
                   </div>
-                )}
+
+                  <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                    <span className="text-xs text-muted">Available</span>
+                    <span
+                      className={`text-sm font-semibold ${product.stock <= 10
+                          ? "text-red-600"
+                          : "text-green-600"
+                        }`}
+                    >
+                      {product.stock} units
+                    </span>
+                  </div>
+                </div>
+
               </div>
-              <h3 className="font-medium pl-3 text-gray-900 text-sm ">{product.name}</h3>
-              <p className="text-sm pl-3 font-bold text-blue-600">${product.price}</p>
-              <p className="text-xs pl-3 text-gray-500">
-                Stock: {product.stock} {product.stock <= 5 && '• Low stock'}
-              </p>
-            </button>
-          ))}
-        </div>
+            </div>
+          </div>
+        ))}
+      </div>
       </div>
 
       {/* Right Panel - Cart & Checkout */}
-      <div className="  bg-white rounded-lg shadow-sm border border-gray-200 p-2">
+      <div className="  bg-white rounded-lg shadow-sm border hidden border-gray-200 p-2">
         <div className="space-y-2">
           {/* Customer Selection */}
           <div>

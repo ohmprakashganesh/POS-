@@ -7,6 +7,7 @@ import {
   UserCircleIcon
 } from '@heroicons/react/24/outline';
 
+
 const Header = ({ onMenuClick, user }) => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { notifications, unreadCount, markAsRead } = useNotifications();
