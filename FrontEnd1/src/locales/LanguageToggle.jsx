@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Languages } from "lucide-react"; // optional icon
 import { LanguageIcon } from "@heroicons/react/24/outline";
-import { SelectComponent,OptionComponent  } from "@/componenets/ui/Select";
+import { SelectComponent,OptionComponent  } from "@/features/ui/Select";
 
 const LanguageToggle = () => {
   const { i18n } = useTranslation();

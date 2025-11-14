@@ -1,5 +1,5 @@
-import Button from "@/componenets/ui/Button";
-import Input from "@/componenets/ui/Input";
+import Button from "@/features/ui/Button";
+import Input from "@/features/ui/Input";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 

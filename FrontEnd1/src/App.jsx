@@ -4,53 +4,54 @@ import { NotificationProvider } from './contexts/NotificationContext';
 import Login from './globalPages/auth/Login';
 import SignUp from './globalPages/auth/SignUp';
 import PublicSubscription  from './globalPages/subscription/Subscription'
-import NotificationCenter from './componenets/notifications/NotificationCenter';
+import NotificationCenter from './features/notifications/NotificationCenter';
 
-import Layout from './componenets/cashier/layout/CashierLayout'
-import AdminLayout from './componenets/Admin/layout/AdminLayout'
+import Layout from './features/cashier/layout/CashierLayout'
+import AdminLayout from './features/Admin/layout/AdminLayout'
 import PaymentScreen from './globalPages/subscription/PaymentScreen';
-import SubscriberLayout from './componenets/Subscriber/layout/SubscriberLayout'
+import SubscriberLayout from './features/Subscriber/layout/SubscriberLayout'
 
 
 
 
 // subscriber components 
-import ProductList from './componenets/Subscriber/pages/items/ProductList';
-import AddEditProduct from './componenets/Subscriber/pages/items/AddEditProduct';
-import CustomerList from './componenets/Subscriber/pages/customers/CustomerList';
-import Categories from './componenets/Subscriber/pages/categories/Category'
-import AddEditCustomer from './componenets/Subscriber/pages/customers/AddEditCustomer';
-import TransactionHistory from './componenets/Subscriber/pages/transactions/TransactionHistory';
-import SalesReports from './componenets/Subscriber/pages/reports/SalesReports';
-import ProfitLoss from './componenets/Subscriber/pages/dashboard/ProfitLoss';
-import Subscription from './componenets/Subscriber/pages/settings/active-plan/Subscription';
-import AddEditCashier from './componenets/Subscriber/pages/cashiers/AddEditCashier';
-import CashierList from './componenets/Subscriber/pages/cashiers/CashierList';
-import Product from './componenets/Subscriber/pages/items/Product';
-import SubscriberDashboard from './componenets/Subscriber/pages/dashboard/SubscriberDashboard';
-import AddEditVendor from './componenets/Subscriber/pages/vendors/AddEditVendor';
-import VendorDetailsCard from './componenets/Subscriber/pages/vendors/VendorDetailsCard';
+import ProductList from './features/Subscriber/pages/items/ProductList';
+import AddEditProduct from './features/Subscriber/pages/items/AddEditProduct';
+import CustomerList from './features/Subscriber/pages/customers/CustomerList';
+import Categories from './features/Subscriber/pages/categories/Category'
+import AddEditCustomer from './features/Subscriber/pages/customers/AddEditCustomer';
+import TransactionHistory from './features/Subscriber/pages/transactions/TransactionHistory';
+import SalesReports from './features/Subscriber/pages/reports/SalesReports';
+import ProfitLoss from './features/Subscriber/pages/dashboard/ProfitLoss';
+import Subscription from './features/Subscriber/pages/settings/active-plan/Subscription';
+import AddEditCashier from './features/Subscriber/pages/cashiers/AddEditCashier';
+import CashierList from './features/Subscriber/pages/cashiers/CashierList';
+import Product from './features/Subscriber/pages/items/Product';
+import SubscriberDashboard from './features/Subscriber/pages/dashboard/SubscriberDashboard';
+import AddEditVendor from './features/Subscriber/pages/vendors/AddEditVendor';
+import VendorDetailsCard from './features/Subscriber/pages/vendors/VendorDetailsCard';
 
 
 // admin components 
-import SubscriberList from './componenets/Admin/pages/subscriberList';
-import AdminDashboard from './componenets/Admin/AdminDashboard';
-import SubscriptionPlans from './componenets/Admin/pages/SubscriptionPlans';
-import Report from './componenets/Admin/pages/Report';
+import SubscriberList from './features/Admin/pages/subscriberList';
+import AdminDashboard from './features/Admin/AdminDashboard';
+import SubscriptionPlans from './features/Admin/pages/SubscriptionPlans';
+import Report from './features/Admin/pages/Report';
 
 // cashier components 
-import CashierProductList from './componenets/cashier/pages/products/ProductList'
-import CashierCustomerList from './componenets/cashier/pages/customer/CustomerList';
-import Orders from './componenets/cashier/pages/history/Orders'
-import POS from './componenets/cashier/pages/pos/POS';
+import CashierProductList from './features/cashier/pages/products/ProductList'
+import CashierCustomerList from './features/cashier/pages/customer/CustomerList';
+import Orders from './features/cashier/pages/history/Orders'
+import POS from './features/cashier/pages/pos/POS';
 import Paid from './globalPages/subscription/Paid';
-import VendorList from './componenets/Subscriber/pages/vendors/VendorsList';
-import Profile from './componenets/Subscriber/pages/settings/profile/Profile';
-import Support from './componenets/Subscriber/pages/settings/help/Support';
-import SupportReq from './componenets/Admin/pages/Support';
-import { CartProvider } from './componenets/cashier/context/CartContext';
-import Cart from './componenets/cashier/pages/cart/cart';
-import CProduct from './componenets/cashier/pages/products/Product';
+import VendorList from './features/Subscriber/pages/vendors/VendorsList';
+import Profile from './features/Subscriber/pages/settings/profile/Profile';
+import Support from './features/Subscriber/pages/settings/help/Support';
+import SupportReq from './features/Admin/pages/Support';
+import { CartProvider } from './features/cashier/context/CartContext';
+import Cart from './features/cashier/pages/cart/cart';
+import CProduct from './features/cashier/pages/products/Product';
+import { FormProvider } from './features/cashier/context/FormContext';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
@@ -89,6 +90,7 @@ function App() {
       <AuthProvider>
         <NotificationProvider>
            <CartProvider>
+            <FormProvider>
             <Routes>
               <Route
                 element={
@@ -171,6 +173,7 @@ function App() {
             <Route path="/payment" element={<PaymentScreen />} />
 
             </Routes>
+            </FormProvider>
               </CartProvider>
             <NotificationCenter />
         </NotificationProvider>
