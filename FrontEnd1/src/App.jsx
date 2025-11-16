@@ -52,11 +52,12 @@ import { CartProvider } from './features/cashier/context/CartContext';
 import Cart from './features/cashier/pages/cart/cart';
 import CProduct from './features/cashier/pages/products/Product';
 import { FormProvider } from './features/cashier/context/FormContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
   const { user, subscriptionStatus } = useAuth();
-  console.log(user?.role);
+  console.log("logged user is ",user?.role);
   const location = useLocation();
 
   if (!user) {
@@ -87,10 +88,13 @@ function ProtectedRoute({ children, requireAdmin = false }) {
 function App() {
   return (
     <Router>
+       <ThemeProvider>
+
       <AuthProvider>
         <NotificationProvider>
+          <FormProvider>
            <CartProvider>
-            <FormProvider>
+           
             <Routes>
               <Route
                 element={
@@ -159,8 +163,6 @@ function App() {
                 <Route path="/c-customers/edit/:id" element={<CashierAddEditCustomer />} /> */}
                 <Route path="/c-orders" element={<Orders />} />
                   <Route path="/c-product/:id" element={<CProduct />} />
-
-
               </Route>
             
 
@@ -173,11 +175,14 @@ function App() {
             <Route path="/payment" element={<PaymentScreen />} />
 
             </Routes>
-            </FormProvider>
               </CartProvider>
+                </FormProvider>
             <NotificationCenter />
         </NotificationProvider>
       </AuthProvider>
+      </ThemeProvider>
+
+     
     </Router>
   );
 }

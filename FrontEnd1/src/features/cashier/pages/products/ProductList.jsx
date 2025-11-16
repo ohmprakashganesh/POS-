@@ -60,26 +60,26 @@ const ProductList = () => {
     <div className="space-y-6">
       
       {/* Search and Filters */}
-      <div className="bg-primary-foreground  rounded-lg shadow-sm border border-gray-200 p-4">
+      <div className="bg-primary-foreground  rounded-lg shadow-sm  p-4">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 ">
           <div className="relative">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
             <input
               type="text"
               placeholder={t("products.searchProducts")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full pl-10 pr-4 py-2 border border-muted/40 rounded-lg focus:ring-2"
             />
           </div>
 
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="border text-muted border-muted/40 bg-background rounded-lg px-4 py-2 "
           >
             {categories.map((category) => (
-              <option key={category} value={category}>
+              <option key={category} value={category} className="text-muted">
                 {category === "all" ? "All Categories" : category}
               </option>
             ))}
@@ -92,7 +92,7 @@ const ProductList = () => {
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="group relative flex flex-col bg-white shadow-sm rounded-md"
+            className="group relative flex flex-col bg-background border-muted shadow-sm rounded-md"
           >
             <div className="top-options  w-full flex items-center justify-between p-2 h-12">
               {/* Stock badge */}
@@ -118,7 +118,7 @@ const ProductList = () => {
               />
               {/* Product Details */}
               <div className="mt-1.5 grow  flex flex-col justify-between">
-                <h3 className="text-lg font-semibold line-clamp-2 leading-tight">
+                <h3 className="text-lg font-semibold line-clamp-2 text-muted-hover leading-tight">
                   {product.name}
                 </h3>
                 <div className="details">
@@ -129,7 +129,7 @@ const ProductList = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                  <div className="flex items-center justify-between pt-2 border-t border-muted">
                     <span className="text-xs text-muted">{t("products.available")}</span>
                     <span
                       className={`text-sm font-semibold ${product.stock <= 10

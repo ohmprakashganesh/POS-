@@ -1,8 +1,6 @@
 // components/LanguageToggle.jsx
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Languages } from "lucide-react"; // optional icon
-import { LanguageIcon } from "@heroicons/react/24/outline";
 import { SelectComponent,OptionComponent  } from "@/features/ui/Select";
 
 const LanguageToggle = () => {
@@ -18,10 +16,10 @@ const LanguageToggle = () => {
     <SelectComponent
   value={i18n.language}
   onChange={toggleLanguage}
-  className=" bg-white text-sm w-fit min-w-[25px]"
+  className="  text-sm  min-w-[25px]"
 >
-  <OptionComponent className="w-fit p-5" value="en">English</OptionComponent>
-  <OptionComponent value="np">नेपाली</OptionComponent>
+  <OptionComponent className="w-fit" value="en">English</OptionComponent>
+  <OptionComponent className="w-fit " value="np">नेपाली</OptionComponent>
 </SelectComponent>
   );
 };

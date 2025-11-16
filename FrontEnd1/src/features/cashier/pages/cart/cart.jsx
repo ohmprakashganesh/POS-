@@ -14,39 +14,21 @@ import OrderItem from './OrderedItem';
 import { customersData } from '@/data/mockData';
 import { useForm } from '../../context/FormContext';
 import AddEditCustomer from '../customer/AddEditCustomer';
+import { QRGenerator } from './Qrgenreator';
 
 
-const EsewaPayment = ({ userId, totalAmount, setQrOpen }) => {
+
+const EsewaPayment = ({ payment, setQrOpen }) => {
   const { t } = useTranslation("cashier");
-  const [qrCodeData, setQrCodeData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [showBill, setShowBill] = useState(false);
   const [error, setError] = useState(null);
   const merchantName = t("cart.storeTitle");
   // Function to simulate fetching the QR data from a backend API
-  const generateDynamicQr = () => {
-    setIsLoading(true);
-    setError(null);
-    setTimeout(() => {
-      //implement the real world api
-
-      const simulatedQrData = `eSewa://pay?pid=${userId}&amt=${totalAmount}&mer=${merchantName.replace(/\s/g, "")}`;
-      setQrCodeData(simulatedQrData);
-      setIsLoading(false);
-    }, 1500);
-  };
-
-  useEffect(() => {
-    // Automatically generate QR when the component mounts
-    generateDynamicQr();
-  }, [userId, totalAmount]);
   return (
     <div className="fixed inset-0 items-center w-screen h-screen bg-black/80 z-50 p-4">
       <div className='flex justify-end text-gray-600p-4 '>
         <span className=' font-bold cursor-pointer text-muted-foreground  px-5 text-3xl py-2 rounded-full ' onClick={() => setQrOpen(false)}>X</span>
       </div>
-
-
       <div className="flex flex-col justify-center  items-center w-full h-full">
         {isLoading && (
           <div className="flex flex-col items-center justify-center p-8 bg-primary-foreground border border-gray-200 rounded-lg">
@@ -58,7 +40,7 @@ const EsewaPayment = ({ userId, totalAmount, setQrOpen }) => {
         {error && (
           <div className="p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
             <p>{t("cart.errorGeneratingQR")} {error}</p>
-            <button onClick={generateDynamicQr} className="mt-2 text-sm font-semibold underline">{t("cart.tryAgain")}</button>
+            <button onClick={()=>generateDynamicQr()} className="mt-2 text-sm font-semibold underline">{t("cart.tryAgain")}</button>
           </div>
         )}
         {!error && !isLoading && (
@@ -67,11 +49,7 @@ const EsewaPayment = ({ userId, totalAmount, setQrOpen }) => {
 
             {/* Display QR code area */}
             <div className="flex justify-center items-center w-full aspect-square bg-gray-50 p-2 rounded-md">
-              <img
-                src={qrPlaceholder} // Placeholder image
-                alt="eSewa QR Code"
-                className="w-48 h-48 border border-gray-300 rounded-md"
-              />
+              <QRGenerator payment={payment} type={"payment"}/>
             </div>
 
             <p className="text-sm text-center text-gray-500 mt-4">
@@ -88,15 +66,17 @@ const EsewaPayment = ({ userId, totalAmount, setQrOpen }) => {
 const Cart = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { t } = useTranslation("cashier")
-  const { cartItems, updateQuantity, removeFromCart, subtotal } = useCart();
+  const { cartItems, subtotal } = useCart();
   const [cart, setCart] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [filteredCustomers, setFilteredCustomer] = useState([]);
   const [showBill, setShowBill] = useState(false);
+  const [billDetail, setBillDetail] = useState([]);
   const [discountRate, setDiscountRate] = useState(0);
   const [qrOpen, setQrOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState("");
-  const {openCustomerForm,openForm}=useForm();
+  const [selectedId, setSelectedId] = useState("");
+ const { openForm, openCustomerForm } = useForm();
+ 
 
   useEffect(() => {
     setCustomers(customersData);
@@ -119,11 +99,7 @@ const Cart = () => {
     }
   }, [cartItems]);
 
-  const [payment, setPayment] = useState({
-    paymentType: "",
-    userId: "123456789",
-    totalAmount: 0,
-  });
+ 
 
   const discountAmount = useMemo(
     () => (discountRate > 0 ? (subtotal * discountRate) / 100 : 0),
@@ -131,6 +107,13 @@ const Cart = () => {
   );
 
   const netAmount = useMemo(() => subtotal - discountAmount, [subtotal, discountAmount]);
+
+ const [payment, setPayment] = useState({
+    merchantAccount:"9803748378483",
+    orderId:"5",
+    paymentType:"",
+    totalAmount: netAmount?netAmount:0,
+  });
 
   useEffect(() => {
     setPayment((prev) => ({
@@ -154,17 +137,10 @@ const Cart = () => {
   // 🧮 Total Items Count
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
-    <>
-   {openForm && (
-  <div
-    className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center"  // close on background click
-  >
-      <AddEditCustomer/>
-  </div>
-   )}
+    <div>
     <div>
       {/* Order Header with Count */}
-      <h2 className="text-2xl font-bold border-b text-muted-hover border-gray-200">
+      <h2 className="text-2xl font-bold border-b text-muted border-muted/40">
         {t("cart.cartOverview")}
         {totalItems > 0 && (
           <span className="text-sm font-medium text-muted ml-2">
@@ -182,28 +158,14 @@ const Cart = () => {
 
         <>
           {/* search section */}
-       <form className="flex flex-wrap md:justify-around lg:justify-around gap-3 p-3 rounded-sm bg-primary-foreground">
-  {/* Search */}
-  <div className="relative w-[99%] md:w-[30%] lg:w-[30%] ">
-    <MagnifyingGlassIcon
-      className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted"
-    />
-    <Input
-      type="text"
-      placeholder={t('customers.search')}
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      className="pl-10 bg-primary-foreground h-[45px]"
-    />
-  </div>
-
+       <div className="flex justify-between  gap-3 p-3 rounded-sm bg-primary-foreground">
   {/* Dropdown */}
   <select
-    value={selectedUser}
-    onChange={(e) => setSelectedUser(e.target.value)}
-    className="w-[48%] md:w-[30%] lg:w-[30%]  h-[45px] border border-gray-300 rounded-md bg-primary-foreground"
+    value={selectedId|| ""}
+    onChange={(e) => setSelectedId( e.target.value)}
+    className="w-[48%] md:w-[30%] lg:w-[30%]  h-[45px] border border-muted/40 rounded-md bg-primary-foreground"
   >
-    <option value="">Select Customer</option>
+    <option value="" className='text-muted'>Select Customer</option>
     {filteredCustomers.slice(0, 3).map((user) => (
       <option key={user.id} value={user.id}>
         {user.name}
@@ -212,18 +174,16 @@ const Cart = () => {
   </select>
 
   {/* Button */}
-  <Button onClick={()=>openCustomerForm()} className=" px-5 h-[45px] w-[48%] md:w-[30%] ">
+   <Button onClick={()=>openCustomerForm()} className=" px-5 h-[45px] w-[48%] md:w-[30%] ">
     Add customer
   </Button>
-</form>
-
-
+  </div>
           <div className="flex md:flex-row lg:flex-row flex-col gap-5 mt-4">
             <div className="flex flex-col md:w-[70%] lg:w-[70%] w-full gap-0.5">
+
               {/* rendering the cart items */}
               {cart.map((item, ind) => <OrderItem key={ind} item={item} t={t} />)}
             </div>
-
             {/* Payment Summary */}
             <div className="lg:w-[30%] md:w-[30%] w-full p-2 bg-primary-foreground rounded-lg shadow">
               <h2 className="text-2xl text-muted-hover font-bold pb-4">
@@ -257,16 +217,16 @@ const Cart = () => {
                 </div>
               </div>
 
-              <hr className="border-gray-200" />
+              <hr className="border-muted/40" />
 
               <div className="flex justify-between text-xl font-bold mt-2 mb-2">
                 <span className="text-muted-hover">{t("cart.netAmount")}</span>
-                <span>${payment.totalAmount.toFixed(2)}</span>
+                <span className='text-muted-hover'>${payment.totalAmount.toFixed(2)}</span>
               </div>
 
-              <h3 className="text-lg font-semibold mb-3">{t("cart.selectPaymentMethod")}</h3>
+              <h3 className="text-lg text-muted-hover font-semibold mb-3">{t("cart.selectPaymentMethod")}</h3>
 
-              <div className="flex lg:gap-10 md:gap-5 gap-5 items-center h-[50px] justify-around text-lg font-bold text-gray-900 mb-4">
+              <div className="flex lg:gap-10 md:gap-5 gap-5 items-center h-[50px] justify-around text-lg font-bold text-muted-hover mb-4">
                 <div
                   onClick={() => {
                     updatePayment("paymentType", "esewa");
@@ -274,7 +234,7 @@ const Cart = () => {
                   }}
                   className={`cursor-pointer border-2 p-1 rounded-lg transition-all ${payment.paymentType === "esewa"
                     ? "border-green-500 shadow-md"
-                    : "border-gray-200 hover:border-gray-400"
+                    : "border-muted hover:border-muted-hover"
                     }`}
                 >
                   <img
@@ -287,7 +247,7 @@ const Cart = () => {
                   onClick={() => updatePayment("paymentType", "Cash")}
                   className={`cursor-pointer border-2 p-1 rounded-lg transition-all ${payment.paymentType === "Cash"
                     ? "border-blue-500 shadow-md"
-                    : "border-gray-200 hover:border-gray-400"
+                    : "border-muted/40 hover:border-muted/20"
                     }`}
                 >
                   <img
@@ -297,61 +257,70 @@ const Cart = () => {
                   />
                 </div>
               </div>
-
               {payment.paymentType === "esewa" && qrOpen && (
                 <div className="mt-6">
                   <EsewaPayment
-                    userId={payment.userId}
-                    totalAmount={payment.totalAmount}
+                    payment={payment}
                     setQrOpen={setQrOpen}
                   />
                 </div>
               )}
-
               {payment.paymentType === "Cash" && (
-                <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-center">
-                  <p className="font-semibold text-blue-800">
+                <div className="mt-6 p-4 bg-background border border-blue-200 rounded-lg text-center">
+                  <p className="font-semibold text-muted">
                     {t("cart.prepareMessage", "cart.rs")}{payment.totalAmount.toFixed(2)} {t("cart.cashOnDelivery")}
                   </p>
                 </div>
               )}
 
               <Button
-                disabled={!payment.paymentType}
-                onClick={() => {
-                  if (payment.paymentType) {
-                    setShowBill(true);
-                  }
-                }}
-                className={`w-full mt-6 cursor-pointer 
-              ${payment.paymentType
-                    ? "bg-secondary hover:bg-secondary-hover"
-                    : "bg-muted cursor-not-allowed"
-                  }`}
-              >
-                {!payment.paymentType ? t("cart.selectType") : t("cart.generateBill")}
-              </Button>
+  disabled={!payment.paymentType || !selectedId}
+  onClick={() => {
+    if (payment.paymentType && selectedId) {
+      setBillDetail({
+        items: cart,
+        customerId: selectedId,
+        subtotal: subtotal,
+        discountRate: discountRate,
+        discountAmount: discountAmount,
+        netAmount: netAmount,
+        payment: payment,
+        date: new Date().toLocaleString(),
+      });
+
+      setShowBill(true);
+    }
+  }}
+  className={`w-full mt-6 cursor-pointer 
+  ${payment.paymentType ? "bg-secondary hover:bg-secondary-hover" : "bg-muted cursor-not-allowed"
+  }`}
+>
+  {!payment.paymentType ? t("cart.selectType") : t("cart.generateBill")}
+</Button>
+
             </div>
           </div>
         </>
       )}
-
       <div className="flex">
         {showBill && (
-          <BillDetails
-            products={cart}
-            subtotal={subtotal}
-            discount={discountAmount}
-            netAmount={netAmount}
-            qrPlaceholder={qrPlaceholder}
-            onClose={() => setShowBill(false)}
-          />
+         <BillDetails
+          bill={billDetail}
+          onClose={() => setShowBill(false)}
+              />
+
         )}
       </div>
     </div>
-    </>
+     {openForm && (
+  <div
+    className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center"  // close on background click
+  >
+      <AddEditCustomer/>
+  </div>
+   )}
+    </div>
   );
 };
-
 export default Cart;
 

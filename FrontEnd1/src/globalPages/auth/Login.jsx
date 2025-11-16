@@ -85,14 +85,10 @@ const Login = () => {
             </p>
             <select className="border-2  rounded-md bg-gray-300 hover:border-primary-green px-2 py-1">
               <option className="font-bold text-black bg-gray-300" value="English">
-                <span>
-               English <TvIcon color="green" />
-                </span>
-          
-          
+               English
               </option>
               <option value="Nepali">
-                नेपाली <CheckIcon />
+                नेपाली 
               </option>
             </select>
           </div>

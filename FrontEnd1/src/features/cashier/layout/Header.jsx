@@ -9,16 +9,21 @@ import {
 } from '@heroicons/react/24/outline';
 import LanguageToggle from '@/locales/LanguageToggle';
 import NotificationScreen from '../pages/notification/notification';
+import { Moon, Sun } from 'lucide-react';
+// UPDATED import: point to your ThemeContext provider hook
+import { useTheme } from '@/contexts/ThemeContext';
 
 const Header = ({ onMenuClick, user }) => {
+  // now useTheme returns { theme, setTheme, toggleTheme }
+  const { theme, setTheme, toggleTheme } = useTheme();
   const { t } = useTranslation('cashier');
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const { notifications, unreadCount, markAsRead } = useNotifications();
+  const { unreadCount, markAsRead } = useNotifications();
   const { logout } = useAuth();
   const [notification, setNotification] = useState(false);
 
-  const buttonRef = useRef(null); // Ref to notification button container
-  const panelRef = useRef(null); // Ref to notification panel container
+  const buttonRef = useRef(null);
+  const panelRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -38,25 +43,39 @@ const Header = ({ onMenuClick, user }) => {
   }, []);
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
+    <header className="bg-white dark:bg-black shadow-sm border-b border-gray-200 dark:border-gray-700">
       <div className="flex items-center justify-between h-16 px-4 sm:px-6">
         {/* Left section */}
         <div className="flex items-center">
           <button
             onClick={onMenuClick}
-            className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600"
+            className="lg:hidden p-2 rounded-md text-gray-400 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100"
           >
             <Bars3Icon className="h-6 w-6" />
           </button>
           <div className="ml-4 lg:ml-0">
-            <h1 className="text-xl font-semibold text-gray-900">
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
               {t('general.dashboard')}
             </h1>
           </div>
         </div>
+
         {/* Right section */}
         <div className="flex items-center space-x-2">
+
+          {/* 🌗 Theme Toggle */}
+          {/* You can either call setTheme directly (keeps your code) or use toggleTheme */}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            // alternatively: onClick={toggleTheme}
+            className="p-2 rounded-full bg-muted/10 dark:bg-gray-700"
+          >
+            <Sun className="h-5 w-5 dark:hidden" />
+            <Moon className="h-5 w-5 hidden dark:block" />
+          </button>
+
           <LanguageToggle />
+
           {/* Notifications */}
           <div ref={buttonRef} className="relative">
             <button
@@ -64,7 +83,7 @@ const Header = ({ onMenuClick, user }) => {
                 markAsRead();
                 setNotification((prev) => !prev);
               }}
-              className="p-2 text-gray-400 hover:text-gray-600 relative"
+              className="p-2 text-gray-400 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100 relative"
             >
               <BellIcon className="h-6 w-6" />
               {unreadCount > 0 && (
@@ -81,17 +100,19 @@ const Header = ({ onMenuClick, user }) => {
               onClick={() => setUserMenuOpen(!userMenuOpen)}
               className="flex items-center space-x-3 text-sm focus:outline-none"
             >
-              <UserCircleIcon className="h-8 w-8 text-gray-400" />
+              <UserCircleIcon className="h-8 w-8 text-gray-400 dark:text-gray-300" />
               <div className="hidden md:block text-left">
-                <div className="text-muted-hover text-sm">{user?.role}</div>
+                <div className="text-gray-700 dark:text-gray-200 text-sm">
+                  {user?.role}
+                </div>
               </div>
             </button>
 
             {userMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50 border border-gray-200 dark:border-gray-700">
                 <button
                   onClick={logout}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   {t('general.logOut')}
                 </button>
@@ -100,8 +121,12 @@ const Header = ({ onMenuClick, user }) => {
           </div>
         </div>
       </div>
+
       {notification && (
-        <div  ref={panelRef} className="absolute md:w-2/6 lg:w-2/7 w-full bg-amber-500 right-1 top-17 z-40 flex justify-end">
+        <div
+          ref={panelRef}
+          className="absolute md:w-2/6 lg:w-2/7 w-full bg-white dark:bg-gray-800 right-1 top-17 z-40 flex justify-end border border-gray-200 dark:border-gray-700"
+        >
           <NotificationScreen />
         </div>
       )}

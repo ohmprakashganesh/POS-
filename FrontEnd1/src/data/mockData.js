@@ -2,6 +2,76 @@
 import { CubeIcon } from '@heroicons/react/24/outline';
 
 
+export const notificationsData = [
+    {
+      id: 1,
+      title: "Hp lapto 45 inch (Unread)",
+      stock: "77",
+      time: '15m',
+      status: 'read',
+    },
+    {
+      id: 2,
+      title: "lenevo lapto 45 inch (Unread)",
+      stock: "76",
+      time: '20m',
+      status: 'unread',
+    },
+    {
+      id: 3,
+      title: "Mac book laptop 45 inch (Unread)",
+      stock: "45",
+      time: '30m',
+      status: 'read',
+    },
+    {
+      id: 4,
+      title: "Dell Monitor 27 inch (Unread)",
+      stock: "77",
+      time: '45m',
+      status: 'unread',
+    },
+    {
+      id: 5,
+      title: "Samsung Phone (Unread)",
+   stock: "77",      time: '1h',
+      status: 'read',
+    },
+
+    // 5 Notifications with 'read' status (Old)
+    {
+      id: 6,
+      title: "Gaming Mouse Pad (Read)",
+   stock: "77",      time: '2h',
+      status: 'read',
+    },
+    {
+      id: 7,
+      title: "Mechanical Keyboard (Read)",
+   stock: "77",      time: '3h',
+      status: 'unread',
+    },
+    {
+      id: 8,
+      title: "External SSD 1TB (Read)",
+   stock: "77",      time: '5h',
+      status: 'read',
+    },
+    {
+      id: 9,
+      iconType: 'reaction',
+      title: "Wireless Headphones (Read)",
+   stock: "77",      time: '8h',
+      status: 'unread',
+    },
+    {
+      id: 10,
+     title: "Portable Charger (Read)",
+   stock: "77",    
+     time: '1d',
+      status: 'read',
+    },
+];
 
  export const plans = {
     basic: {

@@ -1,28 +1,60 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
+
+/* Light Theme */
 @theme {
   --color-background: hsl(0, 0%, 97%);
   --color-foreground: hsl(220, 15%, 15%);
+
   --color-primary: hsl(210, 65%, 50%);
   --color-primary-hover: hsl(210, 65%, 40%);
   --color-primary-foreground: hsl(0, 0%, 100%);
+
   --color-secondary: hsl(160, 55%, 45%);
   --color-secondary-hover: hsl(160, 55%, 35%);
   --color-secondary-foreground: hsl(0, 0%, 100%);
+
   --color-tertiary: hsl(45, 85%, 55%);
   --color-tertiary-hover: hsl(45, 85%, 45%);
   --color-tertiary-foreground: hsl(220, 15%, 15%);
+
   --color-destructive: hsl(0, 70%, 50%);
   --color-destructive-hover: hsl(0, 70%, 40%);
   --color-destructive-foreground: hsl(0, 0%, 100%);
-  --color-muted:var(--color-gray-500);
-  --color-muted-hover:var(--color-gray-700);
-  --color-muted-foreground: var(--color-white);
 
+  --color-muted: var(--color-gray-500);
+  --color-muted-hover: var(--color-gray-700);
+  --color-muted-foreground: var(--color-white);
 
   --font-base: "MyCustom", "Inter", "Roboto", sans-serif;
   --font-heading: "MyCustomBold", "Poppins", sans-serif;
+}
+
+/* Dark Theme */
+.dark {
+  --color-background: hsl(220, 15%, 10%);
+  --color-foreground: hsl(0, 0%, 97%);
+
+  --color-primary: hsl(210, 65%, 60%);
+  --color-primary-hover: hsl(210, 65%, 70%);
+  --color-primary-foreground: hsl(0, 0%, 5%);
+
+  --color-secondary: hsl(160, 55%, 55%);
+  --color-secondary-hover: hsl(160, 55%, 65%);
+  --color-secondary-foreground: hsl(0, 0%, 10%);
+
+  --color-tertiary: hsl(45, 85%, 65%);
+  --color-tertiary-hover: hsl(45, 85%, 75%);
+  --color-tertiary-foreground: hsl(0, 0%, 10%);
+
+  --color-destructive: hsl(0, 70%, 60%);
+  --color-destructive-hover: hsl(0, 70%, 70%);
+  --color-destructive-foreground: hsl(0, 0%, 10%);
+
+  --color-muted: hsl(220, 10%, 60%);
+  --color-muted-hover: hsl(220, 10%, 80%);
+  --color-muted-foreground: hsl(0, 0%, 90%);
 }
 
 body {

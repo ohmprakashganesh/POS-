@@ -54,7 +54,6 @@ const InvoiceViewer = ({ setInvoice, invoice }) => {
     subtotal: 2891,
     discountTotal: 77,
     vatPercent: 13,
-    vatAmount: 376,
     grandTotal: 3267,
     payment: {
       type: "Card",

@@ -4,7 +4,7 @@ const FormContext = createContext();
 
 export const FormProvider = ({ children }) => {
   const [openForm, setOpenForm] = useState(false);
-  const [editId, setEditId] = useState("");
+  const [editId, setEditId] = useState(null);
 
   const openCustomerForm = (id=null) => {
     setEditId(id);
