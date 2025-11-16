@@ -76,7 +76,7 @@ const ProductList = () => {
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="border text-muted border-muted/40 bg-background rounded-lg px-4 py-2 "
+            className="border text-muted border-muted/40  rounded-lg px-4 py-2 "
           >
             {categories.map((category) => (
               <option key={category} value={category} className="text-muted">
@@ -92,7 +92,7 @@ const ProductList = () => {
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="group relative flex flex-col bg-background border-muted shadow-sm rounded-md"
+            className="group relative flex flex-col bg-primary-foreground border-muted shadow-sm rounded-md"
           >
             <div className="top-options  w-full flex items-center justify-between p-2 h-12">
               {/* Stock badge */}

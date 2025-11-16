@@ -26,7 +26,7 @@ const POS = () => {
   return (
     <div className="h-full w-full flex flex-col lg:flex-row gap-6">
       {/* Left Panel - Product Selection */}
-      <div className="flex-1   border-b-muted-foreground p-4">
+      <div className="flex-1  border-b-muted-foreground p-4">
         <div className="mb-4">
           <div className="relative">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
@@ -35,17 +35,16 @@ const POS = () => {
               placeholder="Search products..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-muted/40 text-muted-foreground rounded-lg focus:border-muted"
+              className="w-full pl-10 pr-4 py-3 border border-muted/40 bg-primary-foreground  rounded-lg focus:border-muted"
             />
           </div>
         </div>
-
          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-5">
         {filteredProducts.map((product) => (
           <div
             key={product.id}
             onClick={() => {addToCart(product),toast.success("successfully added to cart")}}
-            className="group relative cursor-pointer flex flex-col bg-background  shadow-sm rounded-md"
+            className="group relative cursor-pointer flex flex-col bg-primary-foreground shadow-sm rounded-md"
           >
             {/* Product image */}
             <div  className="p-2 grow flex flex-col ">

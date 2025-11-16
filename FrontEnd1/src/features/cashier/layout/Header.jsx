@@ -9,7 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import LanguageToggle from '@/locales/LanguageToggle';
 import NotificationScreen from '../pages/notification/notification';
-import { Moon, Sun } from 'lucide-react';
+import { LogOutIcon, Moon, Sun } from 'lucide-react';
 // UPDATED import: point to your ThemeContext provider hook
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -98,7 +98,7 @@ const Header = ({ onMenuClick, user }) => {
           <div className="relative">
             <button
               onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="flex items-center space-x-3 text-sm focus:outline-none"
+              className="flex items-center space-x-1 text-sm focus:outline-none"
             >
               <UserCircleIcon className="h-8 w-8 text-gray-400 dark:text-gray-300" />
               <div className="hidden md:block text-left">
@@ -109,12 +109,12 @@ const Header = ({ onMenuClick, user }) => {
             </button>
 
             {userMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50 border border-gray-200 dark:border-gray-700">
+              <div className="absolute right-0 mt-4 w-48  bg-primary-foreground rounded-md shadow-lg py-1 z-50 border border-muted/40 ">
                 <button
                   onClick={logout}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  className=" w-full gap-2  flex text-left px-2 py-1 text-sm text-muted-hover "
                 >
-                  {t('general.logOut')}
+                <span><LogOutIcon/></span>   {t('general.logOut')}
                 </button>
               </div>
             )}

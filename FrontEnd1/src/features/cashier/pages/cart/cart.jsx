@@ -150,8 +150,8 @@ const Cart = () => {
       </h2>
       {cart.length === 0 ? (
         <div className=' w-full flex flex-col justify-center items-center h-56 bg-secondary-foreground'>
-          <p className="text-muted text-4xl p-4">{t("cart.emptyCart")}</p>
-          <p>{t("cart.addItems")}</p>
+          <p className="text-muted-hover text-4xl p-4">{t("cart.emptyCart")}</p>
+          <p className='text-muted'>{t("cart.addItems")}</p>
 
         </div>
       ) : (
