@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { plans as initialPlans } from "@/data/mockData";
+import PlanForm from "./PlanForm";
+import Button from "@/features/ui/Button";
 
 const PlanManagement = () => {
   const [plant2, setPlans] = useState(initialPlans);
   const [editKey, setEditKey] = useState(null);
-  const [newPlan, setNewPlan] = useState({
-    id: "",
-    name: "",
-    duration: "",
-    features: "",
-    limitations: "",
-  });
+  const[openForm, setOpenForm]=useState(false);
+
 
   // Delete plan
   const handleDelete = (key) => {
@@ -20,100 +17,21 @@ const PlanManagement = () => {
     setPlans(updated);
   };
 
-  // Save edit
-  const handleSave = (key) => {
-    setPlans({
-      ...plant2,
-      [key]: {
-        ...plant2[key],
-        name: newPlan.name || plant2[key].name,
-        duration: newPlan.duration || plant2[key].duration,
-        features: newPlan.features
-          ? newPlan.features.split(",").map((f) => f.trim())
-          : plant2[key].features,
-        limitations: newPlan.limitations
-          ? newPlan.limitations.split(",").map((l) => l.trim())
-          : plant2[key].limitations,
-      },
-    });
-    setEditKey(null);
-
-    setNewPlan({ id: "", name: "", duration: "", features: "", limitations: "" });
-  };
-
-  // Add new plan
-  const handleAdd = () => {
-    if (!newPlan.id || !newPlan.name) return alert("Enter key and name for the plan!");
-    setPlans({
-      ...plant2,
-      [newPlan.id]: {
-        name: newPlan.name,
-        duration: newPlan.duration,
-        features: newPlan.features
-          ? newPlan.features.split(",").map((f) => f.trim())
-          : [],
-        limitations: newPlan.limitations
-          ? newPlan.limitations.split(",").map((l) => l.trim())
-          : [],
-      },
-    });
-    setNewPlan({ id: "", name: "", duration: "", features: "", limitations: "" });
-  };
+ 
 
   return (
-    <div className="w-full mx-auto p-6 bg-primary-foreground shadow rounded-lg">
-      <h1 className="text-2xl font-semibold mb-6">Manage Subscription Plans</h1>
+    <div className="w-full mx-auto md:p-6  p-2  bg-primary-foreground shadow rounded-lg">
+      <div className="flex flex-wrap lg:justify-between justify-between ">
+              <h1 className="text-2xl font-semibold mb-6">Manage Subscription Plans</h1>
+              <Button onClick={()=>setOpenForm(true)} className=" md:w-2/12 w-auto lg:h-2/12 h-10">Add Plan</Button>
+      </div>
 
       {/* Add/Edit Plan Section */}
-      <div className="mb-6 border p-4 rounded-lg bg-gray-50">
-        <h2 className="font-semibold mb-2">
-          {editKey ? "Edit Existing Plan" : "Add New Plan"}
-        </h2>
-
-        <div className="flex flex-wrap gap-2">
-          <input
-            type="text"
-            placeholder="Plan Key (e.g., silver)"
-            value={editKey ? editKey : newPlan.id}
-            onChange={(e) => setNewPlan({ ...newPlan, id: e.target.value })}
-            className="p-2 border rounded"
-          />
-          <input
-            type="text"
-            placeholder="Name"
-            value={newPlan.name}
-            onChange={(e) => setNewPlan({ ...newPlan, name: e.target.value })}
-            className="p-2 border rounded"
-          />
-          <input
-            type="text"
-            placeholder="Duration (months)"
-            value={newPlan.duration}
-            onChange={(e) => setNewPlan({ ...newPlan, duration: e.target.value })}
-            className="p-2 border rounded"
-          />
-          <input
-            type="text"
-            placeholder="Features (comma separated)"
-            value={newPlan.features}
-            onChange={(e) => setNewPlan({ ...newPlan, features: e.target.value })}
-            className="p-2 border rounded w-full"
-          />
-          <input
-            type="text"
-            placeholder="Limitations (comma separated)"
-            value={newPlan.limitations}
-            onChange={(e) => setNewPlan({ ...newPlan, limitations: e.target.value })}
-            className="p-2 border rounded w-full"
-          />
-          <button
-            onClick={editKey ? () => handleSave(editKey) : handleAdd}
-            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-          >
-            {editKey ? "Save" : "Add"}
-          </button>
-        </div>
-      </div>
+      {
+        openForm &&(
+        <PlanForm/>
+        )
+      }
 
       {/* Plans Table */}
       <div className="overflow-x-auto">

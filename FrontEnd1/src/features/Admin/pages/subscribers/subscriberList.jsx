@@ -59,8 +59,8 @@ const [list, setList] = useState(null); // store hovered subscriber ID
   );
 
   return (
-      <div className="min-w-2xl max-w-full mx-auto bg-white rounded-xl shadow p-6">
-        <h1 className="text-2xl font-semibold mb-4 text-gray-800">Subscriber Management</h1>
+      <div className="min-w-2xl max-w-full mx-auto bg-background text-muted-hover rounded-xl shadow p-2">
+        <h1 className="text-2xl font-semibold mb-4 ">Subscriber Management</h1>
 
         {/* 🔍 Search */}
         <input
@@ -68,14 +68,14 @@ const [list, setList] = useState(null); // store hovered subscriber ID
           placeholder="Search by name or email..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full p-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full p-2 mb-4 border border-muted/40 rounded-lg focus:outline-none focus:ring-2 "
         />
 
         {/* 📋 Table */}
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>
-              <tr className="bg-gray-100 text-left text-gray-700">
+              <tr className="bg-primary text-left text-background ">
                 <th className="p-3">SN</th>
                 <th className="p-3">Name</th>
                 <th className="p-3 ">Email</th>
@@ -87,7 +87,7 @@ const [list, setList] = useState(null); // store hovered subscriber ID
             </thead>
             <tbody>
               {filtered.map((s, i) => (
-                <tr key={s.id} className="border-b hover:bg-gray-50">
+                <tr key={s.id} className="border border-b-muted/40 bg-primary-foreground hover:bg-gray-50">
                   <td className="p-3">{i + 1}</td>
 
                   <td className="p-3">

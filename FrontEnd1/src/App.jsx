@@ -56,8 +56,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
-  const { user, subscriptionStatus } = useAuth();
-  console.log("logged user is ",user?.role);
+  const { user, subscriptionStatus } = useAuth(); 
   const location = useLocation();
 
   if (!user) {

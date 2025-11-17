@@ -38,13 +38,13 @@ const Sidebar = ({ isOpen, onClose }) => {
       
       {/* Sidebar */}
       <div className={`
-        fixed inset-y-0 left-0 z-50 w-64  bg-white shadow-xl transform transition-transform duration-300 ease-in-out
+        fixed inset-y-0 left-0 z-50 w-64  bg-background border border-muted/40 shadow-xl transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0
       `}>
         <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
           <div className="flex items-center">
-            <ShoppingCartIcon className="h-8 w-8 text-blue-600" />
-            <span className="ml-2 text-xl font-bold text-gray-900">Smart Bill System</span>
+            <ShoppingCartIcon className="h-8 w-8 text-muted-hover" />
+            <span className="ml-2 text-xl font-bold text-muted-hover">Smart Bill System</span>
           </div>
           <button
             onClick={onClose}
@@ -64,15 +64,15 @@ const Sidebar = ({ isOpen, onClose }) => {
                 className={`
                   group flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors
                   ${isActive 
-                    ? 'bg-blue-50 text-blue-700 border border-blue-200' 
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    ? 'bg-primary text-background border ' 
+                    : 'text-muted-hover hover:bg-gray-50 hover:text-shadow-muted-hover'
                   }
                 `}
                 onClick={() => window.innerWidth < 1024 && onClose()}
               >
                 <item.icon className={`
                   mr-3 h-5 w-5 flex-shrink-0
-                  ${isActive ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-600'}
+                  ${isActive ? 'text-background' : 'text-muted-hover group-hover:text-muted-hover'}
                 `} />
                 {item.name}
               </Link>

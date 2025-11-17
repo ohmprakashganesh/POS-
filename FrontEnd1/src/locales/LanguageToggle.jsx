@@ -1,13 +1,15 @@
 // components/LanguageToggle.jsx
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { SelectComponent,OptionComponent  } from "@/features/ui/Select";
+import { Languages } from "lucide-react"; // optional icon
+import { LanguageIcon } from "@heroicons/react/24/outline";
+import { OptionComponent, SelectComponent } from "@/features/ui/Select";
 
 const LanguageToggle = () => {
   const { i18n } = useTranslation();
 
-  const toggleLanguage = () => {
-    const newLang = i18n.language === "en" ? "np" : "en";
+  const handleLanguageChange = (event) => {
+    const newLang=event.target.value || "en"
     i18n.changeLanguage(newLang);
     localStorage.setItem("lang", newLang); // 👈 persist language
   };
@@ -15,7 +17,7 @@ const LanguageToggle = () => {
   return (
     <SelectComponent
   value={i18n.language}
-  onChange={toggleLanguage}
+  onChange={handleLanguageChange}
   className="  text-sm  min-w-[25px]"
 >
   <OptionComponent className="w-fit" value="en">English</OptionComponent>

@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 
 import { STATIC_SUBSCRIPTION_DATA } from '@/data/mockData';
+import { it } from 'zod/v4/locales';
 // ----------------------------------------------------------------------
 // STATIC MOCK DATA
 // ----------------------------------------------------------------------
@@ -85,91 +86,115 @@ const Report = () => {
 
 
 
-  const renderSummaryCards = (summary) => (
+  const renderSummaryCards = (summary) => {
+     const cards = [
+    {
+      title: "Total Subscribers (Latest)",
+      value: summary.totalSubscribers.toLocaleString(),
+      note: `As of ${filteredData[filteredData.length - 1]?.month || "N/A"}`,
+      className: "bg-primary-foreground text-muted-hover",
+      border: "border border-muted/40",
+    },
+    {
+      title: "Active Subscribers (Latest)",
+      value: summary.activeSubscribers.toLocaleString(),
+      note: `${(
+        (summary.activeSubscribers / summary.totalSubscribers) *
+        100
+      ).toFixed(1)}% Active Rate`,
+      className: "bg-white",
+      border: "border-l-4 border-green-500",
+    },
+    {
+      title: `Total Revenue (${timeRange})`,
+      value: `$${summary.totalRevenue.toLocaleString()}`,
+      note: "Aggregated over the period",
+      border: "border-l-4 border-yellow-500",
+    },
+    {
+      title: `Churn Rate (${timeRange})`,
+      value: `${summary.churnRate}%`,
+      note: "Total churned subscribers",
+    },
+  ];
+  return(
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {/* Total Subscribers Card */}
-      <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-indigo-500">
-        <p className="text-sm font-medium text-gray-500">Total Subscribers (Latest)</p>
-        <p className="text-3xl font-bold text-gray-900 mt-1">{summary.totalSubscribers.toLocaleString()}</p>
-        <span className="text-gray-500 text-xs mt-2 block">As of {filteredData[filteredData.length - 1]?.month || 'N/A'}</span>
+      {cards.map((card,ind)=>(
+      <div className="bg-primary-foreground text-muted-hover p-6 rounded-xl shadow-lg border border-muted/40">
+        <p className="text-sm font-medium ">{card.title}</p>
+        <p className="text-3xl font-bold  mt-1">{card.value}</p>
+        <span className="text-muted text-xs mt-2 block">As of {card.note}</span>
       </div>
-      
-      {/* Active Subscribers Card */}
-      <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500">
-        <p className="text-sm font-medium text-gray-500">Active Subscribers (Latest)</p>
-        <p className="text-3xl font-bold text-gray-900 mt-1">{summary.activeSubscribers.toLocaleString()}</p>
-        <span className="text-green-600 text-xs mt-2 block">{(summary.activeSubscribers / summary.totalSubscribers * 100).toFixed(1)}% Active Rate</span>
-      </div>
-      
-      {/* Total Revenue Card */}
-      <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500">
-        <p className="text-sm font-medium text-gray-500">Total Revenue ({timeRange})</p>
-        <p className="text-3xl font-bold text-gray-900 mt-1">${summary.totalRevenue.toLocaleString()}</p>
-        <span className="text-gray-500 text-xs mt-2 block">Aggregated over the period</span>
-      </div>
+ 
+      ))}
 
-       {/* Churn Rate Card */}
-       <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-red-500">
-        <p className="text-sm font-medium text-gray-500">Churn Rate ({timeRange})</p>
-        <p className="text-3xl font-bold text-gray-900 mt-1">{summary.churnRate}%</p>
-        <span className="text-red-500 text-xs mt-2 block">Total churned subscribers</span>
-      </div>
-    </div>
-  );
+        </div>
+  )
+  };
 
-  const renderReportTable = (data) => (
-    <div className="mt-8 bg-white p-6 rounded-xl shadow-lg overflow-x-auto">
-      <h3 className="text-xl font-semibold mb-4 text-gray-800">Subscription Breakdown</h3>
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
-          <tr className='bg-gray-300'>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Period</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Subscribers</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Active Subscribers</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Revenue</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Sample</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan Sample</th>
+  const renderReportTable = (data) =>{
+    const tableHeaders = [
+  "Period",
+  "Total Subscribers",
+  "Active Subscribers",
+  "Revenue",
+  "Status Sample",
+  "Plan Sample",
+];
+return (
+    <div className="mt-8 bg-primary-foreground p-6 rounded-xl shadow-lg overflow-x-auto">
+      <h3 className="text-xl font-semibold mb-4 text-muted-hover">Subscription Breakdown</h3>
+     <table className="min-w-full divide-y divide-muted/40">
+        <thead>
+          <tr className="bg-secondary">
+            {tableHeaders.map((head, i) => (
+              <th
+                key={i}
+                className="px-6 py-3 text-left text-xs font-medium text-primary-foreground uppercase tracking-wider"
+              >
+                {head}
+              </th>
+            ))}
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
+        <tbody className="bg-primary-foreground divide-y text-muted-hover divide-muted/40">
           {data.map((row) => (
-            <tr key={row.id || row.month} className="hover:bg-gray-50">
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600">{row.month}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{row.totalSubscribers.toLocaleString()}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">{row.activeSubscribers.toLocaleString()}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-bold">${row.revenue.toLocaleString()}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{row.status}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{row.plan}</td>
+            <tr key={row.id || row.month} className="hover:bg-background">
+              <td className="px-6 py-4 whitespace-nowrap text-sm ">{row.month}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm ">{row.totalSubscribers.toLocaleString()}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm ">{row.activeSubscribers.toLocaleString()}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm  ">${row.revenue.toLocaleString()}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm ">{row.status}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm ">{row.plan}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  );
+  )
+};
 
   // ----------------------------------------------------------------------
   // MAIN RENDER
   // ----------------------------------------------------------------------
 
   return (
-    <div className="p-8 rounded-md bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Subscription Analytics Report</h1>
+    <div className="p-2 rounded-md bg-background min-h-screen">
+      <h1 className="text-3xl font-extrabold text-muted-hover  border-b-muted/40 pb-2">Subscription Analytics Report</h1>
 
       {/* 1. Filters & Controls Section */}
-      <div className="bg-white p-6 rounded-xl shadow-lg mb-8">
-
-
-        <h2 className="text-xl font-semibold mb-4 text-gray-800">Report Criteria</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+      <div className="bg-background p-2 rounded-xl  mb-2">
+        <h2 className="text-xl  mb-4 text-muted-hover font-semibold">Report Criteria</h2>
+        <div className="grid grid-cols-2 bg-background  gap-10 items-end">
 
           {/* Time Range Filter (Monthly/Yearly) */}
-          <div>
-            <label htmlFor="timeRange" className="block text-sm font-medium text-gray-700">Reporting Period</label>
+          <div className='  border-muted/40'>
+            <label htmlFor="timeRange" className="block text-sm font-medium text-muted">Reporting Period</label>
             <select
               id="timeRange"
               value={timeRange}
               onChange={(e) => setTimeRange(e.target.value)}
-              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              className="mt-1 block w-full pl-3 pr-10  py-2 text-muted bg-primary-foreground focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
             >
               {TIME_RANGES.map(range => (
                 <option key={range} value={range}>{range}</option>
@@ -179,12 +204,12 @@ const Report = () => {
 
           {/* Status Filter */}
           <div>
-            <label htmlFor="statusFilter" className="block text-sm font-medium text-gray-700">Subscription Status</label>
+            <label htmlFor="statusFilter" className="block text-sm font-medium text-muted ">Subscription Status</label>
             <select
               id="statusFilter"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-muted border-muted/40  focus:outline-none bg-primary-foreground focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
             >
               {SUBSCRIPTION_STATUSES.map(status => (
                 <option key={status} value={status}>{status}</option>
@@ -241,7 +266,7 @@ const Report = () => {
 
       URL.revokeObjectURL(url); // cleanup
     }}
-    className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-md text-sm font-medium shadow-md transition duration-150"
+    className=" bg-primary text-white py-2 px-4 rounded-md text-sm font-medium shadow-md transition duration-150"
   >
     Export to CSV
   </button>

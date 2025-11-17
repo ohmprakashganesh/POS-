@@ -31,20 +31,20 @@ const NotificationCenter = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
-  const getNotificationIcon = (type) => {
-    switch (type) {
-      case 'success':
-        return <CheckIcon className="h-5 w-5 text-green-500 'border-l-green-500'" />;
-      case 'warning':
-        return <ExclamationTriangleIcon className="h-5 w-5 text-yellow-500 border-l-yellow-500" />;
-      case 'error':
-        return <ShieldExclamationIcon className="h-5 w-5 text-red-500 border-l-red-500" />;
-      case 'info':
-        return <InformationCircleIcon className="h-5 w-5 text-blue-500 border-l-blue-500" />;
-      default:
-        return <BellIcon className="h-5 w-5 text-gray-500 border-l-gray-500" />;
-    }
-  };
+  // const getNotificationIcon = (type) => {
+  //   switch (type) {
+  //     case 'success':
+  //       return <CheckIcon className="h-5 w-5 text-green-500 'border-l-green-500'" />;
+  //     case 'warning':
+  //       return <ExclamationTriangleIcon className="h-5 w-5 text-yellow-500 border-l-yellow-500" />;
+  //     case 'error':
+  //       return <ShieldExclamationIcon className="h-5 w-5 text-red-500 border-l-red-500" />;
+  //     case 'info':
+  //       return <InformationCircleIcon className="h-5 w-5 text-blue-500 border-l-blue-500" />;
+  //     default:
+  //       return <BellIcon className="h-5 w-5 text-gray-500 border-l-gray-500" />;
+  //   }
+  // };
 
   const formatTime = (timestamp) => {
     const now = new Date();
@@ -104,7 +104,7 @@ const NotificationCenter = () => {
 
   return (
     <div className="relative">
-  
+
   
     </div>
   );

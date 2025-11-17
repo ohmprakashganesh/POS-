@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// FIX: Replaced the occasionally missing TrendingUpIcon and TrendingDownIcon 
-// with the more reliably exported ArrowUpIcon and ArrowDownIcon to resolve 
-// the compilation error.
+
 import { CurrencyDollarIcon, ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/outline';
 
 const formatCurrency = (amount) => {

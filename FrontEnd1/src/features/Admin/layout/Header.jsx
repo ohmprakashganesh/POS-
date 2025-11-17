@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useNotifications } from '../../../contexts/NotificationContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -8,26 +8,49 @@ import {
   UserCircleIcon
 } from '@heroicons/react/24/outline';
 import { Moon, Sun } from 'lucide-react';
+import NotificationScreen from '../notifications/NotificationScreen';
 
 const Header = ({ onMenuClick, user }) => {
   const{theme,setTheme}=useTheme();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { unreadCount, markAsRead } = useNotifications();
   const { logout } = useAuth();
+  const[notification,setNotification]=useState();
+  
+    const buttonRef = useRef(null);
+    const panelRef = useRef(null);
+
+     useEffect(() => {
+        function handleClickOutside(event) {
+          if (
+            buttonRef.current &&
+            !buttonRef.current.contains(event.target) &&
+            panelRef.current &&
+            !panelRef.current.contains(event.target)
+          ) {
+            setNotification(false);
+          }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, []);
+  
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
+    <header className="bg-background shadow-sm border-b border-muted/40">
       <div className="flex items-center justify-between h-16 px-4 sm:px-6">
         {/* Left section */}
         <div className="flex items-center">
           <button
             onClick={onMenuClick}
-            className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600"
+            className="lg:hidden p-2 rounded-md text-muted-hover hover:text-shadow-muted-hover"
           >
             <Bars3Icon className="h-6 w-6" />
           </button>
           <div className="ml-4 lg:ml-0">
-            <h1 className="text-xl mask- font-bold  text-gray-900">Dashboard</h1>
+            <h1 className="text-xl mask- font-bold  text-muted-hover">Dashboard</h1>
           </div>
         </div>
 
@@ -42,19 +65,22 @@ const Header = ({ onMenuClick, user }) => {
             <Moon className="h-5 w-5 hidden dark:block" />
           </button>
           {/* Notifications */}
-          <div className="relative">
-            <button
-              onClick={() => markAsRead()}
-              className="p-2 text-gray-400 hover:text-gray-600 relative"
-            >
-              <BellIcon className="h-6  w-6" />
-              {unreadCount > 0 && (
-                <span className="absolute top-1  right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                  {unreadCount}
-                </span>
-              )}
-            </button>
-          </div>
+          <div ref={buttonRef} className="relative">
+                     <button
+                       onClick={() => {
+                         markAsRead();
+                         setNotification((prev) => !prev);
+                       }}
+                       className="p-2 rounded-full bg-muted/10 dark:bg-gray-700 relative"
+                     >
+                       <BellIcon className="h-5 w-5 " />
+                       {unreadCount > 0 && (
+                         <span className="absolute top-1 right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                           {unreadCount}
+                         </span>
+                       )}
+                     </button>
+                   </div>
 
           {/* User menu */}
           <div className="relative">
@@ -62,10 +88,10 @@ const Header = ({ onMenuClick, user }) => {
               onClick={() => setUserMenuOpen(!userMenuOpen)}
               className="flex items-center space-x-3 text-sm focus:outline-none"
             >
-              <UserCircleIcon className="h-8 w-8 text-gray-400" />
+              <UserCircleIcon className="h-8 w-8 text-muted-hover" />
               <div className="hidden md:block text-left">
-                <div className="font-medium text-gray-900">{user?.name}</div>
-                <div className="text-gray-500 text-xs">{user?.role}</div>
+                <div className="font-medium text-gray-900 text-muted-hover">{user?.name}</div>
+                <div className=" text-xs">{user?.role}</div>
               </div>
             </button>
 
@@ -82,6 +108,15 @@ const Header = ({ onMenuClick, user }) => {
           </div>
         </div>
       </div>
+      
+      {notification && (
+        <div
+          ref={panelRef}
+          className="absolute md:w-2/6 lg:w-2/7 w-full bg-white dark:bg-gray-800 right-1 top-17 z-40 flex justify-end border border-gray-200 dark:border-gray-700"
+        >
+          <NotificationScreen />
+        </div>
+      )}
     </header>
   );
 };

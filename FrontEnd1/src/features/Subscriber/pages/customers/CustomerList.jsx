@@ -7,7 +7,7 @@ import {
   TrashIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { customersData } from "../../../../data/mockData";
+import { customersData } from "@/data/mockData";
 import Input from "@/features/ui/Input";
 
 const CustomerList = () => {

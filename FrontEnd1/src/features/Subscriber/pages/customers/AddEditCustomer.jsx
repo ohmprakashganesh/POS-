@@ -1,175 +1,140 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
-import { customersData } from '../../../../data/mockData';
+import { customersData } from '@/data/mockData';
+import {z} from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import Button from "@/features/ui/Button";
+import Input from "@/features/ui/Input";
+
+const formSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  phone: z.string().min(1, "Phone number is required"),
+  email: z.string().optional(),
+  address: z.string().optional(),
+});
 
 const AddEditCustomer = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
+   const [error, setError] = useState("");
+    const {
+      register,
+      handleSubmit,
+      reset,
+      formState: { errors, isSubmitting },
+    } = useForm({
+      resolver: zodResolver(formSchema),
+    });
 
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    address: ''
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    if (isEdit) {
-      const customer = customersData.find(c => c.id === parseInt(id));
-      if (customer) {
-        setFormData({
+useEffect(() => {
+      if (isEdit) {
+        const customer = customersData.find((c) => c.id === parseInt(id));
+        if (!customer) return;
+        reset({
           name: customer.name,
           phone: customer.phone,
           email: customer.email,
-          address: customer.address
+          address: customer.address,
         });
       }
-    }
-  }, [id, isEdit]);
+    }, [id, isEdit, reset]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
 
-    // Basic validation
-    if (!formData.name.trim() || !formData.phone.trim()) {
-      setError('Name and phone are required');
-      return;
-    }
+ const onSubmit = async (data) => {
+    try {
+      // const response=await createnewcustomer or edit existing customer
+      console.log("Customer Data:", data);
+      navigate("/customers");
+    }catch (err) {
+  setError(`Failed to save customer: ${err.message}`);
+}
+ }
 
-    setIsLoading(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Customer saved:', formData);
-      setIsLoading(false);
-      navigate('/customers');
-    }, 1000);
-  };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <Link
-            to="/customers"
-            className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100"
-          >
-            <ArrowLeftIcon className="h-5 w-5" />
-          </Link>
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">
-              {isEdit ? 'Edit Customer' : 'Add New Customer'}
-            </h1>
-            <p className="text-gray-600">
-              {isEdit ? 'Update customer information' : 'Add a new customer to your database'}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
-          {error}
-        </div>
-      )}
-
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter customer name"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                Phone Number *
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                required
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="+977 98XXXXXXXX"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="customer@example.com"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
-                Address
-              </label>
-              <textarea
-                id="address"
-                name="address"
-                rows={3}
-                value={formData.address}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter customer address"
-              />
-            </div>
-          </div>
-
-          <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+    <>
+    <div className="flex items-center space-x-4">
             <Link
               to="/customers"
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+              className="bg-primary/10 hover:bg-primary/30 rounded-full"
             >
-              Cancel
+              <ArrowLeftIcon className="size-10 p-2" strokeWidth={2.5} />
             </Link>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-            >
-              {isLoading ? 'Saving...' : isEdit ? 'Update Customer' : 'Add Customer'}
-            </button>
+            <div>
+              <h1 className="text-2xl font-bold">
+                {isEdit ? "Update Customer Profile" : "Create a New Customer"}
+              </h1>
+              <p className="text-muted">
+                {isEdit
+                  ? "Review and Update Customers's details"
+                  : "Add a new Customer to your system"}
+              </p>
+            </div>
           </div>
-        </form>
-      </div>
-    </div>
+     <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full max-w-5xl my-10 rounded-md mx-auto bg-white p-5 space-y-5"
+      >
+        <div className="border-b border-b-gray-200 pb-2">
+          <h1 className="font-bold text-2xl">Customer's Details</h1>
+          <p className="text-muted">
+            {isEdit? "Update necessary details":"Provide details for new customer"}
+    
+          </p>
+        </div>
+        <Input
+          id="name"
+          placeholder="Enter customer's name"
+          label="Full Name *"
+          {...register("name")}
+          disabled={isSubmitting}
+          error={errors.name?.message}
+        />
+        <Input
+          id="phone"
+          type="tel"
+          placeholder="+977 98XXXXXXXX"
+          label="Phone Number *"
+          {...register("phone")}
+          disabled={isSubmitting}
+          error={errors.phone?.message}
+        />
+        <Input
+          id="email"
+          type="email"
+          placeholder="customer@example.com"
+          label="Email Address"
+          {...register("email")}
+          disabled={isSubmitting}
+          error={errors.email?.message}
+        />
+        <div className="address">
+           <label htmlFor="addressInput" className="block mb-1  capitalize">Address</label>
+           <textarea {...register("address")} rows="5" name="address" id="addressInput" disabled={isSubmitting} placeholder="Enter customers's address" className="w-full border border-gray-300 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed" />
+          {errors.address?.message && <p className="text-destructive text-sm mt-1">*{errors.address.message}</p>}
+        </div>
+        {error && <p className="text-destructive text-sm">*{error}</p>}
+        <div className="flex justify-end gap-3">
+          <Link
+            to="/customers"
+            className="px-4 py-2 rounded-md bg-destructive text-destructive-foreground hover:bg-destructive-hover"
+          >
+            Cancel
+          </Link>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting
+              ? "Saving..."
+              : isEdit
+              ? "Update Customer"
+              : "Add Customer"}
+          </Button>
+        </div>
+      </form>
+    </>
   );
 };
 

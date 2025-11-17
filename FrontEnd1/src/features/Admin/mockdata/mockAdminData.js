@@ -7,7 +7,7 @@ import { Building, ChartBarIcon, CheckCircleIcon, CreditCard, UserIcon, UsersIco
       value: 100,
       change: 12,
       icon: UsersIcon,
-      color: "blue",
+      color: "green",
       description: "All time subscribers"
     },
     {
@@ -23,7 +23,7 @@ import { Building, ChartBarIcon, CheckCircleIcon, CreditCard, UserIcon, UsersIco
       value: 2289796,
       change: 15,
       icon: CurrencyDollarIcon,
-      color: "emerald",
+      color: "green",
       description: "This month"
     },
     {
@@ -31,7 +31,7 @@ import { Building, ChartBarIcon, CheckCircleIcon, CreditCard, UserIcon, UsersIco
       value: 1232323,
       change: 23,
       icon: ChartBarIcon,
-      color: "purple",
+      color: "green",
       description: "All time"
     }
   ];

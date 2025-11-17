@@ -29,11 +29,11 @@ const Header = ({ openSidebar }) => {
         >
           <Bars3Icon className="h-6 w-6" />
         </button>
-        <h1 className="text-xl sm:text-2xl font-bold">{user.name}</h1>
+        <h1 className="text-xl sm:text-2xl font-bold whitespace-nowrap">{user.name}</h1>
       </div>
 
       {/* Right section */}
-      <div className="flex items-center gap-2 ">
+      <div className="flex items-center gap-2">
         <LanguageToggle />
         {/* Notifications */}
         <div className="relative ">
@@ -61,8 +61,8 @@ const Header = ({ openSidebar }) => {
           >
             <UserCircleIcon className="h-8 w-8 text-muted" />
             <div className="hidden md:block text-left">
-              <div className="font-medium ">{user?.name}</div>
-              <div className="text-muted text-xs">{user?.role}</div>
+              <p className="font-medium text-nowrap">{user?.name}</p>
+              <p className="text-muted text-xs">{user?.role}</p>
             </div>
           </button>
           {userMenuOpen && (

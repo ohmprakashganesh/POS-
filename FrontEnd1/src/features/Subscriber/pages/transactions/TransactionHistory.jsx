@@ -4,7 +4,7 @@ import {
   DocumentTextIcon,
   EyeIcon,
 } from "@heroicons/react/24/outline";
-import { transactionsData } from "../../../../data/mockData";
+import { transactionsData } from "@/data/mockData";
 import InvoiceViewer from "./Invoice";
 import Input from "@/features/ui/Input";
 
@@ -78,14 +78,14 @@ const TransactionHistory = () => {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-10">
-        <div className="bg-gradient-to-r from-white to-secondary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
+        <div className="bg-linear-to-r from-white to-secondary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
           <DocumentTextIcon className="h-8 w-8 text-muted" />
           <div className="details">
             <p className="font-medium text-muted">Total Transactions</p>
             <p className="text-2xl font-bold">{transactions.length}</p>
           </div>
         </div>
-        <div className="bg-gradient-to-r from-white to-secondary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
+        <div className="bg-linear-to-r from-white to-secondary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
           <span className="text-secondary flex items-center justify-center rounded-full size-8 bg-secondary/10 font-bold">
             $
           </span>
@@ -98,7 +98,7 @@ const TransactionHistory = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-white to-secondary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
+        <div className="bg-linear-to-r from-white to-secondary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
           <span className="text-secondary flex items-center justify-center rounded-full size-8 bg-secondary/10 font-bold">
             ✓
           </span>
@@ -111,7 +111,7 @@ const TransactionHistory = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-white to-tertiary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
+        <div className="bg-linear-to-r from-white to-tertiary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
           <span className="text-tertiary flex items-center justify-center rounded-full size-8 bg-tertiary/10 font-bold">
             ⏱
           </span>
@@ -125,7 +125,7 @@ const TransactionHistory = () => {
       </div>
 
       {/* Filters */}
-      <div className="grid grid-cols-1  items-center mb-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1  items-end mb-2 md:grid-cols-4 gap-4">
         <div className="relative">
           <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
           <Input
@@ -139,6 +139,7 @@ const TransactionHistory = () => {
         <Input
           type="date"
           placeholder="Start Date"
+          label="Start Date"
           value={dateRange.start}
           onChange={(e) =>
             setDateRange((prev) => ({ ...prev, start: e.target.value }))
@@ -148,15 +149,16 @@ const TransactionHistory = () => {
         <Input
           type="date"
           placeholder="End Date"
+          label="End Date"
           value={dateRange.end}
           onChange={(e) =>
             setDateRange((prev) => ({ ...prev, end: e.target.value }))
           }
           className="bg-white"
         />
-        <p className="text-muted">
+        <div className="md:pt-5 flex items-center h-full"><p className="text-muted">
           Showing {filteredTransactions.length} transactions
-        </p>
+        </p></div>
       </div>
 
       {/* Transactions Table */}

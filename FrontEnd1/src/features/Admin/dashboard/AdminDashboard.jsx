@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 import { metricCards ,recentSubscriptions,quickActions} from '../mockdata/mockAdminData';
 import { 
   UsersIcon, 
-  CurrencyDollarIcon, 
   ChartBarIcon, 
   BuildingStorefrontIcon,
   XCircleIcon,
   ArrowTrendingUpIcon,
   CreditCardIcon
 } from '@heroicons/react/24/outline';
-import { Icon } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [cardMetrics, setCardMetrics]=useState([]);
@@ -95,13 +93,11 @@ const AdminDashboard = () => {
     );
   }
   return(
-    
- 
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-muted-hover">SaaS Analytics Dashboard</h1>
-          <p className="text-gray-600">Overview of your POS platform performance</p>
+          <p className="text-muted">Overview of your POS platform performance</p>
         </div>
         <div className="text-sm text-gray-500">
           {/* //get the latest update from  the  backend  */}
@@ -114,10 +110,10 @@ const AdminDashboard = () => {
         {cardMetrics.map((card) => (
           <div key={card.title} className="bg-primary-foreground rounded-lg shadow-sm border border-muted/40 p-6">
             <div className="flex items-center justify-between">
-              <div>
+              <div className=' shrink'>
                 <p className="text-sm font-medium text-muted-hover">{card.title}</p>
                 <p className="text-2xl font-bold text-muted-hover mt-2">
-                  {card.title.includes('Revenue') ? `$${card.value.toLocaleString()}` : card.value.toLocaleString()}
+                  {card.title ?card.title : "not set"}
                 </p>
                 <p className="text-sm text-gray-500 mt-1">{card.description}</p>
                 <div className={`flex items-center mt-1 text-sm ${
@@ -127,7 +123,7 @@ const AdminDashboard = () => {
                   {Math.abs(card.change)}% from last period
                 </div>
               </div>
-              <div className={`p-3 rounded-full bg-${card.color}-100`}>
+              <div className={`p-4  rounded-full bg-${card.color}-100`}>
                 <card.icon className={`h-6 w-6 text-${card.color}-600`} />
               </div>
             </div>
@@ -141,10 +137,10 @@ const AdminDashboard = () => {
        {metrics.subMetrics.map((obj, ind) => {
   const Icon = obj.icon;
   return (
-    <div key={ind} className="bg-primary-foreground rounded-lg shadow-sm border border-gray-200 p-6">
+    <div key={ind} className="bg-primary-foreground rounded-lg shadow-sm border border-muted/40 p-6">
       <div className="flex items-center justify-between">
         <div className='text-muted-hover'>
-          <p className="text-sm font-medium ">{obj.title}</p>
+          <p className="text-sm font-medium "> {obj.title}</p>
           <p className="text-2xl font-bold ">{obj.value}</p>
         </div>
 
@@ -161,7 +157,7 @@ const AdminDashboard = () => {
       {/* Recent Subscriptions & Revenue Chart */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Subscriptions */}
-        <div className="bg-primary-foreground rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-primary-foreground rounded-lg shadow-sm border border-muted/40 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-muted-hover">Recent Subscriptions</h3>
             <Link to="/admin/subscriptions" className="text-sm dark:text-muted-hover text-primary hover:text-primary-hover">
@@ -195,7 +191,7 @@ const AdminDashboard = () => {
 
 
         {/* Revenue Chart */}
-        <div className="bg-primary-foreground rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-primary-foreground rounded-lg shadow-sm border border-muted/40 p-6">
           <h3 className="text-lg font-semibold text-muted-hover mb-4">Revenue Overview</h3>
           <div className="h-64 bg-primary-foreground rounded-lg flex items-center justify-center">
             <div className="text-center">
@@ -208,9 +204,9 @@ const AdminDashboard = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="bg-primary-foreground rounded-lg shadow-sm border border-muted/40 p-6">
+        <h3 className="text-lg font-semibold text-muted-hover mb-4">Quick Actions</h3>
+        <div className="grid text-muted grid-cols-1 md:grid-cols-4 gap-4">
           {quickActions.map((item,ind)=>{
             const Icon = item.icon;
           return (
@@ -221,43 +217,15 @@ const AdminDashboard = () => {
           to={item.link}
             className="p-4 border border-muted/40 rounded-lg hover:bg-primary/20  transition-colors text-center"
           >
-            <div className="h-8 w-8 text-blue-600 mx-auto" >
+            <div className="h-8 w-8 text-primary mx-auto" >
               <Icon/>
               </div>
-            <p className="mt-2 font-medium text-gray-900">{item.title}</p>
-            <p className="text-sm text-gray-500">{item.subtitle}</p>
+            <p className="mt-2 font-medium text-muted-hover">{item.title}</p>
+            <p className="text-sm text-muted">{item.subtitle}</p>
           </Link>
          )
         })
       };
-         
-
-          <Link
-            to="/billing"
-            className="p-4 border border-gray-200 rounded-lg hover:border-green-500 hover:bg-green-50 transition-colors text-center"
-          >
-            <CurrencyDollarIcon className="h-8 w-8 text-green-600 mx-auto" />
-            <p className="mt-2 font-medium text-gray-900">Billing</p>
-            <p className="text-sm text-gray-500">Revenue reports</p>
-          </Link>
-
-          <Link
-            to="/subscriptionPlans"
-            className="p-4 border border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-colors text-center"
-          >
-            <CreditCardIcon className="h-8 w-8 text-purple-600 mx-auto" />
-            <p className="mt-2 font-medium text-gray-900">Plan Management</p>
-            <p className="text-sm text-gray-500">Edit pricing plans</p>
-          </Link>
-
-          <Link
-            to="/support"
-            className="p-4 border border-gray-200 rounded-lg hover:border-orange-500 hover:bg-orange-50 transition-colors text-center"
-          >
-            <BuildingStorefrontIcon className="h-8 w-8 text-orange-600 mx-auto" />
-            <p className="mt-2 font-medium text-gray-900">Customer Support</p>
-            <p className="text-sm text-gray-500">Help & support</p>
-          </Link>
         </div>
       </div>
     </div>
