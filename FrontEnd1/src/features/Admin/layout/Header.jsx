@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useNotifications } from '../../../contexts/NotificationContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { 
   BellIcon,
   Bars3Icon,
   UserCircleIcon
 } from '@heroicons/react/24/outline';
+import { Moon, Sun } from 'lucide-react';
 
 const Header = ({ onMenuClick, user }) => {
+  const{theme,setTheme}=useTheme();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const { notifications, unreadCount, markAsRead } = useNotifications();
+  const { unreadCount, markAsRead } = useNotifications();
   const { logout } = useAuth();
 
   return (
@@ -30,6 +33,14 @@ const Header = ({ onMenuClick, user }) => {
 
         {/* Right section */}
         <div className="flex items-center space-x-4">
+           <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            // alternatively: onClick={toggleTheme}
+            className="p-2 rounded-full bg-muted/10 dark:bg-gray-700"
+          >
+            <Sun className="h-5 w-5 dark:hidden" />
+            <Moon className="h-5 w-5 hidden dark:block" />
+          </button>
           {/* Notifications */}
           <div className="relative">
             <button

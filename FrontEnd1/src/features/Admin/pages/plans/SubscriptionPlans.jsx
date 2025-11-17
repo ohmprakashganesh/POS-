@@ -37,6 +37,7 @@ const PlanManagement = () => {
       },
     });
     setEditKey(null);
+
     setNewPlan({ id: "", name: "", duration: "", features: "", limitations: "" });
   };
 
@@ -60,7 +61,7 @@ const PlanManagement = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-6 bg-white shadow rounded-lg">
+    <div className="w-full mx-auto p-6 bg-primary-foreground shadow rounded-lg">
       <h1 className="text-2xl font-semibold mb-6">Manage Subscription Plans</h1>
 
       {/* Add/Edit Plan Section */}

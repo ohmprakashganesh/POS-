@@ -15,7 +15,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 
 const Header = ({ onMenuClick, user }) => {
   // now useTheme returns { theme, setTheme, toggleTheme }
-  const { theme, setTheme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const { t } = useTranslation('cashier');
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { unreadCount, markAsRead } = useNotifications();
@@ -64,7 +64,6 @@ const Header = ({ onMenuClick, user }) => {
         <div className="flex items-center space-x-2">
 
           {/* 🌗 Theme Toggle */}
-          {/* You can either call setTheme directly (keeps your code) or use toggleTheme */}
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             // alternatively: onClick={toggleTheme}

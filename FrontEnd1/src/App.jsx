@@ -33,10 +33,10 @@ import VendorDetailsCard from './features/Subscriber/pages/vendors/VendorDetails
 
 
 // admin components 
-import SubscriberList from './features/Admin/pages/subscriberList';
-import AdminDashboard from './features/Admin/AdminDashboard';
-import SubscriptionPlans from './features/Admin/pages/SubscriptionPlans';
-import Report from './features/Admin/pages/Report';
+import SubscriberList from './features/Admin/pages/subscribers/subscriberList';
+import AdminDashboard from './features/Admin/dashboard/AdminDashboard';
+import SubscriptionPlans from './features/Admin/pages/plans/SubscriptionPlans';
+import Report from './features/Admin/pages/report/Report';
 
 // cashier components 
 import CashierProductList from './features/cashier/pages/products/ProductList'
@@ -47,7 +47,7 @@ import Paid from './globalPages/subscription/Paid';
 import VendorList from './features/Subscriber/pages/vendors/VendorsList';
 import Profile from './features/Subscriber/pages/settings/profile/Profile';
 import Support from './features/Subscriber/pages/settings/help/Support';
-import SupportReq from './features/Admin/pages/Support';
+import SupportReq from './features/Admin/pages/support/Support';
 import { CartProvider } from './features/cashier/context/CartContext';
 import Cart from './features/cashier/pages/cart/cart';
 import CProduct from './features/cashier/pages/products/Product';
