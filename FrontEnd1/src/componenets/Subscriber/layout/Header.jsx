@@ -29,7 +29,7 @@ const Header = ({ openSidebar }) => {
         >
           <Bars3Icon className="h-6 w-6" />
         </button>
-        <h1 className="text-xl sm:text-2xl font-bold">{user.name}</h1>
+        <h1 className="text-xl sm:text-2xl font-bold whitespace-nowrap">{user.name}</h1>
       </div>
 
       {/* Right section */}

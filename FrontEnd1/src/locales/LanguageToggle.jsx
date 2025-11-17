@@ -15,9 +15,9 @@ const LanguageToggle = () => {
   };
 
   return (
-    <SelectComponent value={i18n.language} onChange={handleLanguageChange} className="border-none  focus:ring-0">
-      <OptionComponent value="en">🇺🇸 English</OptionComponent>
-      <OptionComponent value="np">🇳🇵 नेपाली</OptionComponent>
+    <SelectComponent value={i18n.language} onChange={handleLanguageChange} className="border-none  focus:ring-0 text-xs sm:text-base ml-3">
+      <OptionComponent value="en">🇺🇸 En</OptionComponent>
+      <OptionComponent value="np">🇳🇵 Np</OptionComponent>
     </SelectComponent>
   );
 };
