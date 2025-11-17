@@ -157,7 +157,7 @@
 //       {/* Metrics Grid */}
 //       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 //         {metricCards.map((card) => (
-//           <div key={card.title} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+//           <div key={card.title} className="bg-white dark:bg-dark rounded-lg shadow-sm border border-gray-200 p-6">
 //             <div className="flex items-center justify-between">
 //               <div>
 //                 <p className="text-sm font-medium text-gray-600">{card.title}</p>
@@ -188,7 +188,7 @@
 
 //       {/* Additional Business Metrics */}
 //       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-//         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+//         <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-gray-200 p-6">
 //           <div className="flex items-center justify-between">
 //             <div>
 //               <p className="text-sm font-medium text-gray-600">Total Products</p>
@@ -199,7 +199,7 @@
 //           </div>
 //         </div>
 
-//         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+//         <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-gray-200 p-6">
 //           <div className="flex items-center justify-between">
 //             <div>
 //               <p className="text-sm font-medium text-gray-600">Monthly Expenses</p>
@@ -210,7 +210,7 @@
 //           </div>
 //         </div>
 
-//         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+//         <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-gray-200 p-6">
 //           <div className="flex items-center justify-between">
 //             <div>
 //               <p className="text-sm font-medium text-gray-600">Low Stock Items</p>
@@ -223,7 +223,7 @@
 //       </div>
 
 //       {/* Quick Actions */}
-//       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+//       <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-gray-200 p-6">
 //         <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
 //         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
 //           {quickActions.map((action) => (
@@ -243,7 +243,7 @@
 //       {/* Recent Activity & Low Stock Alerts */}
 //       <div className="grid grid-cols-1 shadow-md lg:grid-cols-2 gap-4">
 //         {/* Recent Transactions */}
-//         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+//         <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-gray-200 p-6">
 //           <div className="flex items-center justify-between mb-4">
 //             <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
 //             <Link to="/transactions" className="text-sm text-blue-600 hover:text-blue-800">
@@ -272,7 +272,7 @@
 //         </div>
 
 //         {/* Low Stock Alerts */}
-//         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+//         <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-gray-200 p-6">
 //           <div className="flex items-center justify-between mb-4">
 //             <h3 className="text-lg font-semibold text-gray-900">Low Stock Alerts</h3>
 //             <Link to="/products" className="text-sm text-blue-600 hover:text-blue-800">
@@ -310,7 +310,7 @@
 //       </div>
 
 //       {/* Sales Chart */}
-//       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+//       <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-gray-200 p-6">
 //         <h3 className="text-lg font-semibold text-gray-900 mb-4">Sales Overview</h3>
 //         <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
 //           <div className="text-center">
@@ -432,7 +432,7 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -441,10 +441,10 @@ const Dashboard = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">{t('dashboard.title')}</h1>
-          <p className="text-gray-600">{t('dashboard.subtitle')}</p>
+          <h1 className="text-2xl font-bold">{t('dashboard.title')}</h1>
+          <p className="text-muted">{t('dashboard.subtitle')}</p>
         </div>
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-muted">
           {t('dashboard.lastUpdated')}: {new Date().toLocaleDateString()}
         </div>
       </div>
@@ -452,7 +452,7 @@ const Dashboard = () => {
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
         {metricCards.map((card) => (
-          <div key={card.title} className="bg-linear-to-r from-white/50  to-secondary/10   rounded-md shadow-sm p-5">
+          <div key={card.title} className="bg-linear-to-r bg-white dark:bg-dark rounded-md shadow-sm p-5">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xl font-semibold ">{card.title}</p>
@@ -465,7 +465,7 @@ const Dashboard = () => {
                   }
                 </p>
                 <p className="text-sm text-muted mt-1">{card.description}</p>
-                <div className={`flex items-center mt-1 text-sm ${card.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                <div className={`flex items-center mt-1 text-sm ${card.change >= 0 ? 'text-constructive' : 'text-destructive'}`}>
                   {card.change >= 0 ? <ArrowUpIcon className="h-4 w-4 mr-1" /> : <ArrowDownIcon className="h-4 w-4 mr-1" />}
                   {t('dashboard.metrics.percentChange', { value: Math.abs(card.change) })}
                 </div>
@@ -480,7 +480,7 @@ const Dashboard = () => {
 
       {/* Additional Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div className="bg-white rounded-lg shadow-sm  p-5">
+        <div className="bg-white dark:bg-dark rounded-lg shadow-sm  p-5">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xl font-semibold">{t('dashboard.metrics.totalProducts')}</p>
@@ -491,7 +491,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-md shadow-sm p-5">
+        <div className="bg-white dark:bg-dark rounded-md shadow-sm p-5">
           <div className="flex items-center justify-between">
             <div>
               <p className=" text-xl font-semibold  ">{t('dashboard.metrics.monthlyExpenses')}</p>
@@ -502,7 +502,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-md  shadow-sm p-5">
+        <div className="bg-white dark:bg-dark rounded-md  shadow-sm p-5">
           <div className="flex items-center justify-between">
             <div>
               <p className=" text-xl font-semibold ">{t('dashboard.metrics.lowStockItems')}</p>
@@ -516,17 +516,17 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <div className="quick-actions">
-        <h3 className="text- font-semibold text-gray-900 mb-4">{t('dashboard.quickActions.title')}</h3>
+        <h3 className="font-semibold  mb-4">{t('dashboard.quickActions.title')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {quickActions.map((action) => (
             <Link
               key={action.title}
               to={action.link}
-              className="p-4 bg-white shadow-sm rounded-md  hover:bg-gradient-to-r hover:from-transparent  hover:via-primary/10  text-center group"
+              className="p-4 bg-white dark:bg-dark border border-transparent hover:border-primary/50  shadow-sm rounded-md   text-center group"
             >
-              <action.icon className={`h-8 w-8 text-${action.color}-600 mx-auto group-hover:scale-110 transition-transform`} />
-              <p className="mt-2 font-medium text-gray-900">{action.title}</p>
-              <p className="text-sm text-gray-500">{action.description}</p>
+              <action.icon className={`h-8 w-8 text-${action.color}-600 mx-auto`} />
+              <p className="mt-2 font-medium">{action.title}</p>
+              <p className="text-sm text-muted">{action.description}</p>
             </Link>
           ))}
         </div>
@@ -534,7 +534,7 @@ const Dashboard = () => {
 
       {/* Recent Transactions & Low Stock Alerts */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
-        <div className="bg-white rounded-md shadow-sm p-5">
+        <div className="bg-white dark:bg-dark rounded-md shadow-sm p-5">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold">{t('dashboard.sections.recentTransactions')}</h3>
             <Link to="/transactions" className="text-sm text-primary hover:text-primary-hover">{t('dashboard.sections.viewAll')}</Link>
@@ -560,7 +560,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-white h-fit rounded-md shadow-sm p-5">
+        <div className="bg-white dark:bg-dark h-fit rounded-md shadow-sm p-5">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold ">{t('dashboard.sections.lowStockAlerts')}</h3>
             <Link to="/products" className="text-sm text-primary hover:text-primary-hover">{t('dashboard.sections.manageInventory')}</Link>
@@ -589,7 +589,7 @@ const Dashboard = () => {
             ))}
             {lowStockProducts.length === 0 && (
               <div className="text-center py-4 text-muted">
-                <CheckIcon className="h-8 w-8 text-green-500 mx-auto" />
+                <CheckIcon className="h-8 w-8 text-constructive mx-auto" />
                 <p className="mt-2">{t('dashboard.metrics.allProductsWellStocked')}</p>
               </div>
             )}
@@ -598,7 +598,7 @@ const Dashboard = () => {
       </div>
 
       {/* Sales Overview */}
-      <div className="p-5 bg-white rounded-md shadow-sm min-h-100 -fit flex flex-col">
+      <div className="p-5 bg-white dark:bg-dark rounded-md shadow-sm min-h-100 -fit flex flex-col">
         <h3 className="text-lg font-semibold mb-4">{t('dashboard.sections.salesOverview')}</h3>
         <div className="grow bg-background rounded-md flex items-center justify-center">
           <div className="text-center text-muted">

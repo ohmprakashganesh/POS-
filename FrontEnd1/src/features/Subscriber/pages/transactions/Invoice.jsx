@@ -124,14 +124,14 @@ const InvoiceViewer = ({ setInvoice, invoice }) => {
     invoice && (
       <>
         <div
-          className="overlay fixed inset-0 bg-black/30 z-50"
+          className="overlay fixed inset-0 bg-black/30 dark:bg-black/70 z-50"
           onClick={() => setInvoice(false)}
         >
-          <X strokeWidth={2.5} className="size-12 p-2 rounded-full text-primary-foreground hover:bg-black/40 absolute top-2 right-2"/>
+          <X strokeWidth={2.5} className="size-12 p-2 rounded-full text-primary-foreground hover:bg-black/40  absolute top-2 right-2"/>
         </div>
-        <div className="bill w-[95dvw] overflow-auto  max-w-4xl max-h-4/5 bg-white shadow-sm p-3 z-100 rounded-md mx-auto fixed top-1/2 left-1/2 -translate-1/2">
+        <div className="bill w-[95dvw] overflow-auto  max-w-4xl max-h-4/5 bg-white dark:bg-dark shadow-sm p-3 z-100 rounded-md mx-auto fixed top-1/2 left-1/2 -translate-1/2">
           {/* Header Section */}
-          <div className="text-center border-b border-gray-200 pb-4 mb-6">
+          <div className="text-center border-b border-muted/40 pb-4 mb-6">
             <h1 className="text-xl md:text-2xl font-bold mb-1">{data.branch.name}</h1>
             <p className="text-sm text-muted">{data.branch.address}</p>
             <p className="text-sm text-muted">Contact: {data.branch.contact}</p>
@@ -183,7 +183,7 @@ const InvoiceViewer = ({ setInvoice, invoice }) => {
               </div>
             </div>
           </div>
-          <table className="w-full mb-5 text-xs sm:text-sm">
+          <table className="w-full mb-5 text-xs sm:text-sm text-muted">
             <thead className="bg-secondary text-secondary-foreground font-semibold">
               <tr>
                 <th className="px-3 py-2">S.N</th>
@@ -196,19 +196,19 @@ const InvoiceViewer = ({ setInvoice, invoice }) => {
             <tbody>
               {data.items.map((item, index) => (
                 <tr key={index}>
-                  <td className="border border-gray-200 px-3 py-2">
+                  <td className="border border-muted/40 px-3 py-2">
                     {index + 1}
                   </td>
-                  <td className="border border-gray-200 px-3 py-2">
+                  <td className="border border-muted/40 px-3 py-2">
                     {item.name}
                   </td>
-                  <td className="border border-gray-200 px-3 py-2  text-center">
+                  <td className="border border-muted/40 px-3 py-2  text-center">
                     {item.quantity} {item.unit}
                   </td>
-                  <td className="border border-gray-200 px-3 py-2 text-right">
+                  <td className="border border-muted/40 px-3 py-2 text-right">
                     Rs. {item.unitPrice.toFixed(2)}
                   </td>
-                  <td className="border border-gray-200 px-3 py-2 text-right font-semibold">
+                  <td className="border border-muted/40 px-3 py-2 text-right font-semibold">
                     Rs. {item.total.toFixed(2)}
                   </td>
                 </tr>
@@ -236,13 +236,13 @@ const InvoiceViewer = ({ setInvoice, invoice }) => {
                   </span>
                 </div>
               )}
-              <div className="flex justify-between text-base pt-2 border-t border-gray-200">
+              <div className="flex justify-between text-base pt-2 border-t border-muted/40">
                 <span className="font-bold">Grand Total:</span>
                 <span className="font-bold">Rs. {data.grandTotal}</span>
               </div>
             </div>
           </div>
-          <div className="border-t border-gray-200 pt-4 text-center text-xs text-muted mb-6">
+          <div className="border-t border-muted/40 pt-4 text-center text-xs text-muted mb-6">
             <p>Thank you for your business!</p>
             <p className="mt-1">
               This is a computer-generated invoice and does not require a

@@ -74,9 +74,9 @@ const AddEditCashier = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-5xl my-10 rounded-md mx-auto bg-white p-5 space-y-5"
+        className="w-full max-w-5xl my-10 rounded-md mx-auto bg-white dark:bg-dark p-5 space-y-5"
       >
-        <div className="border-b border-b-gray-200 pb-2">
+        <div className="border-b border-muted/40 pb-2">
           <h1 className="font-bold text-2xl">Cashier Details</h1>
           <p className="text-muted">
             {isEdit? "Update necessary details":"Provide details for new cashier"}
@@ -111,7 +111,7 @@ const AddEditCashier = () => {
         />
         <div className="address">
            <label htmlFor="addressInput" className="block mb-1  capitalize">Address</label>
-           <textarea {...register("address")} rows="5" name="address" id="addressInput" disabled={isSubmitting} placeholder="Enter cashier's address" className="w-full border border-gray-300 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed" />
+           <textarea {...register("address")} rows="5" name="address" id="addressInput" disabled={isSubmitting} placeholder="Enter cashier's address" className="w-full border border-muted/40  rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed" />
           {errors.address?.message && <p className="text-destructive text-sm mt-1">*{errors.address.message}</p>}
         </div>
         {error && <p className="text-destructive text-sm">*{error}</p>}

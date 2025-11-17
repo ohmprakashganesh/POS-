@@ -20,7 +20,7 @@ const Header = ({ openSidebar }) => {
   const { logout, user } = useAuth();
 
   return (
-    <header className="h-16 bg-white shadow-sm flex items-center justify-between px-2 sm:px-5 sticky top-0 z-10">
+    <header className="h-16 bg-white dark:bg-dark shadow-sm flex items-center justify-between px-2 sm:px-5 sticky top-0 z-10">
       {/* Left section */}
       <div className="flex items-center gap-2">
         <button

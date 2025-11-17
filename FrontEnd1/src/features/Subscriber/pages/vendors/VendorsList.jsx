@@ -45,7 +45,7 @@ const Vendor = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold">Vendors</h1>
-          <p className="text-gray-600">Manage your vendor database</p>
+          <p className="text-muted">Manage your vendor database</p>
         </div>
         <Link
           to="/vendor/add"
@@ -64,12 +64,12 @@ const Vendor = () => {
           placeholder="Search vendors by name, phone, or email..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="pl-9 bg-white"
+          className="pl-9  bg-white dark:bg-dark"
         />
       </div>
 
-      <div className="overflow-x-auto bg-white rounded-md shadow-sm">
-        <table className="min-w-full text-sm ">
+      <div className="overflow-x-auto  bg-white dark:bg-dark rounded-md shadow-sm">
+        <table className="min-w-full text-sm text-muted">
           <thead className="uppercase text-xs text-left font-semibold bg-secondary text-secondary-foreground">
             <tr>
               <th className="w-6 p-4">SN</th>

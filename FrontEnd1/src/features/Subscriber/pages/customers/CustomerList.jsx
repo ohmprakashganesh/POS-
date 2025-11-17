@@ -38,7 +38,7 @@ const CustomerList = () => {
   };
 
   return (
-    <div className="space-y-2 ">
+    <div className="space-y-2  ">
       <div className="flex flex-col  sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold">Customers</h1>
@@ -60,12 +60,12 @@ const CustomerList = () => {
           placeholder="Search customers by name, phone, or email..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="pl-9 bg-white"
+          className="pl-9 bg-white dark:bg-dark"
         />
       </div>
 
-      <div className="overflow-x-auto bg-white rounded-md shadow-sm">
-        <table className="min-w-full text-sm text-gray-700">
+      <div className="overflow-x-auto bg-white dark:bg-dark rounded-md shadow-sm">
+        <table className="min-w-full text-sm text-muted">
           <thead className="uppercase  text-xs text-left font-semibold bg-secondary text-secondary-foreground">
             <tr>
               <th className="p-4 w-6">S.N</th>
@@ -111,7 +111,7 @@ const CustomerList = () => {
                 <td className="px-4 py-3 font-semibold">12</td>
 
                 {/* Total Spent */}
-                <td className="px-4 py-3 font-semibold text-green-600">
+                <td className="px-4 py-3 font-semibold text-constructive">
                   $2,450.00
                 </td>
 
@@ -125,7 +125,7 @@ const CustomerList = () => {
                   </Link>
                   <button
                     onClick={() => handleDelete(customer.id)}
-                    className="p-1.5 rounded-full hover:bg-red-50 text-red-600 hover:text-red-800 transition"
+                    className="p-1.5 rounded-full hover:bg-red-50 text-destructive dark:text-destructive-hover transition"
                   >
                     <TrashIcon className="h-4 w-4" />
                   </button>

@@ -42,7 +42,7 @@ import Report from './features/Admin/pages/report/Report';
 import CashierProductList from './features/cashier/pages/products/ProductList'
 import CashierCustomerList from './features/cashier/pages/customer/CustomerList';
 import Orders from './features/cashier/pages/history/Orders'
-import POS from './features/cashier/pages/pos/POS';
+import POS from './features/cashier/pages/pos/Pos';
 import Paid from './globalPages/subscription/Paid';
 import VendorList from './features/Subscriber/pages/vendors/VendorsList';
 import Profile from './features/Subscriber/pages/settings/profile/Profile';

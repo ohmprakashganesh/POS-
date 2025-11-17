@@ -8,7 +8,7 @@ import {
   UserCircleIcon
 } from '@heroicons/react/24/outline';
 import LanguageToggle from '@/locales/LanguageToggle';
-import NotificationScreen from '../pages/notification/notification';
+import NotificationScreen from '../pages/notification/Notification';
 import { LogOutIcon, Moon, Sun } from 'lucide-react';
 // UPDATED import: point to your ThemeContext provider hook
 import { useTheme } from '@/contexts/ThemeContext';
