@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LanguageToggle from "@/locales/LanguageToggle";
 import { LogOut, X } from "lucide-react";
 import Button from "@/features/ui/Button";
+import ThemeButton from "@/features/ui/ThemeButton";
 const Header = ({ openSidebar }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const Header = ({ openSidebar }) => {
 
       {/* Right section */}
       <div className="flex items-center gap-2">
+        <ThemeButton/>
         <LanguageToggle />
         {/* Notifications */}
         <div className="relative ">
@@ -45,7 +47,7 @@ const Header = ({ openSidebar }) => {
             {unreadCount > 0 && (
               <span
                 className="absolute 
-                top-1 right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+                top-1 right-1 bg-destructive text-destructive-foreground  text-xs rounded-full h-4 w-4 flex items-center justify-center"
               >
                 {unreadCount}
               </span>
@@ -71,14 +73,14 @@ const Header = ({ openSidebar }) => {
                 className="overlay fixed inset-0 z-10"
                 onClick={() => setUserMenuOpen(false)}
               />
-              <div className="dropdown absolute w-70 z-20 top-10 right-0 h-fit bg-white shadow-sm  py-3 px-2">
+              <div className="dropdown absolute w-70 z-20 top-10 right-0 h-fit bg-white dark:bg-dark shadow-sm  py-3 px-2">
                 <X
                   className="absolute right-2 top-2 size-8 p-1.5  rounded-full hover:bg-background"
                   onClick={() => setUserMenuOpen(false)}
                 />
                 <div className="px-4">
                   <div className="flex items-center gap-2">
-                    <div className="size-10 bg-primary text-white rounded-full capitalize flex items-center justify-center text-lg font-bold">
+                    <div className="size-10 bg-primary text-primary-foreground rounded-full capitalize flex items-center justify-center text-lg font-bold">
                       {user?.name[0]}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -102,7 +104,7 @@ const Header = ({ openSidebar }) => {
 
                 <button
                   onClick={logout}
-                  className="px-4 py-2  rounded-lg w-full flex gap-2 font-semibold items-center justify-start hover:bg-background text-red-500"
+                  className="px-4 py-2  rounded-lg w-full flex gap-2 font-semibold items-center justify-start hover:bg-background text-destructive"
                 >
                   <LogOut />
                   Logout
