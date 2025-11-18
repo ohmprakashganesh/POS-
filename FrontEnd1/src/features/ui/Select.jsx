@@ -41,7 +41,7 @@ export const SelectComponent = ({
 
   return (
     <SelectContext.Provider value={{ open, setOpen, value, onChange, }}>
-      <div ref={selectRef} className="relative inline-block">
+      <div ref={selectRef} className="relative inline-block w-full">
          {label && <label className="block mb-1  capitalize">{label}</label>}
         <button
           type="button"
