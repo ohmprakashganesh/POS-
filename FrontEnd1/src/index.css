@@ -77,3 +77,8 @@ body {
   font-style: normal;
   font-display: swap;
 }
+
+.support-table-th {
+  @apply px-2 md:px-4 lg:py-2  md:py-2 py-1 text-sm font-medium text-muted-hover ;
+}
+

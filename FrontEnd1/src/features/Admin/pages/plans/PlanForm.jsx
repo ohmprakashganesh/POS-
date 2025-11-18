@@ -1,112 +1,136 @@
-import React, { useState } from 'react'
-import { plans as initialPlans } from "@/data/mockData";
+import React, { useEffect, useState } from 'react'
 import Input from '@/features/ui/Input';
+import { plans } from '@/data/mockData';
 
-const PlanForm = ({editKey}) => {
-      const [newPlan, setNewPlan] = useState({
+const PlanForm = ({ editKey, setOpenForm, setEditKey }) => {
+  const [newPlan, setNewPlan] = useState({
     id: "",
     name: "",
     duration: "",
     features: "",
     limitations: "",
   });
-   // Save edit
-    const handleSave = (key) => {
-      setPlans({
-        ...plant2,
-        [key]: {
-          ...plant2[key],
-          name: newPlan.name || plant2[key].name,
-          duration: newPlan.duration || plant2[key].duration,
-          features: newPlan.features
-            ? newPlan.features.split(",").map((f) => f.trim())
-            : plant2[key].features,
-          limitations: newPlan.limitations
-            ? newPlan.limitations.split(",").map((l) => l.trim())
-            : plant2[key].limitations,
-        },
-      });
-      setEditKey(null);
-  
-      setNewPlan({ id: "", name: "", duration: "", features: "", limitations: "" });
-    };
-  
-    // Add new plan
-    const handleAdd = () => {
-      if (!newPlan.id || !newPlan.name) return alert("Enter key and name for the plan!");
-      setPlans({
-        ...plant2,
-        [newPlan.id]: {
-          name: newPlan.name,
-          duration: newPlan.duration,
-          features: newPlan.features
-            ? newPlan.features.split(",").map((f) => f.trim())
-            : [],
-          limitations: newPlan.limitations
-            ? newPlan.limitations.split(",").map((l) => l.trim())
-            : [],
-        },
-      });
-      setNewPlan({ id: "", name: "", duration: "", features: "", limitations: "" });
-    };
-  return (
-      <div className="mb-6 border border-muted/40  p-4 rounded-lg bg-primary-foreground">
-        <h2 className="font-semibold text-muted-hover  mb-2">
-          {editKey ? "Edit Existing Plan" : "Add New Plan"}
-        </h2>
 
-        <div className="flex flex-col gap-2">
-         <div className='flex gap-5'>
-           <Input
+  // Load plan on edit
+  useEffect(() => {
+    if (editKey) {
+      const editable = plans[editKey]; // <-- correct access for object
+
+      if (editable) {
+        setNewPlan({
+          id: editKey,
+          name: editable.name,
+          duration: editable.time,
+          features: editable.features.join(", "),
+          limitations: editable.limitations.join(", "),
+        });
+      }
+    }
+  }, [editKey]);
+
+  // Update existing plan
+  const handleUpdate = () => {
+    if (!plans[editKey]) return;
+
+    plans[editKey] = {
+      ...plans[editKey],
+      name: newPlan.name,
+      time: newPlan.duration,
+      features: newPlan.features.split(",").map(f => f.trim()),
+      limitations: newPlan.limitations.split(",").map(l => l.trim()),
+    };
+
+    setEditKey(null);
+    setOpenForm(false);
+  };
+
+  // Add new plan
+  const handleSubmit = () => {
+    if (!newPlan.id) return alert("Plan ID is required!");
+
+    plans[newPlan.id] = {
+      id: Object.keys(plans).length + 1,
+      name: newPlan.name,
+      time: newPlan.duration,
+      features: newPlan.features.split(",").map(f => f.trim()),
+      limitations: newPlan.limitations.split(",").map(l => l.trim()),
+    };
+
+    setOpenForm(false);
+  };
+
+  return (
+    <div className="mb-6 border border-muted/40 p-4 rounded-lg bg-primary-foreground">
+      <h2 className="font-semibold text-muted-hover mb-2">
+        {editKey ? "Edit Plan" : "Add New Plan"}
+      </h2>
+
+      <div className="flex flex-col gap-2">
+
+        {/* ID + Name */}
+        <div className="flex gap-3">
+          <Input
+            type="text"
+            placeholder="Plan ID (e.g., basic, pro)"
+            value={newPlan.id}
+            disabled={!!editKey} // cannot change ID while editing
+            onChange={(e) => setNewPlan({ ...newPlan, id: e.target.value })}
+          />
+
+          <Input
             type="text"
             placeholder="Name"
             value={newPlan.name}
             onChange={(e) => setNewPlan({ ...newPlan, name: e.target.value })}
-            className="p-2 border rounded"
           />
-          <Input
-            type="text"
-            placeholder="Duration (months)"
-            value={newPlan.duration}
-            onChange={(e) => setNewPlan({ ...newPlan, duration: e.target.value })}
-            className="p-2 border rounded"
-          />
-         </div>
-         <div className='flex gap-3 mb-3 flex-col'>
-          <Input
-            type="text"
-            placeholder="Features (comma separated)"
-            value={newPlan.features}
-            onChange={(e) => setNewPlan({ ...newPlan, features: e.target.value })}
-            className="p-2 border rounded w-full"
-          />
-          <Input
-            type="text"
-            placeholder="Limitations (comma separated)"
-            value={newPlan.limitations}
-            onChange={(e) => setNewPlan({ ...newPlan, limitations: e.target.value })}
-            className="p-2 border rounded w-full min-w[90%]"
-          />
-         </div>
-         <div className='flex w-full justify-between md:gap-10 md:justify-start lg:gap-10 lg:justify-start' >
-         <button
-            onClick={editKey ? () => handleSave(editKey) : handleAdd}
-            className="px-4 py-2 md:w-2/8 lg:w-2/8  w-5/12 text-xl   bg-secondary text-secondary-foreground  rounded hover:bg-secondary-hover"
-          >
-            {editKey ? "Save" : "Submit"}
-          </button>
-          <button
-            onClick={editKey ? () => handleSave(editKey) : handleAdd}
-            className="px-4  py-2 md:w-2/8 lg:w-2/8  w-5/12 text-xl   bg-destructive text-background   rounded hover:bg-destructive-hover"
-          >
-             Cancel
-          </button>
-         </div>
-         
+           <Input
+          type="number"
+          placeholder="Duration (months)"
+          value={newPlan.duration}
+          onChange={(e) => setNewPlan({ ...newPlan, duration: e.target.value })}
+        />
         </div>
+
+       
+
+        {/* Features */}
+        <Input
+          type="text"
+          placeholder="Features (comma separated)"
+          value={newPlan.features}
+          onChange={(e) => setNewPlan({ ...newPlan, features: e.target.value })}
+        />
+
+        {/* Limitations */}
+        <Input
+          type="text"
+          placeholder="Limitations (comma separated)"
+          value={newPlan.limitations}
+          onChange={(e) =>
+            setNewPlan({ ...newPlan, limitations: e.target.value })
+          }
+        />
+
+        {/* Buttons */}
+        <div className="flex justify-between md:justify-start lg:justify-start gap-10 mt-4">
+          <button
+            onClick={editKey ? handleUpdate : handleSubmit}
+            className="px-4 py-2 w-[45%] md:w-[20%] lg:w-[20%]  bg-secondary text-secondary-foreground rounded-lg"
+          >
+            {editKey ? "Update" : "Submit"}
+          </button>
+
+          <button
+            onClick={() => setOpenForm(false)}
+            className="px-4 py-2 w-[45%] md:w-[20%] lg:w-[20%] bg-destructive text-background rounded-lg"
+          >
+            Cancel
+          </button>
+        </div>
+
       </div>
+    </div>
+  );
+};
 
-  )
-}
-
-export default PlanForm
+export default PlanForm;

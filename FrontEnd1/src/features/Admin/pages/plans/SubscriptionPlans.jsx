@@ -2,34 +2,47 @@ import React, { useState } from "react";
 import { plans as initialPlans } from "@/data/mockData";
 import PlanForm from "./PlanForm";
 import Button from "@/features/ui/Button";
+import { tr } from "zod/v4/locales";
+import { PencilIcon, Trash2Icon } from "lucide-react";
 
 const PlanManagement = () => {
-  const [plant2, setPlans] = useState(initialPlans);
+  const [plans2, setPlans2] = useState(initialPlans);
   const [editKey, setEditKey] = useState(null);
-  const[openForm, setOpenForm]=useState(false);
+  const [openForm, setOpenForm] = useState(false);
 
+  const tableHeaders = [
+    "SN",
+    "Name",
+    "Duration",
+    "Features",
+    "Limitations",
+    "Actions",
+  ];
 
   // Delete plan
   const handleDelete = (key) => {
-    if (!window.confirm(`Delete ${plant2[key].name} plan?`)) return;
-    const updated = { ...plant2 };
+    //if ok then delete
+    if (!window.confirm(`Delete ${plans2[key].name} plan?`)) return;
+    const updated = { ...plans2 };
     delete updated[key];
-    setPlans(updated);
+    setPlans2(updated);
   };
 
- 
+
 
   return (
     <div className="w-full mx-auto md:p-6  p-2  bg-primary-foreground shadow rounded-lg">
       <div className="flex flex-wrap lg:justify-between justify-between ">
-              <h1 className="text-2xl font-semibold mb-6">Manage Subscription Plans</h1>
-              <Button onClick={()=>setOpenForm(true)} className=" md:w-2/12 w-auto lg:h-2/12 h-10">Add Plan</Button>
+        <h1 className="text-2xl font-semibold mb-6">Manage Subscription Plans</h1>
+        {!openForm && (
+          <Button onClick={() => setOpenForm(true)} className=" md:w-2/12 bg-primary text-primary-foreground w-auto lg:h-2/12 h-10">Add Plan</Button>
+        )}
       </div>
 
       {/* Add/Edit Plan Section */}
       {
-        openForm &&(
-        <PlanForm/>
+        openForm && (
+          <PlanForm setOpenForm={setOpenForm} setEditKey={setEditKey} plans={plans2} setPlans={setPlans2} editKey={editKey ? editKey : null} />
         )
       }
 
@@ -37,23 +50,26 @@ const PlanManagement = () => {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="bg-gray-100 text-left text-gray-700">
-              <th className="p-3">SN</th>
-              <th className="p-3">Name</th>
-              <th className="p-3">Duration</th>
-              <th className="p-3">Features</th>
-              <th className="p-3">Limitations</th>
-              <th className="p-3 text-center">Actions</th>
+            <tr className="bg-secondary p-5 text-center text-secondary-foreground">
+              {tableHeaders.map((header, index) => (
+                <th
+                  key={index}
+                  className={`py-3 text-center mx-auto px-2 ${header === "Actions" ? "text-center" : "text-center"}`}
+                >
+                  {header}
+                </th>
+              ))}
             </tr>
           </thead>
+
           <tbody>
-            {Object.entries(plant2).map(([key, plan], index) => (
-              <tr key={key} className="border-b hover:bg-gray-50">
-                <td className="p-3">{index + 1}</td>
-                <td className="p-3">{plan.name}</td>
+            {Object.entries(plans2).map(([key, plan], index) => (
+              <tr key={key} className="border-b  justify-center items-center  my-auto ">
+                <td className="md:p-3 px-1">{index + 1}</td>
+                <td className="md:p-3 ">{plan.name}</td>
                 <td className="p-3">{plan.time || plan.duration}</td>
-                <td className="p-3">
-                  <ul className="list-disc pl-5">
+                <td className="p-3 shrink-0">
+                  <ul className="list-disc shrink-0 pl-5">
                     {plan.features.map((f, i) => (
                       <li key={i}>{f}</li>
                     ))}
@@ -62,34 +78,29 @@ const PlanManagement = () => {
                 <td className="p-3">
                   {plan.limitations.length ? (
                     <ul className="list-disc pl-5">
-                      {plan.limitations.map((l, i) => (
-                        <li key={i}>{l}</li>
+                      {plan.limitations.map((item, i) => (
+                        <li key={i}>{item}</li>
                       ))}
                     </ul>
                   ) : (
                     "—"
                   )}
                 </td>
-                <td className="p-3 text-center space-x-2">
+                <td className=" flexcontent box">
                   <button
                     onClick={() => {
                       setEditKey(key);
-                      setNewPlan({
-                        name: plan.name,
-                        duration: plan.time || plan.duration,
-                        features: plan.features.join(", "),
-                        limitations: plan.limitations.join(", "),
-                      });
+                      setOpenForm(true);
                     }}
-                    className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    className="px-3 py-1 text hover:scale-110  text-primary dark:text-muted-hover rounded "
                   >
-                    Edit
+                    <PencilIcon />
                   </button>
                   <button
                     onClick={() => handleDelete(key)}
-                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                    className="px-3 py-1  text-destructive hover:scale-110 hover:text-destructive-hover dark:text-muted-hover rounded "
                   >
-                    Delete
+                    <Trash2Icon />
                   </button>
                 </td>
               </tr>

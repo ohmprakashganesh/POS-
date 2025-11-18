@@ -50,27 +50,35 @@ import { Building, ChartBarIcon, CheckCircleIcon, CreditCard, UserIcon, UsersIco
     subtitle: "View all subscribers",
     icon: UserIcon,
     color: "blue",
-    link: "/admin/subscriptions",
+    link: "/subscriberList",
   },
   {
-    title: "Billing",
+    title: "Report",
     subtitle: "Revenue reports",
     icon: CurrencyDollarIcon,
     color: "green",
-    link: "/admin/billing",
+    link: "/report",
   },
   {
     title: "Plan Management",
     subtitle: "Edit pricing plans",
     icon: CreditCard,
     color: "purple",
-    link: "/admin/plans",
+    link: "/subscriptionPlans",
   },
   {
     title: "Customer Support",
     subtitle: "Help & support",
     icon: Building,
     color: "orange",
-    link: "/admin/support",
+    link: "/support",
   },
+];
+
+ export const supportRequests = [
+  { id: '1', userId: 'user_A001_dev', category: 'Staff Management', status: 'New', requestDate: new Date(Date.now() - 1000 * 60 * 60 * 24),servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24) },
+  { id: '2', userId: 'user_B045_prod', category: 'Inventory', status: 'In Progress', requestDate: new Date(Date.now() - 1000 * 60 * 60 * 5),servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24) },
+  { id: '3', userId: 'user_C102_test', category: 'Balances & Ledgers', status: 'Resolved', requestDate: new Date(Date.now() - 1000 * 60 * 15), servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24)},
+  { id: '4', userId: 'user_A001_dev', category: 'Profile Update', status: 'New', requestDate: new Date(Date.now() - 1000 * 60 * 3),servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24)},
+  { id: '5', userId: 'user_F990_stg', category: 'Customers/Suppliers', status: 'New', requestDate: new Date(Date.now() - 1000 * 60 * 55),servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24) },
 ];

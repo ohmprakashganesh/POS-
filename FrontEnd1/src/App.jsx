@@ -33,7 +33,7 @@ import VendorDetailsCard from './features/Subscriber/pages/vendors/VendorDetails
 
 
 // admin components 
-import SubscriberList from './features/Admin/pages/subscribers/subscriberList';
+import SubscriberList from './features/Admin/pages/subscribers/SubscriberList';
 import AdminDashboard from './features/Admin/dashboard/AdminDashboard';
 import SubscriptionPlans from './features/Admin/pages/plans/SubscriptionPlans';
 import Report from './features/Admin/pages/report/Report';

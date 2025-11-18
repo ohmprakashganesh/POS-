@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 
 import { STATIC_SUBSCRIPTION_DATA } from '@/data/mockData';
 import { it } from 'zod/v4/locales';
+import { OptionComponent, SelectComponent } from '@/features/ui/Select';
 // ----------------------------------------------------------------------
 // STATIC MOCK DATA
 // ----------------------------------------------------------------------
@@ -185,37 +186,55 @@ return (
       {/* 1. Filters & Controls Section */}
       <div className="bg-background p-2 rounded-xl  mb-2">
         <h2 className="text-xl  mb-4 text-muted-hover font-semibold">Report Criteria</h2>
-        <div className="grid grid-cols-2 bg-background  gap-10 items-end">
+        <div className="flex md:gap-10 sm:justify-start  md:justify-start lg:justify-start lg:gap-10 justify-between bg-background  gap-10 items-end">
 
           {/* Time Range Filter (Monthly/Yearly) */}
-          <div className='  border-muted/40'>
-            <label htmlFor="timeRange" className="block text-sm font-medium text-muted">Reporting Period</label>
-            <select
-              id="timeRange"
-              value={timeRange}
-              onChange={(e) => setTimeRange(e.target.value)}
-              className="mt-1 block w-full pl-3 pr-10  py-2 text-muted bg-primary-foreground focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-            >
-              {TIME_RANGES.map(range => (
-                <option key={range} value={range}>{range}</option>
-              ))}
-            </select>
-          </div>
+         {/* Time Range Filter */}
+<div className=''>
+  <label
+    htmlFor="timeRange"
+    className="block text-sm font-medium text-muted"
+  >
+    Time Range
+  </label>
 
-          {/* Status Filter */}
-          <div>
-            <label htmlFor="statusFilter" className="block text-sm font-medium text-muted ">Subscription Status</label>
-            <select
-              id="statusFilter"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="mt-1 block w-full pl-3 pr-10 py-2 text-muted border-muted/40  focus:outline-none bg-primary-foreground focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-            >
-              {SUBSCRIPTION_STATUSES.map(status => (
-                <option key={status} value={status}>{status}</option>
-              ))}
-            </select>
-          </div>
+  <SelectComponent
+    id="timeRange"
+    value={timeRange}
+    onChange={(e) => setTimeRange(e.target.value)}
+    className="mt-1 w-[150px] md:w-[200px] bg-primary-foreground border border-muted/40 text-muted rounded-md"
+  >
+    {TIME_RANGES.map((range) => (
+      <OptionComponent key={range} value={range}>
+        {range}
+      </OptionComponent>
+    ))}
+  </SelectComponent>
+</div>
+
+{/* Status Filter */}
+<div>
+  <label
+    htmlFor="statusFilter"
+    className="block text-sm font-medium text-muted"
+  >
+    Subscription Status
+  </label>
+
+  <SelectComponent
+    id="statusFilter"
+    value={statusFilter}
+    onChange={(e) => setStatusFilter(e.target.value)}
+    className="mt-1 w-[150px] md:w-[200px] bg-primary-foreground border border-muted/40 text-muted rounded-md"
+  >
+    {SUBSCRIPTION_STATUSES.map((status) => (
+      <OptionComponent key={status} value={status}>
+        {status}
+      </OptionComponent>
+    ))}
+  </SelectComponent>
+</div>
+
         </div>
       </div>
 

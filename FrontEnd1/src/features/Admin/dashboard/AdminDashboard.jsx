@@ -106,10 +106,10 @@ const AdminDashboard = () => {
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid  grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6 gap-2 lg:gap-6">
         {cardMetrics.map((card) => (
-          <div key={card.title} className="bg-primary-foreground rounded-lg shadow-sm border border-muted/40 p-6">
-            <div className="flex items-center justify-between">
+          <div key={card.title} className="bg-primary-foreground rounded-lg shrink shadow-sm border border-muted/40 p-6">
+            <div className="flex items-center shrink justify-between">
               <div className=' shrink'>
                 <p className="text-sm font-medium text-muted-hover">{card.title}</p>
                 <p className="text-2xl font-bold text-muted-hover mt-2">
@@ -123,7 +123,7 @@ const AdminDashboard = () => {
                   {Math.abs(card.change)}% from last period
                 </div>
               </div>
-              <div className={`p-4  rounded-full bg-${card.color}-100`}>
+              <div className={`p-2  rounded-full bg-${card.color}-100`}>
                 <card.icon className={`h-6 w-6 text-${card.color}-600`} />
               </div>
             </div>
@@ -133,7 +133,7 @@ const AdminDashboard = () => {
 
       {/* Additional Metrics */}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
        {metrics.subMetrics.map((obj, ind) => {
   const Icon = obj.icon;
   return (
@@ -155,7 +155,7 @@ const AdminDashboard = () => {
 
 
       {/* Recent Subscriptions & Revenue Chart */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {/* Recent Subscriptions */}
         <div className="bg-primary-foreground rounded-lg shadow-sm border border-muted/40 p-6">
           <div className="flex items-center justify-between mb-4">
@@ -206,7 +206,7 @@ const AdminDashboard = () => {
       {/* Quick Actions */}
       <div className="bg-primary-foreground rounded-lg shadow-sm border border-muted/40 p-6">
         <h3 className="text-lg font-semibold text-muted-hover mb-4">Quick Actions</h3>
-        <div className="grid text-muted grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid text-muted grid-cols-1  sm:grid-cols-3 md:grid-cols-4 gap-4">
           {quickActions.map((item,ind)=>{
             const Icon = item.icon;
           return (
