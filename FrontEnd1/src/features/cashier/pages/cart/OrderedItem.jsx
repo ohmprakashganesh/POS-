@@ -15,8 +15,8 @@ import { MinusIcon, PlusIcon, TrashIcon } from 'lucide-react';
   return(
   
      //  Remove item automatically if quantity <= 0
-    <div className="flex flex-row md:flex-row md:items-center md:justify-between w-full border-b border-muted/40 bg-primary-foreground gap-2 py-2 px-2">
-      <div className="flex-shrink-0 my-auto md:w-12 md:h-12 lg:w-14 lg:h-12 w-10 h-10 bg-primary-foreground flex items-center justify-center rounded-md overflow-hidden">
+    <div className="flex flex-row md:flex-row md:items-center md:justify-between w-full border-b border-muted/40 bg-white dark:bg-dark gap-2 py-2 px-2">
+      <div className="flex-shrink-0 my-auto md:w-12 md:h-12 lg:w-14 lg:h-12 w-10 h-10flex items-center justify-center rounded-md overflow-hidden">
         <img src={test} alt="product" className="object-cover w-full h-full" />
       </div>
 
@@ -32,12 +32,12 @@ import { MinusIcon, PlusIcon, TrashIcon } from 'lucide-react';
       </div>
 
       {/* Quantity Controls */}
-      <div className="flex justify-center md:justify-end items-center bg-primary-foreground rounded-lg px-3 lg:py-2 md:py-2 gap-3">
+      <div className="flex justify-center md:justify-end items-center bg-background rounded-lg px-3 lg:py-2 md:py-2 gap-3">
         <button
           onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
-          className="p-1 hover:text-gray-700 text-gray-500"
+          className="p-2 hover:bg-primary rounded-md "
         >
-          <MinusIcon className="h-4 text-muted-hover w-4" />
+          <MinusIcon className="h-4 hover:text-dark text-muted-hover w-4" />
         </button>
         <span className="w-6 items-center text-muted-hover my-auto text-center font-medium">
           {item.quantity}
@@ -45,7 +45,7 @@ import { MinusIcon, PlusIcon, TrashIcon } from 'lucide-react';
         <button
           onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
           disabled={item.quantity >= item.stock}
-          className="p-1 text-muted-hover  r disabled:opacity-50"
+          className="p-2 hover:bg-primary rounded-md   text-muted-hover  r disabled:opacity-50"
         >
           <PlusIcon className="h-4 text-muted-hover w-4" />
         </button>

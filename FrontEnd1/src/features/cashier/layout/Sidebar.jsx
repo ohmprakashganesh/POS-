@@ -123,7 +123,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       {/* Sidebar */}
       <div className={`
         fixed inset-y-0 left-0 z-50 w-54 
-        bg-background 
+        bg-white dark:bg-dark 
         border-r border border-muted/40 
         shadow-xl transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
@@ -157,22 +157,19 @@ const Sidebar = ({ isOpen, onClose }) => {
                 key={item.name}
                 to={item.href}
                 className={`
-                  group flex items-center px-4 py-3 text-sm font-medium rounded-lg
-                  transition-all duration-200
-                  ${isActive 
-                    ? 'bg-primary text-primary-foreground dark:bg-primary dark:text-gray-900 [letter-spacing:2px]'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }
+                  group flex items-center px-4 py-2.5 text-sm font-medium rounded-md transition-colors
+                    ${
+                      isActive
+                        ? "bg-primary/20 text-primary"
+                        : "text-muted hover:bg-background hover:text-foreground"
+                    }
                 `}
                 onClick={() => window.innerWidth < 1024 && onClose()}
               >
                 <item.icon 
                   className={`
-                    mr-3 h-5 w-5 flex-shrink-0
-                    ${isActive 
-                      ? 'text-primary-foreground dark:text-gray-900' 
-                      : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300'
-                    }
+                    mr-3 h-5 w-5 shrink-0
+                 
                   `}
                 />
                 {item.name}

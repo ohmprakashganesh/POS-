@@ -74,7 +74,7 @@ const SalesReports = () => {
     return `$${value}`;
   };
 
-  return isLoading ? <div className="flex items-center justify-center h-screen w-full">
+  return isLoading ? <div className="flex items-center justify-center h-screen w-full dark:bg-dark ">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"/>
           </div>:
     <div className="space-y-6">
@@ -84,32 +84,28 @@ const SalesReports = () => {
       </div>
 
       {/* Filters */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div>
-          <label className="block mb-1">
-            Report Type
-          </label>
+      <div className="grid items-end grid-cols-1 md:grid-cols-4 gap-4">
           <SelectComponent
+          label="Report Type"
             value={reportType}
-            className="bg-white"
+            className=" bg-white dark:bg-dark"
             onChange={(e) => setReportType(e.target.value)}
           >
             <OptionComponent value="daily">Daily</OptionComponent>
             <OptionComponent value="weekly">Weekly</OptionComponent>
             <OptionComponent value="monthly">Monthly</OptionComponent>
           </SelectComponent>
-        </div>
         <Input label="start Date"  type="date"
             value={dateRange.start}
             onChange={(e) =>
               setDateRange((prev) => ({ ...prev, start: e.target.value }))
-            } className="bg-white"/>
+            } className=" bg-white dark:bg-dark"/>
 
      <Input label="End Date" type="date"
             value={dateRange.end}
             onChange={(e) =>
               setDateRange((prev) => ({ ...prev, end: e.target.value }))
-            } className="bg-white"/>
+            } className=" bg-white dark:bg-dark"/>
           
       
 
@@ -120,21 +116,21 @@ const SalesReports = () => {
    
            {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-gradient-to-r from-white to-primary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
+        <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
           <ChartBarIcon className="size-8 text-primary" />
           <div className="details">
             <p className="font-medium text-muted">Total Salses</p>
             <p className="text-2xl font-bold"> ${totalSales.toLocaleString()}</p>
           </div>
         </div>
-        <div className="bg-gradient-to-r from-white to-secondary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
+         <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
           <CalendarIcon className="size-8 text-secondary" />
           <div className="details">
             <p className="font-medium text-muted">Total Orders</p>
             <p className="text-2xl font-bold">{totalOrders}</p>
           </div>
         </div>
-        <div className="bg-gradient-to-r from-white to-purple-600/10 rounded-md shadow-sm flex items-center p-5 gap-4">
+        <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
         <span className="text-purple-600 font-bold text-sm size-10 bg-purple-500/10 rounded-full flex items-center justify-center">AVG</span>
           <div className="details">
             <p className="font-medium text-muted">Average Order Value</p>
@@ -143,12 +139,12 @@ const SalesReports = () => {
         </div>
       </div>
 {/* Sales Chart */}
-      <div className="bg-white  rounded-md shadow-sm p-2">
+      <div className=" bg-white dark:bg-dark  rounded-md shadow-sm p-2">
         <h3 className="text-xl md:text-2xl font-semibold mb-4">
           Sales Overview
         </h3>
-          <div className="h-fit bg-red-400   shadow-neutral-50  rounded-lg flex justify-start">
-            <div className="bg-green-400  w-[100%]   ">
+          <div className="h-fit   rounded-lg flex justify-start">
+            <div className="bg-constructive w-full">
               <Paper elevation={0}>
                 <Typography variant="h6">
                   Quarterly Sales Performance
@@ -210,8 +206,8 @@ const SalesReports = () => {
           <h3 className="text-xl md:text-2xl font-semibold mb-3">
             Detailed Sales Data
           </h3>
-        <div className="overflow-x-auto bg-white rounded-md shadow-sm">
-          <table className="min-w-full text-sm text-left">
+        <div className="overflow-x-auto  bg-white dark:bg-dark rounded-md shadow-sm">
+          <table className="min-w-full text-sm text-left text-muted">
             <thead className="bg-secondary text-secondary-foreground tracking-wider">
               <tr>
                 <th className="px-6 py-3 ">

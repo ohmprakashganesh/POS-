@@ -30,6 +30,7 @@ import Product from './features/Subscriber/pages/items/Product';
 import SubscriberDashboard from './features/Subscriber/pages/dashboard/SubscriberDashboard';
 import AddEditVendor from './features/Subscriber/pages/vendors/AddEditVendor';
 import VendorDetailsCard from './features/Subscriber/pages/vendors/VendorDetailsCard';
+import SupportForm from './features/Subscriber/pages/settings/help/SupportForm';
 
 
 // admin components 
@@ -42,7 +43,7 @@ import Report from './features/Admin/pages/report/Report';
 import CashierProductList from './features/cashier/pages/products/ProductList'
 import CashierCustomerList from './features/cashier/pages/customer/CustomerList';
 import Orders from './features/cashier/pages/history/Orders'
-import POS from './features/cashier/pages/pos/POS';
+import POS from './features/cashier/pages/pos/Pos';
 import Paid from './globalPages/subscription/Paid';
 import VendorList from './features/Subscriber/pages/vendors/VendorsList';
 import Profile from './features/Subscriber/pages/settings/profile/Profile';
@@ -140,7 +141,7 @@ function App() {
                 <Route path="/reports/sales" element={<SalesReports />} />
                 <Route path="/reports/profit-loss" element={<ProfitLoss />} />
                 <Route path="/subscription" element={<Subscription />} />
-                 <Route path="/help" element={ <Support/>}/>
+                 <Route path="/help" element={ <SupportForm/>}/>
               </Route>
 
               {/* cashier============================================================================= routes  */}

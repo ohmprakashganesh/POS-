@@ -3,16 +3,12 @@ import {Link, useLocation } from 'react-router-dom';
 import { 
   HomeIcon, 
   ShoppingCartIcon, 
-  CubeIcon, 
   UsersIcon, 
-  DocumentTextIcon,
   ChartBarIcon,
   CreditCardIcon,
-  
   XMarkIcon,
   BuildingStorefrontIcon
 } from '@heroicons/react/24/outline';
-import { HandGrab, icons, TypeIcon } from 'lucide-react';
 const navigation = [
   { name: 'ADashboard', href: '/admin', icon: HomeIcon },
   { name: 'Manage-Subscriber', href: '/subscriberList', icon: UsersIcon },
@@ -37,8 +33,8 @@ const Sidebar = ({ isOpen, onClose }) => {
       )}
       
       {/* Sidebar */}
-      <div className={`
-        fixed inset-y-0 left-0 z-50 w-64  bg-background border border-muted/40 shadow-xl transform transition-transform duration-300 ease-in-out
+      <aside className={`
+        fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-dark border border-muted/40 shadow-xl transform transition-transform duration-500 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0
       `}>
         <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
@@ -62,9 +58,9 @@ const Sidebar = ({ isOpen, onClose }) => {
                 key={item.name}
                 to={item.href}
                 className={`
-                  group flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors
+                  group flex items-center px-4 py-2.5 text-sm font-medium rounded-md transition-colors
                   ${isActive 
-                    ? 'bg-primary text-background border ' 
+                    ? 'bg-primary/20 text-primary ' 
                     : 'text-muted-hover hover:bg-gray-50 hover:text-shadow-muted-hover'
                   }
                 `}
@@ -72,15 +68,19 @@ const Sidebar = ({ isOpen, onClose }) => {
               >
                 <item.icon className={`
                   mr-3 h-5 w-5 flex-shrink-0
-                  ${isActive ? 'text-background' : 'text-muted-hover group-hover:text-muted-hover'}
+                  ${isActive
+                        ? "bg-primary/20 text-primary"
+                        : "text-muted hover:bg-background hover:text-foreground"
+                  }
                 `} />
                 {item.name}
               </Link>
             );
           })}
         </nav>
-      </div>
-    </>
+         </aside>
+      </>
+   
   );
 };
 

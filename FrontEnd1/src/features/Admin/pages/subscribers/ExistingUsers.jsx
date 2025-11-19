@@ -49,13 +49,13 @@ export const ExistingUsers = () => {
         placeholder="Search existing subscribers..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full max-w-sm p-2 mb-4 border border-muted/40 rounded-lg focus:outline-none focus:ring-2"
+        className="w-full max-w-sm p-2 mb-4 bg-white dark:bg-dark border border-muted/40 rounded-lg focus:outline-none focus:ring-2"
       />
 
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
+      <div className="overflow-x-auto shadow-md rounded-md">
+        <table className="w-full border-collapse shadow-md rounded-md">
           <thead>
-            <tr className="bg-primary text-left text-background">
+            <tr className="bg-secondary text-secondary-foreground text-left ">
               <th className="pl-2 py-2">SN</th>
               <th>Name</th>
               <th>Email</th>
@@ -66,11 +66,11 @@ export const ExistingUsers = () => {
             </tr>
           </thead>
 
-          <tbody>
+          <tbody >
             {filtered.map((s, i) => (
               <tr
                 key={s.id}
-                className="border border-muted/40 dark:hover:bg-black/15 bg-primary-foreground hover:bg-primary-foreground/30"
+                className="border border-muted/40 dark:hover:bg-black/15 bg-white dark:bg-dark hover:bg-primary-foreground/30"
               >
                 <td className="p-3">{i + 1}</td>
 

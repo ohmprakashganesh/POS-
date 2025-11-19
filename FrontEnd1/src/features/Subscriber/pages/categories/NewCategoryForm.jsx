@@ -54,7 +54,7 @@ const NewCategoryForm = ({ className = "",setIsCreateCategoryFormOpen,setIsSucce
       <form
         onSubmit={handleSubmit(createNewCategory)}
         className={cn(
-          "max-w-xl relative w-[95%] p-5 bg-white rounded-md shadow-sm space-y-4",
+          "max-w-xl relative w-[95%] p-5 bg-white dark:bg-dark h-fit rounded-md shadow-sm space-y-4",
           className
         )}
       >
@@ -107,7 +107,7 @@ const NewCategoryForm = ({ className = "",setIsCreateCategoryFormOpen,setIsSucce
             )}
           </div>
 
-          <p className="text-gray-600 truncate capitalize">
+          <p className="text-muted truncate capitalize">
             {formData.name || "Category Preview"}
           </p>
         </div>

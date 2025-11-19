@@ -41,17 +41,17 @@ const SupportReq = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 rounded-md bg-primary-foreground  shadow-2xl border border-muted/40 max-w-6xl mx-auto">
+    <div className="p-4 sm:p-6 rounded-md   border-muted/40 max-w-6xl mx-auto">
       <h2 className="text-3xl font-extrabold text-muted-hover mb-6 border-b pb-3">
         Admin Support Dashboard
       </h2>
       
       {!requests || requests==null ? (
-        <div className="text-center py-10 text-muted border border-muted/40  rounded-lg">
+        <div className="text-center py-10 text-muted border border-muted/40  rounded-md">
           No support requests currently available.
         </div>
       ) : (
-        <div className="overflow-x-auto shadow-md rounded-lg">
+        <div className="overflow-x-auto shadow-md rounded-md">
           <table className="min-w-full divide-y divide-muted/40">
             <thead className="bg-secondary w-screen shrink h-10 text-secondary-foreground">
               <tr className='py-5 '>
@@ -62,11 +62,11 @@ const SupportReq = () => {
                 ))}
               </tr>
             </thead>
-               <tbody className=" w-screen shrink h-10 text-secondary-foreground">
+               <tbody className=" w-screen divide-y divide-muted/40 p-2 shrink h-10 bg-white dark:bg-dark text-muted-hover">
               {requests.map((request) => (
-                <tr 
+                <tr  className=''
                 >
-                  <td className="support-table-th ">
+                  <td className="support-table-th p-3 ">
                     {request.userId}
                   </td>
                   <td className="support-table-th">

@@ -86,10 +86,10 @@ const ProductList = () => {
         <div className="relative">
           <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
           <Input placeholder="Search products..." value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)} className="pl-9 bg-white" />
+            onChange={(e) => setSearchTerm(e.target.value)} className="pl-9  bg-white dark:bg-dark" />
 
         </div>
-        <SelectComponent value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} placeholder="Select a Category" className="bg-white">
+        <SelectComponent value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} placeholder="Select a Category" className="bg-white dark:bg-dark">
           {categories.map((category, index) => (
             <OptionComponent key={index} value={category}>
               {category === "all" ? "All Categories" : category}
@@ -104,7 +104,7 @@ const ProductList = () => {
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="group relative flex flex-col bg-white shadow-sm rounded-md"
+            className="group relative flex flex-col  bg-white dark:bg-dark shadow-sm rounded-md"
           >
             <div className="top-options  w-full flex items-center justify-between p-2 h-12">
               {/* Stock badge */}

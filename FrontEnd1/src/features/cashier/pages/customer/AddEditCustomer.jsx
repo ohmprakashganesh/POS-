@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { customersData } from '@/data/mockData';
 import { useForm } from '../../context/FormContext';
+import Input from '@/features/ui/Input';
+import Button from '@/features/ui/Button';
+import { fa, tr } from 'zod/v4/locales';
 
 const AddEditCustomer = () => {
   const { closeCustomerForm, editId } = useForm();
@@ -67,26 +70,20 @@ const AddEditCustomer = () => {
     if (!validateForm()) return;
 
     setIsLoading(true);
+    alert("successful");
+    setIsLoading(false);
+    closeCustomerForm(true);
+    
 
-    setTimeout(() => {
-      console.log("Customer saved:", formData);
-      setIsLoading(false);
-      closeCustomerForm();
-    }, 1000);
+   
   };
-
-  const isFormValid =
-    formData.name.trim() &&
-    /^\d{10}$/.test(formData.phone.trim()) &&
-    (!formData.email || /\S+@\S+\.\S+/.test(formData.email));
-
   return (
-    <div className="fixed inset-0 bg-prim flex bg-background items-center justify-center z-50">
+    <div className="fixed inset-0 bg-prim flex  items-center justify-center z-50">
       {/* Theme-aware popup */}
-      <div className="bg-card w-1/3 max-w-xl mx-4 rounded-xl shadow-lg p-6 
+      <div className="bg-card w-1/3 bg-white dark:bg-dark max-w-xl mx-4 rounded-xl shadow-lg p-6 
                       overflow-y-auto max-h-[90vh] text-muted border border-border">
 
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center  justify-between mb-4">
           <div className="flex w-full justify-center flex-col items-center">
             <h1 className="text-2xl font-bold text-muted-hover">
               {isEdit ? 'Edit Customer' : 'Add New Customer'}
@@ -105,98 +102,99 @@ const AddEditCustomer = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="flex flex-col  space-y-4">
+          <div className="flex flex-col text-muted-hover  space-y-4">
 
             {/* Full Name */}
             <div>
-              <label className="block text-sm font-medium text-muted  mb-1">
+              <label className="block text-sm font-medium  mb-1">
                 Full Name *
               </label>
-              <input
+              <Input
                 type="text"
                 name="name"
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-3 py-2 rounded-lg 
-                           bg-background text-muted-hover  border border-muted/40
-                           "
+                className=" "
                 placeholder="Enter customer name"
               />
             </div>
 
             {/* Phone */}
             <div>
-              <label className="block text-sm font-medium text-muted  mb-1">
+              <label className="block text-sm font-medium mb-1">
                 Phone Number *
               </label>
-              <input
+              <Input
                 type="tel"
                 name="phone"
                 required
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full px-3 py-2 rounded-lg 
-                           bg-background text-muted-hover  border border-muted/40
-                           "
+          
                 placeholder="98XXXXXXXX"
               />
             </div>
 
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-muted  mb-1">
+              <label className="block text-sm font-medium  mb-1">
                 Email Address
               </label>
-              <input
+              <Input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-3 py-2 rounded-lg 
-                          bg-background text-muted-hover  border border-muted/40
-                           "
+           
                 placeholder="customer@example.com"
               />
             </div>
 
             {/* Address */}
-            <div>
-              <label className="block text-sm font-medium text-muted  mb-1">
-                Address
-              </label>
-              <textarea
-                name="address"
-                rows={3}
-                value={formData.address}
-                onChange={handleChange}
-                className="w-full px-3 py-2 rounded-lg 
-                          bg-background text-muted-hover  border border-muted/40
-                           "
-                placeholder="Enter customer address"
-              />
-            </div>
+           <div>
+  <label className="block text-sm font-medium text-muted-hover mb-1">
+    Address
+  </label>
+
+  <textarea
+    name="address"
+    rows={3}
+    value={formData.address}
+    onChange={handleChange}
+    className="
+      w-full 
+      border 
+      border-muted/60 
+      rounded-md 
+      px-3 py-2
+      focus:border-primary-hover/40
+      focus:outline-none 
+      focus:ring-0
+    "
+    placeholder="Enter customer address "
+  />
+</div>
+
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-end space-x-3 pt-4  ">
-            <button
+          <div className="flex    md:space-x-10 sm:space-x-2   ">
+            <Button
               onClick={() => closeCustomerForm()}
               type="button"
-              className="px-4 py-2 border border-border rounded-lg 
-                         text-foreground bg-muted hover:bg-muted-hover"
+              className="w-full max-w-sm bg-destructive hover:bg-destructive-hover"
             >
               Cancel
-            </button>
+            </Button>
 
-            <button
+            <Button
               type="submit"
               disabled={isLoading}
-              className="px-6 py-2 bg-primary text-primary-foreground rounded-lg 
-                         hover:bg-primary-hover disabled:opacity-50"
+              className="w-full max-w-sm"
             >
-              {isLoading ? 'Saving...' : isEdit ? 'Update Customer' : 'Add Customer'}
-            </button>
+              {isLoading ? 'Saving...' : isEdit ? 'Update' : 'Submit'}
+            </Button>
           </div>
         </form>
       </div>

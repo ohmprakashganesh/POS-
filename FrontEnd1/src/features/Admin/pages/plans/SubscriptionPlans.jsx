@@ -31,7 +31,7 @@ const PlanManagement = () => {
 
 
   return (
-    <div className="w-full mx-auto md:p-6  p-2  bg-primary-foreground shadow rounded-lg">
+    <div className="w-full mx-auto md:p-4  p-2    rounded-lg">
       <div className="flex flex-wrap lg:justify-between justify-between ">
         <h1 className="text-2xl font-semibold mb-6">Manage Subscription Plans</h1>
         {!openForm && (
@@ -48,7 +48,7 @@ const PlanManagement = () => {
 
       {/* Plans Table */}
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
+        <table className="w-full border-separate border-spacing-y-1 ">
           <thead>
             <tr className="bg-secondary p-5 text-center text-secondary-foreground">
               {tableHeaders.map((header, index) => (
@@ -61,9 +61,9 @@ const PlanManagement = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-white  rounded-md text-muted-hover dark:bg-dark">
             {Object.entries(plans2).map(([key, plan], index) => (
-              <tr key={key} className="border-b  justify-center items-center  my-auto ">
+              <tr key={key} className="gap-2 justify-center items-center  my-auto ">
                 <td className="md:p-3 px-1">{index + 1}</td>
                 <td className="md:p-3 ">{plan.name}</td>
                 <td className="p-3">{plan.time || plan.duration}</td>

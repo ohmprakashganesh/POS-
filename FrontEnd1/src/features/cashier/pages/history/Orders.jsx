@@ -4,6 +4,7 @@ import { MagnifyingGlassIcon, DocumentTextIcon, EyeIcon } from '@heroicons/react
 import { transactionsData } from '@/data/mockData';
 import InvoiceViewer from '../../components/Invoice';
 import { useTranslation } from 'react-i18next';
+import Input from '@/features/ui/Input';
 
 const TransactionHistory = () => {
   const { t } = useTranslation("cashier");
@@ -82,8 +83,10 @@ const TransactionHistory = () => {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+  
+        
         {/* Total Transactions */}
-        <div className="bg-primary-foreground rounded-lg shadow-sm border border-muted/40 p-6">
+        <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-muted/40 p-6">
           <div className="flex items-center">
             <div className="flex-shrink-0 bg-green-100  rounded-full">
               <DocumentTextIcon className="h-8 w-8 text-muted-hover  " />
@@ -100,7 +103,7 @@ const TransactionHistory = () => {
         </div>
 
         {/* Total Revenue */}
-        <div className="bg-primary-foreground
+        <div className="bg-white dark:bg-dark
          rounded-lg shadow-sm border border-muted/40 p-6">
           <div className="flex items-center w-fit">
             <div className="flex-shrink-0">
@@ -120,7 +123,7 @@ const TransactionHistory = () => {
         </div>
 
         {/* Completed */}
-        <div className="bg-primary-foreground rounded-lg shadow-sm border border-muted/40 p-6">
+        <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-muted/40 p-6">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center">
@@ -139,7 +142,7 @@ const TransactionHistory = () => {
         </div>
 
         {/* Pending */}
-        <div className="bg-primary-foreground rounded-lg shadow-sm border border-muted/40 p-6">
+        <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-muted/40 p-6">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <div className="h-8 w-8 bg-yellow-100 rounded-full flex items-center justify-center">
@@ -159,42 +162,41 @@ const TransactionHistory = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-primary-foreground rounded-lg shadow-sm  p-4">
+      <div className=" rounded-lg  text-muted  p-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Search */}
           <div className="relative">
-            <MagnifyingGlassIcon className="absolute text-muted-hover left-3 top-1/2 transform -translate-y-1/2 h-5 w-5  " />
-            <input
+            <Input
               type="text"
               placeholder={t("transactions.searchPlaceholder")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border text-muted-hover border-muted/40 rounded-lg "
+              className="w-full max-w-sm bg-white dark:bg-dark  rounded-lg "
             />
           </div>
 
           {/* Date filters */}
           <div className="flex justify-between md:flex-row lg:flex-row gap-2 w-full">
-            <input
+            <Input
               type="date"
               placeholder={t("transactions.startDate")}
               value={dateRange.start}
               onChange={(e) => setDateRange(prev => ({ ...prev, start: e.target.value }))}
-              className="w-full px-3 py-2 border text-muted-hover border-muted/40 rounded-lg "
+              className="w-full max-w-sm bg-white dark:bg-dark  "
             />
-            <input
+            <Input
               type="date"
               placeholder={t("transactions.endDate")}
               value={dateRange.end}
               onChange={(e) => setDateRange(prev => ({ ...prev, end: e.target.value }))}
-              className="w-full px-3 py-2 border text-muted-hover border-muted/40 rounded-lg "
+              className="w-full bg-white dark:bg-dark  max-w-sm rounded-lg"
             />
           </div>
         </div>
       </div>
 
       {/* Transactions Table */}
-      <div className="bg-primary-foreground rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      <div className=" rounded-lg shadow-sm border border-muted/40 overflow-hidden">
         <div className="overflow-x-auto bg-white rounded-md shadow-sm">
           <table className="min-w-full uppercase text-xs text-left font-semibold text-secondary-foreground">
             <thead className="uppercase text-xs font-semibold bg-secondary text-secondary-foreground">
@@ -206,7 +208,7 @@ const TransactionHistory = () => {
                 ))}
               </tr>
             </thead>
-            <tbody className="bg-primary-foreground divide-y divide-muted/40">
+            <tbody className="bg-white dark:bg-dark divide-y divide-muted/40">
               {filteredTransactions.map((transaction) => (
                 <tr key={transaction.id} className="">
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -239,6 +241,7 @@ const TransactionHistory = () => {
                       onClick={() => viewInvoice(transaction.id)}
                       className="text-blue-600 hover:text-blue-900 flex items-center justify-end w-full"
                     >
+                      {/* // this will be the image  url */}
                       <EyeIcon className="h-4 w-4 mr-1" />
                       {t("transactions.view")}
                     </button>

@@ -9,7 +9,7 @@ const AdminLayout = () => {
   const { user } = useAuth();
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex h-screen">
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       

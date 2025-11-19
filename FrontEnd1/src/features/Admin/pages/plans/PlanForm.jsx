@@ -60,7 +60,7 @@ const PlanForm = ({ editKey, setOpenForm, setEditKey }) => {
   };
 
   return (
-    <div className="mb-6 border border-muted/40 p-4 rounded-lg bg-primary-foreground">
+    <div className="mb-6 border border-muted/40 p-4 rounded-lg bg-white dark:bg-dark">
       <h2 className="font-semibold text-muted-hover mb-2">
         {editKey ? "Edit Plan" : "Add New Plan"}
       </h2>

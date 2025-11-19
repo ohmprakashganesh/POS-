@@ -3,18 +3,15 @@ import Button from '@/features/ui/Button';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import esewa from '../../../../assets/esewa.png'
 import money from '../../../../assets/money.png'
-import { CarIcon, MinusIcon, PlusIcon, TrashIcon } from 'lucide-react';
 import { useCart } from "../../context/CartContext"; // adjust path as needed
-import qrPlaceholder from '../../../../assets/qr.jpg'; // Assume you create or use a placeholder QR image
 import BillDetails from './BillDetails';
-import { Translation, useTranslation } from 'react-i18next';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import Input from '@/features/ui/Input';
+import { useTranslation } from 'react-i18next';
 import OrderItem from './OrderedItem';
 import { customersData } from '@/data/mockData';
 import { useForm } from '../../context/FormContext';
 import AddEditCustomer from '../customer/AddEditCustomer';
 import { QRGenerator } from './Qrgenreator';
+import EmptyCart from './EmptyCart';
 
 
 
@@ -149,21 +146,22 @@ const Cart = () => {
         )}
       </h2>
       {cart.length === 0 ? (
-        <div className=' w-full flex flex-col justify-center items-center h-56 bg-secondary-foreground'>
-          <p className="text-muted-hover text-4xl p-4">{t("cart.emptyCart")}</p>
-          <p className='text-muted'>{t("cart.addItems")}</p>
+        <div className=' w-full   flex flex-col justify-center items-center  '>
+          <EmptyCart />
+          {/* <p className="text-muted-hover text-4xl p-4">{t("cart.emptyCart")}</p>
+          <p className='text-muted'>{t("cart.addItems")}</p> */}
 
         </div>
       ) : (
 
         <>
           {/* search section */}
-       <div className="flex justify-between  gap-3 p-3 rounded-sm bg-primary-foreground">
+       <div className="flex justify-between  gap-3 p-3 rounded-sm ">
   {/* Dropdown */}
   <select
     value={selectedId|| ""}
     onChange={(e) => setSelectedId( e.target.value)}
-    className="w-[48%] md:w-[30%] lg:w-[30%]  h-[45px] border border-muted/40 rounded-md bg-primary-foreground"
+    className="w-[48%] md:w-[30%] lg:w-[30%]  h-[45px] border border-muted/40 rounded-md bg-white dark:bg-dark"
   >
     <option value="" className='text-muted'>Select Customer</option>
     {filteredCustomers.slice(0, 3).map((user) => (
@@ -175,7 +173,7 @@ const Cart = () => {
 
   {/* Button */}
    <Button onClick={()=>openCustomerForm()} className=" px-5 h-[45px] w-[48%] md:w-[30%] ">
-    Add customer
+     {t("customers.addCustomer")}
   </Button>
   </div>
           <div className="flex md:flex-row lg:flex-row flex-col gap-5 mt-4">
@@ -185,7 +183,7 @@ const Cart = () => {
               {cart.map((item, ind) => <OrderItem key={ind} item={item} t={t} />)}
             </div>
             {/* Payment Summary */}
-            <div className="lg:w-[30%] md:w-[30%] w-full p-2 bg-primary-foreground rounded-lg shadow">
+            <div className="lg:w-[30%] md:w-[30%] w-full p-2 bg-white dark:bg-dark rounded-lg shadow">
               <h2 className="text-2xl text-muted-hover font-bold pb-4">
                 {t("cart.paymentSummary")}
               </h2>
@@ -207,7 +205,7 @@ const Cart = () => {
                   <input
                     onChange={handleDiscountChange}
                     value={discountRate}
-                    className="w-20 bg-primary-foreground p-1 text-right border rounded"
+                    className="w-20 p-1 text-right border rounded"
                     type="number"
                     name="discount"
                     min="0"
@@ -292,7 +290,7 @@ const Cart = () => {
     }
   }}
   className={`w-full mt-6 cursor-pointer 
-  ${payment.paymentType ? "bg-secondary hover:bg-secondary-hover" : "bg-muted cursor-not-allowed"
+  ${payment.paymentType ? "bg-secondary hover:bg-secondary-hover" : "bg-primary/30 cursor-not-allowed"
   }`}
 >
   {!payment.paymentType ? t("cart.selectType") : t("cart.generateBill")}

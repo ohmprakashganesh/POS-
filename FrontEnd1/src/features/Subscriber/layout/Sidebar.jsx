@@ -71,7 +71,7 @@ const Sidebar = ({closeSidebar,className=""}) => {
     setIsSettingOPen(!isSettingOpen);
   };
   return (
-      <aside className={cn("min-w-70 overflow-y-auto max-w-80 h-screen bg-white shadow-sm",className)}>
+      <aside className={cn("min-w-65 overflow-y-auto max-w-80 h-screen bg-white dark:bg-dark shadow-sm",className)}>
         <div className="flex items-center justify-start h-16 px-4">
           <ShoppingCartIcon className="h-8 w-8 text-primary" />
           <span className="ml-2 text-xl font-bold">POS System</span>

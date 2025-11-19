@@ -62,13 +62,13 @@ const CashierList = () => {
           placeholder="Search cashiers by name, phone, or email..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="pl-9 bg-white"
+          className="pl-9 bg-white dark:bg-dark"
         />
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto bg-white rounded-md shadow-sm">
-        <table className="min-w-full text-sm ">
+      <div className="overflow-x-auto bg-white dark:bg-dark rounded-md shadow-sm">
+        <table className="min-w-full text-sm text-muted ">
           <thead className="uppercase  text-xs text-left font-semibold bg-secondary text-secondary-foreground">
             <tr>
                <th className="p-4 w-6">S.N</th>
@@ -115,7 +115,7 @@ const CashierList = () => {
                 <td className="px-4 py-3 font-semibold">12</td>
 
                 {/* Total Sales */}
-                <td className="px-4 py-3 font-semibold text-green-600">
+                <td className="px-4 py-3 font-semibold text-constructive">
                   $2,450.00
                 </td>
 
@@ -129,7 +129,7 @@ const CashierList = () => {
                   </Link>
                   <button
                     onClick={() => handleDelete(cashier.id)}
-                    className="p-1.5 rounded-full hover:bg-red-50 text-red-600 hover:text-red-800 transition"
+                    className="p-1.5 rounded-full hover:bg-red-50 text-destructive hover:text-destructive-hover transition"
                   >
                     <TrashIcon className="h-4 w-4" />
                   </button>

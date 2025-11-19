@@ -9,20 +9,21 @@ const LanguageToggle = () => {
   const { i18n } = useTranslation();
 
   const handleLanguageChange = (event) => {
-    const newLang=event.target.value || "en"
+    const newLang = event.target.value || "en";
     i18n.changeLanguage(newLang);
     localStorage.setItem("lang", newLang); // 👈 persist language
   };
 
   return (
     <SelectComponent
-  value={i18n.language}
-  onChange={handleLanguageChange}
-  className="  text-sm  min-w-[25px]"
->
-  <OptionComponent className="w-fit" value="en">English</OptionComponent>
-  <OptionComponent className="w-fit " value="np">नेपाली</OptionComponent>
-</SelectComponent>
+      value={i18n.language}
+      onChange={handleLanguageChange}
+      className="border-none  mx-0 px-0 focus:ring-0 text-xs sm:text-base"
+    >
+      <OptionComponent value="en">🇺🇸 En</OptionComponent>
+      <OptionComponent value="np">🇳🇵Np</OptionComponent>
+    </SelectComponent>
   );
 };
+
 export default LanguageToggle;

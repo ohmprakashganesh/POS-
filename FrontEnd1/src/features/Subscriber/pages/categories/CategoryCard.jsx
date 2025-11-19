@@ -13,7 +13,7 @@ const CategoryCard = React.memo(({ category, openModal, onToggleActive }) => {
         <div className="grid grid-cols-[80px_2fr_1fr] gap-2 items-center">
           {/* Image/Color Circle */}
           <div
-            className="w-20 h-20 rounded-sm shrink-0 flex items-center justify-center text-xl font-bold text-white shadow-lg"
+            className="w-20 h-20 rounded-sm shrink-0 flex items-center justify-center text-xl font-bold text-white dark:text-dark shadow-lg"
             style={{ backgroundColor: color }}
           >
             {imageUrl ? (
@@ -47,7 +47,7 @@ const CategoryCard = React.memo(({ category, openModal, onToggleActive }) => {
             onClick={() => onToggleActive(id)}
             className={`p-2 rounded-full transition duration-150 ${
               active
-                ? "text-red-600 hover:bg-red-500/30"
+                ? "text-destructive hover:bg-destructive/30"
                 : "text-green-600 hover:bg-green-500/30"
             }`}
             title={active ? "Deactivate Category" : "Activate Category"}
@@ -62,7 +62,7 @@ const CategoryCard = React.memo(({ category, openModal, onToggleActive }) => {
           {/* Delete Button */}
           <button
             onClick={()=>openModal(id)}
-            className="p-2 rounded-full hover:bg-red-500/30 text-red-600 transition duration-150"
+            className="p-2 rounded-full hover:bg-destructive/30 text-destructive transition duration-150"
             title="Delete Category"
           >
             <Trash2 className="w-5 h-5" />

@@ -17,7 +17,7 @@ const CProduct = () => {
   // --- Product Not Found Error Handler ---
   if (!productData) {
     return (
-      <div className="max-w-5xl mx-auto p-6 sm:p-8 lg:p-12 bg-primary-foreground shadow-xl rounded-2xl text-center">
+      <div className="max-w-5xl mx-auto p-6 sm:p-8 lg:p-12 shadow-xl rounded-2xl text-center">
         <p className="text-2xl font-bold text-red-500 dark:text-red-400">
           Product not found.
         </p>
@@ -34,7 +34,7 @@ const CProduct = () => {
   );
 
   return (
-    <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-10 bg-primary-foreground shadow-lg rounded-2xl">
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-10   rounded-2xl">
       {/* TOP SECTION: Image and Details */}
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-10 mb-8 lg:mb-12">
         {/* IMAGE SECTION */}

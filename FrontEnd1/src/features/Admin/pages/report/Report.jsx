@@ -121,7 +121,7 @@ const Report = () => {
   return(
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {cards.map((card,ind)=>(
-      <div className="bg-primary-foreground text-muted-hover p-6 rounded-xl shadow-lg border border-muted/40">
+      <div className="bg-white dark:bg-dark text-muted-hover p-6 rounded-xl shadow-lg border border-muted/40">
         <p className="text-sm font-medium ">{card.title}</p>
         <p className="text-3xl font-bold  mt-1">{card.value}</p>
         <span className="text-muted text-xs mt-2 block">As of {card.note}</span>
@@ -143,7 +143,7 @@ const Report = () => {
   "Plan Sample",
 ];
 return (
-    <div className="mt-8 bg-primary-foreground p-6 rounded-xl shadow-lg overflow-x-auto">
+    <div className="mt-8 bg-white dark:bg-dark p-6 rounded-xl shadow-lg overflow-x-auto">
       <h3 className="text-xl font-semibold mb-4 text-muted-hover">Subscription Breakdown</h3>
      <table className="min-w-full divide-y divide-muted/40">
         <thead>
@@ -158,7 +158,7 @@ return (
             ))}
           </tr>
         </thead>
-        <tbody className="bg-primary-foreground divide-y text-muted-hover divide-muted/40">
+        <tbody className="bg-white dark:bg-dark divide-y text-muted-hover divide-muted/40">
           {data.map((row) => (
             <tr key={row.id || row.month} className="hover:bg-background">
               <td className="px-6 py-4 whitespace-nowrap text-sm ">{row.month}</td>
@@ -180,11 +180,11 @@ return (
   // ----------------------------------------------------------------------
 
   return (
-    <div className="p-2 rounded-md bg-background min-h-screen">
+    <div className="p-2 rounded-md  min-h-screen">
       <h1 className="text-3xl font-extrabold text-muted-hover  border-b-muted/40 pb-2">Subscription Analytics Report</h1>
 
       {/* 1. Filters & Controls Section */}
-      <div className="bg-background p-2 rounded-xl  mb-2">
+      <div className=" p-2 rounded-xl  mb-2">
         <h2 className="text-xl  mb-4 text-muted-hover font-semibold">Report Criteria</h2>
         <div className="flex md:gap-10 sm:justify-start  md:justify-start lg:justify-start lg:gap-10 justify-between bg-background  gap-10 items-end">
 
@@ -202,7 +202,7 @@ return (
     id="timeRange"
     value={timeRange}
     onChange={(e) => setTimeRange(e.target.value)}
-    className="mt-1 w-[150px] md:w-[200px] bg-primary-foreground border border-muted/40 text-muted rounded-md"
+    className="mt-1 w-[150px] md:w-[200px] bg-white dark:bg-dark border border-muted/40 text-muted rounded-md"
   >
     {TIME_RANGES.map((range) => (
       <OptionComponent key={range} value={range}>
@@ -225,7 +225,7 @@ return (
     id="statusFilter"
     value={statusFilter}
     onChange={(e) => setStatusFilter(e.target.value)}
-    className="mt-1 w-[150px] md:w-[200px] bg-primary-foreground border border-muted/40 text-muted rounded-md"
+    className="mt-1 w-[150px] md:w-[200px] bg-white dark:bg-dark border border-muted/40 text-muted rounded-md"
   >
     {SUBSCRIPTION_STATUSES.map((status) => (
       <OptionComponent key={status} value={status}>

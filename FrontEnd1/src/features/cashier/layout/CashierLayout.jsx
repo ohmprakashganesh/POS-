@@ -10,7 +10,7 @@ const CashierLayout = () => {
   const { user } = useAuth();
 
   return (
-    <div className="flex h-screen bg-background dark:bg-black">
+    <div className="flex h-screen bg-backgroun">
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       

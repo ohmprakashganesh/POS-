@@ -213,7 +213,7 @@ const App = () => {
   }, []);
   // console.log(deleteCategoryId)
   return (
-    <div className="font-inter">
+    <div className="font-inter ">
       <div className="top-section space-y-2 sm:flex items-center justify-between ">
         <h1 className="text-2xl font-bold">Category Management</h1>
         <Button
@@ -240,13 +240,13 @@ const App = () => {
           placeholder="Search categories by name..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="pl-9 bg-white"
+          className="pl-9 bg-white dark:bg-dark"
         />
       </div>
 
       <div className="flex  lg:flex-row gap-2">
         {/* LEFT COLUMN: Category List (Cards) */}
-        <div className="left-section w-full bg-white rounded-md shadow-sm p-3 grow">
+        <div className="left-section w-full bg-white dark:bg-dark rounded-md shadow-sm p-3 grow">
           <div className="cards grid grid-cols-1 sm:grid-cols-2 gap-3">
             {filteredCategories.map((category) => (
               <CategoryCard
@@ -293,7 +293,7 @@ function ConfirmDeleteModal({ closeModal, handleDeleteCategory }) {
         onClick={closeModal}
         className="overlay fixed inset-0 bg-black/30 flex items-center justify-center z-50"
       />
-      <div className="modal w-9/10 aspect-video max-w-120 h-fit bg-white rounded-md shadow-sm p-5 z-50 flex gap-5 flex-col items-center relative">
+      <div className="modal w-9/10 aspect-video max-w-120 h-fit bg-white dark:bg-dark rounded-md shadow-sm p-5 z-50 flex gap-5 flex-col items-center relative">
         <button
           onClick={closeModal}
           className="absolute top-4 right-4 p-1.5 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
@@ -328,7 +328,7 @@ function SuccessModal({ closeModal }) {
           onClick={closeModal}
           className="overlay fixed inset-0 bg-black/30 flex items-center justify-center z-50"
         />
-        <div className="modal w-[95%] aspect-video max-w-120 h-fit bg-white rounded-md shadow-sm p-5 z-50 flex gap-5 flex-col items-center relative">
+        <div className="modal w-[95%] aspect-video max-w-120 h-fit bg-white dark:bg-dark rounded-md shadow-sm p-5 z-50 flex gap-5 flex-col items-center relative">
           <button
             onClick={closeModal}
             className="absolute top-4 right-4 p-1.5 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"

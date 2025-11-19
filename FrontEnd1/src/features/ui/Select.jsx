@@ -17,6 +17,7 @@ export const SelectComponent = ({
   placeholder = "Select",
   value,
   onChange,
+  label="",
   className = "",
 }) => {
   const [open, setOpen] = useState(false);
@@ -39,13 +40,14 @@ export const SelectComponent = ({
   )?.props?.children;
 
   return (
-    <SelectContext.Provider value={{ open, setOpen, value, onChange }}>
-      <div ref={selectRef} className="relative inline-block w-fit">
+    <SelectContext.Provider value={{ open, setOpen, value, onChange, }}>
+      <div ref={selectRef} className="relative inline-block w-full">
+         {label && <label className="block mb-1  capitalize">{label}</label>}
         <button
           type="button"
           onClick={() => setOpen(!open)}
           className={cn(
-            `w-full focus:ring-primary/40 focus:ring-2 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed  border  border-muted/40 rounded-md  px-3 py-2 flex items-center justify-between gap-2 min-h-10 ${className}`
+            `w-full focus:ring-primary focus:ring-2 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed  border-muted/40  border rounded-md  px-3 py-2 flex items-center justify-between gap-2 min-h-10 ${className}`
           )}
         >
           {selectedLabel || (
@@ -55,7 +57,7 @@ export const SelectComponent = ({
         </button>
 
         {open && (
-          <div className="absolute mt-1.5 w-full min-w-40 border border-muted/40 bg-primary-foreground overflow-hidden rounded-md shadow-sm z-50 ">
+          <div className="absolute mt-1.5 w-full min-w-40 bg-white dark:bg-dark overflow-hidden rounded-md shadow-sm z-50 ">
             {children}
           </div>
         )}
@@ -84,8 +86,8 @@ export const OptionComponent = ({ children, value }) => {
       onClick={handleSelect}
       className={`w-full  px-3 py-2 flex items-center justify-start gap-2 min-h-10 ${
         isActive
-          ? "bg-primary/40 text-primary dark:hover:bg-primary-foreground/8  hover:bg-primary-hover/40"
-          : "hover:bg-neutral-200"
+          ? "bg-primary/40 text-primary hover:bg-primary-hover/40"
+          : "hover:bg-neutral-200 dark:hover:bg-neutral-700"
       }`}
     >
       {children}

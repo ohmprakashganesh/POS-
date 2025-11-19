@@ -240,7 +240,7 @@ const CustomerList = () => {
         </div>
       )}
 
-      <div className="space-y-2 bg-primary-foreground">
+      <div className="space-y-2 ">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-2xl font-bold text-muted-hover">
@@ -261,19 +261,19 @@ const CustomerList = () => {
         </div>
 
         {/* Search Bar */}
-        <div className="relative bg-primary-foreground  max-w-md my-6">
+        <div className="relative max-w-md my-6">
           <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
           <Input
             type="text"
             placeholder={t("customers.search")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-9 bg-card border border-muted/40 text-foreground"
+            className="pl-9 bg-card border bg-white dark:bg-dark border-muted/40 text-foreground"
           />
         </div>
 
         {/* Table */}
-        <div className="overflow-x-auto bg-card bg-primary-foreground rounded-md shadow-sm border border-muted/40 ">
+        <div className="overflow-x-auto bg-card bg-white dark:bg-dark rounded-md shadow-sm border border-muted/40 ">
           <table className="min-w-full text-sm text-foreground">
             <thead className="uppercase text-xs text-secondary-foreground font-semibold bg-secondary">
               <tr>

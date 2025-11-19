@@ -76,10 +76,10 @@ function downloadBill() {
         placeholder="Search potential users..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className=" mb-4 max-w-sm "
+        className=" mb-4 max-w-sm bg-white dark:bg-dark "
       />
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto shadow-md rounded-md">
         <BillViewer
   show={showBill}
   billImage={billImage}
@@ -87,9 +87,9 @@ function downloadBill() {
   onDownload={downloadBill}
 />
 
-        <table className="w-full border-collapse">
+        <table className="w-full  border-collapse shadow-md rounded-md">
           <thead>
-            <tr className="bg-primary  text-left text-wrap text-background">
+            <tr className=" bg-secondary text-secondary-foreground  text-left text-wrap ">
               <th className="pl-2 py-2">SN</th>
               <th >Name</th>
               <th >Email</th>
@@ -99,9 +99,9 @@ function downloadBill() {
               <th className="pr-3 text-center">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="rounded-md">
             {filtered.map((u, i) => (
-              <tr key={u.id} className="border border-muted/40 dark:hover:bg-black/15 border-b-muted/40 bg-primary-foreground hover:bg-primary-foreground/30">
+              <tr key={u.id} className="border  border-muted/40 dark:hover:bg-black/15 border-b-muted/40 bg-white dark:bg-dark hover:bg-primary-foreground/30">
                 <td className="pl-2 py-3">{i + 1}</td>
                 <td >{u.name}</td>
                 <td >{u.email}</td>

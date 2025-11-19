@@ -72,9 +72,9 @@ const customer = customers.find((e) => e.id == customerId);
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center w-screen h-screen bg-black/70 z-50 p-4">
-      <div className="flex w-full h-fit justify-center overflow-y-scroll">
-        <div className="bg-primary-foreground text-muted rounded-lg shadow-lg p-4 w-[300px] flex flex-col">
+    <div className="fixed inset-0 flex justify-center items-center w-screen h-screen bg-black/70 dark:bg-black z-50 p-4">
+      <div className="flex  w-full h-fit justify-center overflow-y-scroll">
+        <div className=" border border-muted/40 text-muted bg-white dark:bg-dark rounded-lg shadow-lg p-4 w-[300px] flex flex-col">
           
           {/* Printable bill part */}
           <div ref={printRef}>

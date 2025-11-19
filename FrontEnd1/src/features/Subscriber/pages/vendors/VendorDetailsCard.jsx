@@ -23,7 +23,7 @@ const VendorDetailsCard = () => {
           </Link>      
       {/* Header Section with Icon and Name */}
       <div className="flex flex-col items-center text-center">
-          <Building2 className="size-16 p-1 px-3.5 bg-secondary/10 rounded-full text-green-600" />
+          <Building2 className="size-16 p-1 px-3.5 bg-secondary/10 rounded-full text-constructive" />
         <h2 className="text-2xl font-bold">{vendor.name}</h2>
         <p className="text-muted">Vendor Details Overview</p>
       </div>
@@ -31,33 +31,33 @@ const VendorDetailsCard = () => {
   <div className="mb-5">
     <h3 className="font-semibold text-xl uppercase tracking-wide mb-2">Financial Summary</h3>
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3  sm:gap-5">
-      <div className="bg-white rounded-lg p-4 shadow-sm">
+      <div className=" bg-white dark:bg-dark rounded-lg p-4 shadow-sm">
         <div className="flex items-center gap-2 mb-2">
           <DollarSign className="w-4 h-4 text-primary" />
           <span className="text-xs text-muted">Total Cost</span>
         </div>
         <p className="text-xl font-bold text-primary">NPR {vendor.total_cost}</p>
       </div>
-      <div className="bg-white rounded-lg p-4 shadow-sm">
+      <div className=" bg-white dark:bg-dark rounded-lg p-4 shadow-sm">
         <div className="flex items-center gap-2 mb-2">
           <Wallet className="w-4 h-4 text-secondary" />
           <span className="text-xs text-muted">Total Paid</span>
         </div>
         <p className="text-xl font-bold text-secondary">NPR {vendor.total_paid}</p>
       </div>
-      <div className="bg-white rounded-lg p-4 shadow-sm">
+      <div className=" bg-white dark:bg-dark rounded-lg p-4 shadow-sm">
         <div className="flex items-center gap-2 mb-2">
-          <FileText className="w-4 h-4 text-red-600" />
+          <FileText className="w-4 h-4 text-destructive" />
           <span className="text-xs text-muted">Total Due</span>
         </div>
-        <p className="text-xl font-bold text-red-600">NPR {vendor.total_due}</p>
+        <p className="text-xl font-bold text-destructive">NPR {vendor.total_due}</p>
       </div>
     </div>
     </div>
 
   <div className="grid grid-cols-1 gap-5 sm:grid-cols-5">
           {/* Contact Information Card */}
-    <div className="bg-white h-fit col-span-3 shadow-sm rounded-md p-5">
+    <div className=" bg-white dark:bg-dark h-fit col-span-3 shadow-sm rounded-md p-5">
       <h3 className="text-sm font-semibold  uppercase tracking-wide mb-3">Contact Info</h3>
       <div className="space-y-3">
         <div className="flex items-start gap-3">
@@ -84,7 +84,7 @@ const VendorDetailsCard = () => {
       </div>
     </div>
     {/* Business Metrics Card */}
-    <div className="bg-white col-span-2 h-fit rounded-md p-5 shadow-sm">
+    <div className=" bg-white dark:bg-dark col-span-2 h-fit rounded-md p-5 shadow-sm">
       <h3 className="text-sm font-semibold uppercase tracking-wide mb-3">Business Metrics</h3>
       <div className="space-y-3">
         <div className="flex items-center justify-between">
@@ -92,14 +92,14 @@ const VendorDetailsCard = () => {
             <Package className="w-4 h-4 text-secondary" />
             <span className="text-sm text-muted">Products</span>
           </div>
-          <span className="text-sm font-semibold text-gray-900">{vendor.total_product}</span>
+          <span className="text-sm font-semibold">{vendor.total_product}</span>
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Package className="w-4 h-4 text-secondary" />
             <span className="text-sm text-muted">Categories</span>
           </div>
-          <span className="text-sm font-semibold text-gray-900">{vendor.total_categories}</span>
+          <span className="text-sm font-semibold">{vendor.total_categories}</span>
         </div>
       </div>
     </div>

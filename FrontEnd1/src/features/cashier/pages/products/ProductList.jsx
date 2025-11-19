@@ -10,6 +10,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { productsData } from "@/data/mockData";
 import { EllipsisVerticalIcon } from "lucide-react";
+import Input from "@/features/ui/Input";
+import { OptionComponent, SelectComponent } from "@/features/ui/Select";
 
 const ProductList = () => {
   const {t}=useTranslation("cashier");
@@ -60,30 +62,32 @@ const ProductList = () => {
     <div className="space-y-6">
       
       {/* Search and Filters */}
-      <div className="bg-primary-foreground  rounded-lg shadow-sm  p-4">
+      <div className=" rounded-lg  ">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 ">
           <div className="relative">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
-            <input
+            <Input
               type="text"
               placeholder={t("products.searchProducts")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-muted/40 rounded-lg focus:ring-2"
+              className="w-full bg-white dark:bg-dark max-w-sm  border border-muted/40 rounded-lg focus:ring-2"
             />
           </div>
 
-          <select
+          <SelectComponent
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="border text-muted border-muted/40  rounded-lg px-4 py-2 "
+            className=" text-muted border-muted/40 bg-white dark:bg-dark border rounded-lg px-4 py-2 "
           >
             {categories.map((category) => (
-              <option key={category} value={category} className="text-muted">
-                {category === "all" ? "All Categories" : category}
-              </option>
+              // <option key={category} value={category} className="text-muted">
+              //   {category === "all" ? "All Categories" : category}
+              // </option>
+              <OptionComponent  key={category} value={category}>
+               {category === "all" ? "All Categories" : category}
+              </OptionComponent>
             ))}
-          </select>
+          </SelectComponent>
         </div>
       </div>
       <div >
@@ -92,7 +96,7 @@ const ProductList = () => {
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="group relative flex flex-col bg-primary-foreground border-muted shadow-sm rounded-md"
+            className="group relative flex flex-col bg-white dark:bg-black border-muted/40 shadow-sm rounded-md"
           >
             <div className="top-options  w-full flex items-center justify-between p-2 h-12">
               {/* Stock badge */}
@@ -129,7 +133,7 @@ const ProductList = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between pt-2 border-t border-muted">
+                  <div className="flex items-center justify-between pt-2 border-t border-muted/40">
                     <span className="text-xs text-muted">{t("products.available")}</span>
                     <span
                       className={`text-sm font-semibold ${product.stock <= 10

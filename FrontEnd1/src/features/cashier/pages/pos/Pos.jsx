@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { productsData } from '@/data/mockData';
 import { useCart } from '../../context/CartContext';
+import Input from '@/features/ui/Input';
 
 const Pos = () => {
   const [t]= useTranslation("cashier");
@@ -29,13 +30,12 @@ const Pos = () => {
       <div className="flex-1  border-b-muted-foreground p-4">
         <div className="mb-4">
           <div className="relative">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
-            <input
+            <Input
               type="text"
               placeholder="Search products..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-muted/40 bg-primary-foreground  rounded-lg focus:border-muted"
+              className=" border w-full max-w-sm   bg-white dark:bg-dark border-muted/40  rounded-lg focus:border-muted"
             />
           </div>
         </div>
@@ -44,10 +44,10 @@ const Pos = () => {
           <div
             key={product.id}
             onClick={() => {addToCart(product),toast.success("successfully added to cart")}}
-            className="group relative cursor-pointer flex flex-col bg-primary-foreground shadow-sm rounded-md"
+            className="group relative cursor-pointer flex flex-col bg-white dark:bg-dark shadow-sm rounded-md"
           >
             {/* Product image */}
-            <div  className="p-2 grow flex flex-col ">
+            <div  className="p-2 grow flex bg-white dark:bg-dark flex-col ">
               <img
                 src={
                   product.image ||
@@ -70,7 +70,7 @@ const Pos = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                  <div className="flex items-center justify-between pt-2 border-t border-muted/40">
                     <span className="text-xs text-muted-hover">{t("products.available")}</span>
                     <span
                       className={`text-sm font-semibold ${product.stock <= 10

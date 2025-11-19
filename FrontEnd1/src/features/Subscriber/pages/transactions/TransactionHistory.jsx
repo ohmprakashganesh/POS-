@@ -78,14 +78,14 @@ const TransactionHistory = () => {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-10">
-        <div className="bg-linear-to-r from-white to-secondary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
+        <div className="bg-white dark:bg-dark  rounded-md shadow-sm flex items-center p-5 gap-4">
           <DocumentTextIcon className="h-8 w-8 text-muted" />
           <div className="details">
             <p className="font-medium text-muted">Total Transactions</p>
             <p className="text-2xl font-bold">{transactions.length}</p>
           </div>
         </div>
-        <div className="bg-linear-to-r from-white to-secondary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
+       <div className="bg-white dark:bg-dark  rounded-md shadow-sm flex items-center p-5 gap-4">
           <span className="text-secondary flex items-center justify-center rounded-full size-8 bg-secondary/10 font-bold">
             $
           </span>
@@ -98,7 +98,7 @@ const TransactionHistory = () => {
           </div>
         </div>
 
-        <div className="bg-linear-to-r from-white to-secondary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
+         <div className="bg-white dark:bg-dark  rounded-md shadow-sm flex items-center p-5 gap-4">
           <span className="text-secondary flex items-center justify-center rounded-full size-8 bg-secondary/10 font-bold">
             ✓
           </span>
@@ -111,7 +111,7 @@ const TransactionHistory = () => {
           </div>
         </div>
 
-        <div className="bg-linear-to-r from-white to-tertiary/10 rounded-md shadow-sm flex items-center p-5 gap-4">
+         <div className="bg-white dark:bg-dark  rounded-md shadow-sm flex items-center p-5 gap-4">
           <span className="text-tertiary flex items-center justify-center rounded-full size-8 bg-tertiary/10 font-bold">
             ⏱
           </span>
@@ -133,7 +133,7 @@ const TransactionHistory = () => {
             placeholder="Search by invoice or customer..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-9 bg-white"
+            className="pl-9 bg-white dark:bg-dark"
           />
         </div>
         <Input
@@ -144,7 +144,7 @@ const TransactionHistory = () => {
           onChange={(e) =>
             setDateRange((prev) => ({ ...prev, start: e.target.value }))
           }
-          className="bg-white"
+          className="bg-white dark:bg-dark"
         />
         <Input
           type="date"
@@ -154,7 +154,7 @@ const TransactionHistory = () => {
           onChange={(e) =>
             setDateRange((prev) => ({ ...prev, end: e.target.value }))
           }
-          className="bg-white"
+          className="bg-white dark:bg-dark"
         />
         <div className="md:pt-5 flex items-center h-full"><p className="text-muted">
           Showing {filteredTransactions.length} transactions
@@ -162,8 +162,8 @@ const TransactionHistory = () => {
       </div>
 
       {/* Transactions Table */}
-      <div className="overflow-x-auto bg-white rounded-md shadow-sm">
-        <table className="min-w-full text-sm">
+      <div className="overflow-x-auto bg-white dark:bg-dark rounded-md shadow-sm">
+        <table className="min-w-full text-sm text-muted">
           <thead className="uppercase  text-xs text-left font-semibold bg-secondary text-secondary-foreground">
             <tr>
               <th className="p-4 w-6">S.N</th>
