@@ -93,7 +93,7 @@ const SupportReq = () => {
                         id="timeRange"
                       value={request.status}
                       onChange={(e) => updateRequestStatus(request.id, e.target.value)}
-                        className="mt-1 w-[100px] md:w-[200px] bg-primary-foreground border border-muted/40 text-muted rounded-md"
+                     
                       >
                          {STATUS_OPTIONS.map(status => (
                       <OptionComponent  key={status}  value={status}>{status}  </OptionComponent>

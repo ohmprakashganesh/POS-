@@ -7,7 +7,7 @@ import {
 import { productsData } from '@/data/mockData';
 import { useCart } from '../../context/CartContext';
 
-const POS = () => {
+const Pos = () => {
   const [t]= useTranslation("cashier");
 
   const [products, setProducts] = useState([]);
@@ -92,5 +92,5 @@ const POS = () => {
   );
 };
 
-export default POS;
+export default Pos;
 

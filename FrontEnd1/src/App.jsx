@@ -49,7 +49,7 @@ import Profile from './features/Subscriber/pages/settings/profile/Profile';
 import Support from './features/Subscriber/pages/settings/help/Support';
 import SupportReq from './features/Admin/pages/support/Support';
 import { CartProvider } from './features/cashier/context/CartContext';
-import Cart from './features/cashier/pages/cart/cart';
+import Cart from './features/cashier/pages/cart/Cart';
 import CProduct from './features/cashier/pages/products/Product';
 import { FormProvider } from './features/cashier/context/FormContext';
 import { ThemeProvider } from './contexts/ThemeContext';

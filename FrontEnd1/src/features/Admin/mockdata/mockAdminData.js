@@ -1,6 +1,6 @@
 import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
 import { Building, ChartBarIcon, CheckCircleIcon, CreditCard, UserIcon, UsersIcon } from "lucide-react";
-
+import statement from "@/assets/statement.png"
   export const metricCards = [
     {
       title: "Total Subscribers",
@@ -82,3 +82,60 @@ import { Building, ChartBarIcon, CheckCircleIcon, CreditCard, UserIcon, UsersIco
   { id: '4', userId: 'user_A001_dev', category: 'Profile Update', status: 'New', requestDate: new Date(Date.now() - 1000 * 60 * 3),servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24)},
   { id: '5', userId: 'user_F990_stg', category: 'Customers/Suppliers', status: 'New', requestDate: new Date(Date.now() - 1000 * 60 * 55),servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24) },
 ];
+
+  // 👥 Existing Subscribers Data
+export const existingUsers=[
+    { id: 1, name: "John Doe", email: "john@example.com", active: true, plan: 'pro', start: "2022.12.5", expiry: '2026.04.22' },
+    { id: 2, name: "Alice Smith", email: "alice@example.com", active: false, plan: 'basic', start: "2022.12.5", expiry: '2026.04.22' },
+    { id: 3, name: "Robert Lee", email: "robert@example.com", active: true, plan: 'enterprise', start: "2022.12.5", expiry: '2026.04.22' },
+  ];
+
+  // 🆕 Hypothetical New/Potential Users Data (for demonstration)
+// =[
+//     { id: 101, name: "Emily Clark", email: "emily@potential.com", source: 'Trial Signup', created: "2024.11.01" },
+//     { id: 102, name: "David Wilson", email: "david@potential.com", source: 'Waitlist', created: "2024.10.15" },
+//     { id: 103, name: "Maria Garcia", email: "maria@potential.com", source: 'Unfinished Checkout', created: "2024.11.10" },
+//   ];
+
+    export const newUsers = [
+  {
+    "id": 1,
+    "name": "James Carter",
+    "email": "james.carter@example.com",
+    "plan": "Premium",
+    "bill": statement,
+    "dateCreated": "2025-01-12"
+  },
+  {
+    "id": 2,
+    "name": "Sophia Martinez",
+    "email": "sophia.martinez@example.com",
+    "plan": "Basic",
+    "bill": statement,
+    "dateCreated": "2025-02-01"
+  },
+  {
+    "id": 3,
+    "name": "Daniel Kim",
+    "email": "daniel.kim@example.com",
+    "plan": "Standard",
+    "bill":statement,
+    "dateCreated": "2025-01-28"
+  },
+  {
+    "id": 4,
+    "name": "Aarav Sharma",
+    "email": "aarav.sharma@example.com",
+    "plan": "Premium",
+    "bill":statement,
+    "dateCreated": "2025-02-10"
+  },
+  {
+    "id": 5,
+    "name": "Emma Wilson",
+    "email": "emma.wilson@example.com",
+    "plan": "Free",
+    "bill":statement,
+    "dateCreated": "2025-02-15"
+  }
+]

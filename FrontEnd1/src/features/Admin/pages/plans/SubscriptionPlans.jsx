@@ -61,7 +61,6 @@ const PlanManagement = () => {
               ))}
             </tr>
           </thead>
-
           <tbody>
             {Object.entries(plans2).map(([key, plan], index) => (
               <tr key={key} className="border-b  justify-center items-center  my-auto ">
@@ -86,21 +85,21 @@ const PlanManagement = () => {
                     "—"
                   )}
                 </td>
-                <td className=" flexcontent box">
+                <td className="box md:space-x-2 space-x-1 ">
                   <button
                     onClick={() => {
                       setEditKey(key);
                       setOpenForm(true);
                     }}
-                    className="px-3 py-1 text hover:scale-110  text-primary dark:text-muted-hover rounded "
+                    className="px-1 py-1   hover:bg-primary  dark:text-muted-hover rounded "
                   >
-                    <PencilIcon />
+                    <PencilIcon className="h-5 w-5 text-primary hover:text-primary-foreground  " />
                   </button>
                   <button
                     onClick={() => handleDelete(key)}
-                    className="px-3 py-1  text-destructive hover:scale-110 hover:text-destructive-hover dark:text-muted-hover rounded "
+                    className="px-1 py-1 hover:bg-destructive  dark:text-muted-hover rounded "
                   >
-                    <Trash2Icon />
+                    <Trash2Icon className="h-5 w-5 text-destructive hover:text-primary-foreground " />
                   </button>
                 </td>
               </tr>
