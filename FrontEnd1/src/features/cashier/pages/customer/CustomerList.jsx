@@ -243,7 +243,7 @@ const CustomerList = () => {
       <div className="space-y-2 ">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-muted-hover">
+            <h1 className="text-2xl font-bold text-shadow-dark dark:text-whiter">
               {t("customers.customers")}
             </h1>
             <p className="text-muted">{t("customers.manageCustomers")}</p>

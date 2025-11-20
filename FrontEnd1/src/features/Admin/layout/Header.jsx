@@ -50,7 +50,7 @@ const Header = ({ onMenuClick, user }) => {
             <Bars3Icon className="h-6 w-6" />
           </button>
           <div className="ml-4 lg:ml-0">
-            <h1 className="text-xl mask- font-bold  text-muted-hover">Dashboard</h1>
+            <h1 className="text-3xl  text-dark dark:text-white mask- font-bold  ">Dashboard</h1>
           </div>
         </div>
 

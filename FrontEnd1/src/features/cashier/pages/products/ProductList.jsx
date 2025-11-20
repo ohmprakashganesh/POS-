@@ -80,9 +80,6 @@ const ProductList = () => {
             className=" text-muted border-muted/40 bg-white dark:bg-dark border rounded-lg px-4 py-2 "
           >
             {categories.map((category) => (
-              // <option key={category} value={category} className="text-muted">
-              //   {category === "all" ? "All Categories" : category}
-              // </option>
               <OptionComponent  key={category} value={category}>
                {category === "all" ? "All Categories" : category}
               </OptionComponent>
@@ -127,8 +124,8 @@ const ProductList = () => {
                 </h3>
                 <div className="details">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-xs text-muted">{t("products.rs")}</span>
-                    <span className="text-xl text-muted-hover font-bold">
+                    <span className="text-sm text-muted">{t("products.rs")}</span>
+                    <span className="text-md text-muted-hover font-bold">
                       {product.price}
                     </span>
                   </div>

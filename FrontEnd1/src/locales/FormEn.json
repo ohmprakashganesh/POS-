@@ -1,0 +1,36 @@
+{
+"customer":{
+      "titleU": "Register New Customer",
+  "descriptionU": "Fill in the details to register a new customer.",
+       "title": "Update Customer Information",
+  "description": "Modify the customer details below.",
+  "fields": {
+    "fullName": {
+      "label": "Full Name",
+      "placeholder": "Enter customer name",
+      "required": true
+    },
+    "phoneNumber": {
+      "label": "Phone Number",
+      "placeholder": "98XXXXXXXX",
+      "required": true
+    },
+    "emailAddress": {
+      "label": "Email Address",
+      "placeholder": "customer@example.com",
+      "required": false
+    },
+    "address": {
+      "label": "Address",
+      "placeholder": "Enter customer address",
+      "required": false
+    }
+  },
+  "buttons": {
+    "cancel": "Cancel",
+    "submit": "Submit"
+
+  }
+}
+
+}

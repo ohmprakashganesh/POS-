@@ -50,12 +50,12 @@ const Header = ({ onMenuClick, user }) => {
         <div className="flex items-center">
           <button
             onClick={onMenuClick}
-            className="lg:hidden p-2 rounded-md text-gray-400 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100"
+            className="lg:hidden p-2 rounded-md  dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100"
           >
             <Bars3Icon className="h-6 w-6" />
           </button>
           <div className="ml-4 lg:ml-0">
-            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+            <h1 className="text-3xl  text-dark dark:text-white mask- font-bold ">
               {t('general.dashboard')}
             </h1>
           </div>
@@ -64,9 +64,7 @@ const Header = ({ onMenuClick, user }) => {
         {/* Right section */}
         <div className="flex items-center space-x-2">
           <ThemeButton/>
-
           <LanguageToggle />
-
           {/* Notifications */}
           <div ref={buttonRef} className="relative">
             <button
@@ -100,14 +98,18 @@ const Header = ({ onMenuClick, user }) => {
             </button>
 
             {userMenuOpen && (
-              <div className="absolute right-0 mt-4 w-48  rounded-md shadow-lg py-1 z-50 border border-muted/40 ">
-                <button
-                  onClick={logout}
-                  className=" w-full gap-2 bg-white dark:bg-dark  flex text-left px-2 py-1 text-sm text-muted-hover "
-                >
-                <span><LogOutIcon/></span>   {t('general.logOut')}
-                </button>
-              </div>
+             <div className="absolute right-0 mt-4 w-48 bg-white dark:bg-dark rounded-md hover:bg-muted/10 shadow-lg py-1 z-50">
+                             <div className='flex flex-row justify-start py-2 gap-2 hover:bg-muted/10 dark:text-muted-hover  text-muted-hover  px-5'>
+                                <LogOutIcon/> 
+                               <button
+                               onClick={logout}
+                               className="block w-full text-left  text-sm "
+                             >
+                              Sign out
+                             </button>
+                             </div>
+                            
+                           </div>
             )}
           </div>
         </div>

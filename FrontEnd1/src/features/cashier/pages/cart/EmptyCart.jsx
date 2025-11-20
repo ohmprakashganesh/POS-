@@ -19,7 +19,7 @@ const CartEmpty = () => {
         {t("cart.addItems")}
       </p>
 
-      <Button onClick={() => navigate("/")} className="mt-4">
+      <Button onClick={() => navigate("/")} className="mt-4 w-full max-w-sm">
        {t("cart.addItems")}
       </Button>
         </div>

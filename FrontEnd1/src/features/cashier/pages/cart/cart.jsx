@@ -137,7 +137,7 @@ const Cart = () => {
     <div>
     <div>
       {/* Order Header with Count */}
-      <h2 className="text-2xl font-bold border-b text-muted border-muted/40">
+      <h2 className="text-2xl font-bold border-b pb-2 text-shadow-dark dark:text-white border-muted/40">
         {t("cart.cartOverview")}
         {totalItems > 0 && (
           <span className="text-sm font-medium text-muted ml-2">
@@ -148,9 +148,6 @@ const Cart = () => {
       {cart.length === 0 ? (
         <div className=' w-full   flex flex-col justify-center items-center  '>
           <EmptyCart />
-          {/* <p className="text-muted-hover text-4xl p-4">{t("cart.emptyCart")}</p>
-          <p className='text-muted'>{t("cart.addItems")}</p> */}
-
         </div>
       ) : (
 
@@ -158,18 +155,20 @@ const Cart = () => {
           {/* search section */}
        <div className="flex justify-between  gap-3 p-3 rounded-sm ">
   {/* Dropdown */}
-  <select
-    value={selectedId|| ""}
-    onChange={(e) => setSelectedId( e.target.value)}
-    className="w-[48%] md:w-[30%] lg:w-[30%]  h-[45px] border border-muted/40 rounded-md bg-white dark:bg-dark"
-  >
-    <option value="" className='text-muted'>Select Customer</option>
-    {filteredCustomers.slice(0, 3).map((user) => (
-      <option key={user.id} value={user.id}>
-        {user.name}
-      </option>
-    ))}
-  </select>
+ <select
+  value={selectedId || ""}
+  onChange={(e) => setSelectedId(e.target.value)}
+  className="w-[48%] md:w-[30%] lg:w-[30%] h-[45px] border border-muted/40 rounded-md bg-white 
+             dark:bg-dark focus:outline-none focus:ring-0 ring-0"
+>
+  <option value="" className="text-muted">Select Customer</option>
+  {filteredCustomers.slice(0, 3).map((user) => (
+    <option key={user.id} value={user.id}>
+      {user.name}
+    </option>
+  ))}
+</select>
+
 
   {/* Button */}
    <Button onClick={()=>openCustomerForm()} className=" px-5 h-[45px] w-[48%] md:w-[30%] ">

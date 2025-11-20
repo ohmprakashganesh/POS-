@@ -134,14 +134,14 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div className="flex items-center justify-between h-16 px-4 
           border-b border-muted/40 dark:border-gray-700">
           <div className="flex items-center">
-            <ShoppingCartIcon className="h-8 w-8 text-primary dark:text-primary" />
-            <span className="ml-2 text-xl font-bold text-muted-hover dark:text-gray-100">
-              POS System
+            <ShoppingCartIcon className="h-8 w-8 text-dark dark:text-white font-bold" />
+            <span className="ml-2 text-2xl font-bold">
+             Smart Bill
             </span>
           </div>
           <button
             onClick={onClose}
-            className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100"
+            className="lg:hidden p-2 rounded-md text-muted hover:text-muted-hover dark:text-gray-300 dark:hover:text-gray-100"
           >
             <XMarkIcon className="h-6 w-6" />
           </button>
@@ -160,7 +160,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                   group flex items-center px-4 py-2.5 text-sm font-medium rounded-md transition-colors
                     ${
                       isActive
-                        ? "bg-primary/20 text-primary"
+                        ? "bg-primary/20 text-primary dark:text-white"
                         : "text-muted hover:bg-background hover:text-foreground"
                     }
                 `}

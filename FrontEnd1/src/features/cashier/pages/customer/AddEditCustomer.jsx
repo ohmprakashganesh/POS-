@@ -4,9 +4,9 @@ import { customersData } from '@/data/mockData';
 import { useForm } from '../../context/FormContext';
 import Input from '@/features/ui/Input';
 import Button from '@/features/ui/Button';
-import { fa, tr } from 'zod/v4/locales';
-
+import { useTranslation } from 'react-i18next';
 const AddEditCustomer = () => {
+  const {t}=useTranslation("form")
   const { closeCustomerForm, editId } = useForm();
   const isEdit = Boolean(editId);
 
@@ -80,16 +80,16 @@ const AddEditCustomer = () => {
   return (
     <div className="fixed inset-0 bg-prim flex  items-center justify-center z-50">
       {/* Theme-aware popup */}
-      <div className="bg-card w-1/3 bg-white dark:bg-dark max-w-xl mx-4 rounded-xl shadow-lg p-6 
+      <div className="bg-card lg:w-2/5 md:w-4/6 sm:w-1/2  w-full bg-white dark:bg-dark max-w-xl mx-4 rounded-xl shadow-lg p-6 
                       overflow-y-auto max-h-[90vh] text-muted border border-border">
 
         <div className="flex items-center  justify-between mb-4">
           <div className="flex w-full justify-center flex-col items-center">
-            <h1 className="text-2xl font-bold text-muted-hover">
-              {isEdit ? 'Edit Customer' : 'Add New Customer'}
+            <h1 className="text-2xl font-bold text-shadow-dark dark:text-white text-muted-hover">
+              {isEdit ? t("customer.titleU") : t("customer.title")}
             </h1>
             <p className="text-muted text-center">
-              {isEdit ? 'Update customer information' : 'Add a new customer to your database'}
+              {isEdit ?  t("customer.descriptionU") : t("customer.description")}
             </p>
           </div>
         </div>
@@ -107,7 +107,7 @@ const AddEditCustomer = () => {
             {/* Full Name */}
             <div>
               <label className="block text-sm font-medium  mb-1">
-                Full Name *
+              {t("customer.fields.fullName.label")}
               </label>
               <Input
                 type="text"
@@ -116,14 +116,14 @@ const AddEditCustomer = () => {
                 value={formData.name}
                 onChange={handleChange}
                 className=" "
-                placeholder="Enter customer name"
+                placeholder= {t("customer.fields.fullName.placeholder")}
               />
             </div>
 
             {/* Phone */}
             <div>
               <label className="block text-sm font-medium mb-1">
-                Phone Number *
+               {t("customer.fields.phoneNumber.label")}*
               </label>
               <Input
                 type="tel"
@@ -132,14 +132,14 @@ const AddEditCustomer = () => {
                 value={formData.phone}
                 onChange={handleChange}
           
-                placeholder="98XXXXXXXX"
+                placeholder= {t("customer.fields.phoneNumber.placeholder")}
               />
             </div>
 
             {/* Email */}
             <div>
               <label className="block text-sm font-medium  mb-1">
-                Email Address
+               {t("customer.fields.emailAddress.label")}
               </label>
               <Input
                 type="email"
@@ -147,14 +147,14 @@ const AddEditCustomer = () => {
                 value={formData.email}
                 onChange={handleChange}
            
-                placeholder="customer@example.com"
+                placeholder={t("customer.fields.emailAddress.placeholder")}
               />
             </div>
 
             {/* Address */}
            <div>
   <label className="block text-sm font-medium text-muted-hover mb-1">
-    Address
+     {t("customer.fields.address.label")}
   </label>
 
   <textarea
@@ -172,7 +172,7 @@ const AddEditCustomer = () => {
       focus:outline-none 
       focus:ring-0
     "
-    placeholder="Enter customer address "
+      placeholder={t("customer.fields.address.placeholder")}
   />
 </div>
 
@@ -185,7 +185,7 @@ const AddEditCustomer = () => {
               type="button"
               className="w-full max-w-sm bg-destructive hover:bg-destructive-hover"
             >
-              Cancel
+             {t("customer.buttons.cancel")}
             </Button>
 
             <Button
@@ -193,7 +193,7 @@ const AddEditCustomer = () => {
               disabled={isLoading}
               className="w-full max-w-sm"
             >
-              {isLoading ? 'Saving...' : isEdit ? 'Update' : 'Submit'}
+              {isLoading ? 'Saving...' : t("customer.buttons.submit")}
             </Button>
           </div>
         </form>

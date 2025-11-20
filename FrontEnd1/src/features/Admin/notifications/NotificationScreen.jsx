@@ -13,13 +13,13 @@ const NotificationItem = ({ title,stock, time,status, isNew ,id}) => {
   };
   const getIcon = () => {
         return (
-          <div className="w-12 h-12 overflow-hidden rounded-full flex items-center justify-center bg-background relative">
+          <div className="w-12 h-12 overflow-hidden rounded-full flex items-center justify-center bg-white dark:bg-dark relative">
              <img className=' w-full h-full' src={logo} alt="" />
           </div>
         );
   };
   return (
-    <div   onClick={handleClick}  className={`flex items-start p-2 ${status=="read"?"bg-primary-foreground":"bg-muted/15 text-muted-hover" }   cursor-pointer nd `}>
+    <div   onClick={handleClick}  className={`flex items-start p-2 ${status=="read"?"dark:bg-dark bg-white":"dark:bg-muted/15 text-muted-hover bg-muted/15" }   cursor-pointer nd `}>
       <div className="mr-3 flex-shrink-0 ">
         {getIcon()}
       </div>
@@ -28,10 +28,10 @@ const NotificationItem = ({ title,stock, time,status, isNew ,id}) => {
          <span className='text-muted-hover'> {title? title:"added new product"}</span>
          <p className='text-muted'>stock level <span>{stock?stock:"20"}</span></p>
         </div>
-        <p className={`text-xs ${isNew ? 'text-blue-600' : 'text-gray-500'}`}>{time}</p>
+        <p className={`text-xs ${isNew ? 'text-primary' : 'text-muted-hover'}`}>{time}</p>
       </div>
       {isNew && (
-        <div className="ml-2 w-2 h-2 rounded-full bg-blue-600 flex-shrink-0 mt-1"></div>
+        <div className="ml-2 w-2 h-2 rounded-full bg-secondary flex-shrink-0 mt-1"></div>
       )}
       {!isNew && (
         <div className="ml-2 w-4 h-4 flex-shrink-0 text-gray-500">
@@ -44,12 +44,13 @@ const NotificationItem = ({ title,stock, time,status, isNew ,id}) => {
 
 const NotificationScreen = () => {
   const [activeFilter, setActiveFilter]=useState("All")
+
   const getActivated=(filterName)=>{
     const isActive= activeFilter==filterName;
-    return `${isActive?"bg-primary text-white":"bg-primary-foreground "}`;
+    return `${isActive?"bg-primary text-white dark:bg-primary/40 dark:text-muted-hover":"bg-muted/30 dark:bg-muted/20 "}`;
   };
   return (
-    <div className="w-full min-h-screen max-h-screen overflow-scroll  shadow-lg bg-primary-foreground   font-base">
+    <div className="w-full min-h-screen max-h-screen overflow-scroll  shadow-lg bg-white dark:bg-dark  font-base">
       {/* Header */}
       <div className="p-4 border-b text-muted">
         <div className="flex justify-between items-center mb-2">

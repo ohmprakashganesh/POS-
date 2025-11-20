@@ -27,7 +27,7 @@ const Pos = () => {
   return (
     <div className="h-full w-full flex flex-col lg:flex-row gap-6">
       {/* Left Panel - Product Selection */}
-      <div className="flex-1  border-b-muted-foreground p-4">
+      <div className="flex-1  border-b-muted-foreground ">
         <div className="mb-4">
           <div className="relative">
             <Input
@@ -64,8 +64,8 @@ const Pos = () => {
                 </h3>
                 <div className="details">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-xs text-muted-hover ">{t("products.rs")}</span>
-                    <span className="text-xl text-muted-hover font-bold">
+                    <span className="text-sm text-muted-hover ">{t("products.rs")}</span>
+                    <span className="text-md text-muted-hover font-bold">
                       {product.price}
                     </span>
                   </div>

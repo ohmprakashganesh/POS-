@@ -1,0 +1,34 @@
+{ 
+    "customer":{
+ "title": "नयाँ ग्राहक दर्ता गर्नुहोस्",
+  "description": "नयाँ ग्राहक दर्ता गर्न आवश्यक विवरणहरू भर्नुहोस्।",
+   "titleU": "ग्राहक जानकारी अपडेट गर्नुहोस्",
+  "descriptionU": "तल उल्लेखित ग्राहक विवरणहरू परिमार्जन गर्नुहोस्।",
+  "fields": {
+    "fullName": {
+      "label": "पुरा नाम",
+      "placeholder": "ग्राहकको नाम लेख्नुहोस्",
+      "required": true
+    },
+    "phoneNumber": {
+      "label": "फोन नम्बर",
+      "placeholder": "98XXXXXXXX",
+      "required": true
+    },
+    "emailAddress": {
+      "label": "इमेल ठेगाना",
+      "placeholder": "customer@example.com",
+      "required": false
+    },
+    "address": {
+      "label": "ठेगाना",
+      "placeholder": "ग्राहकको ठेगाना लेख्नुहोस्",
+      "required": false
+    }
+  },
+  "buttons": {
+    "cancel": "रद्द गर्नुहोस्",
+    "submit": "पेश गर्नुहोस्"
+  }
+}
+}

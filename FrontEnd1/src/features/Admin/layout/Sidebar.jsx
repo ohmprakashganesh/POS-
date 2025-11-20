@@ -38,9 +38,9 @@ const Sidebar = ({ isOpen, onClose }) => {
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0
       `}>
         <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
-          <div className="flex items-center">
-            <ShoppingCartIcon className="h-8 w-8 text-muted-hover" />
-            <span className="ml-2 text-xl font-bold text-muted-hover">Smart Bill System</span>
+          <div className="flex text-dark dark:text-white font-bold items-center">
+            <ShoppingCartIcon className="h-8 w-8  " />
+            <span className="ml-2 text-2xl  ">Smart Bill </span>
           </div>
           <button
             onClick={onClose}
