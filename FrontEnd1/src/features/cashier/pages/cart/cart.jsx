@@ -150,7 +150,6 @@ const Cart = () => {
           <EmptyCart />
         </div>
       ) : (
-
         <>
           {/* search section */}
        <div className="flex justify-between  gap-3 p-3 rounded-sm ">
