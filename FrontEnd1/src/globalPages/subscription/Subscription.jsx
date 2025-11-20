@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, HandIcon, Move3dIcon, MoveRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { plans } from '@/data/mockData';
+import Button from '@/features/ui/Button';
 
 const Subscription = () => {
   const navigate= useNavigate();
@@ -41,46 +42,46 @@ const Subscription = () => {
 
   if (sts === 'active') {
     return (
-      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <div className="text-center">
-            <CheckIcon className="mx-auto h-16 w-16 text-green-500" />
-            <h1 className="mt-4 text-3xl font-bold text-gray-900">Subscription Active</h1>
-            <p className="mt-2 text-gray-600">
+            <CheckIcon className="mx-auto size-16 bg-secondary/30 rounded-full p-2 text-secondary" strokeWidth={2.5} />
+            <h1 className="mt-4 text-3xl font-bold">Subscription Active</h1>
+            <p className="text-muted">
               Your Professional plan is currently active and in good standing.
             </p>
           </div>
 
-          <div className="mt-8 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="mt-8 bg-white dark:bg-dark rounded-md shadow-sm p-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Current Plan</h3>
-                <div className="mt-2 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <div className='left-section'>
+                <h3 className="text-lg font-semibold ">Current Plan</h3>
+                <div className="mt-2 p-4 bg-primary/10 rounded-md border border-primary/50">
                   <div className="flex justify-between items-center">
-                    <span className="font-semibold text-blue-900">Professional</span>
-                    <span className="text-2xl font-bold text-blue-600">$79</span>
+                    <span className="font-semibold text-primary">Professional</span>
+                    <span className="text-2xl font-bold text-primary">$79</span>
                   </div>
-                  <p className="text-sm text-blue-700 mt-1">per month</p>
+                  <p className="text-sm text-primary/70 mt-1">per month</p>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">Billing Information</h3>
-                <div className="mt-2 space-y-2 text-sm text-gray-600">
-                  <p><strong>Status:</strong> <span className="text-green-600">Active</span></p>
+                <h3 className="text-lg font-semibold">Billing Information</h3>
+                <div className="mt-2 space-y-2 text-sm text-muted">
+                  <p><strong>Status:</strong> <span className="text-constructive">Active</span></p>
                   <p><strong>Next Billing Date:</strong> February 15, 2024</p>
                   <p><strong>Payment Method:</strong> eSewa (•••• 4242)</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 pt-6 border-t border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Plan Features</h3>
+            <div className="mt-6 pt-6 border-t border-muted/40">
+              <h3 className="text-lg font-semibold mb-4">Plan Features</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {plans.pro.features.map((feature, index) => (
                   <div key={index} className="flex items-center">
-                    <CheckIcon className="h-5 w-5 text-green-500 mr-2" />
-                    <span className="text-gray-700">{feature}</span>
+                    <CheckIcon className="size-5 outline-constructive outline rounded-full p-0.5 text-constructive mr-2" />
+                    <span className="text-muted font-normal">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -88,15 +89,15 @@ const Subscription = () => {
               </div>
             </div>
 
-            <div className="mt-6 flex space-x-4">
-              <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
-                Update Payment Method
-              </button>
-              <button onClick={()=>cancelSub() }className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+            <div className="mt-6 flex justify-end space-x-4">
+                <Button destructive onClick={()=>cancelSub() }>
                 Cancel Subscription
                 
-              </button>
-               <button  className='outline-1  flex px-3 py-1 rounded-md bg-blue-400  '>  <Link to='/subscriber' className='flex'> <p>go to Dashboard</p><MoveRight/> </Link> </button>
+              </Button>
+              <Button outline>
+                Update Payment Method
+              </Button>
+               <Button> <Link to='/subscriber'>Go to Dashboard</Link> </Button>
 
             </div>
           </div>
@@ -106,11 +107,11 @@ const Subscription = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 px-4 sm:px-3 lg:px-6">
+    <div className="min-h-screen py-6 px-4 sm:px-3 lg:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Choose Your Plan</h1>
-          <p className="mt-2 text-gray-600">
+        <div className="text-center pt-5">
+          <h1 className="text-3xl font-bold">Choose Your Plan</h1>
+          <p className="text-muted">
             Select the plan that works best for your business
           </p>
         </div>
@@ -122,55 +123,55 @@ const Subscription = () => {
           {Object.entries(plans).map(([key, plan]) => (
             <div
               key={key}
-              className={`bg-white rounded-lg shadow-sm border-2 ${
-                selectedPlan === key ? 'border-green-500' : 'border-gray-200'
+              className={`bg-white dark:bg-dark rounded-md shadow-sm ${
+                selectedPlan === key ? 'border border-constructive' : ''
               } p-6 relative`}
             >
               {selectedPlan === key && (
                 <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-2">
-                  <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-constructive text-constructive-foreground px-3 py-1 rounded-full text-sm font-medium">
                     Popular
                   </span>
                 </div>
               )}
 
-              <h3 className="text-xl font-bold text-gray-900">{plan.name}</h3>
+              <h3 className="text-xl font-bold">{plan.name}</h3>
               <div className="mt-4">
-                <span className="text-4xl font-bold text-gray-900">
+                <span className="text-4xl font-bold">
                   ${billingCycle? plan.monthly:"100"}
                 </span>
-                <span className=" text-xl font-semibold text-emerald-800 ml-2">
+                <span className=" text-xl font-semibold text-secondary ml-2">
                  /{plan.time} Months
                 </span>
               </div>
 
-              <button
+              <Button
                 onClick={() => setSelectedPlan(key)}
-                className={`w-full mt-6 py-3 px-4 cursor-pointer rounded-lg font-semibold ${
+                className={`w-full py-3 my-2 ${
                   selectedPlan === key
-                    ? 'bg-green-600 text-white '
-                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                    ? 'bg-constructive text-constructive-foreground hover:bg-constructive-hover'
+                    : 'bg-background text-foreground hover:bg-neutral-200 dark:hover:bg-neutral-800'
                 }`}
               >
                 {selectedPlan === key ? 'Selected' : 'Select Plan'}
-              </button>
+              </Button>
 
-              <div className="mt-6 space-y-3">
-                <h4 className="font-semibold text-gray-900">Features included:</h4>
+              <div className="mt-4 space-y-3">
+                <h4 className="font-semibold">Features included:</h4>
                 {plan.features.map((feature, index) => (
                   <div key={index} className="flex items-center">
                     <CheckIcon className="h-5 w-5 text-blue-500 mr-2" />
-                    <span className="text-gray-700 text-sm">{feature}</span>
+                    <span className="text-muted text-sm">{feature}</span>
                   </div>
                 ))}
                 {plan.limitations.length > 0 && (
                   <>
-                    <h4 className="font-semibold text-gray-900 mt-4">Limitations:</h4>
+                    <h4 className="font-semibold  mt-4">Limitations:</h4>
                    
                   </>
                 )}
                  {/* <div className='w-full text-center  p-3 bg-green-800 rounded-sm font-semibold  cursor-pointer  text-white' onClick={()=>navigate(`/payment/${plan.name}`)}> Enroll      <ArrowRight className="w-4 h-4 mr-2" /></div> */}
-                   <div className='w-full text-center  p-3 bg-green-800 rounded-sm font-semibold  cursor-pointer  text-white' onClick={()=>navigate(`/signUp`)}> Enroll      <ArrowRight className="w-4 h-4 mr-2" /></div>
+                   <Button secondary className='w-full py-3' onClick={()=>navigate(`/signUp`)}> Enroll<ArrowRight strokeWidth={2.5}/></Button>
 
               </div>
             </div>

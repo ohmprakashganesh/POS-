@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../contexts/AuthContext';
 
 import { useNavigate } from 'react-router-dom'
+import Button from '@/features/ui/Button';
 
 const Paid = () => {
      
@@ -14,21 +15,22 @@ const Paid = () => {
     const navigate= useNavigate();
      
   return (
-    <div className=' w-full h-screen  flex justify-center items-center '>
-         <div className='w-1/3 h-fit p-10 bg-gray-300  '>
-         <h1 className='text-xl '>Thank You</h1>
-         <h1>   success fully  completed the PayMent </h1>
+    <div className=' w-full fixed inset-0 flex justify-center items-center '>
+         <div className='w-[95%]  max-w-xl h-fit p-10 bg-white dark:bg-dark rounded-md shadow-sm'>
+         <p className='text-xl font-semibold text-center mb-2'>Thank You</p>
+         <p>   Success fully  completed the PayMent </p>
           
-        <h1>    Account will be activated with 12 To 14 hours</h1> 
-         <h1>  credentials will be provided through Gmail</h1> 
+        <p>    Account will be activated with 12 To 14 hours</p> 
+         <p>  credentials will be provided through Gmail</p> 
          <div>
-        <button
+          
+        <Button
         onClick={() => navigate("/login")} 
-        className="w-full outline bg-green-500 hover:text-white py-3 mt-6 flex items-center justify-center text-sm text-black transition duration-150"
+        className="w-full mt-7"
       >
-        <ArrowLeft className="w-4 h-4 mr-2" />
+        <ArrowLeft strokeWidth={2.5}/>
         Back to Home Page
-      </button>
+      </Button>
          </div>
               
          </div>
