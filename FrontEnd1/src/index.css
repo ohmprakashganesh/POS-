@@ -83,6 +83,7 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
 @font-face {
   font-family: "MyCustomBold";
   src: url("./assets/fonts/MyCustom-Bold.woff2") format("woff2");
@@ -90,3 +91,4 @@ body {
   font-style: normal;
   font-display: swap;
 }
+

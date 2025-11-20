@@ -180,8 +180,8 @@ return (
   // ----------------------------------------------------------------------
 
   return (
-    <div className="p-2 rounded-md  min-h-screen">
-      <h1 className="text-3xl font-extrabold text-muted-hover  border-b-muted/40 pb-2">Subscription Analytics Report</h1>
+    <div className="rounded-md  min-h-screen">
+      <h1 className="text-2xl font-bold text-dark dark:text-white">Subscription Analytics Report</h1>
 
       {/* 1. Filters & Controls Section */}
       <div className=" p-2 rounded-xl  mb-2">

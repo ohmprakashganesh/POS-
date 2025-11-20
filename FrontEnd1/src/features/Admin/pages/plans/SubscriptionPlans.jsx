@@ -31,9 +31,9 @@ const PlanManagement = () => {
 
 
   return (
-    <div className="w-full mx-auto md:p-4  p-2    rounded-lg">
+    <div className="w-full mx-auto  rounded-lg">
       <div className="flex flex-wrap lg:justify-between justify-between ">
-        <h1 className="text-2xl font-semibold mb-6">Manage Subscription Plans</h1>
+        <h1 className="text-2xl font-bold text-dark dark:text-white mb-4">Manage Subscription Plans</h1>
         {!openForm && (
           <Button onClick={() => setOpenForm(true)} className=" md:w-2/12 bg-primary text-primary-foreground w-auto lg:h-2/12 h-10">Add Plan</Button>
         )}

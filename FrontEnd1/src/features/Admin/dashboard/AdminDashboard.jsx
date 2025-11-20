@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom';
 import { metricCards ,recentSubscriptions,quickActions} from '../mockdata/mockAdminData';
 import { 
   UsersIcon, 
-  ChartBarIcon, 
   BuildingStorefrontIcon,
   XCircleIcon,
   ArrowTrendingUpIcon,
   CreditCardIcon
 } from '@heroicons/react/24/outline';
+import Button from '@/features/ui/Button';
+import Timeline from './Timeline';
+import TimelineRevenueChart from './Timeline';
 
 const AdminDashboard = () => {
   const [cardMetrics, setCardMetrics]=useState([]);
     const [newSubscriptions, setNewSubscriptions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const[mode,setMode]=useState("monthly");
 
    useEffect(()=>{
     try{
@@ -96,7 +99,7 @@ const AdminDashboard = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-muted-hover">SaaS Analytics Dashboard</h1>
+          <h1 className="text-2xl font-bold text-dark dark:text-white">SaaS Analytics Dashboard</h1>
           <p className="text-muted">Overview of your POS platform performance</p>
         </div>
         <div className="text-sm text-gray-500">
@@ -191,16 +194,36 @@ const AdminDashboard = () => {
 
 
         {/* Revenue Chart */}
-        <div className="bg-white dark:bg-dark  rounded-lg shadow-sm border border-muted/40 p-6">
+        <div className="bg-white dark:bg-dark  rounded-lg shadow-sm border flex flex-col  border-muted/40 p-6">
           <h3 className="text-lg font-semibold text-muted-hover mb-4">Revenue Overview</h3>
-          <div className="h-64 bg-background rounded-lg flex items-center justify-center">
-            <div className="text-center">
-              <ChartBarIcon className="mx-auto h-12 w-12 text-muted-hover" />
-              <p className="mt-2 text-muted">Revenue analytics chart</p>
-              <p className="text-sm text-gray-400">Monthly recurring revenue trends</p>
-            </div>
+          <div className="h-full bg-background  flex-col  rounded-lg flex items-center justify-center">
+                    <TimelineRevenueChart mode={mode}/>
+
+          </div>
+           <div className='flex justify-between space-x-5 '>
+             <Button
+          onClick={() => setMode("monthly")}
+          className={`w-full rounded-lg border ${
+            mode === "monthly"
+              ? "bg-primary text-white  border border-t-muted/40"
+              : "bg-white text-gray-700 border border-muted/40"
+          }`}
+        >
+          Monthly
+        </Button>
+        <Button
+          onClick={() => setMode("yearly")}
+          className={`w-full rounded-lg border ${
+            mode === "yearly"
+              ? "bg-primary text-muted-hover"
+              : "bg-white text-gray-700 border border-muted/40"
+          }`}
+        >
+          Yearly
+        </Button>
           </div>
         </div>
+         
       </div>
 
       {/* Quick Actions */}

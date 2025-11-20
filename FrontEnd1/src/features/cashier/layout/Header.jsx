@@ -12,6 +12,7 @@ import NotificationScreen from '../pages/notification/Notification';
 import { LogOutIcon, Moon, Sun } from 'lucide-react';
 // UPDATED import: point to your ThemeContext provider hook
 import { useTheme } from '@/contexts/ThemeContext';
+import ThemeButton from '@/features/ui/ThemeButton';
 
 const Header = ({ onMenuClick, user }) => {
   // now useTheme returns { theme, setTheme, toggleTheme }
@@ -62,16 +63,7 @@ const Header = ({ onMenuClick, user }) => {
 
         {/* Right section */}
         <div className="flex items-center space-x-2">
-
-          {/* 🌗 Theme Toggle */}
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            // alternatively: onClick={toggleTheme}
-            className="p-2 rounded-full bg-muted/10 dark:bg-gray-700"
-          >
-            <Sun className="h-5 w-5 dark:hidden" />
-            <Moon className="h-5 w-5 hidden dark:block" />
-          </button>
+          <ThemeButton/>
 
           <LanguageToggle />
 
@@ -108,10 +100,10 @@ const Header = ({ onMenuClick, user }) => {
             </button>
 
             {userMenuOpen && (
-              <div className="absolute right-0 mt-4 w-48  bg-primary-foreground rounded-md shadow-lg py-1 z-50 border border-muted/40 ">
+              <div className="absolute right-0 mt-4 w-48  rounded-md shadow-lg py-1 z-50 border border-muted/40 ">
                 <button
                   onClick={logout}
-                  className=" w-full gap-2  flex text-left px-2 py-1 text-sm text-muted-hover "
+                  className=" w-full gap-2 bg-white dark:bg-dark  flex text-left px-2 py-1 text-sm text-muted-hover "
                 >
                 <span><LogOutIcon/></span>   {t('general.logOut')}
                 </button>
