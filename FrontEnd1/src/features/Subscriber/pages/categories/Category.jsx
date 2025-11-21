@@ -4,6 +4,7 @@ import Button from "@/features/ui/Button";
 import NewCategoryForm from "./NewCategoryForm";
 import Input from "@/features/ui/Input";
 import CategoryCard from "./CategoryCard";
+import { useTranslation } from "react-i18next";
 
 // --- Initial Data and State Setup ---
 const initialCategories = [
@@ -175,6 +176,7 @@ const initialCategories = [
 ];
 
 const App = () => {
+  const {t}=useTranslation()
   const [categories, setCategories] = useState(initialCategories);
   const [searchTerm, setSearchTerm] = useState(""); // New state for search term
   const [isCreateCategoryFormOpen, setIsCreateCategoryFormOpen] =
@@ -215,7 +217,7 @@ const App = () => {
   return (
     <div className="font-inter ">
       <div className="top-section space-y-2 sm:flex items-center justify-between ">
-        <h1 className="text-2xl font-bold">Category Management</h1>
+        <h1 className="text-2xl font-bold">{t("category.title")}</h1>
         <Button
           className="xl:hidden"
           onClick={() => setIsCreateCategoryFormOpen(true)}
@@ -237,7 +239,7 @@ const App = () => {
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 size-5 text-muted" />
         <Input
           type="text"
-          placeholder="Search categories by name..."
+          placeholder={t("category.search")}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="pl-9 bg-white dark:bg-dark"

@@ -203,14 +203,14 @@ const App = () => {
           {selectedMethod === "eSewa" && (
             <PaymentSection
               title="eSewa Payment"
-               url="../../../public/qr.jpg"
+               url="/qr.jpg"
               paymentInstructions={paymentInstructions}
             />
           )}
           {selectedMethod === "BankTransfer" && (
             <PaymentSection
               title="Bank Transfer"
-              url="../../../public/qr.jpg"
+              url="/qr.jpg"
               paymentInstructions={paymentInstructions}
             />
           )}
@@ -291,7 +291,7 @@ const PaymentSection = ({ title, paymentInstructions,url }) => (
 
     {/* QR Code and Label */}
     <div className="flex   justify-center flex-col  w-full items-center space-y-2">
-     <img className="w-[250px]" src='../../../public/qr.jpg' alt="" />
+     <img className="w-[250px]" src='/qr.jpg' alt="" />
       <p className="text-sm font-medium w-[250px] text-muted text-center">Byte Gurkha</p>
     </div>
 

@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {PlusIcon} from "lucide-react";
 import {  useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { z } from "zod";
 
 const categorySchema = z.object({
@@ -14,6 +15,7 @@ const categorySchema = z.object({
 });
 
 const NewCategoryForm = ({ className = "",setIsCreateCategoryFormOpen,setIsSuccessModalOpen }) => {
+  const {t}=useTranslation("form")
   const [error, setError] = useState(null);
   const {
     handleSubmit,
@@ -58,9 +60,9 @@ const NewCategoryForm = ({ className = "",setIsCreateCategoryFormOpen,setIsSucce
           className
         )}
       >
-        <h1 className="text-2xl font-bold">Create New Category</h1>
+        <h1 className="text-2xl font-bold">{t("category.title")}</h1>
         <Input
-          label="Category Name"
+          label={t("category.categoryName")}
           placeholder="e.g., Seasonal Sales"
           id="name"
           type="text"
@@ -68,7 +70,7 @@ const NewCategoryForm = ({ className = "",setIsCreateCategoryFormOpen,setIsSucce
           error={errors.name?.message}
         />
         <Input
-          label="Image URL"
+          label={t("category.imageUrl")}
           type="file"
           id="imageUrl"
           {...register("imageUrl")}
@@ -76,7 +78,7 @@ const NewCategoryForm = ({ className = "",setIsCreateCategoryFormOpen,setIsSucce
         />
         <div className="flex items-end gap-2">
           <Input
-            label="Category Color (Hex)"
+            label={t("category.categoryColor")}
             type="text"
             id="colorText"
             readOnly
@@ -93,7 +95,7 @@ const NewCategoryForm = ({ className = "",setIsCreateCategoryFormOpen,setIsSucce
         </div>
         {/* Preview */}
         <div className="flex items-center min-h-30 p-5 space-x-3 bg-background rounded-md">
-          <p className="text-sm font-medium text-muted">Preview:</p>
+          <p className="text-sm font-medium text-muted">{t("category.preview")}</p>
           <div
             style={{ backgroundColor: formData.color }}
             className="size-14 rounded-lg overflow-hidden"
@@ -114,11 +116,11 @@ const NewCategoryForm = ({ className = "",setIsCreateCategoryFormOpen,setIsSucce
         {error && <p className="text-destructive text-sm mt-1">*{error}</p>}
         <Button disabled={isSubmitting} className="w-full">
           {isSubmitting ? (
-            "Creating..."
+            t("category.creating")
           ) : (
             <>
-              <PlusIcon />
-              Create Category
+              <PlusIcon  strokeWidth={2.7}/>
+              {t("category.createButton")}
             </>
           )}
         </Button>

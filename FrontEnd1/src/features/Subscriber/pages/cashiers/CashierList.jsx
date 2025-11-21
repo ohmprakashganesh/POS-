@@ -9,8 +9,10 @@ import {
 } from "@heroicons/react/24/outline";
 import { customersData } from "@/data/mockData";
 import Input from "@/features/ui/Input";
+import { useTranslation } from "react-i18next";
 
 const CashierList = () => {
+  const {t}=useTranslation()
   const [cashiers, setCashiers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredCashiers, setFilteredCashiers] = useState([]);
@@ -42,15 +44,15 @@ const CashierList = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Cashiers</h1>
-          <p className="text-muted">Manage your cashier database</p>
+          <h1 className="text-2xl font-bold">{t("cashier.title")}</h1>
+          <p className="text-muted">{t("cashier.description")}</p>
         </div>
         <Link
           to="/cashier/add"
           className="inline-flex items-center gap-2 px-4 py-2 font-semibold bg-primary hover:bg-primary-hover text-primary-foreground rounded-md"
         >
           <PlusIcon className="h-5 w-5" strokeWidth={2.5} />
-          Add Cashier
+          {t("cashier.addCashier")}
         </Link>
       </div>
 
@@ -59,7 +61,7 @@ const CashierList = () => {
         <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
         <Input
           type="text"
-          placeholder="Search cashiers by name, phone, or email..."
+          placeholder={t("cashier.search")}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="pl-9 bg-white dark:bg-dark"
@@ -69,16 +71,16 @@ const CashierList = () => {
       {/* Table */}
       <div className="overflow-x-auto bg-white dark:bg-dark rounded-md shadow-sm">
         <table className="min-w-full text-sm text-muted ">
-          <thead className="uppercase  text-xs text-left font-semibold bg-secondary text-secondary-foreground">
+          <thead className="uppercase  text-sm text-left  bg-secondary text-secondary-foreground">
             <tr>
-               <th className="p-4 w-6">S.N</th>
-              <th className="p-4">Name</th>
-              <th className="p-4">Phone</th>
-              <th className="p-4">Email</th>
-              <th className="p-4">Address</th>
-              <th className="p-4">Total Orders</th>
-              <th className="p-4">Total Sales</th>
-              <th className="p-4">Actions</th>
+              <th className="p-4 w-6">{t("cashier.sn")}</th>
+              <th className="p-4">{t("cashier.name")}</th>
+              <th className="p-4">{t("cashier.phone")}</th>
+              <th className="p-4">{t("cashier.email")}</th>
+              <th className="p-4">{t("cashier.address")}</th>
+              <th className="p-4">{t("cashier.totalOrders")}</th>
+              <th className="p-4">{t("cashier.totalSales")}</th>
+              <th className="p-4">{t("cashier.actions")}</th>
             </tr>
           </thead>
 

@@ -7,8 +7,10 @@ import {
 import { transactionsData } from "@/data/mockData";
 import InvoiceViewer from "./Invoice";
 import Input from "@/features/ui/Input";
+import { useTranslation } from "react-i18next";
 
 const TransactionHistory = () => {
+  const {t}=useTranslation()
   const [transactions, setTransactions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredTransactions, setFilteredTransactions] = useState([]);
@@ -73,15 +75,15 @@ const TransactionHistory = () => {
   return (
     <div>
       {invoice && <InvoiceViewer setInvoice={setInvoice} invoice={invoice} />}
-      <h1 className="text-2xl font-bold">Transaction History</h1>
-      <p className="text-muted mb-3">View and manage all sales transactions</p>
+      <h1 className="text-2xl font-bold">{t("transactionHistory.title")}</h1>
+      <p className="text-muted mb-3">{t("transactionHistory.description")}</p>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-10">
         <div className="bg-white dark:bg-dark  rounded-md shadow-sm flex items-center p-5 gap-4">
           <DocumentTextIcon className="h-8 w-8 text-muted" />
           <div className="details">
-            <p className="font-medium text-muted">Total Transactions</p>
+            <p className="font-medium text-muted">{t("transactionHistory.totalTransactions")}</p>
             <p className="text-2xl font-bold">{transactions.length}</p>
           </div>
         </div>
@@ -90,7 +92,7 @@ const TransactionHistory = () => {
             $
           </span>
           <div className="details">
-            <p className="font-medium text-muted">Total Revenue</p>
+            <p className="font-medium text-muted">{t("transactionHistory.totalRevenue")}</p>
             <p className="text-2xl font-bold">
               {" "}
               ${transactions.reduce((sum, t) => sum + t.amount, 0).toFixed(2)}
@@ -103,7 +105,7 @@ const TransactionHistory = () => {
             ✓
           </span>
           <div className="details">
-            <p className="font-medium text-muted">Completed Transactions</p>
+            <p className="font-medium text-muted">{t("transactionHistory.completedTransactions")}</p>
             <p className="text-2xl font-bold">
               {" "}
               {transactions.filter((t) => t.status === "completed").length}
@@ -116,7 +118,7 @@ const TransactionHistory = () => {
             ⏱
           </span>
           <div className="details">
-            <p className="font-medium text-muted">Pending Transactions</p>
+            <p className="font-medium text-muted">{t("transactionHistory.pendingTransactions")}</p>
             <p className="text-2xl font-bold">
               {transactions.filter((t) => t.status === "pending").length}
             </p>
@@ -130,7 +132,7 @@ const TransactionHistory = () => {
           <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
           <Input
             type="text"
-            placeholder="Search by invoice or customer..."
+            placeholder={t("transactionHistory.search")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-9 bg-white dark:bg-dark"
@@ -139,7 +141,7 @@ const TransactionHistory = () => {
         <Input
           type="date"
           placeholder="Start Date"
-          label="Start Date"
+          label={t("transactionHistory.startDate")}
           value={dateRange.start}
           onChange={(e) =>
             setDateRange((prev) => ({ ...prev, start: e.target.value }))
@@ -149,7 +151,7 @@ const TransactionHistory = () => {
         <Input
           type="date"
           placeholder="End Date"
-          label="End Date"
+          label={t("transactionHistory.endDate")}
           value={dateRange.end}
           onChange={(e) =>
             setDateRange((prev) => ({ ...prev, end: e.target.value }))
@@ -157,23 +159,23 @@ const TransactionHistory = () => {
           className="bg-white dark:bg-dark"
         />
         <div className="md:pt-5 flex items-center h-full"><p className="text-muted">
-          Showing {filteredTransactions.length} transactions
+         {t("transactionHistory.showing")} {filteredTransactions.length} {t("transactionHistory.transactions")}
         </p></div>
       </div>
 
       {/* Transactions Table */}
       <div className="overflow-x-auto bg-white dark:bg-dark rounded-md shadow-sm">
         <table className="min-w-full text-sm text-muted">
-          <thead className="uppercase  text-xs text-left font-semibold bg-secondary text-secondary-foreground">
+          <thead className="uppercase  text-sm text-left  bg-secondary text-secondary-foreground">
             <tr>
-              <th className="p-4 w-6">S.N</th>
-              <th className="p-4">Invoice</th>
-              <th className="p-4">Customer</th>
-              <th className="p-4">Date</th>
-              <th className="p-4">Items</th>
-              <th className="p-4">Amount</th>
-              <th className="p-4">Status</th>
-              <th className="p-4">Actions</th>
+              <th className="p-4 w-6">{t("transactionHistory.sn")}</th>
+              <th className="p-4">{t("transactionHistory.invoice")}</th>
+              <th className="p-4">{t("transactionHistory.customer")}</th>
+              <th className="p-4">{t("transactionHistory.date")}</th>
+              <th className="p-4">{t("transactionHistory.items")}</th>
+              <th className="p-4">{t("transactionHistory.amount")}</th>
+              <th className="p-4">{t("transactionHistory.status")}</th>
+              <th className="p-4">{t("transactionHistory.actions")}</th>
             </tr>
           </thead>
           <tbody>

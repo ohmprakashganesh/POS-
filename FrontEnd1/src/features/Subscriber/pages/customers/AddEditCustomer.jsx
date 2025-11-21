@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import Button from "@/features/ui/Button";
 import Input from "@/features/ui/Input";
+import { useTranslation } from 'react-i18next';
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -16,6 +17,7 @@ const formSchema = z.object({
 });
 
 const AddEditCustomer = () => {
+  const {t}=useTranslation("form")
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
@@ -66,12 +68,12 @@ useEffect(() => {
             </Link>
             <div>
               <h1 className="text-2xl font-bold">
-                {isEdit ? "Update Customer Profile" : "Create a New Customer"}
+                {isEdit ? t("customerSection.titleUpdate") : t("customerSection.titleCreate")}
               </h1>
               <p className="text-muted">
                 {isEdit
-                  ? "Review and Update Customers's details"
-                  : "Add a new Customer to your system"}
+                  ? t("customerSection.subtitleUpdate")
+                  : t("customerSection.subtitleCreate")}
               </p>
             </div>
           </div>
@@ -80,16 +82,16 @@ useEffect(() => {
         className="w-full max-w-5xl my-10 rounded-md mx-auto bg-white dark:bg-dark p-5 space-y-5"
       >
         <div className="border-b border-muted/40 pb-2">
-          <h1 className="font-bold text-2xl">Customer's Details</h1>
+          <h1 className="font-bold text-2xl">{t("customerSection.detailsHeader")}</h1>
           <p className="text-muted">
-            {isEdit? "Update necessary details":"Provide details for new customer"}
+            {isEdit? t("customerSection.detailsSubHeaderUpdate"):t("customerSection.detailsSubHeaderCreate")}
     
           </p>
         </div>
         <Input
           id="name"
-          placeholder="Enter customer's name"
-          label="Full Name *"
+          placeholder={t("customerSection.name.placeholder")}
+          label={t("customerSection.name.label")}
           {...register("name")}
           disabled={isSubmitting}
           error={errors.name?.message}
@@ -97,8 +99,8 @@ useEffect(() => {
         <Input
           id="phone"
           type="tel"
-          placeholder="+977 98XXXXXXXX"
-          label="Phone Number *"
+          placeholder={t("customerSection.phone.placeholder")}
+          label={t("customerSection.phone.label")}
           {...register("phone")}
           disabled={isSubmitting}
           error={errors.phone?.message}
@@ -106,15 +108,15 @@ useEffect(() => {
         <Input
           id="email"
           type="email"
-          placeholder="customer@example.com"
-          label="Email Address"
+          placeholder={t("customerSection.email.placeholder")}
+          label={t("customerSection.email.label")}
           {...register("email")}
           disabled={isSubmitting}
           error={errors.email?.message}
         />
         <div className="address">
-           <label htmlFor="addressInput" className="block mb-1  capitalize">Address</label>
-           <textarea {...register("address")} rows="5" name="address" id="addressInput" disabled={isSubmitting} placeholder="Enter customers's address" className="w-full border border-muted/40 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed" />
+           <label htmlFor="addressInput" className="block mb-1  capitalize">{t("customerSection.address.label")}</label>
+           <textarea {...register("address")} rows="5" name="address" id="addressInput" disabled={isSubmitting} placeholder={t("customerSection.address.placeholder")} className="w-full border border-muted/40 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed" />
           {errors.address?.message && <p className="text-destructive text-sm mt-1">*{errors.address.message}</p>}
         </div>
         {error && <p className="text-destructive text-sm">*{error}</p>}
@@ -123,14 +125,14 @@ useEffect(() => {
             to="/customers"
             className="px-4 py-2 rounded-md bg-destructive text-destructive-foreground hover:bg-destructive-hover"
           >
-            Cancel
+            {t("customerSection.buttons.cancel")}
           </Link>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting
-              ? "Saving..."
+              ? t("customerSection.buttons.saving")
               : isEdit
-              ? "Update Customer"
-              : "Add Customer"}
+              ? t("customerSection.buttons.updateCustomer")
+              : t("customerSection.buttons.addCustomer")}
           </Button>
         </div>
       </form>

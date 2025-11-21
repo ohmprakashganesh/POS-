@@ -1,65 +1,124 @@
 {
-"customer":{
-      "titleU": "Register New Customer",
-  "descriptionU": "Fill in the details to register a new customer.",
-       "title": "Update Customer Information",
-  "description": "Modify the customer details below.",
-  "fields": {
-    "fullName": {
+  "Customer": {
+    "titleU": "Register New Customer",
+    "descriptionU": "Fill in the details to register a new customer.",
+    "title": "Update Customer Information",
+    "description": "Modify the customer details below.",
+    "fields": {
+      "fullName": {
+        "label": "Full Name",
+        "placeholder": "Enter customer name",
+        "required": true
+      },
+      "phoneNumber": {
+        "label": "Phone Number",
+        "placeholder": "98XXXXXXXX",
+        "required": true
+      },
+      "emailAddress": {
+        "label": "Email Address",
+        "placeholder": "customer@example.com",
+        "required": false
+      },
+      "address": {
+        "label": "Address",
+        "placeholder": "Enter customer address",
+        "required": false
+      }
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Submit"
+    }
+  },
+  "cashier": {
+    "titleCreate": "Create a New Cashier",
+    "titleUpdate": "Update Cashier Profile",
+    "subtitleCreate": "Add a new Cashier to your system",
+    "subtitleUpdate": "Review and Update Cashier's details",
+    "detailsHeader": "Cashier Details",
+    "detailsSubHeaderCreate": "Provide details for new cashier",
+    "detailsSubHeaderUpdate": "Update necessary details",
+    "name": {
       "label": "Full Name",
-      "placeholder": "Enter customer name",
-      "required": true
+      "placeholder": "Enter cashier name"
     },
-    "phoneNumber": {
-      "label": "Phone Number",
-      "placeholder": "98XXXXXXXX",
-      "required": true
-    },
-    "emailAddress": {
+    "email": {
       "label": "Email Address",
-      "placeholder": "customer@example.com",
-      "required": false
+      "placeholder": "cashier@cashier.com"
+    },
+    "phone": {
+      "label": "Phone Number",
+      "placeholder": "98XXXXXXXX"
     },
     "address": {
       "label": "Address",
-      "placeholder": "Enter customer address",
-      "required": false
+      "placeholder": "Enter address"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "addCashier": "Add Cashier",
+      "updateCashier": "Update Cashier",
+      "saving": "Saving..."
     }
   },
-  "buttons": {
-    "cancel": "Cancel",
-    "submit": "Submit"
-
-  }
-},
-"cashier": {
-    "title": "Create a New Cashier",
-    "subtitle": "Add a new Cashier to your system",
-    "detailsHeader": "Cashier Details",
-    "detailsSubHeader": "Provide details for new cashier",
-    "fullName": "Full Name *",
-    "phoneNumber": "Phone Number *",
-    "emailAddress": "Email Address",
-    "address": "Address"
-  },
   "vendor": {
-    "title": "Create a New Vendor",
-    "subtitle": "Add a new Vendor to your system",
+    "titleCreate": "Create a New Vendor",
+    "titleUpdate": "Update Vendor's Profile",
+    "subtitleCreate": "Add a new Vendor to your system",
+    "subtitleUpdate": "Review and Update Vendor's details",
     "detailsHeader": "Vendor's Details",
-    "detailsSubHeader": "Provide details for new vendor",
-    "vendorName": "Vendor Name *",
-    "phoneNumber": "Phone Number *",
-    "address": "Address"
+    "detailsSubHeaderCreate": "Provide details for new vendor",
+    "detailsSubHeaderUpdate": "Update necessary details",
+    "name": {
+      "label": "Vendor Name",
+      "placeholder": "Enter vendor name"
+    },
+    "phone": {
+      "label": "Phone Number",
+      "placeholder": "98XXXXXXXX"
+    },
+    "address": {
+      "label": "Address",
+      "placeholder": "Enter vendor address"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "addVendor": "Add Vendor",
+      "updateVendor": "Update Vendor",
+      "saving": "Saving..."
+    }
   },
-  "customer": {
-    "title": "Create a New Customer",
-    "subtitle": "Add a new Customer to your system",
+  "customerSection": {
+    "titleCreate": "Create a New Customer",
+    "titleUpdate": "Update Customer Profile",
+    "subtitleCreate": "Add a new Customer to your system",
+    "subtitleUpdate": "Review and Update Customer's details",
+    "detailsSubHeaderCreate": "Provide details for new customer",
+    "detailsSubHeaderUpdate": "Update necessary details",
     "detailsHeader": "Customer's Details",
-    "detailsSubHeader": "Provide details for new customer",
-    "fullName": "Full Name *",
-    "phoneNumber": "Phone Number *",
-    "emailAddress": "Email Address",
-    "address": "Address"
+    "name": {
+      "label": "Full Name",
+      "placeholder": "Enter customer name"
+    },
+    "email": {
+      "label": "Email Address",
+      "placeholder": "customer@example.com"
+    },
+    "phone": {
+      "label": "Phone Number",
+      "placeholder": "98XXXXXXXX"
+    },
+    "address": {
+      "label": "Address",
+      "placeholder": "Enter customer address"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "addCustomer": "Add Customer",
+      "updateCustomer": "Update Customer",
+      "saving": "Saving..."
+    }
   },
   "category": {
     "title": "Create New Category",
@@ -67,7 +126,7 @@
     "imageUrl": "Image URL",
     "categoryColor": "Category Color (Hex)",
     "preview": "Category Preview",
-    "createButton": "Create Category"
+    "createButton": "Create Category",
+    "creating": "Creating..."
   }
-
 }

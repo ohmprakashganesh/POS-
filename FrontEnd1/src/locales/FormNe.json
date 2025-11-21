@@ -1,71 +1,133 @@
-{ 
-    "customer":{
- "title": "नयाँ ग्राहक दर्ता गर्नुहोस्",
-  "description": "नयाँ ग्राहक दर्ता गर्न आवश्यक विवरणहरू भर्नुहोस्।",
-   "titleU": "ग्राहक जानकारी अपडेट गर्नुहोस्",
-  "descriptionU": "तल उल्लेखित ग्राहक विवरणहरू परिमार्जन गर्नुहोस्।",
-  "fields": {
-    "fullName": {
-      "label": "पुरा नाम",
-      "placeholder": "ग्राहकको नाम लेख्नुहोस्",
-      "required": true
+{
+  "Customer": {
+    "title": "नयाँ ग्राहक दर्ता गर्नुहोस्",
+    "description": "नयाँ ग्राहक दर्ता गर्न आवश्यक विवरणहरू भर्नुहोस्।",
+    "titleU": "ग्राहक जानकारी अपडेट गर्नुहोस्",
+    "descriptionU": "तल उल्लेखित ग्राहक विवरणहरू परिमार्जन गर्नुहोस्।",
+    "fields": {
+      "fullName": {
+        "label": "पुरा नाम",
+        "placeholder": "ग्राहकको नाम लेख्नुहोस्",
+        "required": true
+      },
+      "phoneNumber": {
+        "label": "फोन नम्बर",
+        "placeholder": "98XXXXXXXX",
+        "required": true
+      },
+      "emailAddress": {
+        "label": "इमेल ठेगाना",
+        "placeholder": "customer@example.com",
+        "required": false
+      },
+      "address": {
+        "label": "ठेगाना",
+        "placeholder": "ग्राहकको ठेगाना लेख्नुहोस्",
+        "required": false
+      }
     },
-    "phoneNumber": {
-      "label": "फोन नम्बर",
-      "placeholder": "98XXXXXXXX",
-      "required": true
+    "buttons": {
+      "cancel": "रद्द गर्नुहोस्",
+      "submit": "पेश गर्नुहोस्"
+    }
+  },
+  "cashier": {
+    "titleCreate": "नयाँ क्यासियर सिर्जना गर्नुहोस्",
+    "titleUpdate": "क्यासियर प्रोफाइल अपडेट गर्नुहोस्",
+    "subtitleCreate": "तपाईंको सिस्टममा नयाँ क्यासियर थप्नुहोस्",
+    "subtitleUpdate": "क्यासियरका विवरणहरू समीक्षा गर्नुहोस् र अपडेट गर्नुहोस्",
+    "detailsHeader": "क्यासियर विवरण",
+    "detailsSubHeaderCreate": "नयाँ क्यासियरका लागि विवरण प्रदान गर्नुहोस्",
+    "detailsSubHeaderUpdate": "आवश्यक विवरण अपडेट गर्नुहोस्",
+    "name": {
+      "label": "पूरा नाम",
+      "placeholder": "क्यासियरको नाम प्रविष्ट गर्नुहोस्"
     },
-    "emailAddress": {
+    "email": {
       "label": "इमेल ठेगाना",
-      "placeholder": "customer@example.com",
-      "required": false
+      "placeholder": "cashier@cashier.com"
+    },
+    "phone": {
+      "label": "फोन नम्बर",
+      "placeholder": "98XXXXXXXX"
     },
     "address": {
       "label": "ठेगाना",
-      "placeholder": "ग्राहकको ठेगाना लेख्नुहोस्",
-      "required": false
+      "placeholder": "ठेगाना प्रविष्ट गर्नुहोस्"
+    },
+    "buttons": {
+      "cancel": "रद्द गर्नुहोस्",
+      "addCashier": "क्यासियर थप्नुहोस्",
+      "updateCashier": "क्यासियर अपडेट गर्नुहोस्",
+      "saving": "सेभ गर्दै..."
     }
   },
-  "buttons": {
-    "cancel": "रद्द गर्नुहोस्",
-    "submit": "पेश गर्नुहोस्"
-  }
-},
-"cashier": {
-    "title": "नयाँ क्यासियर सिर्जना गर्नुहोस्",
-    "subtitle": "तपाईंको प्रणालीमा नयाँ क्यासियर थप्नुहोस्",
-    "detailsHeader": "क्यासियर विवरण",
-    "detailsSubHeader": "नयाँ क्यासियरको लागि विवरण प्रदान गर्नुहोस्",
-    "fullName": "पूरा नाम *",
-    "phoneNumber": "फोन नम्बर *",
-    "emailAddress": "इमेल ठेगाना",
-    "address": "ठेगाना"
-  },
+
   "vendor": {
-    "title": "नयाँ विक्रेता सिर्जना गर्नुहोस्",
-    "subtitle": "तपाईंको प्रणालीमा नयाँ विक्रेता थप्नुहोस्",
+    "titleCreate": "नयाँ विक्रेता सिर्जना गर्नुहोस्",
+    "titleUpdate": "विक्रेताको प्रोफाइल अपडेट गर्नुहोस्",
+    "subtitleCreate": "तपाईंको सिस्टममा नयाँ विक्रेता थप्नुहोस्",
+    "subtitleUpdate": "विक्रेताका विवरणहरू समीक्षा गर्नुहोस् र अपडेट गर्नुहोस्",
+    "detailsSubHeaderCreate": "नयाँ विक्रेताका लागि विवरण प्रदान गर्नुहोस्",
+    "detailsSubHeaderUpdate": "आवश्यक विवरण अपडेट गर्नुहोस्",
     "detailsHeader": "विक्रेताको विवरण",
-    "detailsSubHeader": "नयाँ विक्रेताको लागि विवरण प्रदान गर्नुहोस्",
-    "vendorName": "विक्रेताको नाम *",
-    "phoneNumber": "फोन नम्बर *",
-    "address": "ठेगाना"
+    "name": {
+      "label": "विक्रेताको नाम",
+      "placeholder": "विक्रेताको नाम प्रविष्ट गर्नुहोस्"
+    },
+    "phone": {
+      "label": "फोन नम्बर",
+      "placeholder": "98XXXXXXXX"
+    },
+    "address": {
+      "label": "ठेगाना",
+      "placeholder": "विक्रेताको ठेगाना प्रविष्ट गर्नुहोस्"
+    },
+    "buttons": {
+      "cancel": "रद्द गर्नुहोस्",
+      "addVendor": "विक्रेता थप्नुहोस्",
+      "updateVendor": "विक्रेता अपडेट गर्नुहोस्",
+      "saving": "सेभ गर्दै..."
+    }
   },
-  "customer": {
-    "title": "नयाँ ग्राहक सिर्जना गर्नुहोस्",
-    "subtitle": "तपाईंको प्रणालीमा नयाँ ग्राहक थप्नुहोस्",
+  "customerSection": {
+    "titleCreate": "नयाँ ग्राहक सिर्जना गर्नुहोस्",
+    "titleUpdate": "ग्राहक प्रोफाइल अपडेट गर्नुहोस्",
+    "subtitleCreate": "तपाईंको सिस्टममा नयाँ ग्राहक थप्नुहोस्",
+    "subtitleUpdate": "ग्राहकका विवरणहरू समीक्षा गर्नुहोस् र अपडेट गर्नुहोस्",
+    "detailsSubHeaderCreate": "नयाँ ग्राहकका लागि विवरण प्रदान गर्नुहोस्",
+    "detailsSubHeaderUpdate": "आवश्यक विवरण अपडेट गर्नुहोस्",
     "detailsHeader": "ग्राहकको विवरण",
-    "detailsSubHeader": "नयाँ ग्राहकको लागि विवरण प्रदान गर्नुहोस्",
-    "fullName": "पूरा नाम *",
-    "phoneNumber": "फोन नम्बर *",
-    "emailAddress": "इमेल ठेगाना",
-    "address": "ठेगाना"
+    "name": {
+      "label": "पूरा नाम",
+      "placeholder": "ग्राहकको नाम प्रविष्ट गर्नुहोस्"
+    },
+    "email": {
+      "label": "इमेल ठेगाना",
+      "placeholder": "customer@example.com"
+    },
+    "phone": {
+      "label": "फोन नम्बर",
+      "placeholder": "98XXXXXXXX"
+    },
+    "address": {
+      "label": "ठेगाना",
+      "placeholder": "ग्राहकको ठेगाना प्रविष्ट गर्नुहोस्"
+    },
+    "buttons": {
+      "cancel": "रद्द गर्नुहोस्",
+      "addCustomer": "ग्राहक थप्नुहोस्",
+      "updateCustomer": "ग्राहक अपडेट गर्नुहोस्",
+      "saving": "सेभ गर्दै..."
+    }
   },
   "category": {
     "title": "नयाँ श्रेणी सिर्जना गर्नुहोस्",
     "categoryName": "श्रेणीको नाम",
     "imageUrl": "छवि URL",
-    "categoryColor": "श्रेणीको रंग (हेक्स)",
+    "categoryColor": "श्रेणीको रंग (Hex)",
     "preview": "श्रेणी पूर्वावलोकन",
-    "createButton": "श्रेणी सिर्जना गर्नुहोस्"
+    "createButton": "श्रेणी सिर्जना गर्नुहोस्",
+    "creating": "सिर्जना गर्दै..."
   }
 }

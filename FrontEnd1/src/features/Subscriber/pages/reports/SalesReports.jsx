@@ -6,8 +6,10 @@ import { motion } from "framer-motion";
 import { OptionComponent, SelectComponent } from "@/features/ui/Select";
 import Input from "@/features/ui/Input";
 import Button from "@/features/ui/Button";
+import { useTranslation } from "react-i18next";
 
 const SalesReports = () => {
+  const {t}=useTranslation()
   const [dateRange, setDateRange] = useState({
     start: "2024-01-01",
     end: "2024-01-31",
@@ -79,29 +81,29 @@ const SalesReports = () => {
           </div>:
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Sales Reports</h1>
-        <p className="text-muted">Analyze your sales performance</p>
+        <h1 className="text-2xl font-bold">{t("report.title")}</h1>
+        <p className="text-muted">{t("report.description")}</p>
       </div>
 
       {/* Filters */}
       <div className="grid items-end grid-cols-1 md:grid-cols-4 gap-4">
           <SelectComponent
-          label="Report Type"
+          label={t("report.type")}
             value={reportType}
             className=" bg-white dark:bg-dark"
             onChange={(e) => setReportType(e.target.value)}
           >
-            <OptionComponent value="daily">Daily</OptionComponent>
-            <OptionComponent value="weekly">Weekly</OptionComponent>
-            <OptionComponent value="monthly">Monthly</OptionComponent>
+            <OptionComponent value="daily">{t("report.daily")}</OptionComponent>
+            <OptionComponent value="weekly">{t("report.weekly")}</OptionComponent>
+            <OptionComponent value="monthly">{t("report.monthly")}</OptionComponent>
           </SelectComponent>
-        <Input label="start Date"  type="date"
+        <Input label={t("report.startDate")} type="date"
             value={dateRange.start}
             onChange={(e) =>
               setDateRange((prev) => ({ ...prev, start: e.target.value }))
             } className=" bg-white dark:bg-dark"/>
 
-     <Input label="End Date" type="date"
+     <Input label={t("report.enddate")} type="date"
             value={dateRange.end}
             onChange={(e) =>
               setDateRange((prev) => ({ ...prev, end: e.target.value }))
@@ -110,7 +112,7 @@ const SalesReports = () => {
       
 
         <div className="flex items-end">
-          <Button>Generate Report</Button>
+          <Button>{t("report.generateReport")}</Button>
         </div>
       </div>
    
@@ -119,21 +121,21 @@ const SalesReports = () => {
         <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
           <ChartBarIcon className="size-8 text-primary" />
           <div className="details">
-            <p className="font-medium text-muted">Total Salses</p>
+            <p className="font-medium text-muted">{t("report.totalSales")}</p>
             <p className="text-2xl font-bold"> ${totalSales.toLocaleString()}</p>
           </div>
         </div>
          <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
           <CalendarIcon className="size-8 text-secondary" />
           <div className="details">
-            <p className="font-medium text-muted">Total Orders</p>
+            <p className="font-medium text-muted">{t("report.totalOrders")}</p>
             <p className="text-2xl font-bold">{totalOrders}</p>
           </div>
         </div>
         <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
-        <span className="text-purple-600 font-bold text-sm size-10 bg-purple-500/10 rounded-full flex items-center justify-center">AVG</span>
+        <span className="text-purple-600 font-bold text-sm size-10 bg-purple-500/10 rounded-full flex items-center justify-center">{t("report.avg")}</span>
           <div className="details">
-            <p className="font-medium text-muted">Average Order Value</p>
+            <p className="font-medium text-muted">{t("report.averageOrderValue")}</p>
             <p className="text-2xl font-bold">${averageOrderValue.toFixed(2)}</p>
           </div>
         </div>
@@ -141,7 +143,7 @@ const SalesReports = () => {
 {/* Sales Chart */}
       <div className=" bg-white dark:bg-dark  rounded-md shadow-sm p-2">
         <h3 className="text-xl md:text-2xl font-semibold mb-4">
-          Sales Overview
+         {t("report.salesOverview")}
         </h3>
           <div className="h-fit   rounded-lg flex justify-start">
             <div className="bg-constructive w-full">
@@ -204,7 +206,7 @@ const SalesReports = () => {
       <div>
         
           <h3 className="text-xl md:text-2xl font-semibold mb-3">
-            Detailed Sales Data
+            {t("report.detailedSales")}
           </h3>
         <div className="overflow-x-auto  bg-white dark:bg-dark rounded-md shadow-sm">
           <table className="min-w-full text-sm text-left text-muted">
@@ -212,19 +214,19 @@ const SalesReports = () => {
               <tr>
                 <th className="px-6 py-3 ">
                   {reportType === "daily"
-                    ? "Date"
+                    ? t("report.date")
                     : reportType === "weekly"
-                    ? "Week"
-                    : "Month"}
+                    ? t("report.week")
+                    : t("report.month")}
                 </th>
                 <th className="px-6 py-3">
-                  Sales Amount
+                 {t("report.salesAmount")}
                 </th>
                 <th className="px-6 py-3">
-                  Number of Orders
+                 {t("report.numberOfOrders")}
                 </th>
                 <th className="px-6 py-3">
-                  Average Order Value
+                  {t("report.averageOrderValue")}
                 </th>
               </tr>
             </thead>
@@ -252,8 +254,8 @@ const SalesReports = () => {
 
       {/* Export Options */}
       <div className="flex justify-end gap-4 mb-5">
-        <Button outline>Export to CSV</Button>
-        <Button>Print Report</Button>
+        <Button outline>{t("report.exportToCSV")}</Button>
+        <Button>{t("report.printReport")}</Button>
       </div>
     </div>
 };

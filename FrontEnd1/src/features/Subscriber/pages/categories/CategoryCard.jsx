@@ -1,7 +1,9 @@
 import React  from "react";
 import  { ShieldOff, CheckCircle, Trash2 } from "lucide-react"
+import { useTranslation } from "react-i18next";
 
 const CategoryCard = React.memo(({ category, openModal, onToggleActive }) => {
+  const {t}=useTranslation()
   const { id, name, items, imageUrl, active, color } = category;
   return <>
     <div
@@ -36,7 +38,7 @@ const CategoryCard = React.memo(({ category, openModal, onToggleActive }) => {
                 {name}
               </h3>
             </div>
-            <p className="text-sm text-muted">{items} items</p>
+            <p className="text-sm text-muted">{items} {t("category.items")}</p>
           </div>
         </div>
 
