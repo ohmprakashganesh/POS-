@@ -9,8 +9,10 @@ import {
 } from "@heroicons/react/24/outline";
 import { customersData } from "@/data/mockData";
 import Input from "@/features/ui/Input";
+import { useTranslation } from "react-i18next";
 
 const CustomerList = () => {
+  const {t}=useTranslation()
   const [customers, setCustomers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredCustomers, setFilteredCustomers] = useState([]);
@@ -41,15 +43,15 @@ const CustomerList = () => {
     <div className="space-y-2  ">
       <div className="flex flex-col  sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Customers</h1>
-          <p className="text-muted">Manage your customer database</p>
+          <h1 className="text-2xl font-bold">{t("customer.title")}</h1>
+          <p className="text-muted">{t("customer.description")}</p>
         </div>
         <Link
           to="/customers/add"
           className="inline-flex items-center gap-2 px-4 py-2 font-semibold bg-primary hover:bg-primary-hover text-primary-foreground rounded-md"
         >
           <PlusIcon className="h-5 w-5 " strokeWidth={2.5} />
-          Add Customer
+          {t("customer.addCustomer")}
         </Link>
       </div>
       {/* Search */}
@@ -57,7 +59,7 @@ const CustomerList = () => {
         <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
         <Input
           type="text"
-          placeholder="Search customers by name, phone, or email..."
+          placeholder={t("customer.search")}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="pl-9 bg-white dark:bg-dark"
@@ -66,16 +68,16 @@ const CustomerList = () => {
 
       <div className="overflow-x-auto bg-white dark:bg-dark rounded-md shadow-sm">
         <table className="min-w-full text-sm text-muted">
-          <thead className="uppercase  text-xs text-left font-semibold bg-secondary text-secondary-foreground">
+          <thead className="uppercase  text-sm text-left  bg-secondary text-secondary-foreground">
             <tr>
-              <th className="p-4 w-6">S.N</th>
-              <th className="p-4">Name</th>
-              <th className="p-4">Phone</th>
-              <th className="p-4">Email</th>
-              <th className="p-4">Address</th>
-              <th className="p-4">Total Orders</th>
-              <th className="p-4">Total Spent</th>
-              <th className="p-4">Actions</th>
+              <th className="px-2 py-3">{t("customer.sn")}</th>
+              <th className="text-center">{t("customer.name")}</th>
+              <th className="text-center">{t("customer.phone")}</th>
+              <th className="text-center">{t("customer.email")}</th>
+              <th className="text-center">{t("customer.address")}</th>
+              <th className="text-center">{t("customer.totalOrders")}</th>
+              <th className="text-center">{t("customer.totalSpent")}</th>
+              <th className="text-center">{t("customer.actions")}</th>
             </tr>
           </thead>
 
@@ -86,7 +88,7 @@ const CustomerList = () => {
                   {index + 1}
                 </td>
                 {/* Customer Name + Icon */}
-                <td className="px-4 py-3 flex items-center gap-2">
+                <td className="px-2 py-2 flex items-center gap-2">
                   <UserIcon className="size-9 p-1.5 bg-primary/10 rounded-full text-primary" />
                   <div>
                     <p className="font-semibold ">{customer.name}</p>
@@ -95,28 +97,28 @@ const CustomerList = () => {
                 </td>
 
                 {/* Phone */}
-                <td className="px-4 py-3">{customer.phone}</td>
+                <td className="">{customer.phone}</td>
 
                 {/* Email */}
-                <td className="px-4 py-3 truncate max-w-[200px]">
+                <td className="truncate max-w-[200px]">
                   {customer.email}
                 </td>
 
                 {/* Address */}
-                <td className="px-4 py-3 truncate max-w-[180px]">
+                <td className=" truncate max-w-[180px]">
                   {customer.address}
                 </td>
 
                 {/* Total Orders */}
-                <td className="px-4 py-3 font-semibold">12</td>
+                <td className="font-semibold">12</td>
 
                 {/* Total Spent */}
-                <td className="px-4 py-3 font-semibold text-constructive">
+                <td className=" font-semibold text-constructive">
                   $2,450.00
                 </td>
 
                 {/* Actions */}
-                <td className="px-4 py-3 flex items-center gap-2">
+                <td className=" flex items-center gap-2">
                   <Link
                     to={`/customers/edit/${customer.id}`}
                     className="p-1.5 rounded-full hover:bg-primary/10 text-primary"

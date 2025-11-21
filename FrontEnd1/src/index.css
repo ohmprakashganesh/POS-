@@ -91,4 +91,9 @@ body {
   font-style: normal;
   font-display: swap;
 }
-
+select option{
+  @apply bg-background text-foreground
+}
+select option:checked {
+  @apply bg-primary text-primary-foreground;
+}

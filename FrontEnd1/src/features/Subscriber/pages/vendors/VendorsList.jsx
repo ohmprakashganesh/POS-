@@ -11,8 +11,10 @@ import {
 import { VENDORS } from "../../../../data/mockData";
 import { useNavigate } from "react-router-dom";
 import Input from "@/features/ui/Input";
+import { useTranslation } from "react-i18next";
 
 const Vendor = () => {
+  const {t}=useTranslation()
   const navigate = useNavigate();
   const [vendors, setVendors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -44,15 +46,15 @@ const Vendor = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Vendors</h1>
-          <p className="text-muted">Manage your vendor database</p>
+          <h1 className="text-2xl font-bold">{t("vendor.title")}</h1>
+          <p className="text-muted">{t("vendor.description")}</p>
         </div>
         <Link
           to="/vendor/add"
           className="inline-flex items-center gap-2 px-3 py-2 font-semibold bg-primary hover:bg-primary-hover text-primary-foreground rounded-md"
         >
           <PlusIcon className="h-5 w-5" strokeWidth={2.5} />
-          Add vendor
+          {t("vendor.addVendor")}
         </Link>
       </div>
 
@@ -61,7 +63,7 @@ const Vendor = () => {
         <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 size-5 text-muted" />
         <Input
           type="text"
-          placeholder="Search vendors by name, phone, or email..."
+          placeholder={t("vendor.search")}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="pl-9  bg-white dark:bg-dark"
@@ -70,24 +72,25 @@ const Vendor = () => {
 
       <div className="overflow-x-auto  bg-white dark:bg-dark rounded-md shadow-sm">
         <table className="min-w-full text-sm text-muted">
-          <thead className="uppercase text-xs text-left font-semibold bg-secondary text-secondary-foreground">
+          <thead className="uppercase text-sm text-left  bg-secondary text-secondary-foreground">
             <tr>
-              <th className="w-6 p-4">SN</th>
-              <th className="p-4">Name</th>
-              <th className="p-4">Address</th>
-              <th className="p-4">Total Products</th>
-              <th className="p-4">Total Expenses</th>
-              <th className="p-4">Total Paid</th>
-                <th className="p-4">Total Due</th>            
-              <th className="p-4">Actions</th>
+              <th className="px-2 py-3">{t("vendor.sn")}</th>
+              <th className="text-center">{t("vendor.name")}</th>
+              <th className="text-center">{t("vendor.address")}</th>
+              <th className="text-center">{t("vendor.totalProducts")}</th>
+              <th className="text-center">{t("vendor.totalExpenses")}</th>
+              <th className="">{t("vendor.totalPaid")}</th>
+             <th className="text-center">Total Due</th>
+
+              <th className="text-center">{t("vendor.actions")}</th>
             </tr>
           </thead>
           <tbody>
             {filteredVendors.map((vendor, key) => (
               <tr key={vendor.id} className=" hover:bg-background">
-                <td className="px-4 py-3 truncate max-w-[180px]">{key + 1}</td>
+                <td className=" px-2 py-2 truncate max-w-[180px]">{key + 1}</td>
 
-                <td className="px-4 py-3 flex items-center gap-2">
+                <td className=" flex items-center gap-2">
                   <UserIcon className="size-9 p-1.5 bg-primary/10 rounded-full text-primary" />
 
                   <p className="font-semibold">{vendor.name}</p>

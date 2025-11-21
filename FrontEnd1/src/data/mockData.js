@@ -468,7 +468,7 @@ export const DUMMY_PRODUCTS = [
     selling_price:5600,
     reviews: 1345,
     price: 200,
-    stock:50,
+    stock:5,
     purchase_date:"2025-10-23",
     expiry_date:"2030-10-23",
         tags: ['Apple', 'Electronic'],
@@ -485,7 +485,7 @@ export const DUMMY_PRODUCTS = [
     selling_price:5600,
     reviews: 1345,
     price: 200,
-    stock:50,
+    stock:0,
     purchase_date:"2025-10-23",
     expiry_date:"2030-10-23",
         tags: ['Apple', 'Electronic'],
@@ -613,3 +613,47 @@ const tenant = [
                 { id: 111, month: 'Nov 2029', totalSubscribers: 2800, activeSubscribers: 2550, revenue: 29000, status: 'Active', plan: 'Pro', churned: 250 },
                 { id: 112, month: 'Dec 2000', totalSubscribers: 3000, activeSubscribers: 2800, revenue: 32000, status: 'Active', plan: 'Basic', churned: 200 },
               ];
+
+              export const purchase=[
+        {
+          id: 1,
+          name: "iPhone 14 Pro",
+          vendor: "Apple Store",
+          category: "Electronics",
+          cost: 120000,
+          price: 150000,
+          purchase_date: "2025-01-10",
+          expiry_date: "2027-01-10",
+          stock: 10,
+          sku: "ELEC-A1B2C3",
+           image:"https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80"
+ },
+        {
+          id: 2,
+          name: "Samsung Galaxy Buds",
+          vendor: "Samsung Nepal",
+          category: "Audio",
+          cost: 8000,
+          price: 12000,
+          purchase_date: "2025-02-01",
+          expiry_date: "2026-02-01",
+          stock: 30,
+          sku: "AUDI-F4D9ZP",
+                 image:"https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80"
+
+        },
+        {
+          id: 3,
+          name: "Mechanical Keyboard",
+          vendor: "TechVendor",
+          category: "Accessories",
+          cost: 3000,
+          price: 5000,
+          purchase_date: "2025-01-20",
+          expiry_date: "",
+          stock: 15,
+          sku: "ACC-QW12ZX",
+          image:"https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80"
+            
+        },
+      ]

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Button from "@/features/ui/Button";
+import { useTranslation } from "react-i18next";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -16,6 +17,7 @@ const formSchema = z.object({
 });
 
 const AddEditCashier = () => {
+  const {t}=useTranslation("form")
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
@@ -62,12 +64,12 @@ const AddEditCashier = () => {
         </Link>
         <div>
           <h1 className="text-2xl font-bold">
-            {isEdit ? "Update Cashier Profile" : "Create a New Cashier"}
+            {isEdit ? t("cashier.titleUpdate") : t("cashier.titleCreate")}
           </h1>
           <p className="text-muted">
             {isEdit
-              ? "Review and Update Cashier's details"
-              : "Add a new Cashier to your system"}
+              ? t("cashier.subtitleUpdate")
+              : t("cashier.subtitleCreate")}
           </p>
         </div>
       </div>
@@ -77,16 +79,16 @@ const AddEditCashier = () => {
         className="w-full max-w-5xl my-10 rounded-md mx-auto bg-white dark:bg-dark p-5 space-y-5"
       >
         <div className="border-b border-muted/40 pb-2">
-          <h1 className="font-bold text-2xl">Cashier Details</h1>
+          <h1 className="font-bold text-2xl">{t("cashier.detailsHeader")}</h1>
           <p className="text-muted">
-            {isEdit? "Update necessary details":"Provide details for new cashier"}
+            {isEdit? t("cashier.detailsSubHeaderUpdate"):t("cashier.detailsSubHeaderCreate")}
     
           </p>
         </div>
         <Input
           id="name"
-          placeholder="Enter cashier's name"
-          label="Full Name *"
+          placeholder={t("cashier.name.placeholder")}
+          label={t("cashier.name.label")}
           {...register("name")}
           disabled={isSubmitting}
           error={errors.name?.message}
@@ -94,8 +96,8 @@ const AddEditCashier = () => {
         <Input
           id="phone"
           type="tel"
-          placeholder="+977 98XXXXXXXX"
-          label="Phone Number *"
+          placeholder={t("cashier.phone.placeholder")}
+          label={t("cashier.phone.label")}
           {...register("phone")}
           disabled={isSubmitting}
           error={errors.phone?.message}
@@ -103,15 +105,15 @@ const AddEditCashier = () => {
         <Input
           id="email"
           type="email"
-          placeholder="cashier@example.com"
-          label="Email Address"
+          placeholder={t("cashier.email.placeholder")}
+          label={t("cashier.email.label")}
           {...register("email")}
           disabled={isSubmitting}
           error={errors.email?.message}
         />
         <div className="address">
-           <label htmlFor="addressInput" className="block mb-1  capitalize">Address</label>
-           <textarea {...register("address")} rows="5" name="address" id="addressInput" disabled={isSubmitting} placeholder="Enter cashier's address" className="w-full border border-muted/40  rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed" />
+           <label htmlFor="addressInput" className="block mb-1  capitalize">{t("cashier.address.label")}</label>
+           <textarea {...register("address")} rows="5" name="address" id="addressInput" disabled={isSubmitting} placeholder={t("cashier.address.placeholder")} className="w-full border border-muted/40  rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed" />
           {errors.address?.message && <p className="text-destructive text-sm mt-1">*{errors.address.message}</p>}
         </div>
         {error && <p className="text-destructive text-sm">*{error}</p>}
@@ -120,14 +122,14 @@ const AddEditCashier = () => {
             to="/cashierList"
             className="px-4 py-2 rounded-md bg-destructive text-destructive-foreground hover:bg-destructive-hover"
           >
-            Cancel
+          {t("cashier.buttons.cancel")}
           </Link>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting
-              ? "Saving..."
+              ? t("cashier.buttons.saving")
               : isEdit
-              ? "Update Cashier"
-              : "Add Cashier"}
+              ?  t("cashier.buttons.updateCahier")
+              :  t("cashier.buttons.addCashier")}
           </Button>
         </div>
       </form>

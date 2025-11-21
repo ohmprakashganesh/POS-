@@ -2,6 +2,8 @@
   "general": {
     "logOut":"Log Out",
     "searchProducts": "Search Items",
+     "allCategories": "All Categories",
+    "selectCustomer": "Select Customer",
     "pos": "POS",
     "products": "Products",
     "customers": "Customers",

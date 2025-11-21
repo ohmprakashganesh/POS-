@@ -161,7 +161,7 @@ const Cart = () => {
   className="w-[48%] md:w-[30%] lg:w-[30%] h-[45px] border border-muted/40 rounded-md bg-white 
              dark:bg-dark focus:outline-none focus:ring-0 ring-0"
 >
-  <option value="" className="text-muted">{t("general.selectCustomer")}</option>
+  <option value="" className="text-muted">Select Customer</option>
   {filteredCustomers.slice(0, 3).map((user) => (
     <option key={user.id} value={user.id}>
       {user.name}

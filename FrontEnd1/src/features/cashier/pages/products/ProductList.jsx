@@ -81,7 +81,7 @@ const ProductList = () => {
           >
             {categories.map((category) => (
               <OptionComponent  key={category} value={category}>
-               {category === "all" ? "All Categories" : category}
+               {category === "all" ?t("general.allCategories") : category}
               </OptionComponent>
             ))}
           </SelectComponent>

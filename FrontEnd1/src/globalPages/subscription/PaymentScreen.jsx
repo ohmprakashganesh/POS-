@@ -11,6 +11,7 @@ import {
   ClipboardCheck,
   LockIcon,
 } from "lucide-react";
+import Button from "@/features/ui/Button";
 
 // --- 1. Enrollment Summary Component (Right Sidebar) ---
 
@@ -18,12 +19,12 @@ const EnrollmentSummary = ({ summary, totalAmount }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full text-white dark:te rounded-xl shadow-2xl h-fit flex flex-col">
-        <div className="bg-primary-green p-4 w-full">
-          <h2 className="text-2xl text-white font-bold pb-4">
+      <div className="w-full bg-white dark:bg-dark rounded-md overflow-hidden shadow-sm h-fit flex flex-col">
+        <div className="bg-primary text-primary-foreground p-4 w-full">
+          <h2 className="text-2xl font-bold">
             Enrollment Summary
           </h2>
-          <p className="text-xl font-sans text-gray-200 mb-6">
+          <p className="text-lg font-sans text-primary-foreground/70">
             Review your details before payment
           </p>
         </div>
@@ -35,38 +36,39 @@ const EnrollmentSummary = ({ summary, totalAmount }) => {
                 index < Object.keys(summary).length - 1 ? "border-green-700" : ""
               }`}
             >
-              <span className="font-xl text-gray-700">{key}</span>
-              <span className=" font-xl text-black">{value}</span>
+              <span className="font-xl text-muted">{key} :</span>
+              <span className="font-medium ">{value}</span>
             </div>
           ))}  
         </div>
       </div>
 
       <div className="flex flex-col mt-5 w-full">
-        <h3 className="text-gray-700 text-xl border-b p-6 font-bold mt-4 mb-3 border-green-700 pt-3">
+        <h3 className="text-xl border-b px-6 p-3 font-bold border-muted/40 ">
           Payment Summary
         </h3>
-        <div className="flex px-6 justify-between items-center text-xl font-bold mb-6 text-gray-600">
+        <div className="flex px-6 justify-between items-center text-xl font-bold p-3 text-muted">
           <span>Total Amount</span>
-          <span className="text-primary-green">{totalAmount}</span>
+          <span className="text-foreground">{totalAmount}</span>
         </div>
 
-        <button   onClick={()=>navigate('/success')} className="w-full outline bg-primary-green opacity-80 hover:font-semibold cursor-pointer hover:opacity-100  hover:text-white py-3 mt-6 flex items-center justify-center text-sm text-black transition duration-15">
+        <Button   onClick={()=>navigate('/success')} outline className="w-full my-2">
           Complete Enrollment
-        </button>
+        </Button>
 
-        <p className="text-xs text-center mt-3 text-gray-600">
+        <p className="text-sm text-center my-2 text-muted">
           By completing enrollment, you agree to our terms and conditions
         </p>
       </div>
-      
-      <button
+ 
+      <Button
         onClick={() => navigate("/")} 
-        className="w-full outline hover:bg-primary-green hover:text-white py-3 mt-6 flex items-center cursor-pointer justify-center text-sm text-black transition duration-150"
+        outline
+        className="w-full"
       >
-        <ArrowLeft className="w-4 h-4 mr-2" />
+        <ArrowLeft strokeWidth={2.5} />
         Back to Course Details
-      </button>
+      </Button>
     </>
   );
 };
@@ -75,8 +77,8 @@ const EnrollmentSummary = ({ summary, totalAmount }) => {
 const PaymentMethodCard = ({ icon: Icon, title, subtitle, selected, onClick }) => {
   const baseClasses =
     "relative flex flex-col items-center p-8 border-2 rounded-xl cursor-pointer transition duration-300 w-full";
-  const selectedClasses = "border-green-500 bg-green-50 shadow-lg scale-[1.01]";
-  const defaultClasses = "border-gray-200 bg-white hover:border-gray-400";
+  const selectedClasses = "border-constructive bg-constructive/10  scale-101";
+  const defaultClasses = "border-primary bg-primary/20";
 
   return (
     <div
@@ -87,23 +89,22 @@ const PaymentMethodCard = ({ icon: Icon, title, subtitle, selected, onClick }) =
     >
       <div
         className={`p-3 rounded-full mb-3 transition duration-300 ${
-          selected ? "bg-green-200 text-green-600" : "bg-gray-100 text-gray-500"
+          selected ? "bg-constructive/30 text-constructive" : " text-primary bg-primary/30"
         }`}
       >
         <Icon className="w-8 h-8" />
       </div>
-      <p className="font-bold text-lg text-gray-800">{title}</p>
-      <p className="text-sm text-gray-500">{subtitle}</p>
+      <p className="font-bold text-lg text-black">{title}</p>
+      <p className="text-sm text-muted">{subtitle}</p>
       {selected && (
-        <div className="absolute top-2 right-2 text-green-600">
-          <CheckCircle className="w-5 h-5 fill-green-500" />
+        <div className="absolute top-2 right-2 text-constructive">
+          <CheckCircle className="w-5 h-5 outline-constructive" />
         </div>
       )}
     </div>
   );
 };
 
-// --- 3. Main Payment Screen Component ---
 const App = () => {
   const [selectedMethod, setSelectedMethod] = useState("eSewa");
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -158,15 +159,15 @@ const App = () => {
     <div className="min-h-screen bg-white dark:bg-dark p-6 sm:p-10 font-sans">
       <div className="mb-6">
         <div className="flex justify-center rounded-md">
-          <h1 className="bg-green-50 px-5 rounded-md flex mb-5 items-center justify-center gap-3">
-            <LockIcon className="text-[10px]" size={15} /> complete the process
+          <h1 className="bg-secondary  text-secondary-foreground py-1 font-semibold px-5 rounded-full flex mb-5 items-center justify-center gap-3">
+            <LockIcon strokeWidth={3}  size={15} /> complete the process
             securely
           </h1>
         </div>
-        <h1 className="text-4xl pb-2 font-semibold text-center font-serif">
+        <h1 className="text-4xl  font-semibold text-center font-serif">
           Complete Your Enrollment
         </h1>
-        <h1 className="text-center font-normal text-gray-500 flex-wrap text-xl p-1">
+        <h1 className="text-center font-normal text-muted  flex-wrap text-xl p-1">
           You're just one step away from being a part of Byte Gurkha Services
         </h1>
       </div>
@@ -202,20 +203,20 @@ const App = () => {
           {selectedMethod === "eSewa" && (
             <PaymentSection
               title="eSewa Payment"
-               url="../../../public/qr.jpg"
+               url="/qr.jpg"
               paymentInstructions={paymentInstructions}
             />
           )}
           {selectedMethod === "BankTransfer" && (
             <PaymentSection
               title="Bank Transfer"
-              url="../../../public/qr.jpg"
+              url="/qr.jpg"
               paymentInstructions={paymentInstructions}
             />
           )}
 
           {/* 3. Upload Payment Screenshot */}
-          <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100">
+          <div className="bg-white dark:bg-dark p-6 sm:p-8 rounded-md shadow-sm">
             <h2 className="text-xl font-bold mb-4 ">
               Upload Payment Screenshot
             </h2>
@@ -225,8 +226,8 @@ const App = () => {
               border-2 border-dashed rounded-lg
               ${
                 isDragging
-                  ? "border-green-500 bg-green-50"
-                  : "border-gray-300 hover:border-gray-500"
+                  ? "border-constructive bg-constructive/10"
+                  : "border-muted/40 hover:border-muted"
               }`}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
@@ -234,20 +235,20 @@ const App = () => {
             >
               <Upload
                 className={`w-12 h-12 mb-3 transition-colors ${
-                  uploadedFile ? "text-green-600" : "text-gray-400"
+                  uploadedFile ? "text-constructive" : "text-muted"
                 }`}
               />
 
               {uploadedFile ? (
-                <p className="text-green-600 font-bold text-lg">
+                <p className="text-constructive font-bold text-lg">
                   {uploadedFile.name}
                 </p>
               ) : (
                 <>
-                  <p className="text-gray-700 font-semibold">
+                  <p className="text-muted font-semibold">
                     Click to browse or drag and drop your payment screenshot
                   </p>
-                  <p className="text-sm text-gray-500 mt-2">
+                  <p className="text-sm text-muted mt-2">
                     Supported formats: JPG, PNG, JPEG (Max 5MB)
                   </p>
                 </>
@@ -280,30 +281,30 @@ const App = () => {
 
 // --- Helper Components ---
 const PaymentSection = ({ title, paymentInstructions,url }) => (
-  <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100 space-y-6">
+  <div className="bg-white dark:bg-dark p-6 sm:p-8 rounded-md shadow-sm space-y-6">
     <div className="text-center">
-      <h2 className="text-xl font-semibold mb-1 text-gray-800">{title}</h2>
-      <p className="text-gray-500 text-sm">
+      <h2 className="text-2xl font-semibold">{title}</h2>
+      <p className="text-muted text-sm">
         Scan the QR code below to make payment
       </p>
     </div>
 
     {/* QR Code and Label */}
     <div className="flex   justify-center flex-col  w-full items-center space-y-2">
-     <img className="w-[250px]" src='../../../public/qr.jpg' alt="" />
-      <p className="mt-2 text-sm font-medium w-[250px] text-gray-700">Byte Gurkha</p>
+     <img className="w-[250px]" src='/qr.jpg' alt="" />
+      <p className="text-sm font-medium w-[250px] text-muted text-center">Byte Gurkha</p>
     </div>
 
     {/* Payment Instructions */}
-    <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500 shadow-inner">
-      <h3 className="font-bold mb-3 text-blue-800 flex items-center">
+    <div className="p-4 bg-primary/10 rounded-lg border-l-4 border-primary shadow-inner">
+      <h3 className="font-bold mb-3 text-primary flex items-center">
         <ClipboardCheck className="w-5 h-5 mr-2" />
         Payment Instructions:
       </h3>
-      <ol className="list-none pl-0 space-y-2 text-sm text-gray-700">
+      <ol className="list-none pl-0 space-y-2 text-sm text-muted">
         {paymentInstructions.map((instruction, index) => (
           <li key={index} className="flex items-start">
-            <span className="font-semibold w-4 mr-2 text-blue-500">
+            <span className="font-semibold w-4 mr-2 text-primary">
               {index + 1}.
             </span>
             <span>{instruction}</span>

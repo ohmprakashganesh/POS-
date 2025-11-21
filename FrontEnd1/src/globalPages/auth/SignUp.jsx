@@ -75,13 +75,13 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center  px-4">
-      <div className="w-full md:w-[40%] bg-white rounded-xl shadow-sm p-8">
+      <div className="w-full md:w-[40%] bg-white dark:bg-dark rounded-xl shadow-sm p-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-extrabold  tracking-tight">
             Register Your Company
           </h1>
-          <p className="text-gray-500 mt-2 text-sm">
+          <p className="text-muted mt-2 text-sm">
             Already have an account?{" "}
             <Link
               to="/login"
@@ -94,8 +94,8 @@ const SignUp = () => {
 
         {/* Alerts */}
         {error && (
-          <div className="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-destructive text-sm" role="alert">
-            {error}
+          <div className="mb-4 rounded-lg border border-destructive bg-destructive/10 px-4 py-3 text-destructive text-sm" role="alert">
+            * {error}
           </div>
         )}
         {successMsg && (
@@ -154,7 +154,7 @@ const SignUp = () => {
               value={formData.address}
               onChange={handleChange}
               placeholder="E.g. Barhadashi 4, Jhapa, Nepal"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full border border-muted/40 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary/40 focus:border-transparent"
             ></textarea>
           </div>
 
@@ -173,7 +173,7 @@ const SignUp = () => {
               name="terms"
               type="checkbox"
               required
-              className="h-4 w-4 mt-1 text-primary border-gray-300 rounded focus:ring-primary"
+              className="h-4 w-4 mt-1 text-primary border-muted/40 rounded focus:ring-primary"
             />
             <label htmlFor="terms" className="text-sm text-muted">
               I agree to the{" "}

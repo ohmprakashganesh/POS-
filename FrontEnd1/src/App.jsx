@@ -16,7 +16,7 @@ import SubscriberLayout from './features/Subscriber/layout/SubscriberLayout'
 
 // subscriber components 
 import ProductList from './features/Subscriber/pages/items/ProductList';
-import AddEditProduct from './features/Subscriber/pages/items/AddEditProduct';
+import AddEditProduct from './features/Subscriber/pages/purchase/AddEditProduct';
 import CustomerList from './features/Subscriber/pages/customers/CustomerList';
 import Categories from './features/Subscriber/pages/categories/Category'
 import AddEditCustomer from './features/Subscriber/pages/customers/AddEditCustomer';

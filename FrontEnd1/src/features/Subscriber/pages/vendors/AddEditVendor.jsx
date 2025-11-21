@@ -8,6 +8,7 @@ import Input  from '@/features/ui/Input';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslation } from 'react-i18next';
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -15,6 +16,7 @@ const formSchema = z.object({
   address: z.string().optional(),
 });
 const AddEditVendor = () => {
+  const {t}=useTranslation("form")
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
@@ -63,12 +65,12 @@ const AddEditVendor = () => {
               </Link>
               <div>
                 <h1 className="text-2xl font-bold">
-                  {isEdit ? "Update Vendor's Profile" : 'Create a New vendor'}
+                  {isEdit ? t("vendor.titleUpdate") :t("vendor.titleCreate")}
                 </h1>
                 <p className="text-muted">
                   {isEdit
-                    ? "Review and Update Vendor's details"
-                    : "Add a new Vendor to your system"}
+                    ? t("vendor.subtitleUpdate")
+                    : t("vendor.subtitleCreate")}
                 </p>
               </div>
             </div>
@@ -77,17 +79,17 @@ const AddEditVendor = () => {
         className="w-full max-w-5xl my-10 rounded-md mx-auto bg-white dark:bg-dark p-5 space-y-5"
       >
         <div className="border-b border-muted/40 pb-2">
-          <h1 className="font-bold text-2xl">Vendor's Details</h1>
+          <h1 className="font-bold text-2xl">{t("vendor.detailsHeader")}</h1>
           <p className="text-muted">
-            {isEdit? "Update necessary details":"Provide details for new vendor"}
+            {isEdit? t("vendor.detailsSubHeaderUpdate"):t("vendor.detailsSubHeaderCreate")}
     
           </p>
         </div>
         <Input
           id="name"
           type="text"
-          placeholder="Enter vendor's name"
-          label="Vendor Name *"
+          placeholder={t("vendor.name.placeholder")}
+          label={t("vendor.name.label")}
           {...register("name")}
           disabled={isSubmitting}
           error={errors.name?.message}
@@ -95,15 +97,15 @@ const AddEditVendor = () => {
         <Input
           id="phone"
           type="tel"
-          placeholder="+977 98XXXXXXXX"
-          label="Phone Number *"
+          placeholder={t("vendor.phone.placeholder")}
+          label={t("vendor.phone.label")}
           {...register("phone")}
           disabled={isSubmitting}
           error={errors.phone?.message}
         />
         <div className="address">
-           <label htmlFor="addressInput" className="block mb-1  capitalize">Address</label>
-           <textarea {...register("address")} rows="5" name="address" id="addressInput" disabled={isSubmitting} placeholder="Enter vendor's address" className="w-full border border-muted/40 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed" />
+           <label htmlFor="addressInput" className="block mb-1  capitalize">{t("vendor.address.label")}</label>
+           <textarea {...register("address")} rows="5" name="address" id="addressInput" disabled={isSubmitting} placeholder={t("vendor.address.placeholder")}className="w-full border border-muted/40 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed" />
           {errors.address?.message && <p className="text-destructive text-sm mt-1">*{errors.address.message}</p>}
         </div>
         {error && <p className="text-destructive text-sm">*{error}</p>}
@@ -112,14 +114,14 @@ const AddEditVendor = () => {
             to="/vendors"
             className="px-4 py-2 rounded-md bg-destructive text-destructive-foreground hover:bg-destructive-hover"
           >
-            Cancel
+            {t("vendor.buttons.cancel")}
           </Link>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting
-              ? "Saving..."
+              ? t("vendor.buttons.saving")
               : isEdit
-              ? "Update Vendor"
-              : "Add Vendor"}
+              ? t("vendor.buttons.updateVendor")
+              : t("vendor.buttons.addVendor")}
           </Button>
         </div>
       </form>

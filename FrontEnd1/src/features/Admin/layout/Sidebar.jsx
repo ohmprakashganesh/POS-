@@ -10,7 +10,7 @@ import {
   BuildingStorefrontIcon
 } from '@heroicons/react/24/outline';
 const navigation = [
-  { name: 'ADashboard', href: '/admin', icon: HomeIcon },
+  { name: 'Dashboard', href: '/admin', icon: HomeIcon },
   { name: 'Manage-Subscriber', href: '/subscriberList', icon: UsersIcon },
   { name: 'Report', href: '/report', icon: ChartBarIcon },
   { name: 'Manage-plans', href: '/subscriptionPlans', icon: CreditCardIcon },
@@ -60,8 +60,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                 className={`
                   group flex items-center px-4 py-2.5 text-sm font-medium rounded-md transition-colors
                   ${isActive 
-                    ? 'bg-primary/20 text-primary ' 
-                    : 'text-muted-hover hover:bg-gray-50 hover:text-shadow-muted-hover'
+                        ? "bg-primary/20 text-primary dark:text-white"
+                        : "text-muted-ho dark:hover:bg-background  hover:bg-dark/15 hover:text-foreground"
                   }
                 `}
                 onClick={() => window.innerWidth < 1024 && onClose()}
@@ -69,7 +69,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 <item.icon className={`
                   mr-3 h-5 w-5 flex-shrink-0
                   ${isActive
-                        ? "bg-primary/20 text-primary"
+                        ? " text-primary"
                         : "text-muted hover:bg-background hover:text-foreground"
                   }
                 `} />

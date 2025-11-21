@@ -32,7 +32,7 @@ const Pos = () => {
           <div className="relative">
             <Input
               type="text"
-              placeholder="Search products..."
+              placeholder={t("general.searchProducts")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className=" border w-full max-w-sm   bg-white dark:bg-dark border-muted/40  rounded-lg focus:border-muted"

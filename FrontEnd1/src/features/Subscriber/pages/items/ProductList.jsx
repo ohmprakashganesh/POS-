@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   PlusIcon,
   MagnifyingGlassIcon,
-  PencilIcon,
-  TrashIcon,
-  CubeIcon,
   EllipsisVerticalIcon,
 } from "@heroicons/react/24/outline";
 import { DUMMY_PRODUCTS } from "../../../../data/mockData";
 import { OptionComponent, SelectComponent } from "@/features/ui/Select";
 import Input from "@/features/ui/Input";
+import { useTranslation } from "react-i18next";
 
 const ProductList = () => {
+    const location=useLocation();
+   const returnPath=location.pathname;
+   const { t } = useTranslation();
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -68,31 +69,32 @@ const ProductList = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <div>
           <h1 className="text-2xl font-bold uppercase">
-            Products Inventory
+            {t("item.title")}
           </h1>
-          <p className="text-muted">Manage your product inventory</p>
+          <p className="text-muted">{t("item.description")}</p>
         </div>
-        <Link
-          to="/products/add"
-          className="inline-flex gap-2 items-center px-4 py-2 text-primary-foreground font-semibold hover:bg-primary-hover bg-primary rounded-md  transition-colors"
-        >
-          <PlusIcon className="size-5" strokeWidth={3} />
-          Add Product
-        </Link>
+         <Link
+              to="/products/add"
+              state={{from:returnPath}}
+              className="inline-flex gap-2 items-center px-4 py-2 text-primary-foreground font-semibold hover:bg-primary-hover bg-primary rounded-md  transition-colors"
+            >
+              <PlusIcon className="size-5" strokeWidth={3} />
+              Add-Product
+            </Link>
       </div>
 
       {/* Search and Filters */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
         <div className="relative">
           <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
-          <Input placeholder="Search products..." value={searchTerm}
+          <Input placeholder={t("item.search")} value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)} className="pl-9  bg-white dark:bg-dark" />
 
         </div>
         <SelectComponent value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} placeholder="Select a Category" className="bg-white dark:bg-dark">
           {categories.map((category, index) => (
             <OptionComponent key={index} value={category}>
-              {category === "all" ? "All Categories" : category}
+              {category === "all" ? t("item.all") : category}
             </OptionComponent>
           ))}
         </SelectComponent>
@@ -114,7 +116,7 @@ const ProductList = () => {
                     : "bg-green-100 text-green-700"
                   }`}
               >
-                {product.stock <= 10 ? product.stock == 0 ? "Out of Stock" : "Low Stock" : "In Stock"}
+                {product.stock <= 10 ? product.stock == 0 ? t("item.outOfStock") : t("item.lowStock") : t("item.inStock")}
               </span>
 
               {/* Three-dot menu */}
@@ -162,7 +164,7 @@ const ProductList = () => {
                   "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80"
                 }
                 alt={product.name}
-                className="inline-block w-full aspect-[16/9]  rounded-md"
+                className="inline-block w-full aspect-video  rounded-md"
               />
               {/* Product Details */}
               <div className="mt-1.5 grow  flex flex-col justify-between">
@@ -171,21 +173,21 @@ const ProductList = () => {
                 </h3>
                 <div className="details">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-xs text-muted">Rs.</span>
+                    <span className="text-xs text-muted">{t("item.rs")}</span>
                     <span className="text-2xl font-bold">
                       {product.price}
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between pt-2 border-t border-gray-200">
-                    <span className="text-xs text-muted">Available</span>
+                    <span className="text-xs text-muted">{t("item.available")}</span>
                     <span
                       className={`text-sm font-semibold ${product.stock <= 10
                           ? "text-red-600"
                           : "text-green-600"
                         }`}
                     >
-                      {product.stock} units
+                      {product.stock} {t("item.units")}
                     </span>
                   </div>
                 </div>

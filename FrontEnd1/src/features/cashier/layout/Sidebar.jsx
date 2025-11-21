@@ -122,7 +122,7 @@ const Sidebar = ({ isOpen, onClose }) => {
 
       {/* Sidebar */}
       <div className={`
-        fixed inset-y-0 left-0 z-50 w-54 
+        fixed inset-y-0 left-0 z-50 w-64 
         bg-white dark:bg-dark  
         shadow-xl transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
@@ -160,7 +160,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                     ${
                       isActive
                         ? "bg-primary/20 text-primary dark:text-white"
-                        : "text-muted hover:bg-background hover:text-foreground"
+                        : "text-muted dark:hover:bg-background hover:bg-dark/15 hover:text-foreground"
                     }
                 `}
                 onClick={() => window.innerWidth < 1024 && onClose()}

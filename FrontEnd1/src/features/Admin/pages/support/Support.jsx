@@ -27,7 +27,6 @@ const SupportReq = () => {
       )
     );
 
-    // 2. BACKEND API CALL INTEGRATION POINT
     try {
       const apiEndpoint = `/api/support/request/${requestId}/status`; // <-- Replace with your actual API endpoint
       
@@ -54,33 +53,33 @@ const SupportReq = () => {
         <div className="overflow-x-auto shadow-md rounded-md">
           <table className="min-w-full divide-y divide-muted/40">
             <thead className="bg-secondary w-screen shrink h-10 text-secondary-foreground">
-              <tr className='py-5 '>
+              <tr>
                 {tableHeaders.map((head,ind)=>(
-                <th  key={ind} className="md:px-4 lg:py-3  text-left text-xs font-medium uppercase tracking-wider">
+                <th  key={ind} className="px-2 py-3  text-left text-xs font-medium uppercase tracking-wider">
                  {head}
                 </th>
                 ))}
               </tr>
             </thead>
-               <tbody className=" w-screen divide-y divide-muted/40 p-2 shrink h-10 bg-white dark:bg-dark text-muted-hover">
+               <tbody className=" w-screen divide-y divide-muted/40 shrink  bg-white dark:bg-dark text-muted-hover">
               {requests.map((request) => (
                 <tr  className=''
                 >
-                  <td className="support-table-th p-3 ">
+                  <td className="px-2  ">
                     {request.userId}
                   </td>
-                  <td className="support-table-th">
+                  <td className="px-2  ">
                     {request.category}
                   </td>
 
-                   <td className="support-table-th">
+                  <td className="px-2  ">
                     {request.requestDate ? request.requestDate.toLocaleString().slice(0,10) : 'N/A'}
                   </td>
-                                    <td className="support-table-th">
+                  <td className="px-2  ">
                     {request.servedDate ? request.servedDate.toLocaleString().slice(0,10) : 'N/A'}
                   </td>
-                  <td className="support-table-th">
-                    <span className={`px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full shadow-inner ${
+                  <td className="px-2  ">
+                    <span className={`px-2  inline-flex text-xs leading-5 font-bold rounded-full shadow-inner ${
                       request.status === 'New' ? 'bg-red-100 dark:bg-primary-foreground dark:text-muted-hover text-red-700' :
                       request.status === 'In Progress' ? 'bg-yellow-100 dark:bg-primary-foreground dark:text-muted-hover text-yellow-700' :
                       'bg-green-100 dark:bg-primary-foreground dark:text-muted-hover text-green-700'
@@ -88,15 +87,16 @@ const SupportReq = () => {
                       {request.status}
                     </span>
                   </td>
-                  <td className="support-table-th ">
+                  <td className="px-2 w-10  ">
                      <SelectComponent
+                     className='h-1.5 focus:ring-0 outline-0 border-0 '
                         id="timeRange"
                       value={request.status}
                       onChange={(e) => updateRequestStatus(request.id, e.target.value)}
                      
                       >
                          {STATUS_OPTIONS.map(status => (
-                      <OptionComponent  key={status}  value={status}>{status}  </OptionComponent>
+                      <OptionComponent className="truncate w-10 text-xs w-full "  key={status}  value={status}>{status}  </OptionComponent>
                       ))}
                 
                       </SelectComponent>

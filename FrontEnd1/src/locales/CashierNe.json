@@ -2,6 +2,8 @@
   "general": {
     "logOut":"लग आउट",
     "searchProducts": "वस्तुहरू खोज्नुहोस्",
+     "allCategories": "सबै श्रेणीहरू",
+    "selectCustomer": "ग्राहक छान्नुहोस्",
     "pos": "बिक्री बिन्दु (POS)",
     "products": "वस्तुहरू",
     "customers": "ग्राहकहरू",

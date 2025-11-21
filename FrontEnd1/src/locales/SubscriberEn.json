@@ -1,6 +1,7 @@
 {
   "welcome": "Welcome to our site!",
   "toggle": "Switch to Nepali",
+  "subscriberUser": "Subscriber User",
   "subscriber": {
     "dashboard": "Dashboard",
     "items": "Items",
@@ -64,15 +65,22 @@
     }
   },
   "item": {
+    "title": "Products Inventory",
+    "description": "Manage your product inventory.",
+    "ctaAddProduct": "Add Product",
     "search": "Search products...",
     "all": "All Categories",
     "inStock": "In Stock",
+    "lowStock": "Low Stock",
+    "outOfStock": "Out of Stock",
     "rs": "Rs.",
     "available": "Available",
     "units": "units"
   },
   "category": {
-    "title": "Category Management"
+    "title": "Category Management",
+    "search": "Search categories by name...",
+    "items": "items"
   },
   "vendor": {
     "title": "Vendors",
@@ -85,7 +93,21 @@
     "totalProducts": "Total Products",
     "totalExpenses": "Total Expenses",
     "totalPaid": "Total Paid",
-    "actions": "Actions"
+    "actions": "Actions",
+    "details": {
+      "description": "Vendor Details Overview",
+      "totalCost": "Total Cost",
+      "totalPaid": "Total Paid",
+      "totalDue": "Total Due",
+      "contactInfo": "Contact Info",
+      "address": "Address",
+      "phone": "Phone",
+      "businessMetrics": "Business Metrics",
+      "products": "Products",
+      "categories": "Categories",
+      "PANNumber": "PAN Number",
+      "financialSummary": "Financial Summary"
+    }
   },
   "cashier": {
     "title": "Cashiers",
@@ -93,8 +115,10 @@
     "addCashier": "Add Cashier",
     "search": "Search cashiers by name, phone, or email...",
     "sn": "S.N",
+    "name": "Name",
     "phone": "Phone",
     "email": "Email",
+    "address": "Address",
     "totalOrders": "Total Orders",
     "totalSales": "Total Sales",
     "actions": "Actions"
@@ -113,16 +137,17 @@
     "totalSpent": "Total Spent",
     "actions": "Actions"
   },
-  "history": {
-    "history": "Transaction History",
-    "view": "View and manage all sales transactions",
+  "transactionHistory": {
+    "title": "Transaction History",
+    "description": "View and manage all sales transactions",
     "totalTransactions": "Total Transactions",
     "totalRevenue": "Total Revenue",
     "completedTransactions": "Completed Transactions",
     "pendingTransactions": "Pending Transactions",
-    "searchByInvoice": "Search by invoice or customer...",
+    "search": "Search by invoice or customer...",
     "startDate": "Start Date",
     "endDate": "End Date",
+    "showing": "Showing",
     "transactions": "transactions",
     "sn": "S.N",
     "invoice": "Invoice",
@@ -138,19 +163,52 @@
     "description": "Analyze your sales performance",
     "type": "Report Type",
     "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "startDate": "Start Date",
+    "endDate": "End Date",
     "generateReport": "Generate Report",
     "totalSales": "Total Sales",
+    "totalOrders": "Total Orders",
     "avg": "AVG",
     "averageOrderValue": "Average Order Value",
     "salesOverview": "Sales Overview",
     "quarterlySales": "Quarterly Sales Performance",
     "detailedSales": "Detailed Sales Data",
     "salesAmount": "Sales Amount",
-    "numberOfOrders": "Number of Orders"
+    "numberOfOrders": "Number of Orders",
+    "month": "Month",
+    "week": "Week",
+    "date": "Date",
+    "exportToCSV": "Export to CSV",
+    "printReport": "Print Report"
   },
   "plan": {
-    "status": "You're Fully Active",
-    "description": "Your Professional plan is currently active and in good standing.",
-    "manage": "Manage Subscription"
+    "statusActive": "You're Fully Active",
+    "descriptionActive": "Your Professional plan is currently active and in good standing.",
+    "statusTrial": "Trial",
+    "descriptionTrial": "Experience everything. Upgrade to continue without limits.",
+    "manage": "Manage Subscription",
+    "getFullAccess": "Get Full Access"
+  },
+  "purchase": {
+   "title": "Purchase",
+    "subTitle": "Purchase Details",
+    "description": "Over View of a Purchase summary",
+    "button": "Add-Product",
+    "th": {
+      "sn": "SN",
+      "vendor": "Vendor",
+      "product": "Product",
+      "category": "Category",
+      "costRs": "Cost (Rs)",
+      "saleRs": "Sale (Rs)",
+      "purchaseDate": "Purchase Date",
+      "expiryDate": "Expiry Date",
+      "stock": "Stock",
+      "sku": "SKU",
+      "image": "Image",
+      "actions": "Actions"
+    }
   }
 }

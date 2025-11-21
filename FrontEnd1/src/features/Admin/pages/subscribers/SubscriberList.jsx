@@ -18,7 +18,7 @@ const SubscriberList = () => {
       <h1 className="text-2xl font-bold text-dark dark:text-white mb-5">Subscriber Management</h1>
 
       {/* ↔️ Tab/Section Switcher */}
-      <div className="flex space-x-4 mb-6">
+      <div className="flex space-x-4 mb-6 border-b border-muted/40">
         <button
           onClick={() => {
             setActiveView('existing');

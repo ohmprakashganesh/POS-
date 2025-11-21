@@ -1,65 +1,126 @@
 {
-"customer":{
-      "titleU": "Register New Customer",
-  "descriptionU": "Fill in the details to register a new customer.",
-       "title": "Update Customer Information",
-  "description": "Modify the customer details below.",
-  "fields": {
-    "fullName": {
+  "customer": {
+    "titleU": "Register New Customer",
+    "descriptionU": "Fill in the details to register a new customer.",
+    "title": "Update Customer Information",
+    "description": "Modify the customer details below.",
+    "fields": {
+      "fullName": {
+        "label": "Full Name *",
+        "placeholder": "Enter customer name",
+       "nameRequired": "Name is required"
+      },
+      "phoneNumber": {
+        "label": "Phone Number *",
+        "placeholder": "98XXXXXXXX",
+    "phoneRequired": "Phone number is required",
+        "phoneInvalid": "Phone number must be 10 digits"
+
+      },
+      "emailAddress": {
+        "label": "Email Address",
+        "placeholder": "customer@example.com",
+        "invalidEmail": "Invalid email format"
+      },
+      "address": {
+        "label": "Address",
+        "placeholder": "Enter customer address",
+        "required": false
+      }
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "submit": "Submit"
+    }
+  },
+  "cashier": {
+    "titleCreate": "Create a New Cashier",
+    "titleUpdate": "Update Cashier Profile",
+    "subtitleCreate": "Add a new Cashier to your system",
+    "subtitleUpdate": "Review and Update Cashier's details",
+    "detailsHeader": "Cashier Details",
+    "detailsSubHeaderCreate": "Provide details for new cashier",
+    "detailsSubHeaderUpdate": "Update necessary details",
+    "name": {
       "label": "Full Name",
-      "placeholder": "Enter customer name",
-      "required": true
+      "placeholder": "Enter cashier name"
     },
-    "phoneNumber": {
-      "label": "Phone Number",
-      "placeholder": "98XXXXXXXX",
-      "required": true
-    },
-    "emailAddress": {
+    "email": {
       "label": "Email Address",
-      "placeholder": "customer@example.com",
-      "required": false
+      "placeholder": "cashier@cashier.com"
+    },
+    "phone": {
+      "label": "Phone Number",
+      "placeholder": "98XXXXXXXX"
     },
     "address": {
       "label": "Address",
-      "placeholder": "Enter customer address",
-      "required": false
+      "placeholder": "Enter address"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "addCashier": "Add Cashier",
+      "updateCashier": "Update Cashier",
+      "saving": "Saving..."
     }
   },
-  "buttons": {
-    "cancel": "Cancel",
-    "submit": "Submit"
-
-  }
-},
-"cashier": {
-    "title": "Create a New Cashier",
-    "subtitle": "Add a new Cashier to your system",
-    "detailsHeader": "Cashier Details",
-    "detailsSubHeader": "Provide details for new cashier",
-    "fullName": "Full Name *",
-    "phoneNumber": "Phone Number *",
-    "emailAddress": "Email Address",
-    "address": "Address"
-  },
   "vendor": {
-    "title": "Create a New Vendor",
-    "subtitle": "Add a new Vendor to your system",
+    "titleCreate": "Create a New Vendor",
+    "titleUpdate": "Update Vendor's Profile",
+    "subtitleCreate": "Add a new Vendor to your system",
+    "subtitleUpdate": "Review and Update Vendor's details",
     "detailsHeader": "Vendor's Details",
-    "detailsSubHeader": "Provide details for new vendor",
-    "vendorName": "Vendor Name *",
-    "phoneNumber": "Phone Number *",
-    "address": "Address"
+    "detailsSubHeaderCreate": "Provide details for new vendor",
+    "detailsSubHeaderUpdate": "Update necessary details",
+    "name": {
+      "label": "Vendor Name",
+      "placeholder": "Enter vendor name"
+    },
+    "phone": {
+      "label": "Phone Number",
+      "placeholder": "98XXXXXXXX"
+    },
+    "address": {
+      "label": "Address",
+      "placeholder": "Enter vendor address"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "addVendor": "Add Vendor",
+      "updateVendor": "Update Vendor",
+      "saving": "Saving..."
+    }
   },
-  "customer": {
-    "title": "Create a New Customer",
-    "subtitle": "Add a new Customer to your system",
+  "customerSection": {
+    "titleCreate": "Create a New Customer",
+    "titleUpdate": "Update Customer Profile",
+    "subtitleCreate": "Add a new Customer to your system",
+    "subtitleUpdate": "Review and Update Customer's details",
+    "detailsSubHeaderCreate": "Provide details for new customer",
+    "detailsSubHeaderUpdate": "Update necessary details",
     "detailsHeader": "Customer's Details",
-    "detailsSubHeader": "Provide details for new customer",
-    "fullName": "Full Name *",
-    "phoneNumber": "Phone Number *",
-    "emailAddress": "Email Address",
-    "address": "Address"
+    "name": {
+      "label": "Full Name",
+      "placeholder": "Enter customer name"
+    },
+    "email": {
+      "label": "Email Address",
+      "placeholder": "customer@example.com"
+    },
+    "phone": {
+      "label": "Phone Number",
+      "placeholder": "98XXXXXXXX"
+    },
+    "address": {
+      "label": "Address",
+      "placeholder": "Enter customer address"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "addCustomer": "Add Customer",
+      "updateCustomer": "Update Customer",
+      "saving": "Saving..."
+    }
   },
   "category": {
     "title": "Create New Category",
@@ -67,7 +128,87 @@
     "imageUrl": "Image URL",
     "categoryColor": "Category Color (Hex)",
     "preview": "Category Preview",
-    "createButton": "Create Category"
+    "createButton": "Create Category",
+    "creating": "Creating..."
+  },
+ "purchase": {
+      "titleCreate": "Add New Purchase Item",
+      "titleUpdate": "Edit Purchase Item",
+      "subtitleCreate": "Add a new purchase Item to your inventory",
+      "subtitleUpdate": "Update Purchase information",
+      "detailsHeader": "Product Details",
+      "detailsSubHeaderCreate": "Fill in the mandatory product information below.",
+      "detailsSubHeaderUpdate": "Review and update the product details.",
+      
+      "name": {
+        "label": "Product Name",
+        "placeholder": "Enter product name",
+        "required": "Product Name is required."
+      },
+      "vendor": {
+        "label": "Vendor",
+        "placeholder": "Select a Vendor",
+        "required": "Vendor selection is required."
+      },
+      "category": {
+        "label": "Category",
+        "placeholder": "Select a category",
+        "required": "Category selection is required."
+      },
+      "cost": {
+        "label": "Cost Price ($)",
+        "placeholder": "0.00",
+        "required": "Cost Price must be a positive number.",
+        "typeError": "Cost Price must be a number." 
+      },
+      "price": {
+        "label": "Sale Price ($)",
+        "placeholder": "0.00",
+        "required": "Sale Price must be a positive number.",
+        "typeError": "Sale Price must be a number.",
+        "minCostError": "Sale Price must be greater than or equal to Cost Price."
+      },
+      "stock": {
+        "label": "Stock Quantity",
+        "placeholder": "0",
+        "required": "Stock Quantity cannot be negative.",
+        "typeError": "Stock Quantity must be a whole number."
+      },
+      "sku": {
+        "label": "SKU CODE",
+        "placeholder": "e.g., ELEC-12345",
+        "required": "SKU CODE is required."
+      },
+      "purchaseDate": {
+        "label": "Purchase Date",
+        "required": "Purchase Date is required."
+      },
+      "expiryDate": {
+        "label": "Expiry Date"
+      },
+      "image": {
+        "label": "Product Image",
+        "previewLabel": "Image Preview"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter product description..."
+      },
+      
+      "buttons": {
+        "generateSku": "Generate",
+        "cancel": "Cancel",
+        "update": "Update Product",
+        "add": "Add Product",
+        "saving": "Saving..."
+      },
+      
+      "calculations": {
+        "header": "Profit Calculation",
+        "profitPerUnit": "Profit per unit:",
+        "profitMargin": "Profit margin:",
+        "totalStockValue": "Total stock value:"
+      }
+    }
   }
 
-}

@@ -45,20 +45,20 @@ const AddEditCustomer = () => {
 
   const validateForm = () => {
     if (!formData.name.trim()) {
-      setError("Name is required");
+      setError(t("customer.fields.fullName.nameRequired"));
       return false;
     }
     if (!formData.phone.trim()) {
-      setError("Phone number is required");
-      return false;
+    setError(t("customer.fields.phoneNumber.phoneRequired"));
+     return false;
     }
     if (!/^\d{10}$/.test(formData.phone.trim())) {
-      setError("Phone number must be 10 digits");
-      return false;
+  setError(t("customer.fields.phoneNumber.phoneInvalid"));      return false;
     }
     if (formData.email.trim() && !/\S+@\S+\.\S+/.test(formData.email)) {
-      setError("Invalid email format");
-      return false;
+  setError(t("customer.fields.emailAddress.invalidEmail")); 
+       return false;
+     
     }
     return true;
   };
@@ -112,7 +112,6 @@ const AddEditCustomer = () => {
               <Input
                 type="text"
                 name="name"
-                required
                 value={formData.name}
                 onChange={handleChange}
                 className=" "
@@ -123,15 +122,13 @@ const AddEditCustomer = () => {
             {/* Phone */}
             <div>
               <label className="block text-sm font-medium mb-1">
-               {t("customer.fields.phoneNumber.label")}*
+               {t("customer.fields.phoneNumber.label")}
               </label>
               <Input
                 type="tel"
                 name="phone"
-                required
                 value={formData.phone}
                 onChange={handleChange}
-          
                 placeholder= {t("customer.fields.phoneNumber.placeholder")}
               />
             </div>
@@ -146,7 +143,6 @@ const AddEditCustomer = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-           
                 placeholder={t("customer.fields.emailAddress.placeholder")}
               />
             </div>

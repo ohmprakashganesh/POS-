@@ -20,7 +20,6 @@ const Subscription = () => {
          setStatus("deActive")
          localStorage.setItem('pos_subscription',data);
     }
-
    const sts= localStorage.getItem('pos_subscription');
 
   const handleSubscribe = async (plan) => {
@@ -52,11 +51,11 @@ const Subscription = () => {
             </p>
           </div>
 
-          <div className="mt-8 bg-white dark:bg-dark rounded-lg shadow-sm border  p-6">
+          <div className="mt-8 bg-white dark:bg-dark rounded-lg shadow-md border-muted/40  p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold text-dark dark:text-white ">Current Plan</h3>
-                <div className="mt-2 p-4 bg-background   shadow-md ">
+                <div className="mt-2 p-4  bg-background rounded-md   shadow-md ">
                   <div className="flex justify-between items-center">
                     <span className="font-semibold text-blue-900 ">Professional</span>
                     <span className="text-2xl font-bold text-blue-600">$79</span>
@@ -76,12 +75,12 @@ const Subscription = () => {
             </div>
 
             <div className="mt-6 pt-6 ">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Plan Features</h3>
-              <div className="grid grid-cols-1  md:grid-cols-2 gap-4">
+              <h3 className="text-lg font-semibold text-muted-hover dark:text-white mb-4">Plan Features</h3>
+              <div className="grid grid-cols-1  bg-background  p-2 rounded-md md:grid-cols-2 gap-4">
                 {plans.pro.features.map((feature, index) => (
                   <div key={index} className="flex items-center">
                     <CheckIcon className="h-5 w-5 text-green-500 mr-2" />
-                    <span className="text-gray-700">{feature}</span>
+                    <span className="text-muted-hover">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -98,12 +97,11 @@ const Subscription = () => {
   }
 
   return (
-    
-    <div className="min-h-screen bg-gray-50 py-6 px-4 sm:px-3 lg:px-6">
+    <div className="min-h-screen py-6 px-4 sm:px-3 lg:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Choose Your Plan</h1>
-          <p className="mt-2 text-gray-600">
+        <div className="text-center pt-5">
+          <h1 className="text-3xl font-bold">Choose Your Plan</h1>
+          <p className="text-muted">
             Select the plan that works best for your business
           </p>
         </div>
@@ -115,55 +113,55 @@ const Subscription = () => {
           {Object.entries(plans).map(([key, plan]) => (
             <div
               key={key}
-              className={`bg-white rounded-lg shadow-sm border-2 ${
-                selectedPlan === key ? 'border-green-500' : 'border-gray-200'
+              className={`bg-white dark:bg-dark rounded-md shadow-sm ${
+                selectedPlan === key ? 'border border-constructive' : ''
               } p-6 relative`}
             >
               {selectedPlan === key && (
                 <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-2">
-                  <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-constructive text-constructive-foreground px-3 py-1 rounded-full text-sm font-medium">
                     Popular
                   </span>
                 </div>
               )}
 
-              <h3 className="text-xl font-bold text-gray-900">{plan.name}</h3>
+              <h3 className="text-xl font-bold">{plan.name}</h3>
               <div className="mt-4">
-                <span className="text-4xl font-bold text-gray-900">
+                <span className="text-4xl font-bold">
                   ${billingCycle? plan.monthly:"100"}
                 </span>
-                <span className=" text-xl font-semibold text-emerald-800 ml-2">
+                <span className=" text-xl font-semibold text-secondary ml-2">
                  /{plan.time} Months
                 </span>
               </div>
 
-              <button
+              <Button
                 onClick={() => setSelectedPlan(key)}
-                className={`w-full mt-6 py-3 px-4 cursor-pointer rounded-lg font-semibold ${
+                className={`w-full py-3 my-2 ${
                   selectedPlan === key
-                    ? 'bg-green-600 text-white '
-                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                    ? 'bg-constructive text-constructive-foreground hover:bg-constructive-hover'
+                    : 'bg-background text-foreground hover:bg-neutral-200 dark:hover:bg-neutral-800'
                 }`}
               >
                 {selectedPlan === key ? 'Selected' : 'Select Plan'}
-              </button>
+              </Button>
 
-              <div className="mt-6 space-y-3">
-                <h4 className="font-semibold text-gray-900">Features included:</h4>
+              <div className="mt-4 space-y-3">
+                <h4 className="font-semibold">Features included:</h4>
                 {plan.features.map((feature, index) => (
                   <div key={index} className="flex items-center">
                     <CheckIcon className="h-5 w-5 text-blue-500 mr-2" />
-                    <span className="text-gray-700 text-sm">{feature}</span>
+                    <span className="text-muted text-sm">{feature}</span>
                   </div>
                 ))}
                 {plan.limitations.length > 0 && (
                   <>
-                    <h4 className="font-semibold text-gray-900 mt-4">Limitations:</h4>
+                    <h4 className="font-semibold  mt-4">Limitations:</h4>
                    
                   </>
                 )}
                  {/* <div className='w-full text-center  p-3 bg-green-800 rounded-sm font-semibold  cursor-pointer  text-white' onClick={()=>navigate(`/payment/${plan.name}`)}> Enroll      <ArrowRight className="w-4 h-4 mr-2" /></div> */}
-                   <div className='w-full text-center  p-3 bg-green-800 rounded-sm font-semibold  cursor-pointer  text-white' onClick={()=>navigate(`/signUp`)}> Enroll      <ArrowRight className="w-4 h-4 mr-2" /></div>
+                   <Button secondary className='w-full py-3' onClick={()=>navigate(`/signUp`)}> Enroll<ArrowRight strokeWidth={2.5}/></Button>
 
               </div>
             </div>
