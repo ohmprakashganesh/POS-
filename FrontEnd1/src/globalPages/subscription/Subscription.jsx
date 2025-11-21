@@ -98,6 +98,7 @@ const Subscription = () => {
   }
 
   return (
+    
     <div className="min-h-screen bg-gray-50 py-6 px-4 sm:px-3 lg:px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
