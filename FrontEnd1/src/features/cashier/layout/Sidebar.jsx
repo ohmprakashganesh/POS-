@@ -123,8 +123,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       {/* Sidebar */}
       <div className={`
         fixed inset-y-0 left-0 z-50 w-54 
-        bg-white dark:bg-dark 
-        border-r border border-muted/40 
+        bg-white dark:bg-dark  
         shadow-xl transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
         lg:translate-x-0 lg:static lg:inset-0
@@ -132,7 +131,7 @@ const Sidebar = ({ isOpen, onClose }) => {
         
         {/* Header */}
         <div className="flex items-center justify-between h-16 px-4 
-          border-b border-muted/40 dark:border-gray-700">
+           border-muted/40 dark:border-gray-700 ">
           <div className="flex items-center">
             <ShoppingCartIcon className="h-8 w-8 text-dark dark:text-white font-bold" />
             <span className="ml-2 text-2xl font-bold">

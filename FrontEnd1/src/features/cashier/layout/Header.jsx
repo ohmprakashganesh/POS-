@@ -19,8 +19,8 @@ const Header = ({ onMenuClick, user }) => {
   const { theme, setTheme } = useTheme();
   const { t } = useTranslation('cashier');
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+    const { logout } = useAuth();
   const { unreadCount, markAsRead } = useNotifications();
-  const { logout } = useAuth();
   const [notification, setNotification] = useState(false);
 
   const buttonRef = useRef(null);
@@ -44,7 +44,7 @@ const Header = ({ onMenuClick, user }) => {
   }, []);
 
   return (
-    <header className="bg-white dark:bg-dark shadow-sm border-b border-muted/40">
+    <header className="bg-white dark:bg-dark shadow-sm bor border-muted/40">
       <div className="flex items-center justify-between h-16 px-4 sm:px-6">
         {/* Left section */}
         <div className="flex items-center">
@@ -118,7 +118,7 @@ const Header = ({ onMenuClick, user }) => {
       {notification && (
         <div
           ref={panelRef}
-          className="absolute md:w-2/6 lg:w-2/7 w-full bg-white dark:bg-gray-800 right-1 top-17 z-40 flex justify-end border border-gray-200 dark:border-gray-700"
+          className="absolute md:w-2/6 lg:w-2/7 w-full bg-white dark:bg-gray-800 right-1 top-17 z-40 flex justify-end "
         >
           <NotificationScreen />
         </div>

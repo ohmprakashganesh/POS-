@@ -13,11 +13,12 @@ import {
 } from "lucide-react";
 
 // --- 1. Enrollment Summary Component (Right Sidebar) ---
+
 const EnrollmentSummary = ({ summary, totalAmount }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full text-white rounded-xl shadow-2xl h-fit flex flex-col">
+      <div className="w-full text-white dark:te rounded-xl shadow-2xl h-fit flex flex-col">
         <div className="bg-primary-green p-4 w-full">
           <h2 className="text-2xl text-white font-bold pb-4">
             Enrollment Summary
@@ -154,7 +155,7 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 sm:p-10 font-sans">
+    <div className="min-h-screen bg-white dark:bg-dark p-6 sm:p-10 font-sans">
       <div className="mb-6">
         <div className="flex justify-center rounded-md">
           <h1 className="bg-green-50 px-5 rounded-md flex mb-5 items-center justify-center gap-3">
@@ -175,7 +176,7 @@ const App = () => {
         {/* Left Content Area (scrollable) */}
         <div className="w-full pt-12 lg:w-2/3 space-y-8">
           {/* 1. Choose Payment Method */}
-          <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100">
+          <div className="bg-white dark:bg-dark p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100">
             <h1 className="text-2xl font-bold mb-6 text-gray-800">
               Choose Payment Method
             </h1>

@@ -31,35 +31,36 @@ const Subscription = () => {
     handleSubscribe(selectedPlan);
   };
 
-  if (sts === "active") {
-    return (
-      <div className="h-[calc(100dvh-80px)] flex  flex-col justify-center items-center lg:justify-start lg:py-40">
-        <CheckIcon className="mx-auto bg-primary/10 rounded-full p-3 h-16 w-16 text-constructive" />
-        <h1 className="mt-4 text-3xl font-bold">You're Fully Active </h1>
-        <p className="my-2 text-muted text-lg">
-          Your Professional plan is currently active and in good standing.
-        </p>
-        <Button onClick={() => navigate("/publicSubscription")}>
-          {" "}
-          Manage Subscription
-        </Button>
-      </div>
-    );
-  }
-  if (sts === "trail") {
-    return (
-      <div className="h-[calc(100dvh-80px)] flex flex-col items-center justify-center lg:justify-start lg:py-40">
-        <CheckIcon className="mx-auto bg-primary/10 rounded-full p-3 h-16 w-16 text-constructive" />
-        <h1 className="text-3xl mt-4 font-bold">You're Currently Active</h1>
-        <p className="text-muted text-lg my-2">
-          Experience everything. Upgrade to continue without limits.
-        </p>
-        <Button onClick={() => navigate("/publicSubscription")}>
-          Get Full Access
-        </Button>
-      </div>
-    );
-  }
+if (sts === "active") {
+  return (
+    <div className="h-[calc(100dvh-80px)] flex  flex-col justify-center items-center lg:justify-start lg:py-40">
+      <CheckIcon className="mx-auto bg-primary/10 rounded-full p-3 h-16 w-16 text-constructive" />
+      <h1 className="mt-4 text-3xl font-bold">You're Fully Active</h1>
+      <p className="my-2 text-muted text-lg">
+        Your Professional plan is currently active and in good standing.
+      </p>
+      <Button onClick={() => navigate("/publicSubscription")}>
+        Manage Subscription
+      </Button>
+    </div>
+  );
+}
+
+if (sts === "trial") {  // <-- fixed spelling
+  return (
+    <div className="h-[calc(100dvh-80px)] flex flex-col items-center justify-center lg:justify-start lg:py-40">
+      <CheckIcon className="mx-auto bg-primary/10 rounded-full p-3 h-16 w-16 text-constructive" />
+      <h1 className="text-3xl mt-4 font-bold">You're Currently Active</h1>
+      <p className="text-muted text-lg my-2">
+        Experience everything. Upgrade to continue without limits.
+      </p>
+      <Button onClick={() => navigate("/publicSubscription")}>
+        Get Full Access
+      </Button>
+    </div>
+  );
+}
+
 };
 
 export default Subscription;

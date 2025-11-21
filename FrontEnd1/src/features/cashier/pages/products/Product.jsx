@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { productsData } from '@/data/mockData'; 
 import Button from '@/features/ui/Button';
 import { useCart } from '../../context/CartContext';
+import toast, { Toaster } from 'react-hot-toast';
 const CProduct = () => {
   // Get the product id from the URL, e.g., /product/8
   const { id } = useParams();
@@ -78,7 +79,6 @@ const CProduct = () => {
               {productData.stock}
             </p>
           </div>
-
           {/* Tags (if they exist) */}
           {productData.tags && (
             <div>
@@ -93,9 +93,9 @@ const CProduct = () => {
             </div>
           )}
           <div>
-            <Button  onClick={() => {
+         <Button  onClick={() => {
       addToCart(productData); 
-      alert("clicked"); 
+      toast.success("successfully added to cart")
     }}className="lg:w-1/2 md:w-1/2 w-full   ">Add To Cart </Button>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold mb-5 text-muted-hover">
@@ -110,6 +110,13 @@ const CProduct = () => {
         </p>
         </div>
       </div>
+    <Toaster
+  containerClassName="top-5 right-5"
+  toastOptions={{
+    className:
+      "bg-white dark:bg-dark text-black dark:text-white shadow-lg rounded-md",
+  }}
+/>
     </div>
   );
 };

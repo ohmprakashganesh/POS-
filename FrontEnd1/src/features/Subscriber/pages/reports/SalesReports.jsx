@@ -139,62 +139,63 @@ const SalesReports = () => {
         </div>
       </div>
 {/* Sales Chart */}
-      <div className=" bg-white dark:bg-dark  rounded-md shadow-sm p-2">
-        <h3 className="text-xl md:text-2xl font-semibold mb-4">
-          Sales Overview
-        </h3>
-          <div className="h-fit   rounded-lg flex justify-start">
-            <div className="bg-constructive w-full">
-              <Paper elevation={0}>
-                <Typography variant="h6">
-                  Quarterly Sales Performance
-                </Typography>
-                <BarChart
-                  borderRadius={16}
-                  onAnimationStart={Grow}
-                  dataset={chartData} // The array of data objects
-                  xAxis={[
-                    {
-                      scaleType: "band",
-                      dataKey: "month", // Key from the dataset to use for the categories
-                      label: "Month",
-                    },
-                  ]}
-                  // Y-Axis Configuration (Numerical)
-                  yAxis={[
-                    {
-                      label: "Sales (USD)",
-                      valueFormatter: salesValueFormatter, // Apply the formatter to Y-axis labels
-                    },
-                  ]}
-                  // Series Configuration (The actual bars)
-                  series={[
-                    {
-                      dataKey: "totalSales", // Key from the dataset for the bar height
-                      label: "Total Sales",
-                      valueFormatter: salesValueFormatter, // Apply the formatter to tooltips
-                      color: "#1976D2", // Customize bar color (MUI Primary color)
-                    },
-                  ]}
-                  // Chart dimensions
-                  width={550}
-                  height={300}
-                  sx={{
-                    "& .MuiBarElement-root": {
-                      transformOrigin: "bottom",
-                      borderRadius: 16,
-                      animation: "growBars 1.5s ease-out forwards",
-                    },
-                    "@keyframes growBars": {
-                      from: { transform: "scaleY(0)" },
-                      to: { transform: "scaleY(1)" },
-                    },
-                  }}
-                />
-              </Paper>
-            </div>
-          </div>
-      </div>
+     <div className="bg-white dark:bg-dark rounded-md shadow-sm p-2">
+  <h3 className="text-xl md:text-2xl font-semibold mb-4">
+    Sales Overview
+  </h3>
+
+{/* chart data  */}
+  <div className="h-fit bg-white dark:bg-dark rounded-lg flex justify-start p-4">
+    <div className="w-full">
+      <Paper elevation={0} className="bg-transparent shadow-none">
+        <Typography variant="h6">
+          Quarterly Sales Performance
+        </Typography>
+
+        <BarChart
+          borderRadius={16}
+          onAnimationStart={Grow}
+          dataset={chartData}
+          xAxis={[
+            {
+              scaleType: "band",
+              dataKey: "month",
+              label: "Month",
+            },
+          ]}
+          yAxis={[
+            {
+              label: "Sales (USD)",
+              valueFormatter: salesValueFormatter,
+            },
+          ]}
+          series={[
+            {
+              dataKey: "totalSales",
+              label: "Total Sales",
+              valueFormatter: salesValueFormatter,
+              color: "#1976D2",
+            },
+          ]}
+          width={550}
+          height={300}
+          sx={{
+            "& .MuiBarElement-root": {
+              transformOrigin: "bottom",
+              borderRadius: 16,
+              animation: "growBars 1.5s ease-out forwards",
+            },
+            "@keyframes growBars": {
+              from: { transform: "scaleY(0)" },
+              to: { transform: "scaleY(1)" },
+            },
+          }}
+        />
+      </Paper>
+    </div>
+  </div>
+</div>
+
           
           
      

@@ -1,3 +1,14 @@
+
+// const Purchase = () => {
+//   return (
+//     <div>
+//       This is the purchase page 
+//     </div>
+//   )
+// }
+
+// export default Purchase
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
@@ -7,10 +18,12 @@ import { VENDORS as Vendors } from "@/data/mockData";
 import Button from "@/features/ui/Button";
 import Input from "@/features/ui/Input";
 import { OptionComponent, SelectComponent } from "@/features/ui/Select";
-const AddEditProduct = () => {
+import toast, { ToastBar, Toaster } from "react-hot-toast";
+const Purchase = ({back}) => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const isEdit = Boolean(id);
+  const[backState,setBackState]=useState(false);
+  if(back) setBackState(true);
 
   const product = DUMMY_PRODUCTS.filter((prod) => prod.id == id);
   const [formData, setFormData] = useState({
@@ -86,7 +99,13 @@ const AddEditProduct = () => {
     setTimeout(() => {
       console.log("Product saved:", formData);
       setIsLoading(false);
-      navigate("/products");
+       // Reset form using loop
+    const clearedForm = {};
+    for (let key in formData) {
+      clearedForm[key] = ""; // reset all fields to empty string
+    }
+    toast.success("successfully added to cart")
+    setFormData(clearedForm);
     }, 1000);
   };
 
@@ -103,12 +122,15 @@ const AddEditProduct = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <Link
+            { backState &&(
+             <Link
             to="/products"
             className="p-2 text-muted bg-primary/10 hover:bg-primary/30 rounded-full"
           >
             <ArrowLeftIcon className="h-5 w-5" />
           </Link>
+         
+            )}
           <div>
             <h1 className="text-2xl font-bold">
               {isEdit ? "Edit Product" : "Add New Product"}
@@ -162,6 +184,11 @@ const AddEditProduct = () => {
                     <option className="bg-white dark:bg-dark" key={vendor.id} value={vendor.name}>{vendor.name}</option>
                   ))}
                 </select>
+                
+               
+                
+
+
               </div>
 
                <div>
@@ -214,7 +241,7 @@ const AddEditProduct = () => {
                   label=" purchase Date"
                   type="date"
                   id="purchase"
-                  name="purchase"
+                  name="purchase_date"
                   value={formData.purchase_date}
                   onChange={handleChange}
                   placeholder="0.00"
@@ -223,9 +250,9 @@ const AddEditProduct = () => {
                   label="Expiry Date"
                   type="date"
                   id="expiry"
-                  name="expiry"
+                  name="expiry_date"
                   value={formData.expiry_date}
-                  onChange={handleChange}
+                   onChange={handleChange}
                   placeholder="0.00"
                 />
               </div>
@@ -372,8 +399,15 @@ const AddEditProduct = () => {
           </div>
         </form>
       </div>
+               <Toaster
+  containerClassName="top-5 right-5"
+  toastOptions={{
+    className:
+      "bg-white dark:bg-dark text-black dark:text-white shadow-lg rounded-md",
+  }}
+/>
     </div>
   );
 };
 
-export default AddEditProduct;
+export default Purchase;

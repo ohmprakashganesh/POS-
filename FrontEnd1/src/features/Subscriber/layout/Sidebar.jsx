@@ -17,6 +17,7 @@ import {
   MoveRightIcon,
   Settings2Icon,
   SettingsIcon,
+  ShoppingBagIcon,
   UserIcon,
   VideotapeIcon,
 } from "lucide-react";
@@ -28,19 +29,12 @@ const Sidebar = ({closeSidebar,className=""}) => {
     { name: t("subscriber.dashboard"), href: "/subscriber", icon: HomeIcon },
     { name: t("subscriber.items"), href: "/products", icon: CubeIcon },
     { name: t("subscriber.categories"), href: "/categories", icon: BookAIcon },
+    { name: "purchase", href: "/purchase", icon:ShoppingBagIcon },
     { name: t("subscriber.vendors"), href: "/vendors", icon: UserIcon },
     { name: t("subscriber.cashiers"), href: "/cashierList", icon: UserIcon },
     { name: t("subscriber.customers"), href: "/customers", icon: UsersIcon },
-    {
-      name: t("subscriber.transactions"),
-      href: "/transactions",
-      icon: DocumentTextIcon,
-    },
-    {
-      name: t("subscriber.reports"),
-      href: "/reports/sales",
-      icon: ChartBarIcon,
-    },
+    {name: t("subscriber.transactions"), href: "/transactions",icon: DocumentTextIcon},
+    {name: t("subscriber.reports"),href: "/reports/sales", icon: ChartBarIcon,}
   ];
   const settings = [
     {

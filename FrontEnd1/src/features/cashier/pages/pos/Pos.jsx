@@ -56,7 +56,14 @@ const Pos = () => {
                 alt={product.name}
                 className="inline-block w-full aspect-[16/9]  rounded-md"
               />
-              <Toaster className="absolute w-[125px] mx-auto"/>
+             <Toaster
+  containerClassName="top-5 right-5"
+  toastOptions={{
+    className:
+      "bg-white dark:bg-dark text-black dark:text-white shadow-lg rounded-md",
+  }}
+/>
+
               {/* Product Details */}
               <div className="mt-1.5 grow  flex flex-col justify-between">
                 <h3 className="text-lg font-semibold line-clamp-2 leading-tight">

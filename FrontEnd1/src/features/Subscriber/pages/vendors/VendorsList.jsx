@@ -78,10 +78,10 @@ const Vendor = () => {
               <th className="p-4">Total Products</th>
               <th className="p-4">Total Expenses</th>
               <th className="p-4">Total Paid</th>
+                <th className="p-4">Total Due</th>            
               <th className="p-4">Actions</th>
             </tr>
           </thead>
-
           <tbody>
             {filteredVendors.map((vendor, key) => (
               <tr key={vendor.id} className=" hover:bg-background">
@@ -101,7 +101,9 @@ const Vendor = () => {
 
                 <td className="px-4 py-3">{vendor.total_cost}</td>
 
-                <td className="px-4 py-3 font-semibold">{vendor.total_paid}</td>
+                <td className="px-4 py-3 ">{vendor.total_paid}</td>
+               <td className="px-4 py-3 font-semibold">{vendor.total_due}</td>
+
 
                 {/* Actions */}
                 <td className="px-4  py-3 flex items-center gap-2">

@@ -31,6 +31,7 @@ import SubscriberDashboard from './features/Subscriber/pages/dashboard/Subscribe
 import AddEditVendor from './features/Subscriber/pages/vendors/AddEditVendor';
 import VendorDetailsCard from './features/Subscriber/pages/vendors/VendorDetailsCard';
 import SupportForm from './features/Subscriber/pages/settings/help/SupportForm';
+import Purchase from './features/Subscriber/pages/purchase/Purchase';
 
 // admin components 
 import SubscriberList from './features/Admin/pages/subscribers/SubscriberList';
@@ -48,10 +49,10 @@ import VendorList from './features/Subscriber/pages/vendors/VendorsList';
 import Profile from './features/Subscriber/pages/settings/profile/Profile';
 import SupportReq from './features/Admin/pages/support/Support';
 import { CartProvider } from './features/cashier/context/CartContext';
-import Cart from './features/cashier/pages/cart/Cart';
 import CProduct from './features/cashier/pages/products/Product';
 import { FormProvider } from './features/cashier/context/FormContext';
 import { ThemeProvider } from './contexts/ThemeContext';
+import Cart from './features/cashier/pages/cart/Cart';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
@@ -109,7 +110,7 @@ function App() {
               </Route>
 
               {/* subscriber ============================================================================= routes  */}
-
+            
               <Route
                 element={
                   <ProtectedRoute>
@@ -118,8 +119,8 @@ function App() {
                 }
               >
                 <Route path="/subscriber" element={<SubscriberDashboard />} />
-                  <Route path="/profile" element={  <Profile />}/>
-                  <Route  path="/profile/edit/:id" element={<Profile />}/>    
+                <Route path="/profile" element={  <Profile />}/>
+                <Route  path="/profile/edit/:id" element={<Profile />}/>    
                 <Route path="/transactions" element={<TransactionHistory />} />
                 <Route path="/customers" element={<CustomerList />} />
                 <Route path="/customers/add" element={<AddEditCustomer />} />
@@ -140,8 +141,8 @@ function App() {
                 <Route path="/reports/profit-loss" element={<ProfitLoss />} />
                 <Route path="/subscription" element={<Subscription />} />
                  <Route path="/help" element={ <SupportForm/>}/>
+                 <Route path='/purchase' element={<Purchase />}/>
               </Route>
-
               {/* cashier============================================================================= routes  */}
              
               <Route
@@ -157,21 +158,15 @@ function App() {
                 <Route path="/c-Products" element={<CashierProductList />} />
                 <Route path="/c-cart" element={<Cart />} />
                 <Route path="/c-customers" element={<CashierCustomerList />} />
-                {/* <Route path="/c-customers/add" element={<CashierAddEditCustomer />} />
-                <Route path="/c-customers/edit/:id" element={<CashierAddEditCustomer />} /> */}
                 <Route path="/c-orders" element={<Orders />} />
                   <Route path="/c-product/:id" element={<CProduct />} />
               </Route>
-            
-
               {/* public routes ============================================================================= routes  */}
-
               <Route path="/publicSubscription" element={<PublicSubscription />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
                 <Route path="/success" element={<Paid />} />
             <Route path="/payment" element={<PaymentScreen />} />
-
             </Routes>
               </CartProvider>
                 </FormProvider>
@@ -179,8 +174,6 @@ function App() {
         </NotificationProvider>
       </AuthProvider>
       </ThemeProvider>
-
-     
     </Router>
   );
 }

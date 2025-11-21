@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useTranslation } from "react-i18next";
 import { useNotifications } from "../../../contexts/NotificationContext";
@@ -13,12 +13,16 @@ import LanguageToggle from "@/locales/LanguageToggle";
 import { LogOut, X } from "lucide-react";
 import Button from "@/features/ui/Button";
 import ThemeButton from "@/features/ui/ThemeButton";
+import NotificationScreen from "../pages/notification/Notification";
 const Header = ({ openSidebar }) => {
+    const buttonRef = useRef(null);
+    const panelRef = useRef(null);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const { notifications, unreadCount, markAsRead } = useNotifications();
   const { logout, user } = useAuth();
+   const { unreadCount, markAsRead } = useNotifications();
+    const [notification, setNotification] = useState(false);
 
   return (
     <header className="h-16 bg-white dark:bg-dark shadow-sm flex items-center justify-between px-2 sm:px-5 sticky top-0 z-10">
@@ -38,7 +42,7 @@ const Header = ({ openSidebar }) => {
         <ThemeButton/>
         <LanguageToggle />
         {/* Notifications */}
-        <div className="relative ">
+        {/* <div className="relative ">
           <button
             onClick={() => markAsRead()}
             className="p-2 text-muted hover:text-muted-hover relative"
@@ -53,7 +57,23 @@ const Header = ({ openSidebar }) => {
               </span>
             )}
           </button>
-        </div>
+        </div> */}
+           <div ref={buttonRef} className="relative">
+                     <button
+                       onClick={() => {
+                         markAsRead();
+                         setNotification((prev) => !prev);
+                       }}
+                       className="p-2 text-gray-400 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100 relative"
+                     >
+                       <BellIcon className="h-6 w-6" />
+                       {unreadCount > 0 && (
+                         <span className="absolute top-1 right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                           {unreadCount}
+                         </span>
+                       )}
+                     </button>
+                   </div>
 
         {/* User menu */}
         <div className="relative">
@@ -114,6 +134,14 @@ const Header = ({ openSidebar }) => {
           )}
         </div>
       </div>
+       {notification && (
+        <div
+          ref={panelRef}
+          className="absolute md:w-3/7 lg:w-2/6 w-full bg-white dark:bg-gray-800 right-1 top-16 z-40 flex justify-end "
+        >
+          <NotificationScreen />
+        </div>
+      )}
     </header>
   );
 };

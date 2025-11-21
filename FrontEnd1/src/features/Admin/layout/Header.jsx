@@ -39,7 +39,7 @@ const Header = ({ onMenuClick, user }) => {
   
 
   return (
-    <header className="bg-white dark:bg-dark shadow-sm border-b border-muted/40">
+    <header className="bg-white dark:bg-dark shadow-sm ">
       <div className="flex items-center justify-between h-16 px-4 sm:px-6">
         {/* Left section */}
         <div className="flex items-center">
