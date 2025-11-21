@@ -23,39 +23,39 @@ import {
 import { cn } from "@/lib/utils";
 
 const Sidebar = ({closeSidebar,className=""}) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("subscriber");
   const navigation = [
-    { name: t("subscriber.Dashboard"), href: "/subscriber", icon: HomeIcon },
-    { name: t("subscriber.Items"), href: "/products", icon: CubeIcon },
-    { name: t("subscriber.Categories"), href: "/categories", icon: BookAIcon },
-    { name: t("subscriber.Vendors"), href: "/vendors", icon: UserIcon },
-    { name: t("subscriber.Cashiers"), href: "/cashierList", icon: UserIcon },
-    { name: t("subscriber.Customers"), href: "/customers", icon: UsersIcon },
+    { name: t("subscriber.dashboard"), href: "/subscriber", icon: HomeIcon },
+    { name: t("subscriber.items"), href: "/products", icon: CubeIcon },
+    { name: t("subscriber.categories"), href: "/categories", icon: BookAIcon },
+    { name: t("subscriber.vendors"), href: "/vendors", icon: UserIcon },
+    { name: t("subscriber.cashiers"), href: "/cashierList", icon: UserIcon },
+    { name: t("subscriber.customers"), href: "/customers", icon: UsersIcon },
     {
-      name: t("subscriber.Transactions"),
+      name: t("subscriber.transactions"),
       href: "/transactions",
       icon: DocumentTextIcon,
     },
     {
-      name: t("subscriber.Reports"),
+      name: t("subscriber.reports"),
       href: "/reports/sales",
       icon: ChartBarIcon,
     },
   ];
   const settings = [
     {
-      name: t("settings.ActivePlan"),
+      name: t("settings.activePlan"),
       href: "/subscription",
       icon: Settings2Icon,
     },
-    { name: t("settings.Help"), href: "/help", icon: HelpingHandIcon },
+    { name: t("settings.help"), href: "/help", icon: HelpingHandIcon },
     {
-      name: t("settings.UpdateProfile"),
+      name: t("settings.updateProfile"),
       href: "/update-profile",
       icon: UserIcon,
     },
     {
-      name: t("settings.Tutorials"),
+      name: t("settings.tutorials"),
       href: "/youtube.com",
       icon: VideotapeIcon,
     },

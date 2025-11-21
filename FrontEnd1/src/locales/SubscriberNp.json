@@ -1,0 +1,156 @@
+{
+  "welcome": "हाम्रो साइटमा स्वागत छ!",
+  "toggle": "नेपालीमा स्विच गर्नुहोस्",
+  "subscriber": {
+    "dashboard": "ड्यासबोर्ड",
+    "items": "वस्तुहरू",
+    "categories": "श्रेणीहरू",
+    "vendors": "विक्रेता",
+    "cashiers": "क्यासियरहरू",
+    "customers": "ग्राहकहरू",
+    "transactions": "लेनदेनहरू",
+    "reports": "प्रतिवेदनहरू"
+  },
+  "settings": {
+    "title": "सेटिङहरू",
+    "activePlan": "सक्रिय योजना",
+    "help": "सहयोग",
+    "updateProfile": "प्रोफाइल अद्यावधिक गर्नुहोस्",
+    "tutorials": "ट्युटोरियलहरू"
+  },
+  "dashboard": {
+    "title": "सदस्य ड्यासबोर्ड",
+    "subtitle": "तपाईंको स्टोरको प्रदर्शनको अवलोकन",
+    "lastUpdated": "अन्तिम अद्यावधिक",
+    "metrics": {
+      "todaysSales": "आजको बिक्री",
+      "monthlyRevenue": "मासिक आम्दानी",
+      "netProfit": "नाफा",
+      "totalCustomers": "कुल ग्राहक",
+      "totalProducts": "कुल वस्तुहरू",
+      "monthlyExpenses": "मासिक खर्च",
+      "lowStockItems": "स्टक कम भएका वस्तुहरू",
+      "salesToday": "आजको बिक्री",
+      "thisMonth": "यो महिना",
+      "afterExpenses": "खर्च पछि",
+      "registeredCustomers": "दर्ता गरिएका ग्राहकहरू",
+      "inInventory": "इन्वेन्टरीमा",
+      "operatingCosts": "सञ्चालन खर्च",
+      "needRestocking": "फेरि भर्न आवश्यक",
+      "completed": "पूरा भयो",
+      "outOfStock": "स्टक सकियो",
+      "unitsLeft": "{{count}} वटा बाँकी",
+      "percentChange": "हिजोको तुलनामा {{value}}%"
+    },
+    "quickActions": {
+      "cashiers": "क्यासियरहरू",
+      "addProduct": "वस्तु थप्नुहोस्",
+      "addCustomer": "ग्राहक थप्नुहोस्",
+      "viewReports": "प्रतिवेदन हेर्नुहोस्",
+      "viewCashiers": "क्यासियरहरू हेर्नुहोस्",
+      "addNewProduct": "इन्वेन्टरीमा नयाँ वस्तु थप्नुहोस्",
+      "registerCustomer": "नयाँ ग्राहक दर्ता गर्नुहोस्",
+      "salesAndAnalytics": "बिक्री र विश्लेषण"
+    },
+    "sections": {
+      "recentTransactions": "भर्खरका लेनदेनहरू",
+      "viewAll": "सबै हेर्नुहोस्",
+      "lowStockAlerts": "स्टक कम भएका वस्तुहरूको चेतावनी",
+      "manageInventory": "इन्वेन्टरी व्यवस्थापन गर्नुहोस्",
+      "restock": "फेरि भर्नुहोस्",
+      "salesOverview": "बिक्री अवलोकन",
+      "dailySalesChart": "दैनिक बिक्री प्रदर्शन चार्ट",
+      "visualization": "तपाईंको व्यवसाय वृद्धिको दृश्य प्रतिनिधित्व"
+    }
+  },
+  "item": {
+    "search": "उत्पादनहरू खोज्नुहोस्...",
+    "all": "सबै वर्गहरू",
+    "inStock": "स्टकमा उपलब्ध",
+    "rs": "रु.",
+    "available": "उपलब्ध",
+    "units": "एकाइ"
+  },
+  "category": {
+    "title": "वर्ग व्यवस्थापन"
+  },
+  "vendor": {
+    "title": "विक्रेताहरू",
+    "description": "तपाईंको विक्रेता डेटाबेस व्यवस्थापन गर्नुहोस्",
+    "addVendor": "विक्रेता थप्नुहोस्",
+    "search": "नाम, फोन, वा इमेलद्वारा विक्रेताहरू खोज्नुहोस्...",
+    "sn": "क्र.सं",
+    "name": "नाम",
+    "address": "ठेगाना",
+    "totalProducts": "कुल उत्पादनहरू",
+    "totalExpenses": "कुल खर्च",
+    "totalPaid": "कुल भुक्तानी",
+    "actions": "कार्यहरू"
+  },
+  "cashier": {
+    "title": "क्यासियरहरू",
+    "description": "तपाईंको क्यासियर डेटाबेस व्यवस्थापन गर्नुहोस्",
+    "addCashier": "क्यासियर थप्नुहोस्",
+    "search": "नाम, फोन, वा इमेलद्वारा क्यासियरहरू खोज्नुहोस्...",
+    "sn": "क्र.सं",
+    "phone": "फोन",
+    "email": "इमेल",
+    "totalOrders": "कुल अर्डरहरू",
+    "totalSales": "कुल बिक्री",
+    "actions": "कार्यहरू"
+  },
+  "customer": {
+    "title": "ग्राहकहरू",
+    "description": "तपाईंको ग्राहक डेटाबेस व्यवस्थापन गर्नुहोस्",
+    "addCustomer": "ग्राहक थप्नुहोस्",
+    "search": "नाम, फोन, वा इमेलद्वारा ग्राहकहरू खोज्नुहोस्...",
+    "sn": "क्र.सं",
+    "name": "नाम",
+    "phone": "फोन",
+    "email": "इमेल",
+    "address": "ठेगाना",
+    "totalOrders": "कुल अर्डरहरू",
+    "totalSpent": "कुल खर्च",
+    "actions": "कार्यहरू"
+  },
+  "history": {
+    "history": "लेनदेन इतिहास",
+    "view": "सबै बिक्री लेनदेनहरू हेर्नुहोस् र व्यवस्थापन गर्नुहोस्",
+    "totalTransactions": "कुल लेनदेनहरू",
+    "totalRevenue": "कुल राजस्व",
+    "completedTransactions": "सम्पन्न लेनदेनहरू",
+    "pendingTransactions": "बाँकी लेनदेनहरू",
+    "search": "बीजक वा ग्राहकद्वारा खोज्नुहोस्...",
+    "startDate": "सुरु मिति",
+    "endDate": "अन्तिम मिति",
+    "transactions": "लेनदेनहरू",
+    "sn": "क्र.सं",
+    "invoice": "बीजक",
+    "customer": "ग्राहक",
+    "date": "मिति",
+    "items": "वस्तुहरू",
+    "amount": "रकम",
+    "status": "स्थिति",
+    "actions": "कार्यहरू"
+  },
+  "report": {
+    "title": "बिक्री प्रतिवेदनहरू",
+    "description": "तपाईंको बिक्री प्रदर्शनको विश्लेषण गर्नुहोस्",
+    "type": "प्रतिवेदन प्रकार",
+    "daily": "दैनिक",
+    "generateReport": "प्रतिवेदन उत्पन्न गर्नुहोस्",
+    "totalSalses": "कुल बिक्री",
+    "avg": "औसत",
+    "averageOrderValue": "औसत अर्डर मूल्य",
+    "salesOverview": "बिक्री सिंहावलोकन",
+    "quarterlySales": "त्रैमासिक बिक्री प्रदर्शन",
+    "detailedSales": "विस्तृत बिक्री डाटा",
+    "salesAmount": "बिक्री रकम",
+    "numberOfOrders": "अर्डर संख्या"
+  },
+  "plan": {
+    "status": "तपाईं पूर्ण रूपमा सक्रिय हुनुहुन्छ",
+    "description": "तपाईंको व्यावसायिक योजना हाल सक्रिय र राम्रो स्थितिमा छ।",
+    "manage": "सदस्यता व्यवस्थापन गर्नुहोस्"
+  }
+}

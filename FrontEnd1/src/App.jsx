@@ -32,7 +32,6 @@ import AddEditVendor from './features/Subscriber/pages/vendors/AddEditVendor';
 import VendorDetailsCard from './features/Subscriber/pages/vendors/VendorDetailsCard';
 import SupportForm from './features/Subscriber/pages/settings/help/SupportForm';
 
-
 // admin components 
 import SubscriberList from './features/Admin/pages/subscribers/SubscriberList';
 import AdminDashboard from './features/Admin/dashboard/AdminDashboard';
@@ -47,7 +46,6 @@ import POS from './features/cashier/pages/pos/Pos';
 import Paid from './globalPages/subscription/Paid';
 import VendorList from './features/Subscriber/pages/vendors/VendorsList';
 import Profile from './features/Subscriber/pages/settings/profile/Profile';
-import Support from './features/Subscriber/pages/settings/help/Support';
 import SupportReq from './features/Admin/pages/support/Support';
 import { CartProvider } from './features/cashier/context/CartContext';
 import Cart from './features/cashier/pages/cart/Cart';

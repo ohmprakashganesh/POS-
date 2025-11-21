@@ -1,0 +1,156 @@
+{
+  "welcome": "Welcome to our site!",
+  "toggle": "Switch to Nepali",
+  "subscriber": {
+    "dashboard": "Dashboard",
+    "items": "Items",
+    "categories": "Categories",
+    "vendors": "Vendors",
+    "cashiers": "Cashiers",
+    "customers": "Customers",
+    "transactions": "Transactions",
+    "reports": "Reports"
+  },
+  "settings": {
+    "title": "Settings",
+    "activePlan": "Active Plan",
+    "help": "Help",
+    "updateProfile": "Update Profile",
+    "tutorials": "Tutorials"
+  },
+  "dashboard": {
+    "title": "Subscriber Dashboard",
+    "subtitle": "Overview of your store performance",
+    "lastUpdated": "Last updated",
+    "metrics": {
+      "todaysSales": "Today's Sales",
+      "monthlyRevenue": "Monthly Revenue",
+      "netProfit": "Net Profit",
+      "totalCustomers": "Total Customers",
+      "totalProducts": "Total Products",
+      "monthlyExpenses": "Monthly Expenses",
+      "lowStockItems": "Low Stock Items",
+      "salesToday": "Sales today",
+      "thisMonth": "This month",
+      "afterExpenses": "After expenses",
+      "registeredCustomers": "Registered customers",
+      "inInventory": "In inventory",
+      "operatingCosts": "Operating costs",
+      "needRestocking": "Need restocking",
+      "completed": "Completed",
+      "outOfStock": "Out of stock",
+      "unitsLeft": "{{count}} units left",
+      "percentChange": "{{value}}% from yesterday"
+    },
+    "quickActions": {
+      "cashiers": "Cashiers",
+      "addProduct": "Add Product",
+      "addCustomer": "Add Customer",
+      "viewReports": "View Reports",
+      "viewCashiers": "view Cashiers",
+      "addNewProduct": "Add new product to inventory",
+      "registerCustomer": "Register new customer",
+      "salesAndAnalytics": "Sales and analytics"
+    },
+    "sections": {
+      "recentTransactions": "Recent Transactions",
+      "viewAll": "View all",
+      "lowStockAlerts": "Low Stock Alerts",
+      "manageInventory": "Manage Inventory",
+      "restock": "Restock",
+      "salesOverview": "Sales Overview",
+      "dailySalesChart": "Daily sales performance chart",
+      "visualization": "Visualization of your business growth"
+    }
+  },
+  "item": {
+    "search": "Search products...",
+    "all": "All Categories",
+    "inStock": "In Stock",
+    "rs": "Rs.",
+    "available": "Available",
+    "units": "units"
+  },
+  "category": {
+    "title": "Category Management"
+  },
+  "vendor": {
+    "title": "Vendors",
+    "description": "Manage your vendor database",
+    "addVendor": "Add vendor",
+    "search": "Search vendors by name, phone, or email...",
+    "sn": "SN",
+    "name": "Name",
+    "address": "Address",
+    "totalProducts": "Total Products",
+    "totalExpenses": "Total Expenses",
+    "totalPaid": "Total Paid",
+    "actions": "Actions"
+  },
+  "cashier": {
+    "title": "Cashiers",
+    "description": "Manage your cashier database",
+    "addCashier": "Add Cashier",
+    "search": "Search cashiers by name, phone, or email...",
+    "sn": "S.N",
+    "phone": "Phone",
+    "email": "Email",
+    "totalOrders": "Total Orders",
+    "totalSales": "Total Sales",
+    "actions": "Actions"
+  },
+  "customer": {
+    "title": "Customers",
+    "description": "Manage your customer database",
+    "search": "Search customers by name, phone, or email...",
+    "addCustomer": "Add Customer",
+    "sn": "S.N",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "totalOrders": "Total Orders",
+    "totalSpent": "Total Spent",
+    "actions": "Actions"
+  },
+  "history": {
+    "history": "Transaction History",
+    "view": "View and manage all sales transactions",
+    "totalTransactions": "Total Transactions",
+    "totalRevenue": "Total Revenue",
+    "completedTransactions": "Completed Transactions",
+    "pendingTransactions": "Pending Transactions",
+    "searchByInvoice": "Search by invoice or customer...",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "transactions": "transactions",
+    "sn": "S.N",
+    "invoice": "Invoice",
+    "customer": "Customer",
+    "date": "Date",
+    "items": "Items",
+    "amount": "Amount",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "report": {
+    "title": "Sales Reports",
+    "description": "Analyze your sales performance",
+    "type": "Report Type",
+    "daily": "Daily",
+    "generateReport": "Generate Report",
+    "totalSales": "Total Sales",
+    "avg": "AVG",
+    "averageOrderValue": "Average Order Value",
+    "salesOverview": "Sales Overview",
+    "quarterlySales": "Quarterly Sales Performance",
+    "detailedSales": "Detailed Sales Data",
+    "salesAmount": "Sales Amount",
+    "numberOfOrders": "Number of Orders"
+  },
+  "plan": {
+    "status": "You're Fully Active",
+    "description": "Your Professional plan is currently active and in good standing.",
+    "manage": "Manage Subscription"
+  }
+}

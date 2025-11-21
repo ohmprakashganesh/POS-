@@ -1,8 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-import en from "./en.json";
-import np from "./np.json";
+import sen from "./SubscriberEn.json";
+import snp from "./SubscriberNp.json";
 import cen from "./CashierEn.json";
 import cnp from "./CashierNe.json";
 import fnp from "./FormNe.json";
@@ -13,12 +13,12 @@ const savedLang = localStorage.getItem("lang") || "en";
 i18n.use(initReactI18next).init({
   resources: {
     en: {
-      subscriber: en,
+      subscriber: sen,
       cashier: cen,
         form: fen,   // ✅ cashier namespace for English
     },
     np: {
-      subscriber: np,
+      subscriber: snp,
       cashier: cnp,
       form:fnp,   // ✅ cashier namespace for Nepali
     },
@@ -29,5 +29,4 @@ i18n.use(initReactI18next).init({
   defaultNS: "subscriber",
   interpolation: { escapeValue: false },
 });
-
 export default i18n;

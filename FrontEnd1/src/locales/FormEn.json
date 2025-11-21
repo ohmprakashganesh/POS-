@@ -31,6 +31,43 @@
     "submit": "Submit"
 
   }
-}
+},
+"cashier": {
+    "title": "Create a New Cashier",
+    "subtitle": "Add a new Cashier to your system",
+    "detailsHeader": "Cashier Details",
+    "detailsSubHeader": "Provide details for new cashier",
+    "fullName": "Full Name *",
+    "phoneNumber": "Phone Number *",
+    "emailAddress": "Email Address",
+    "address": "Address"
+  },
+  "vendor": {
+    "title": "Create a New Vendor",
+    "subtitle": "Add a new Vendor to your system",
+    "detailsHeader": "Vendor's Details",
+    "detailsSubHeader": "Provide details for new vendor",
+    "vendorName": "Vendor Name *",
+    "phoneNumber": "Phone Number *",
+    "address": "Address"
+  },
+  "customer": {
+    "title": "Create a New Customer",
+    "subtitle": "Add a new Customer to your system",
+    "detailsHeader": "Customer's Details",
+    "detailsSubHeader": "Provide details for new customer",
+    "fullName": "Full Name *",
+    "phoneNumber": "Phone Number *",
+    "emailAddress": "Email Address",
+    "address": "Address"
+  },
+  "category": {
+    "title": "Create New Category",
+    "categoryName": "Category Name",
+    "imageUrl": "Image URL",
+    "categoryColor": "Category Color (Hex)",
+    "preview": "Category Preview",
+    "createButton": "Create Category"
+  }
 
 }
