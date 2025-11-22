@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect, use, useCallback } from "react";
 import { Link } from "react-router-dom";
 import {
   PlusIcon,
@@ -7,18 +7,26 @@ import {
   TrashIcon,
   UserIcon,
   EyeIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { VENDORS } from "../../../../data/mockData";
 import { useNavigate } from "react-router-dom";
 import Input from "@/features/ui/Input";
 import { useTranslation } from "react-i18next";
+import Button from "@/features/ui/Button";
 
 const Vendor = () => {
-  const {t}=useTranslation()
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [vendors, setVendors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredVendors, setFilteredVendors] = useState([]);
+
+  //vendor due form
+  const [activeVendor, setActiveVendor] = useState(null);
+  const handleVendorDueFormClose = useCallback(() => {
+    setActiveVendor(null);
+  }, []);
 
   useEffect(() => {
     // In real app, this would be an API call
@@ -71,18 +79,17 @@ const Vendor = () => {
       </div>
 
       <div className="overflow-x-auto  bg-white dark:bg-dark rounded-md shadow-sm">
-        <table className="min-w-full text-sm text-muted">
-          <thead className="uppercase text-sm text-left  bg-secondary text-secondary-foreground">
+        <table className="min-w-full text-sm text-muted ">
+          <thead className="uppercase  text-sm text-left  bg-secondary text-secondary-foreground">
             <tr>
               <th className="px-2 py-3">{t("vendor.sn")}</th>
-              <th className="text-center">{t("vendor.name")}</th>
-              <th className="text-center">{t("vendor.address")}</th>
-              <th className="text-center">{t("vendor.totalProducts")}</th>
-              <th className="text-center">{t("vendor.totalExpenses")}</th>
-              <th className="">{t("vendor.totalPaid")}</th>
-             <th className="text-center">Total Due</th>
-
-              <th className="text-center">{t("vendor.actions")}</th>
+              <th className="px-4">{t("vendor.name")}</th>
+              <th className="px-4">{t("vendor.address")}</th>
+              <th className="px-4">{t("vendor.totalProducts")}</th>
+              <th className="px-4">{t("vendor.totalExpenses")}</th>
+              <th className="px-4">{t("vendor.totalPaid")}</th>
+              <th className="px-2">{t("vendor.totalDue")}</th>
+              <th className="px-4 text-right">{t("vendor.actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -105,11 +112,26 @@ const Vendor = () => {
                 <td className="px-4 py-3">{vendor.total_cost}</td>
 
                 <td className="px-4 py-3 ">{vendor.total_paid}</td>
-               <td className="px-4 py-3 font-semibold">{vendor.total_due}</td>
-
+                <td className="px-4 py-3 font-semibold group">
+                  <div
+                    onClick={() =>
+                      setActiveVendor({
+                        name: vendor.name,
+                        id: vendor.id,
+                        totalCost: vendor.total_cost,
+                        totalPaid: vendor.total_paid,
+                        totalDue: vendor.total_due,
+                      })
+                    }
+                    className="flex cursor-pointer items-center h-full p-1 gap-2"
+                  >
+                    {vendor.total_due}
+                    <PencilIcon className="size-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto text-primary" />
+                  </div>
+                </td>
 
                 {/* Actions */}
-                <td className="px-4  py-3 flex items-center gap-2">
+                <td className="px-4  py-3 flex items-center justify-end gap-2">
                   <Link
                     to={`/vendor/edit/${vendor.id}`}
                     className="p-1.5 rounded-full hover:primary/10 text-primary"
@@ -157,8 +179,68 @@ const Vendor = () => {
           </div>
         )}
       </div>
+
+      {/* vendor due form  */}
+      {!!activeVendor && (
+        <VendorDueForm
+          vendor={activeVendor}
+          onClose={handleVendorDueFormClose}
+        />
+      )}
     </div>
   );
 };
 
 export default Vendor;
+
+function VendorDueForm({ vendor, onClose }) {
+  const {t}=useTranslation()
+  const [payment, setPayment] = useState(null);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //backend call to update dues then update this locally as well
+    onClose();
+  };
+  return (
+    <>
+      <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div
+          onClick={onClose}
+          className="fixed inset-0 bg-black/30 dark:bg-black/70 z-50"
+        />
+        <div className="bg-white dark:bg-dark rounded-lg shadow-lg w-full max-w-md p-6 relative z-50">
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-3 text-muted"
+          >
+            <XMarkIcon className="w-6 h-6" />
+          </button>
+          <h2 className="font-semibold text-lg mb-2">{vendor.name}</h2>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Total Paid (editable) */}
+            <Input label={t("vendor.dues.totalPaid")} value={vendor.totalPaid} readOnly />
+            <Input label={t("vendor.dues.totalDues")}value={vendor.totalDue} readOnly />
+            <Input
+              label={t("vendor.dues.paymentAmount")}
+              placeholder={t("vendor.dues.enterAmount")}
+              type="number"
+              value={payment}
+              onChange={(e) => setPayment(Number(e.target.value))}
+            />
+
+            {/* Buttons */}
+            <div className="flex justify-end gap-2 mt-4">
+              <Button type="button" onClick={onClose} destructive>
+                Cancel
+              </Button>
+              <Button type="submit" className="px-6">
+                Pay
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  );
+}
