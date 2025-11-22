@@ -51,18 +51,18 @@ const Purchase = ({ back }) => {
         <table className="min-w-full text-sm text-muted">
           <thead className="uppercase text-sm text-left bg-secondary text-secondary-foreground">
             <tr>
-              <th className="px-2 py-3">{t("purchase.th.sn")}</th>
+              <th className="px-1 py-3">{t("purchase.th.sn")}</th>
               <th >{t("purchase.th.vendor")}</th>
-              <th className="px-2 py-3" >{t("purchase.th.product")}</th>
-              <th className="px-2 py-3">{t("purchase.th.category")}</th>
-              <th className="px-2 py-3">{t("purchase.th.costRs")}</th>
+              <th className="px-1 py-3" >{t("purchase.th.product")}</th>
+              <th className="px-1 py-3">{t("purchase.th.category")}</th>
+              <th className="px-1 py-3">{t("purchase.th.costRs")}</th>
               <th className="px-2 py-3">{t("purchase.th.saleRs")}</th>
-              <th className="px-2 py-3">{t("purchase.th.purchaseDate")}</th>
-              <th className="px-2 py-3">{t("purchase.th.expiryDate")}</th>
-              <th className="px-2 py-3">{t("purchase.th.stock")}</th>
-              <th className="px-2 py-3">{t("purchase.th.sku")}</th>
-              <th className="px-2 py-3">{t("purchase.th.image")}</th>
-              <th className="px-2 py-3">{t("purchase.th.actions")}</th>
+              <th className="px-1 py-3">{t("purchase.th.purchaseDate")}</th>
+              <th className="px-1 py-3">{t("purchase.th.expiryDate")}</th>
+              <th className="px-1 py-3">{t("purchase.th.stock")}</th>
+              <th className="px-1 py-3">{t("purchase.th.sku")}</th>
+              <th className="px-1 py-3">{t("purchase.th.image")}</th>
+              <th className="px-1 py-3">{t("purchase.th.actions")}</th>
             </tr>
           </thead>
 

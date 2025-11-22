@@ -53,7 +53,7 @@ const CProduct = () => {
         <div className="lg:col-span-3 space-y-6 text-muted-hover ">
           
           {/* Title */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+          <h1 className="text-3xl sm:text-4xl text-dark dark:text-white lg:text-5xl font-extrabold tracking-tight">
             {productData.name}
           </h1>
 

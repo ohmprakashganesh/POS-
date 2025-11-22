@@ -117,21 +117,21 @@ const SalesReports = () => {
         <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
           <ChartBarIcon className="size-8 text-primary" />
           <div className="details">
-            <p className="font-medium text-muted">{t("report.totalSales")}</p>
+            <p className="font-medium ">{t("report.totalSales")}</p>
             <p className="text-2xl font-bold"> ${totalSales.toLocaleString()}</p>
           </div>
         </div>
          <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
           <CalendarIcon className="size-8 text-secondary" />
           <div className="details">
-            <p className="font-medium text-muted">{t("report.totalOrders")}</p>
+            <p className="font-medium">{t("report.totalOrders")}</p>
             <p className="text-2xl font-bold">{totalOrders}</p>
           </div>
         </div>
         <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
         <span className="text-purple-600 font-bold text-sm size-10 bg-purple-500/10 rounded-full flex items-center justify-center">{t("report.avg")}</span>
           <div className="details">
-            <p className="font-medium text-muted">{t("report.averageOrderValue")}</p>
+            <p className="font-medium ">{t("report.averageOrderValue")}</p>
             <p className="text-2xl font-bold">${averageOrderValue.toFixed(2)}</p>
           </div>
         </div>

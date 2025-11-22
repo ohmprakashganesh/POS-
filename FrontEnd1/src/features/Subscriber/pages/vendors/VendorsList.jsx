@@ -72,15 +72,15 @@ const Vendor = () => {
 
       <div className="overflow-x-auto  bg-white dark:bg-dark rounded-md shadow-sm">
         <table className="min-w-full text-sm text-muted">
-          <thead className="uppercase text-sm text-left  bg-secondary text-secondary-foreground">
+          <thead className="uppercase text-sm text-left  bg-secondary text-left text-secondary-foreground">
             <tr>
               <th className="px-2 py-3">{t("vendor.sn")}</th>
-              <th className="text-center">{t("vendor.name")}</th>
-              <th className="text-center">{t("vendor.address")}</th>
-              <th className="text-center">{t("vendor.totalProducts")}</th>
-              <th className="text-center">{t("vendor.totalExpenses")}</th>
-              <th className="">{t("vendor.totalPaid")}</th>
-             <th className="text-center">Total Due</th>
+              <th className="px-2 py-3">{t("vendor.name")}</th>
+              <th className="px-2 py-3">{t("vendor.address")}</th>
+              <th className="px-2 py-3">{t("vendor.totalProducts")}</th>
+              <th className="px-2 py-3">{t("vendor.totalExpenses")}</th>
+              <th className="px-2 py-3">{t("vendor.totalPaid")}</th>
+             <th className="px-2 py-3">Total Due</th>
 
               <th className="text-center">{t("vendor.actions")}</th>
             </tr>

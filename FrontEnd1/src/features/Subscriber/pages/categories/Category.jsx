@@ -1,181 +1,17 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { XCircle, Search, PlusIcon, CheckCircle } from "lucide-react";
 import Button from "@/features/ui/Button";
 import NewCategoryForm from "./NewCategoryForm";
 import Input from "@/features/ui/Input";
 import CategoryCard from "./CategoryCard";
 import { useTranslation } from "react-i18next";
+import { initialCategories } from "@/data/mockData";
 
 // --- Initial Data and State Setup ---
-const initialCategories = [
-  {
-    id: 1,
-    name: "Electronics",
-    items: 154,
-    imageUrl:
-      "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80",
-    color: "#4F46E5",
-    active: true,
-  },
-  {
-    id: 2,
-    name: "Apparel",
-    items: 345,
-    imageUrl:
-      "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80",
-    color: "#10B981",
-    active: true,
-  },
-  {
-    id: 3,
-    name: "Home ",
-    items: 98,
-    imageUrl:
-      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
-    color: "#F59E0B",
-    active: false,
-  },
-  {
-    id: 4,
-    name: "Books",
-    items: 501,
-    imageUrl:
-      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
-    color: "#EF4444",
-    active: true,
-  },
-  {
-    id: 5,
-    name: "Sports Gear",
-    items: 78,
-    imageUrl:
-      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
-    color: "#16A34A",
-    active: true,
-  },
-  {
-    id: 6,
-    name: "Pet Supplies",
-    items: 112,
-    imageUrl: "https://placehold.co/64x64/854D0E/white?text=P",
-    color: "#854D0E",
-    active: true,
-  },
-  {
-    id: 7,
-    name: "Jewelry",
-    items: 45,
-    imageUrl: "https://placehold.co/64x64/9333EA/white?text=J",
-    color: "#9333EA",
-    active: false,
-  },
-  {
-    id: 8,
-    name: "Groceries",
-    items: 890,
-    imageUrl: "https://placehold.co/64x64/65A30D/white?text=G",
-    color: "#65A30D",
-    active: true,
-  },
-  {
-    id: 9,
-    name: "Beauty & Health",
-    items: 210,
-    imageUrl: "https://placehold.co/64x64/EC4899/white?text=BH",
-    color: "#EC4899",
-    active: true,
-  },
-  {
-    id: 10,
-    name: "Automotive",
-    items: 32,
-    imageUrl: "https://placehold.co/64x64/4B5563/white?text=AU",
-    color: "#4B5563",
-    active: false,
-  },
-  {
-    id: 11,
-    name: "Toys & Games",
-    items: 640,
-    imageUrl: "https://placehold.co/64x64/0D9488/white?text=TG",
-    color: "#0D9488",
-    active: true,
-  },
-  {
-    id: 12,
-    name: "Garden & Patio",
-    items: 188,
-    imageUrl: "https://placehold.co/64x64/4D7C0F/white?text=GP",
-    color: "#4D7C0F",
-    active: true,
-  },
-  {
-    id: 13,
-    name: "Instruments",
-    items: 70,
-    imageUrl: "https://placehold.co/64x64/F97316/white?text=MI",
-    color: "#F97316",
-    active: true,
-  },
-  {
-    id: 14,
-    name: "Software",
-    items: 15,
-    imageUrl: "https://placehold.co/64x64/06B6D4/white?text=SW",
-    color: "#06B6D4",
-    active: true,
-  },
-  {
-    id: 15,
-    name: "Office Supplies",
-    items: 305,
-    imageUrl: "https://placehold.co/64x64/FCD34D/black?text=OS",
-    color: "#FCD34D",
-    active: false,
-  },
-  {
-    id: 16,
-    name: "Services",
-    items: 12,
-    imageUrl: "https://placehold.co/64x64/60A5FA/white?text=SE",
-    color: "#60A5FA",
-    active: true,
-  },
-  {
-    id: 17,
-    name: "Travel & Luggage",
-    items: 55,
-    imageUrl: "https://placehold.co/64x64/4338CA/white?text=TL",
-    color: "#4338CA",
-    active: true,
-  },
-  {
-    id: 18,
-    name: "Art Supplies",
-    items: 140,
-    imageUrl: "https://placehold.co/64x64/DB2777/white?text=AS",
-    color: "#DB2777",
-    active: false,
-  },
-  {
-    id: 19,
-    name: "Collectibles",
-    items: 25,
-    imageUrl: "https://placehold.co/64x64/FBBF24/black?text=C",
-    color: "#FBBF24",
-    active: true,
-  },
-  {
-    id: 20,
-    name: "Kitchenware",
-    items: 220,
-    imageUrl: "https://placehold.co/64x64/9CA3AF/white?text=KW",
-    color: "#9CA3AF",
-    active: true,
-  },
-];
+
 
 const App = () => {
+
   const {t}=useTranslation()
   const [categories, setCategories] = useState(initialCategories);
   const [searchTerm, setSearchTerm] = useState(""); // New state for search term
@@ -185,6 +21,12 @@ const App = () => {
   const [isConfirmDeleteModalOpen, setIsConfirmDeleteModalOpen] =
     useState(false);
   const [deleteCategoryId, setDeleteCategoryId] = useState(null);
+
+       useEffect(()=>{
+      if(initialCategories){
+        setCategories(initialCategories)
+      }
+     },[])
 
   // Filter categories based on search term
   const filteredCategories = categories.filter((category) =>
@@ -222,7 +64,7 @@ const App = () => {
           className="xl:hidden"
           onClick={() => setIsCreateCategoryFormOpen(true)}
         >
-          <PlusIcon strokeWidth={2.5}  /> Add a Category
+          <PlusIcon strokeWidth={2.5}  />{t("category.addCategory")}
         </Button>
         {/* createNewcategory form  */}
         {isCreateCategoryFormOpen && (

@@ -79,7 +79,7 @@ const ProductList = () => {
               className="inline-flex gap-2 items-center px-4 py-2 text-primary-foreground font-semibold hover:bg-primary-hover bg-primary rounded-md  transition-colors"
             >
               <PlusIcon className="size-5" strokeWidth={3} />
-              Add-Product
+            {t("dashboard.quickActions.addProduct")}
             </Link>
       </div>
 

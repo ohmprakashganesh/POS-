@@ -114,7 +114,7 @@ const CustomerList = () => {
 
                 {/* Total Spent */}
                 <td className=" font-semibold text-constructive">
-                  $2,450.00
+                  2,450.00
                 </td>
 
                 {/* Actions */}
