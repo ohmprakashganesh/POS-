@@ -17,6 +17,18 @@ import {
 // import { useNotifications } from '../../../../contexts/NotificationContext';
 import { useTranslation } from 'react-i18next';
 import { getMetricCards } from './SubDatas';
+import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+
+const dailySalesMockData = [
+  { day: "Sun", sales: 2540, orders: 12 },
+  { day: "Mon", sales: 1870, orders: 8 },
+  { day: "Tue", sales: 3210, orders: 15 },
+  { day: "Wed", sales: 2890, orders: 13 },
+  { day: "Thu", sales: 2150, orders: 10 },
+  { day: "Fri", sales: 3400, orders: 16 },
+  { day: "Sat", sales: 3000, orders: 14 },
+];
+
 
 
 const Dashboard = () => {
@@ -272,15 +284,49 @@ const Dashboard = () => {
       </div>
 
       {/* Sales Overview */}
-      <div className="p-5 bg-white dark:bg-dark rounded-md shadow-sm min-h-100 -fit flex flex-col">
-        <h3 className="text-lg font-semibold mb-4">{t('dashboard.sections.salesOverview')}</h3>
-        <div className="grow bg-background rounded-md flex items-center justify-center">
+      <div className="bg-white dark:bg-dark rounded-md shadow-sm  h-fit flex flex-col">
+       {dailySalesMockData.length<=3 ?  <div className="grow flex items-center justify-center">
           <div className="text-center text-muted">
             <ChartBarIcon className="mx-auto size-12" />
             <p className="mt-2 ">{t('dashboard.sections.dailySalesChart')}</p>
             <p className="text-sm">{t('dashboard.sections.visualization')}</p>
           </div>
+        </div>:
+        <div className=" p-5 charts w-full min-h-100  grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className='w-full max-w-xl h-72'>
+          <h3 className="text-lg font-semibold mb-5">{t('dashboard.sections.salesOverview')}</h3>
+         <ResponsiveContainer width="100%" height="100%">
+                   <LineChart data={dailySalesMockData}>
+                     <Tooltip
+                       contentStyle={{
+                         backgroundColor: "var(--color-background)",
+                         borderRadius: "8px",
+                       }}
+                       labelStyle={{ color: "var(--color-foreground)" }}
+                       itemStyle={{ color: "var(--color-foreground)" }}
+                     />
+         
+                     <Line
+                       type="monotone"
+                       dataKey="sales"
+                       stroke="var(--color-primary)"
+                       strokeWidth={2}
+                       dot={false}
+                     />
+         
+                     <XAxis
+                       dataKey="day"
+                       tick={{ fill: "currentColor" }}
+                     />
+         
+                     <YAxis tick={{ fill: "currentColor" }} />
+                   </LineChart>
+                 </ResponsiveContainer>
         </div>
+        <div className='w-full h-full max-w-xl'>
+          </div>
+        </div>
+        }
       </div>
     </div>
   );
