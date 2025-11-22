@@ -36,7 +36,7 @@ const TimelineRevenueChart = ({mode}) => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 bg-background dark:bg-back text-muted-hover rounded-xl shadow-lg">
+    <div className="w-full max-w-3xl mx-auto p-6 bg-background dark:bg-back text-muted-hover rounded-xl">
 
 
       {/* Line Chart */}

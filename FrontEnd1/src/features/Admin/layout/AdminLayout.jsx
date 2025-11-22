@@ -18,7 +18,7 @@ const AdminLayout = () => {
         <Header onMenuClick={() => setSidebarOpen(true)} user={user} />
         
         {/* Main content area */}
-        <main className="flex-1 overflow-auto p-4 md:p-6">
+        <main className="flex-1 overflow-auto p-2 md:p-4">
           <Outlet/>
         </main>
       </div>

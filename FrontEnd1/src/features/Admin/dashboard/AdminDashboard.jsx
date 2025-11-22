@@ -96,7 +96,7 @@ const AdminDashboard = () => {
     );
   }
   return(
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-dark dark:text-white">SaaS Analytics Dashboard</h1>
@@ -109,9 +109,9 @@ const AdminDashboard = () => {
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid  grid-cols-1 bg-white dark:bg-dark  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6 gap-2 lg:gap-6">
+      <div className="grid  grid-cols-1   sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6 gap-2 lg:gap-6">
         {cardMetrics.map((card) => (
-          <div key={card.title} className="text rounded-lg shrink shadow-sm border border-muted/40 p-6">
+          <div key={card.title} className="text bg-white dark:bg-dark rounded-lg shrink shadow-sm  p-6">
             <div className="flex items-center shrink justify-between">
               <div className=' shrink'>
                 <p className="text-sm font-medium text-muted-hover">{card.title}</p>
@@ -140,7 +140,7 @@ const AdminDashboard = () => {
        {metrics.subMetrics.map((obj, ind) => {
   const Icon = obj.icon;
   return (
-    <div key={ind} className="bg-white dark:bg-dark rounded-lg shadow-sm border border-muted/40 p-6">
+    <div key={ind} className="bg-white dark:bg-dark rounded-lg shadow-md p-6">
       <div className="flex items-center justify-between">
         <div className='text-muted-hover'>
           <p className="text-sm font-medium "> {obj.title}</p>
@@ -160,7 +160,7 @@ const AdminDashboard = () => {
       {/* Recent Subscriptions & Revenue Chart */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {/* Recent Subscriptions */}
-        <div className=" bg-white dark:bg-dark  rounded-lg shadow-sm border border-muted/40 p-6">
+        <div className=" bg-white dark:bg-dark  rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-muted-hover">Recent Subscriptions</h3>
             <Link to="/admin/subscriptions" className="text-sm dark:text-muted-hover text-primary hover:text-primary-hover">
@@ -169,7 +169,7 @@ const AdminDashboard = () => {
           </div>
           <div className="space-y-4">
             {recentSubscriptions.map((subscription) => (
-              <div key={subscription.id} className="flex items-center justify-between p-3 bg-background rounded-lg border border-muted/40">
+              <div key={subscription.id} className="flex items-center justify-between p-3 bg-background rounded-lg ">
                 <div className="flex-1">
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-primary-foreground rounded-full flex items-center justify-center">
@@ -194,7 +194,7 @@ const AdminDashboard = () => {
 
 
         {/* Revenue Chart */}
-        <div className="bg-white dark:bg-dark  rounded-lg shadow-sm border flex flex-col  border-muted/40 p-6">
+        <div className="bg-white dark:bg-dark  rounded-lg shadow-sm flex flex-col  p-6">
           <h3 className="text-lg font-semibold text-muted-hover mb-4">Revenue Overview</h3>
           <div className="h-full bg-background  flex-col  rounded-lg flex items-center justify-center">
                     <TimelineRevenueChart mode={mode}/>
@@ -203,20 +203,20 @@ const AdminDashboard = () => {
            <div className='flex justify-between space-x-5 '>
              <Button
           onClick={() => setMode("monthly")}
-          className={`w-full rounded-lg border ${
+          className={`w-full rounded-lg  ${
             mode === "monthly"
-              ? "bg-primary text-white  border border-t-muted/40"
-              : "bg-white text-gray-700 border border-muted/40"
+              ? "bg-primary text-white  "
+              : "bg-white text-gray-700 "
           }`}
         >
           Monthly
         </Button>
         <Button
           onClick={() => setMode("yearly")}
-          className={`w-full rounded-lg border ${
+          className={`w-full rounded-lg  ${
             mode === "yearly"
               ? "bg-primary text-muted-hover"
-              : "bg-white text-gray-700 border border-muted/40"
+              : "bg-white text-gray-700 "
           }`}
         >
           Yearly
@@ -227,7 +227,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white dark:bg-dark  rounded-lg shadow-sm border border-muted/40 p-6">
+      <div className="bg-white dark:bg-dark  rounded-lg shadow-sm p-6">
         <h3 className="text-lg font-semibold text-muted-hover mb-4">Quick Actions</h3>
         <div className="grid text-muted grid-cols-1  sm:grid-cols-3 md:grid-cols-4 gap-4">
           {quickActions.map((item,ind)=>{
@@ -238,7 +238,7 @@ const AdminDashboard = () => {
              <Link
              key={ind}
           to={item.link}
-            className="p-4 border bg-background border-muted/40 rounded-lg hover:bg-primary/20  transition-colors text-center"
+            className="p-4  bg-background  rounded-lg hover:bg-primary/20  transition-colors text-center"
           >
             <div className="h-8 w-8 text-primary mx-auto" >
               <Icon/>

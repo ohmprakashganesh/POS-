@@ -101,7 +101,7 @@ function downloadBill() {
           </thead>
           <tbody className="rounded-md">
             {filtered.map((u, i) => (
-              <tr key={u.id} className="border  border-muted/40 dark:hover:bg-black/15 border-b-muted/40 bg-white dark:bg-dark hover:bg-primary-foreground/30">
+              <tr key={u.id} className=" dark:hover:bg-black/15 border-b-muted/40 bg-white dark:bg-dark hover:bg-primary-foreground/30">
                 <td className="pl-2 py-3">{i + 1}</td>
                 <td >{u.name}</td>
                 <td >{u.email}</td>

@@ -85,27 +85,37 @@ const Header = ({ onMenuClick, user }) => {
 
           {/* User menu */}
           <div className="relative">
-            <button
+            {/* <button
               onClick={() => setUserMenuOpen(!userMenuOpen)}
               className="flex items-center space-x-1 text-sm focus:outline-none"
             >
               <UserCircleIcon className="h-8 w-8 text-gray-400 dark:text-gray-300" />
               <div className="hidden md:block text-left">
-                <div className="text-gray-700 dark:text-gray-200 text-sm">
+                <div className="text-dark dark:text-white text-sm">
                   {user?.role}
                 </div>
               </div>
-            </button>
+            </button> */}
+                      <button
+                        onClick={() => setUserMenuOpen(!userMenuOpen)}
+                        className="flex items-center space-x-3 text-sm focus:outline-none"
+                      >
+                        <UserCircleIcon className="h-8 w-8 text-muted" />
+                        <div className="hidden md:block text-left">
+                          <p className="font-medium text-nowrap">{user?.name}</p>
+                          <p className="text-muted text-xs">{user?.role}</p>
+                        </div>
+                      </button>
 
-            {userMenuOpen && (
-             <div className="absolute right-0 mt-4 w-48 bg-white dark:bg-dark rounded-md hover:bg-muted/10 shadow-lg py-1 z-50">
-                             <div className='flex flex-row justify-start py-2 gap-2 hover:bg-muted/10 dark:text-muted-hover  text-muted-hover  px-5'>
+                        {userMenuOpen && (
+                        <div className="absolute right-0 mt-4 w-38 shadow-md text-muted-hover bg-white dark:bg-dark rounded-md   py-1 z-50">
+                             <div className='flex flex-row text-destructive text-sm justify-start py-2 gap-2  px-5'>
                                 <LogOutIcon/> 
                                <button
                                onClick={logout}
                                className="block w-full text-left  text-sm "
                              >
-                              Sign out
+                             {t("general.logOut")}
                              </button>
                              </div>
                             

@@ -20,18 +20,14 @@ const Report = () => {
   const [statusFilter, setStatusFilter] = useState('Active');
   const [isGenerating, setIsGenerating] = useState(false);
 
-  // 1. Filtering Logic using useMemo
   const filteredData = useMemo(() => {
-    // For this static example, 'Yearly' will just aggregate 'Monthly' data.
-    // In a real app, 'Yearly' would fetch different data.
+
     let dataToFilter = STATIC_SUBSCRIPTION_DATA;
 
-    // Filter by Status
     if (statusFilter !== 'All') {
       dataToFilter = dataToFilter.filter(item => item.status === statusFilter);
     }
     
-    // For Yearly, we aggregate the filtered data
     if (timeRange === 'Yearly') {
         const totalRevenue = dataToFilter.reduce((acc, item) => acc + item.revenue, 0);
         const totalSubscribers = dataToFilter.reduce((acc, item) => acc + item.totalSubscribers, 0);
@@ -44,21 +40,19 @@ const Report = () => {
         
         return [{
             month: 'Full Year 2024',
-            totalSubscribers: avgTotal, // Showing average monthly total
-            activeSubscribers: avgActive, // Showing average monthly active
-            revenue: totalRevenue, // Showing total yearly revenue
+            totalSubscribers: avgTotal, 
+            activeSubscribers: avgActive, 
+            revenue: totalRevenue, 
             churned: totalChurned,
             status: 'N/A',
             plan: 'N/A'
         }];
     }
     
-    // For Monthly, just return the filtered data
     return dataToFilter;
   }, [timeRange, statusFilter]);
   
   // 2. Summary Calculation
-  // Calculate summary metrics based on the filtered data set
   const summaryMetrics = useMemo(() => {
     if (filteredData.length === 0) return null;
     
@@ -75,7 +69,6 @@ const Report = () => {
     };
   }, [filteredData]);
   
-  // Function to simulate report generation (mainly for the loading state)
   const generateReport = () => {
     setIsGenerating(true);
     // Simulate a brief loading period
@@ -121,10 +114,10 @@ const Report = () => {
   return(
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {cards.map((card,ind)=>(
-      <div className="bg-white dark:bg-dark text-muted-hover p-6 rounded-xl shadow-lg border border-muted/40">
-        <p className="text-sm font-medium ">{card.title}</p>
-        <p className="text-3xl font-bold  mt-1">{card.value}</p>
-        <span className="text-muted text-xs mt-2 block">As of {card.note}</span>
+      <div className="bg-white text-dark dark:text-white dark:bg-dark p-6 rounded-xl shadow-md">
+        <p className="text-xl font-medium   ">{card.title}</p>
+        <p className="text-2xl font-bold  mt-1">{card.value}</p>
+        <span className="text-muted-hover text-xs mt-2  block">As of {card.note}</span>
       </div>
  
       ))}
@@ -143,30 +136,30 @@ const Report = () => {
   "Plan Sample",
 ];
 return (
-    <div className="mt-8 bg-white dark:bg-dark p-6 rounded-xl shadow-lg overflow-x-auto">
-      <h3 className="text-xl font-semibold mb-4 text-muted-hover">Subscription Breakdown</h3>
-     <table className="min-w-full divide-y divide-muted/40">
-        <thead>
-          <tr className="bg-secondary">
+    <div className="mt-4 rounded-xl shadow-md overflow-x-auto">
+      <h3 className="text-xl font-semibold mb-4 bg-background text-dark dark:text-white">Subscription Breakdown</h3>
+     <table className="min-w-full bg-white dark:bg-dark">
+        <thead className=' '>
+          <tr className="bg-secondary ">
             {tableHeaders.map((head, i) => (
               <th
                 key={i}
-                className="px-6 py-3 text-left text-xs font-medium text-primary-foreground uppercase tracking-wider"
+                className="px-2 py-3  text-left text-xs font-medium text-primary-foreground uppercase tracking-wider"
               >
                 {head}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="bg-white dark:bg-dark divide-y text-muted-hover divide-muted/40">
+        <tbody className=" text-muted-hover divide-muted/40">
           {data.map((row) => (
             <tr key={row.id || row.month} className="hover:bg-background">
-              <td className="px-6 py-4 whitespace-nowrap text-sm ">{row.month}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm ">{row.totalSubscribers.toLocaleString()}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm ">{row.activeSubscribers.toLocaleString()}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm  ">${row.revenue.toLocaleString()}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm ">{row.status}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm ">{row.plan}</td>
+              <td className="p-2 whitespace-nowrap text-sm ">{row.month}</td>
+              <td className="p-2 whitespace-nowrap text-sm ">{row.totalSubscribers.toLocaleString()}</td>
+              <td className="p-2 whitespace-nowrap text-sm ">{row.activeSubscribers.toLocaleString()}</td>
+              <td className="p-2 whitespace-nowrap text-sm  ">${row.revenue.toLocaleString()}</td>
+              <td className="p-2 whitespace-nowrap text-sm ">{row.status}</td>
+              <td className="p-2 whitespace-nowrap text-sm ">{row.plan}</td>
             </tr>
           ))}
         </tbody>
@@ -174,10 +167,6 @@ return (
     </div>
   )
 };
-
-  // ----------------------------------------------------------------------
-  // MAIN RENDER
-  // ----------------------------------------------------------------------
 
   return (
     <div className="rounded-md  min-h-screen">
@@ -188,8 +177,7 @@ return (
         <h2 className="text-xl  mb-4 text-muted-hover font-semibold">Report Criteria</h2>
         <div className="flex md:gap-10 sm:justify-start  md:justify-start lg:justify-start lg:gap-10 justify-between bg-background  gap-10 items-end">
 
-          {/* Time Range Filter (Monthly/Yearly) */}
-         {/* Time Range Filter */}
+    
 <div className=''>
   <label
     htmlFor="timeRange"

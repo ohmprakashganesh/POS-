@@ -76,7 +76,7 @@ const TransactionHistory = () => {
 
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-muted-hover">
+        <h1 className="text-2xl font-bold text-dark dark:text-white">
           {t("transactions.transactionHistory")}
         </h1>
         <p className="text-muted-hover">
@@ -95,10 +95,10 @@ const TransactionHistory = () => {
               <DocumentTextIcon className="h-8 w-8 text-muted-hover  " />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-muted-hover">
+              <p className="text-xl font-medium r">
                 {t("transactions.totalTransactions")}
               </p>
-              <p className="text-2xl font-bold text-muted">
+              <p className="text-2xl font-bold ">
                 {transactions.length}
               </p>
             </div>
@@ -115,10 +115,10 @@ const TransactionHistory = () => {
               </div>
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-muted-hover">
+              <p className="text-xl font-medium ">
                 {t("transactions.totalRevenue")}
               </p>
-              <p className="text-2xl font-bold text-muted">
+              <p className="text-2xl font-bold ">
                 ${transactions.reduce((sum, t) => sum + t.amount, 0).toFixed(1)}
               </p>
             </div>
@@ -134,10 +134,10 @@ const TransactionHistory = () => {
               </div>
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-muted-hover">
+              <p className="text-xl font-medium ">
                 {t("transactions.completed")}
               </p>
-              <p className="text-2xl font-bold text-muted">
+              <p className="text-2xl font-bold ">
                 {transactions.filter(t => t.status === 'completed').length}
               </p>
             </div>
@@ -153,10 +153,10 @@ const TransactionHistory = () => {
               </div>
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-muted-hover">
+              <p className="text-xl font-medium">
                 {t("transactions.pending")}
               </p>
-              <p className="text-2xl font-bold text-muted">
+              <p className="text-2xl font-bold ">
                 {transactions.filter(t => t.status === 'pending').length}
               </p>
             </div>
@@ -165,7 +165,7 @@ const TransactionHistory = () => {
       </div>
 
       {/* Filters */}
-      <div className=" rounded-lg  text-muted  p-4">
+      <div className=" rounded-lg  text-muted ">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Search */}
           <div className="relative">
@@ -201,48 +201,48 @@ const TransactionHistory = () => {
       {/* Transactions Table */}
       <div className=" rounded-lg shadow-sm border border-muted/40 overflow-hidden">
         <div className="overflow-x-auto bg-white rounded-md shadow-sm">
-          <table className="min-w-full uppercase text-xs text-left font-semibold text-secondary-foreground">
+          <table className="min-w-full uppercase text-xs text-left font-semibold text">
             <thead className="uppercase text-xs font-semibold bg-secondary text-secondary-foreground">
               <tr>
                 {HeaderFields.map((head, ind) => (
-                  <th key={ind} className="p-4">
+                  <th key={ind} className="p-2 py-3">
                     {t(`transactions.tableHeaders.${head}`)}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="bg-white dark:bg-dark divide-y divide-muted/40">
+            <tbody className="bg-white dark:bg-dark ">
               {filteredTransactions.map((transaction) => (
-                <tr key={transaction.id} className="">
-                  <td className="px-6 py-4 whitespace-nowrap">
+                <tr key={transaction.id} className=' hover:bg-background'>
+                  <td className="p-2 whitespace-nowrap">
                     <div className="flex items-center">
-                      <DocumentTextIcon className="h-5 w-5 text-gray-400 mr-2" />
-                      <div className="text-sm font-medium text-gray-900">
+                      <DocumentTextIcon className="h-5 w-5 text-muted mr-2" />
+                      <div className="text-sm font-medium text-muted">
                         {transaction.invoiceNumber}
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-muted">
+                  <td className="p-2 whitespace-nowrap text-sm text-muted">
                     {transaction.customer}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-muted">
+                  <td className="p-2 whitespace-nowrap text-sm text-muted">
                     {new Date(transaction.date).toLocaleDateString()}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-500">
+                  <td className="p-2 text-sm text-gray-500">
                     {transaction.items.length} {t("transactions.tableHeaders.items")}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-muted">
+                  <td className="p-2 whitespace-nowrap text-sm font-semibold text-muted">
                     ${transaction.amount.toFixed(2)}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="p-2 whitespace-nowrap">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(transaction.status)}`}>
                       {t(`transactions.${transaction.status}`)}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <td className="p-2 text-left whitespace-nowrap  text-sm font-medium">
                     <button
                       onClick={() => viewInvoice(transaction.id)}
-                      className="text-blue-600 hover:text-blue-900 flex items-center justify-end w-full"
+                      className="text-blue-600  text-center hover:text-blue-900 flex items-center  w-full"
                     >
                       {/* // this will be the image  url */}
                       <EyeIcon className="h-4 w-4 mr-1" />

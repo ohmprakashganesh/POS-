@@ -70,7 +70,7 @@ export const ExistingUsers = () => {
             {filtered.map((s, i) => (
               <tr
                 key={s.id}
-                className="border border-muted/40 dark:hover:bg-black/15 bg-white dark:bg-dark hover:bg-primary-foreground/30"
+                className=" dark:hover:bg-black/15 bg-white dark:bg-dark hover:bg-primary-foreground/30"
               >
                 <td className="p-3">{i + 1}</td>
 

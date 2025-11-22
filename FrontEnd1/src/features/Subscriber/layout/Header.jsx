@@ -115,7 +115,6 @@ const Header = ({ openSidebar }) => {
                 </div>
 
                 <button
-                  
                   onClick={()=>{navigate("/profile"),setUserMenuOpen(false)}}
                   className="w-full mt-2 justify-start rounded-lg flex items-center px-4 py-2 gap-2 font-semibold hover:bg-background "
                 >

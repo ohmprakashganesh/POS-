@@ -233,17 +233,17 @@ const CustomerList = () => {
   };
 
   return (
-    <div className="text-foreground">
+    <div >
       {openForm && (
         <div className="fixed inset-0 cursor-pointer bg-black/60 z-50 flex items-center justify-center">
           <AddEditCustomer />
         </div>
       )}
 
-      <div className="space-y-2 ">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="" >
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
           <div>
-            <h1 className="text-2xl font-bold text-shadow-dark dark:text-whiter">
+            <h1 className="text-2xl  font-bold text-dark dark:text-white">
               {t("customers.customers")}
             </h1>
             <p className="text-muted">{t("customers.manageCustomers")}</p>
@@ -261,7 +261,7 @@ const CustomerList = () => {
         </div>
 
         {/* Search Bar */}
-        <div className="relative max-w-md my-6">
+        <div className="relative max-w-md my-3">
           <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
           <Input
             type="text"
@@ -278,7 +278,7 @@ const CustomerList = () => {
             <thead className="uppercase text-xs text-secondary-foreground font-semibold bg-secondary">
               <tr>
                 {headers.map((field, ind) => (
-                  <th key={ind} className="p-4">
+                  <th key={ind} className="px-2 py-3">
                     {field}
                   </th>
                 ))}
@@ -287,43 +287,41 @@ const CustomerList = () => {
 
             <tbody>
               {filteredCustomers.map((customer, index) => (
-                <tr key={customer.id} className=" ">
-                  <td className="px-4 py-3 text-muted truncate max-w-[180px]">
+                <tr key={customer.id} className="hover:bg-background ">
+                  <td className="p-2 text-muted truncate max-w-[180px]">
                     {index + 1}
                   </td>
 
-                  <td className="px-4 py-3 flex items-center gap-2">
-                    <UserIcon className="size-9 p-1.5 bg-primary/10 rounded-full text-muted" />
+                  <td className="p-2 flex items-center gap-2">
+                    <UserIcon className="size-7 p-1.5 bg-primary/10 rounded-full text-muted" />
                     <div>
-                      <p className="font-semibold text-muted">{customer.name}</p>
-                      <p className="text-xs text-muted">Customer</p>
+                      <p className=" text-muted">{customer.name}</p>
                     </div>
                   </td>
+                  <td className="p-2 text-muted py-3">{customer.phone}</td>
 
-                  <td className="px-4 text-muted py-3">{customer.phone}</td>
-
-                  <td className="px-4 py-3 truncate text-muted max-w-[200px]">
+                  <td className="p-2 truncate text-muted max-w-[200px]">
                     {customer.email}
                   </td>
 
-                  <td className="px-4 py-3 truncate text-muted max-w-[180px]">
+                  <td className="p-2 truncate text-muted max-w-[180px]">
                     {customer.address}
                   </td>
 
-                  <td className="px-4 py-3 text-muted font-semibold">12</td>
+                  <td className="p-2 text-muted font-semibold">12</td>
 
-                  <td className="px-4 py-3 font-semibold text-muted ">
-                    $2,450.00
+                  <td className="p-2 font-semibold text-muted ">
+                  {t("products.rs")} 2,450.00
                   </td>
 
-                  <td className="px-4 py-3 flex items-center gap-2">
+                  <td className="p-2 flex items-center gap-2">
                     <span onClick={() => openCustomerForm(customer.id)}>
                       <PencilIcon className="h-4 w-4 cursor-pointer text-primary" />
                     </span>
 
                     <button
                       onClick={() => handleDelete(customer.id)}
-                      className="p-1.5 rounded-full hover:bg-red-50 text-red-600 cursor-pointer hover:text-red-800 transition"
+                      className="p-1  rounded-full hover:bg-red-50 text-red-600 cursor-pointer hover:text-red-800 transition"
                     >
                       <TrashIcon className="h-4 w-4" />
                     </button>

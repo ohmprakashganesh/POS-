@@ -19,7 +19,7 @@ const CashierLayout = () => {
         <Header onMenuClick={() => setSidebarOpen(true)} user={user} />
         
         {/* Main content area */}
-        <main className="flex-1 overflow-auto p-4 md:p-6">
+        <main className="flex-1 overflow-auto p-2 md:px-4 py-3">
        <Outlet/>
         </main>
       </div>

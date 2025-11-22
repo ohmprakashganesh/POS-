@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { supportRequests } from '../../mockdata/mockAdminData';
 import { OptionComponent, SelectComponent } from '@/features/ui/Select';
 
-const STATUS_OPTIONS = ['New', 'In Progress', 'Resolved'];
+const STATUS_OPTIONS = ['New', 'inProgress', 'Resolved'];
 
 const tableHeaders = [
   "Request ID",
@@ -40,19 +40,19 @@ const SupportReq = () => {
   };
 
   return (
-    <div className=" rounded-md   border-muted/40 max-w-6xl mx-auto">
-      <h2 className="text-2xl font-bold text-dark dark:text-white mb-6 border-b pb-3">
+    <div className=" rounded-md  max-w-6xl mx-auto">
+      <h2 className="text-2xl font-bold text-dark dark:text-white  pb-3">
         Admin Support Dashboard
       </h2>
       
       {!requests || requests==null ? (
-        <div className="text-center py-10 text-muted border border-muted/40  rounded-md">
+        <div className="text-center py-10 text-muted   rounded-md">
           No support requests currently available.
         </div>
       ) : (
         <div className="overflow-x-auto shadow-md rounded-md">
           <table className="min-w-full divide-y divide-muted/40">
-            <thead className="bg-secondary w-screen shrink h-10 text-secondary-foreground">
+            <thead className="bg-secondary text-sm  w-fit shrink  text-secondary-foreground">
               <tr>
                 {tableHeaders.map((head,ind)=>(
                 <th  key={ind} className="px-2 py-3  text-left text-xs font-medium uppercase tracking-wider">
@@ -61,9 +61,9 @@ const SupportReq = () => {
                 ))}
               </tr>
             </thead>
-               <tbody className=" w-screen divide-y divide-muted/40 shrink  bg-white dark:bg-dark text-muted-hover">
+               <tbody className=" w-screen shrink  bg-white dark:bg-dark text-muted-hover">
               {requests.map((request) => (
-                <tr  className=''
+                <tr  className='hover:bg-background'
                 >
                   <td className="px-2  ">
                     {request.userId}
@@ -80,14 +80,14 @@ const SupportReq = () => {
                   </td>
                   <td className="px-2  ">
                     <span className={`px-2  inline-flex text-xs leading-5 font-bold rounded-full shadow-inner ${
-                      request.status === 'New' ? 'bg-red-100 dark:bg-primary-foreground dark:text-muted-hover text-red-700' :
-                      request.status === 'In Progress' ? 'bg-yellow-100 dark:bg-primary-foreground dark:text-muted-hover text-yellow-700' :
-                      'bg-green-100 dark:bg-primary-foreground dark:text-muted-hover text-green-700'
+                      request.status === 'New' ? 'bg-red-100  text-red-700' :
+                      request.status === 'inProgress' ? 'bg-yellow-100  r text-yellow-700' :
+                      'bg-green-100   text-green-700'
                     }`}>
                       {request.status}
                     </span>
                   </td>
-                  <td className="px-2 w-10  ">
+                  <td className="px-2 w-20  ">
                      <SelectComponent
                      className='h-1.5 focus:ring-0 outline-0 border-0 '
                         id="timeRange"
@@ -96,7 +96,7 @@ const SupportReq = () => {
                      
                       >
                          {STATUS_OPTIONS.map(status => (
-                      <OptionComponent className="truncate w-10 text-xs w-full "  key={status}  value={status}>{status}  </OptionComponent>
+                      <OptionComponent className="truncate w-20 text-xs "  key={status}  value={status}>{status}  </OptionComponent>
                       ))}
                 
                       </SelectComponent>

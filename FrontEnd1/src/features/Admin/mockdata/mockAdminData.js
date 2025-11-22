@@ -77,7 +77,7 @@ import statement from "@/assets/statement.png"
 
  export const supportRequests = [
   { id: '1', userId: 'user_A001_dev', category: 'Staff Management', status: 'New', requestDate: new Date(Date.now() - 1000 * 60 * 60 * 24),servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24) },
-  { id: '2', userId: 'user_B045_prod', category: 'Inventory', status: 'In Progress', requestDate: new Date(Date.now() - 1000 * 60 * 60 * 5),servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24) },
+  { id: '2', userId: 'user_B045_prod', category: 'Inventory', status: 'Progress', requestDate: new Date(Date.now() - 1000 * 60 * 60 * 5),servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24) },
   { id: '3', userId: 'user_C102_test', category: 'Balances & Ledgers', status: 'Resolved', requestDate: new Date(Date.now() - 1000 * 60 * 15), servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24)},
   { id: '4', userId: 'user_A001_dev', category: 'Profile Update', status: 'New', requestDate: new Date(Date.now() - 1000 * 60 * 3),servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24)},
   { id: '5', userId: 'user_F990_stg', category: 'Customers/Suppliers', status: 'New', requestDate: new Date(Date.now() - 1000 * 60 * 55),servedDate: new Date(Date.now() - 1000 * 60 * 60 * 24) },

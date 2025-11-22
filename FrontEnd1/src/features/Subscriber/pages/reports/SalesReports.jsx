@@ -84,7 +84,6 @@ const SalesReports = () => {
         <h1 className="text-2xl font-bold">{t("report.title")}</h1>
         <p className="text-muted">{t("report.description")}</p>
       </div>
-
       {/* Filters */}
       <div className="grid items-end grid-cols-1 md:grid-cols-4 gap-4">
           <SelectComponent

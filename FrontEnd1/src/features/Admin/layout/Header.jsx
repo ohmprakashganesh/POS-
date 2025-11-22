@@ -85,19 +85,19 @@ const Header = ({ onMenuClick, user }) => {
           {/* User menu */}
           <div className="relative">
             <button
-              onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="flex items-center space-x-3 text-sm focus:outline-none"
-            >
-              <UserCircleIcon className="h-8 w-8 text-muted-hover" />
-              <div className="hidden md:block text-left">
-                <div className="font-medium text-gray-900 text-muted-hover">{user?.name}</div>
-                <div className=" text-xs">{user?.role}</div>
-              </div>
-            </button>
+                                   onClick={() => setUserMenuOpen(!userMenuOpen)}
+                                   className="flex items-center space-x-3 text-sm focus:outline-none"
+                                 >
+                                   <UserCircleIcon className="h-8 w-8 text-muted" />
+                                   <div className="hidden md:block text-left">
+                                     <p className="font-medium text-nowrap">{user?.name}</p>
+                                     <p className="text-muted text-xs">{user?.role}</p>
+                                   </div>
+                                 </button>
 
             {userMenuOpen && (
-              <div className="absolute right-0 mt-4 w-48 bg-white dark:bg-dark rounded-md hover:bg-muted/10 shadow-lg py-1 z-50">
-                <div className='flex flex-row justify-start py-2 gap-2 hover:bg-muted/10 dark:text-muted-hover  text-muted-hover  px-5'>
+              <div className="absolute right-0 mt-4 w-48 bg-white dark:bg-dark rounded-md  shadow-md py-1 z-50">
+                <div className='flex flex-row justify-start py-2 gap-2 text-destructive  px-5'>
                    <LogOutIcon/> 
                   <button
                   onClick={logout}
