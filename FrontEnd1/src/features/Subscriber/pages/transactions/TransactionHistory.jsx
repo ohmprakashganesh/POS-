@@ -79,11 +79,11 @@ const TransactionHistory = () => {
       <p className="text-muted mb-3">{t("transactionHistory.description")}</p>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-5">
         <div className="bg-white dark:bg-dark  rounded-md shadow-sm flex items-center p-5 gap-4">
           <DocumentTextIcon className="h-8 w-8 text-muted" />
           <div className="details">
-            <p className="font-medium text-muted">{t("transactionHistory.totalTransactions")}</p>
+            <p className="font-medium ">{t("transactionHistory.totalTransactions")}</p>
             <p className="text-2xl font-bold">{transactions.length}</p>
           </div>
         </div>
@@ -92,10 +92,10 @@ const TransactionHistory = () => {
             $
           </span>
           <div className="details">
-            <p className="font-medium text-muted">{t("transactionHistory.totalRevenue")}</p>
+            <p className="font-medium ">{t("transactionHistory.totalRevenue")}</p>
             <p className="text-2xl font-bold">
               {" "}
-              ${transactions.reduce((sum, t) => sum + t.amount, 0).toFixed(2)}
+               {t("itemDetail.rs")} {transactions.reduce((sum, t) => sum + t.amount, 0).toFixed(2)}
             </p>
           </div>
         </div>
@@ -105,7 +105,7 @@ const TransactionHistory = () => {
             ✓
           </span>
           <div className="details">
-            <p className="font-medium text-muted">{t("transactionHistory.completedTransactions")}</p>
+            <p className="font-medium ">{t("transactionHistory.completedTransactions")}</p>
             <p className="text-2xl font-bold">
               {" "}
               {transactions.filter((t) => t.status === "completed").length}
@@ -118,7 +118,7 @@ const TransactionHistory = () => {
             ⏱
           </span>
           <div className="details">
-            <p className="font-medium text-muted">{t("transactionHistory.pendingTransactions")}</p>
+            <p className="font-medium ">{t("transactionHistory.pendingTransactions")}</p>
             <p className="text-2xl font-bold">
               {transactions.filter((t) => t.status === "pending").length}
             </p>
@@ -168,37 +168,37 @@ const TransactionHistory = () => {
         <table className="min-w-full text-sm text-muted">
           <thead className="uppercase  text-sm text-left  bg-secondary text-secondary-foreground">
             <tr>
-              <th className="text-center px-2 py-3">{t("transactionHistory.sn")}</th>
-              <th className="text-center">{t("transactionHistory.invoice")}</th>
-              <th className="text-center">{t("transactionHistory.customer")}</th>
-              <th className="text-center">{t("transactionHistory.date")}</th>
-              <th className="text-center">{t("transactionHistory.items")}</th>
-              <th className="text-center">{t("transactionHistory.amount")}</th>
-              <th className="text-center">{t("transactionHistory.status")}</th>
-              <th className="text-center">{t("transactionHistory.actions")}</th>
+              <th className="text-left px-2 py-3">{t("transactionHistory.sn")}</th>
+              <th className="text-left px-2 py-3">{t("transactionHistory.invoice")}</th>
+              <th className="text-left px-2 py-3">{t("transactionHistory.customer")}</th>
+              <th className="text-left px-2 py-3">{t("transactionHistory.date")}</th>
+              <th className="text-left px-2 py-3">{t("transactionHistory.items")}</th>
+              <th className="text-left px-2 py-3">{t("transactionHistory.amount")}</th>
+              <th className="text-left px-2 py-3">{t("transactionHistory.status")}</th>
+              <th className="text-left px-2 py-3">{t("transactionHistory.actions")}</th>
             </tr>
           </thead>
           <tbody>
             {filteredTransactions.map((transaction, index) => (
               <tr key={transaction.id} className="hover:bg-background">
-                <td className="px-4 py-3 truncate max-w-[180px]">
+                <td className="p-2 truncate max-w-[180px]">
                   {index + 1}
                 </td>
-                <td className="p-4 whitespace-nowrap">
+                <td className="p-2 whitespace-nowrap">
                   <div className="flex items-center gap-2">
                     <DocumentTextIcon className="h-5 w-5 text-muted" />
                     {transaction.invoiceNumber}
                   </div>
                 </td>
-                <td className="p-4">{transaction.customer}</td>
-                <td className="p-4">
+                <td className="p-2">{transaction.customer}</td>
+                <td className="p-2">
                   {new Date(transaction.date).toLocaleDateString()}
                 </td>
-                <td className="p-4">{transaction.items.length} items</td>
-                <td className="p-4 whitespace-nowrap font-semibold">
-                  ${transaction.amount.toFixed(2)}
+                <td className="p-2">{transaction.items.length} items</td>
+                <td className="p-2 whitespace-nowrap font-semibold">
+                  {transaction.amount.toFixed(2)}
                 </td>
-                <td className="p-4 whitespace-nowrap">
+                <td className="p-2 whitespace-nowrap">
                   <span
                     className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(
                       transaction.status
@@ -207,7 +207,7 @@ const TransactionHistory = () => {
                     {transaction.status}
                   </span>
                 </td>
-                <td className="p-4 whitespace-nowrap font-medium">
+                <td className="p-2 whitespace-nowrap font-medium">
                   <button
                     onClick={() => viewInvoice(transaction.id)}
                     className="text-primary hover:text-primary-hover flex items-center gap-2"

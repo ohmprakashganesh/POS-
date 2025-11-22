@@ -79,6 +79,7 @@ const Vendor = () => {
       </div>
 
       <div className="overflow-x-auto  bg-white dark:bg-dark rounded-md shadow-sm">
+<<<<<<< HEAD
         <table className="min-w-full text-sm text-muted ">
           <thead className="uppercase  text-sm text-left  bg-secondary text-secondary-foreground">
             <tr>
@@ -90,6 +91,20 @@ const Vendor = () => {
               <th className="px-4">{t("vendor.totalPaid")}</th>
               <th className="px-2">{t("vendor.totalDue")}</th>
               <th className="px-4 text-right">{t("vendor.actions")}</th>
+=======
+        <table className="min-w-full text-sm text-muted">
+          <thead className="uppercase text-sm text-left  bg-secondary text-left text-secondary-foreground">
+            <tr>
+              <th className="px-2 py-3">{t("vendor.sn")}</th>
+              <th className="px-2 py-3">{t("vendor.name")}</th>
+              <th className="px-2 py-3">{t("vendor.address")}</th>
+              <th className="px-2 py-3">{t("vendor.totalProducts")}</th>
+              <th className="px-2 py-3">{t("vendor.totalExpenses")}</th>
+              <th className="px-2 py-3">{t("vendor.totalPaid")}</th>
+             <th className="px-2 py-3">Total Due</th>
+
+              <th className="text-center">{t("vendor.actions")}</th>
+>>>>>>> origin/admin
             </tr>
           </thead>
           <tbody>

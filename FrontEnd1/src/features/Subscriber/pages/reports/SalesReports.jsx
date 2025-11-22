@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { CalendarIcon, ChartBarIcon } from "@heroicons/react/24/outline";
-import { Container, Typography, Paper, Grow } from "@mui/material";
-import { motion } from "framer-motion";
 import { OptionComponent, SelectComponent } from "@/features/ui/Select";
 import Input from "@/features/ui/Input";
 import Button from "@/features/ui/Button";
@@ -17,7 +15,6 @@ import {
   ResponsiveContainer,
   LineChart,
   Line,
-  Legend,
 } from "recharts";
 
 const SalesReports = () => {
@@ -137,17 +134,14 @@ const SalesReports = () => {
         <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
           <ChartBarIcon className="size-8 text-primary" />
           <div className="details">
-            <p className="font-medium text-muted">{t("report.totalSales")}</p>
-            <p className="text-2xl font-bold">
-              {" "}
-              ${totalSales.toLocaleString()}
-            </p>
+            <p className="font-medium ">{t("report.totalSales")}</p>
+            <p className="text-2xl font-bold"> ${totalSales.toLocaleString()}</p>
           </div>
         </div>
         <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
           <CalendarIcon className="size-8 text-secondary" />
           <div className="details">
-            <p className="font-medium text-muted">{t("report.totalOrders")}</p>
+            <p className="font-medium">{t("report.totalOrders")}</p>
             <p className="text-2xl font-bold">{totalOrders}</p>
           </div>
         </div>
@@ -156,12 +150,8 @@ const SalesReports = () => {
             {t("report.avg")}
           </span>
           <div className="details">
-            <p className="font-medium text-muted">
-              {t("report.averageOrderValue")}
-            </p>
-            <p className="text-2xl font-bold">
-              ${averageOrderValue.toFixed(2)}
-            </p>
+            <p className="font-medium ">{t("report.averageOrderValue")}</p>
+            <p className="text-2xl font-bold">${averageOrderValue.toFixed(2)}</p>
           </div>
         </div>
       </div>

@@ -74,13 +74,13 @@ const CashierList = () => {
           <thead className="uppercase  text-sm text-left  bg-secondary text-secondary-foreground">
             <tr>
               <th className="px-2 py-3">{t("cashier.sn")}</th>
-              <th className="text-center">{t("cashier.name")}</th>
-              <th className="text-center">{t("cashier.phone")}</th>
-              <th className="text-center">{t("cashier.email")}</th>
-              <th className="text-center">{t("cashier.address")}</th>
-              <th className="text-center">{t("cashier.totalOrders")}</th>
-              <th className="text-center">{t("cashier.totalSales")}</th>
-              <th className="text-center">{t("cashier.actions")}</th>
+              <th className="">{t("cashier.name")}</th>
+              <th >{t("cashier.phone")}</th>
+              <th >{t("cashier.email")}</th>
+              <th >{t("cashier.address")}</th>
+              <th >{t("cashier.totalOrders")}</th>
+              <th >{t("cashier.totalSales")}</th>
+              <th >{t("cashier.actions")}</th>
             </tr>
           </thead>
 
@@ -113,11 +113,11 @@ const CashierList = () => {
                 </td>
 
                 {/* Total Orders */}
-                <td className=" font-semibold">12</td>
+                <td className=" font-semibold"> {cashier.totalOrders}</td>
 
                 {/* Total Sales */}
                 <td className=" font-semibold text-constructive">
-                  $2,450.00
+                  {cashier.totalSales}
                 </td>
 
                 {/* Actions */}

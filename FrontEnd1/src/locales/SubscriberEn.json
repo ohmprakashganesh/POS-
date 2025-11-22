@@ -44,6 +44,7 @@
       "percentChange": "{{value}}% from yesterday"
     },
     "quickActions": {
+      "title":"Quick Actions",
       "cashiers": "Cashiers",
       "addProduct": "Add Product",
       "addCustomer": "Add Customer",
@@ -73,14 +74,22 @@
     "inStock": "In Stock",
     "lowStock": "Low Stock",
     "outOfStock": "Out of Stock",
-    "rs": "Rs.",
+    "rs": "Rs",
     "available": "Available",
     "units": "units"
   },
+    "itemDetail":{
+   "title":"Product Details",
+  "enoughStock": "Enough Stock Available",
+  "outOfStock": "Currently Out of Stock",
+  "lowStock": "Low Stock — Add More Items",
+    "rs": "Rs."
+},
   "category": {
     "title": "Category Management",
     "search": "Search categories by name...",
-    "items": "items"
+    "items": "items",
+    "addCategory":"Add Category"
   },
   "vendor": {
     "title": "Vendors",
@@ -217,5 +226,33 @@
       "image": "Image",
       "actions": "Actions"
     }
-  }
+  },
+  "productDetail":{
+  "category": "Category",
+  "supplier": "Supplier",
+  "name": "Product Name",
+  "image": "Image",
+  "sku": "SKU",
+  "purchasePrice": "Purchase Price",
+  "sellingPrice": "Selling Price",
+  "price": "Price",
+  "stock": "Stock",
+  "purchaseDate": "Purchase Date",
+  "expiryDate": "Expiry Date"
+  },
+  "request":{
+  "requestSupport": "Request Support",
+  "helpTopic": "Help Topic *",
+  "managingPartyDetails": "Managing Party Details",
+  "pleaseUploadScreenshot": "Please Upload Screenshot *",
+  "noFileChosen": "No file chosen",
+  "detailedDescription": "Detailed Description *",
+  "descriptionPlaceholder": "Please describe your issue in detail, including any steps taken, error messages, and expected outcome.",
+  "submitRequest": "Submit Request",
+  "thankYou": "Thank You!",
+  "requestReceived": "We've received your request successfully.",
+  "responseTime": "Our team will respond within 24 hours.",
+  "close": "Close",
+  "submitting": "Submitting"
+}
 }

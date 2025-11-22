@@ -7,9 +7,10 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import Input from "@/features/ui/Input";
 import Button from "@/features/ui/Button";
+import { useTranslation } from "react-i18next";
 
 const SupportForm = () => {
-  const { user } = useAuth();
+  const {t}= useTranslation("subscriber");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -58,7 +59,7 @@ const SupportForm = () => {
   ];
 
   return (
-    <div className="h-[calc(100dvh-80px)] flex items-center justify-center">
+    <div className="h-[calc(100dvh-80px)]  flex items-center justify-center">
       {issSubmissionSuccessFormOpen && (
         <div
           onClick={() => setIsSubmissionSuccessFormOpen(false)}
@@ -74,40 +75,31 @@ const SupportForm = () => {
                 <CheckCircle size={48} className="text-constructive" />
               </div>
 
-              <h2 className="text-2xl font-bold mb-2">Thank You!</h2>
+              <h2 className="text-2xl font-bold mb-2">  {t("request.thankYou")} </h2>
 
               <p className="text-gray-600 mb-1">
-                We've received your request successfully.
+              {t("request.requestReceived")}
               </p>
 
               <p className="text-sm text-gray-500 mb-6">
-                Our team will respond within 24 hours.
+             {t("request.responseTime")}
               </p>
-              <Button className="px-6">Close</Button>
+              <Button className="px-6"> {t("request.close")}</Button>
             </div>
           </div>
         </div>
       )}
       <form
         onSubmit={handleSubmit}
-        className="space-y-5 w-[95%] max-w-150 bg-white dark:bg-dark rounded-md shadow-sm p-5"
+        className="space-y-5 w-[95%] h-fit max-w-150 bg-white dark:bg-dark rounded-md shadow-sm p-5"
       >
-        <h2 className="text-3xl text-center font-semibold">Request Support</h2>
+        <h2 className="text-3xl text-center font-semibold">{t("request.requestSupport")}</h2>
         {/* Email Input */}
-        <Input
-          label="Your Email Address *"
-          type="email"
-          name="email"
-          id="email"
-          required
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="you@example.com"
-        />
+      
         {/* Topic Dropdown */}
         <div>
           <label htmlFor="topic" className="block mb-1 ">
-            Help Topic *
+           {t("request.helpTopic")}
           </label>
           <select
             id="topic"
@@ -118,7 +110,7 @@ const SupportForm = () => {
             className="w-full px-3 py-2 border border-muted/40 focus:border-none outline-none rounded-lg focus:ring-2 focus:ring-primary"
           >
             <option value="" disabled>
-              Select a topic
+            {t("request.helpTopic")}
             </option>
             {helpTopics.map((topic) => (
               <option key={topic} value={topic}>
@@ -130,20 +122,20 @@ const SupportForm = () => {
 
         {/* Subject/Summary Input */}
         <Input
-          label=" Please Upload ScreenShort *"
+          label= {t("request.pleaseUploadScreenshot")}
           type="file"
           name="subject"
           id="subject"
           required
           value={formData.subject}
           onChange={handleChange}
-          placeholder="please upload screenshot."
+          placeholder=   {t("request.noFileChosen")}
         />
 
         {/* Description Textarea */}
         <div>
           <label htmlFor="description" className="block mb-1">
-            Detailed Description *
+            {t("request.detailedDescription")}
           </label>
 
           <textarea
@@ -153,13 +145,13 @@ const SupportForm = () => {
             required
             value={formData.description}
             onChange={handleChange}
-            placeholder="Please describe your issue in detail, including any steps taken, error messages, and expected outcome."
+            placeholder=     {t("request.descriptionPlaceholder")}
             className="w-full px-3 py-2 border border-muted/40 focus:border-none outline-none rounded-lg focus:ring-2 focus:ring-primary"
           />
         </div>
 
         {/* Submit Button */}
-        <div className="flex justify-end">
+        <div className="flex ">
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
@@ -183,11 +175,11 @@ const SupportForm = () => {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Submitting...
+               {t("request.submitting")}
               </>
             ) : (
               <>
-                Submit Request
+              {t("request.submitRequest")}
                 <Send className="ml-2 h-5 w-5" />
               </>
             )}
