@@ -8,10 +8,8 @@ import { ExistingUsers } from "./ExistingUsers";
 import Button from "@/features/ui/Button";
 
 const SubscriberList = () => {
-  // 👥 Existing Subscribers Data
  
 
-  // State to manage which view is active: 'subscribers' or 'potential'
   const [activeView, setActiveView] = useState('existing');
   return (
     <div className="min-w-2xl max-w-full mx-auto  text-muted-hover rounded-xl ">
