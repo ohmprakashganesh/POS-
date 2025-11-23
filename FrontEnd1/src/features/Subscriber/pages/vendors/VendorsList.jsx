@@ -70,63 +70,62 @@ const Vendor = () => {
         />
       </div>
 
-      <div className="overflow-x-auto  bg-white dark:bg-dark rounded-md shadow-sm">
-        <table className="min-w-full text-sm text-muted">
-          <thead className="uppercase text-sm text-left  bg-secondary text-left text-secondary-foreground">
-            <tr>
-              <th className="px-2 py-3">{t("vendor.sn")}</th>
-              <th className="px-2 py-3">{t("vendor.name")}</th>
-              <th className="px-2 py-3">{t("vendor.address")}</th>
-              <th className="px-2 py-3">{t("vendor.totalProducts")}</th>
-              <th className="px-2 py-3">{t("vendor.totalExpenses")}</th>
-              <th className="px-2 py-3">{t("vendor.totalPaid")}</th>
-             <th className="px-2 py-3">Total Due</th>
+      <div className="overflow-x-auto   rounded-md shadow-sm">
+        <table className="table">
+          <thead>
+            <tr className="table-head-row">
+              <th className="table-th">{t("vendor.sn")}</th>
+              <th className="table-th">{t("vendor.name")}</th>
+              <th className="table-th">{t("vendor.address")}</th>
+              <th className="table-th">{t("vendor.totalProducts")}</th>
+              <th className="table-th">{t("vendor.totalExpenses")}</th>
+              <th className="table-th">{t("vendor.totalPaid")}</th>
+             <th className="table-th">Total Due</th>
 
-              <th className="text-center">{t("vendor.actions")}</th>
+              <th className=" table-th text-center">{t("vendor.actions")}</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="table-tbody">
             {filteredVendors.map((vendor, key) => (
-              <tr key={vendor.id} className=" hover:bg-background">
-                <td className=" px-2 py-2 truncate max-w-[180px]">{key + 1}</td>
+              <tr key={vendor.id} className=" table-body-row">
+                <td className=" table-td">{key + 1}</td>
 
-                <td className=" flex items-center gap-2">
-                  <UserIcon className="size-9 p-1.5 bg-primary/10 rounded-full text-primary" />
+                <td className="table-td ">
 
-                  <p className="font-semibold">{vendor.name}</p>
+              {vendor.name}
                 </td>
 
-                <td className="px-4 py-3 truncate max-w-[180px]">
+                <td className="table-td  ">
                   {vendor.address}
                 </td>
 
-                <td className="px-4 py-3">{vendor.total_product}</td>
+                <td className="table-td ">{vendor.total_product}</td>
 
-                <td className="px-4 py-3">{vendor.total_cost}</td>
+                <td className="table-td ">{vendor.total_cost}</td>
 
-                <td className="px-4 py-3 ">{vendor.total_paid}</td>
-               <td className="px-4 py-3 font-semibold">{vendor.total_due}</td>
+                <td className="table-td ">{vendor.total_paid}</td>
+               <td className="table-td ">{vendor.total_due}</td>
 
 
                 {/* Actions */}
-                <td className="px-4  py-3 flex items-center gap-2">
+                <td className="table-td  flex items-center gap-2">
                   <Link
                     to={`/vendor/edit/${vendor.id}`}
                     className="p-1.5 rounded-full hover:primary/10 text-primary"
                   >
-                    <PencilIcon className="size-4" />
+                    <PencilIcon className="action-icon" />
                   </Link>
                   <button
                     onClick={() => handleDelete(vendor.id)}
                     className="p-1.5 rounded-full hover:bg-destructive/10 text-destructive"
                   >
-                    <TrashIcon className="h-4 w-4" />
+                    <TrashIcon className="action-icon" />
                   </button>
                   <Link
                     to={`/vendor/detail/${vendor.id}`}
                     className="p-1.5 rounded-full hover:bg-secondary/10 text-secondary"
                   >
-                    <EyeIcon className="h-4 w-4" />
+                    <EyeIcon className="action-icon" />
                   </Link>
                 </td>
               </tr>

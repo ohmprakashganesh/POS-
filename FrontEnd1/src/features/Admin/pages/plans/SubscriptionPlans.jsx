@@ -48,33 +48,33 @@ const PlanManagement = () => {
 
       {/* Plans Table */}
       <div className="overflow-x-auto">
-        <table className="w-full border-separate border-spacing-y-1 ">
+        <table className="table ">
           <thead>
-            <tr className="bg-secondary p-5 text-center text-secondary-foreground">
+            <tr className="table-head-row">
               {tableHeaders.map((header, index) => (
                 <th
                   key={index}
-                  className={`py-3 text-center mx-auto px-2 ${header === "Actions" ? "text-center" : "text-center"}`}
+                  className={`table-th `}
                 >
                   {header}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="bg-white  rounded-md text-muted-hover dark:bg-dark">
+          <tbody className="table-tbody">
             {Object.entries(plans2).map(([key, plan], index) => (
-              <tr key={key} className="gap-2 justify-center items-center  my-auto ">
-                <td className="md:p-3 px-1">{index + 1}</td>
-                <td className="md:p-3 ">{plan.name}</td>
-                <td className="p-3">{plan.time || plan.duration}</td>
-                <td className="p-3 shrink-0">
+              <tr key={key} className="table-head-tr ">
+                <td className="table-td">{index + 1}</td>
+                <td className="table-td">{plan.name}</td>
+                <td className="table-td">{plan.time || plan.duration}</td>
+                <td className="table-td shrink-0">
                   <ul className="list-disc shrink-0 pl-5">
                     {plan.features.map((f, i) => (
                       <li key={i}>{f}</li>
                     ))}
                   </ul>
                 </td>
-                <td className="p-3">
+                <td className="table-td">
                   {plan.limitations.length ? (
                     <ul className="list-disc pl-5">
                       {plan.limitations.map((item, i) => (
@@ -85,7 +85,7 @@ const PlanManagement = () => {
                     "—"
                   )}
                 </td>
-                <td className="box md:space-x-2 space-x-1 ">
+                <td className="box md:space-x-2 table-td ">
                   <button
                     onClick={() => {
                       setEditKey(key);
@@ -93,13 +93,13 @@ const PlanManagement = () => {
                     }}
                     className="px-1 py-1   hover:bg-primary  dark:text-muted-hover rounded "
                   >
-                    <PencilIcon className="h-5 w-5 text-primary hover:text-primary-foreground  " />
+                    <PencilIcon className="action-icon text-primary hover:text-primary-foreground  " />
                   </button>
                   <button
                     onClick={() => handleDelete(key)}
                     className="px-1 py-1 hover:bg-destructive  dark:text-muted-hover rounded "
                   >
-                    <Trash2Icon className="h-5 w-5 text-destructive hover:text-primary-foreground " />
+                    <Trash2Icon className="action-icon text-destructive hover:text-primary-foreground " />
                   </button>
                 </td>
               </tr>

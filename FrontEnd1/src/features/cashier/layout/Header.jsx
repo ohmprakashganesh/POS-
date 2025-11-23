@@ -44,7 +44,7 @@ const Header = ({ onMenuClick, user }) => {
   }, []);
 
   return (
-    <header className="bg-white dark:bg-dark shadow-sm bor border-muted/40">
+    <header className="bg-white dark:bg-dark shadow-sm bor z-50 border-muted/40">
       <div className="flex items-center justify-between h-16 px-4 sm:px-6">
         {/* Left section */}
         <div className="flex items-center">
@@ -85,17 +85,6 @@ const Header = ({ onMenuClick, user }) => {
 
           {/* User menu */}
           <div className="relative">
-            {/* <button
-              onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="flex items-center space-x-1 text-sm focus:outline-none"
-            >
-              <UserCircleIcon className="h-8 w-8 text-gray-400 dark:text-gray-300" />
-              <div className="hidden md:block text-left">
-                <div className="text-dark dark:text-white text-sm">
-                  {user?.role}
-                </div>
-              </div>
-            </button> */}
                       <button
                         onClick={() => setUserMenuOpen(!userMenuOpen)}
                         className="flex items-center space-x-3 text-sm focus:outline-none"

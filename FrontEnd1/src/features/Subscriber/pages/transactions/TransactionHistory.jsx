@@ -127,7 +127,7 @@ const TransactionHistory = () => {
       </div>
 
       {/* Filters */}
-      <div className="grid grid-cols-1  items-end mb-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1  items-end mb-3 md:grid-cols-4 gap-4">
         <div className="relative">
           <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted" />
           <Input
@@ -164,41 +164,41 @@ const TransactionHistory = () => {
       </div>
 
       {/* Transactions Table */}
-      <div className="overflow-x-auto bg-white dark:bg-dark rounded-md shadow-sm">
-        <table className="min-w-full text-sm text-muted">
-          <thead className="uppercase  text-sm text-left  bg-secondary text-secondary-foreground">
-            <tr>
-              <th className="text-left px-2 py-3">{t("transactionHistory.sn")}</th>
-              <th className="text-left px-2 py-3">{t("transactionHistory.invoice")}</th>
-              <th className="text-left px-2 py-3">{t("transactionHistory.customer")}</th>
-              <th className="text-left px-2 py-3">{t("transactionHistory.date")}</th>
-              <th className="text-left px-2 py-3">{t("transactionHistory.items")}</th>
-              <th className="text-left px-2 py-3">{t("transactionHistory.amount")}</th>
-              <th className="text-left px-2 py-3">{t("transactionHistory.status")}</th>
-              <th className="text-left px-2 py-3">{t("transactionHistory.actions")}</th>
+      <div className="overflow-x-auto rounded-md  shadow-sm">
+        <table className="table">
+          <thead >
+            <tr className="table-head-row">
+             <th className="table-th">{t("transactionHistory.sn")}</th>
+              <th className="table-th">{t("transactionHistory.invoice")}</th>
+              <th className="table-th">{t("transactionHistory.customer")}</th>
+              <th className="table-th">{t("transactionHistory.date")}</th>
+              <th className="table-th">{t("transactionHistory.items")}</th>
+              <th className="table-th">{t("transactionHistory.amount")}</th>
+              <th className="table-th">{t("transactionHistory.status")}</th>
+              <th className="table-th">{t("transactionHistory.actions")}</th>
             </tr>
           </thead>
           <tbody>
             {filteredTransactions.map((transaction, index) => (
-              <tr key={transaction.id} className="hover:bg-background">
-                <td className="p-2 truncate max-w-[180px]">
+              <tr key={transaction.id} className="table-body-row">
+                <td className="table-td ">
                   {index + 1}
                 </td>
-                <td className="p-2 whitespace-nowrap">
+                <td className="table-td">
                   <div className="flex items-center gap-2">
-                    <DocumentTextIcon className="h-5 w-5 text-muted" />
+                    <DocumentTextIcon className="size-4 text-muted" />
                     {transaction.invoiceNumber}
                   </div>
                 </td>
-                <td className="p-2">{transaction.customer}</td>
-                <td className="p-2">
+                <td className="table-td ">{transaction.customer}</td>
+                <td className="table-td ">
                   {new Date(transaction.date).toLocaleDateString()}
                 </td>
-                <td className="p-2">{transaction.items.length} items</td>
-                <td className="p-2 whitespace-nowrap font-semibold">
+                <td className="table-td  ">{transaction.items.length} items</td>
+                <td className="table-td  ">
                   {transaction.amount.toFixed(2)}
                 </td>
-                <td className="p-2 whitespace-nowrap">
+                <td className="table-td  ">
                   <span
                     className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(
                       transaction.status
@@ -207,7 +207,7 @@ const TransactionHistory = () => {
                     {transaction.status}
                   </span>
                 </td>
-                <td className="p-2 whitespace-nowrap font-medium">
+                <td className="table-td ">
                   <button
                     onClick={() => viewInvoice(transaction.id)}
                     className="text-primary hover:text-primary-hover flex items-center gap-2"

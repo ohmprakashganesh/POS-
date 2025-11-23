@@ -41,23 +41,6 @@ const Header = ({ openSidebar }) => {
       <div className="flex items-center gap-2">
         <ThemeButton/>
         <LanguageToggle />
-        {/* Notifications */}
-        {/* <div className="relative ">
-          <button
-            onClick={() => markAsRead()}
-            className="p-2 text-muted hover:text-muted-hover relative"
-          >
-            <BellIcon className="h-6 w-6 " />
-            {unreadCount > 0 && (
-              <span
-                className="absolute 
-                top-1 right-1 bg-destructive text-destructive-foreground  text-xs rounded-full h-4 w-4 flex items-center justify-center"
-              >
-                {unreadCount}
-              </span>
-            )}
-          </button>
-        </div> */}
            <div ref={buttonRef} className="relative">
                      <button
                        onClick={() => {

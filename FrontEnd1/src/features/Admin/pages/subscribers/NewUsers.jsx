@@ -86,63 +86,72 @@ function downloadBill() {
   onClose={closeStatement}
   onDownload={downloadBill}
 />
+        <table className="table">
+  <thead>
+    <tr className="table-head-row">
+      <th className="table-th">SN</th>
+      <th className="table-th">Name</th>
+      <th className="table-th">Email</th>
+      <th className="table-th">Plan</th>
+      <th className="table-th">Bill</th>
+      <th className="table-th">Date Created</th>
+      <th className="table-th">Actions</th>
+    </tr>
+  </thead>
 
-        <table className="w-full  border-collapse shadow-md rounded-md">
-          <thead>
-            <tr className=" bg-secondary text-secondary-foreground  text-left text-wrap ">
-              <th className="pl-2 py-2">SN</th>
-              <th >Name</th>
-              <th >Email</th>
-              <th >Plan</th>
-              <th >Bill</th>
-              <th >Date Created</th>
-              <th className="pr-3 text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="rounded-md">
-            {filtered.map((u, i) => (
-              <tr key={u.id} className=" dark:hover:bg-black/15 border-b-muted/40 bg-white dark:bg-dark hover:bg-primary-foreground/30">
-                <td className="pl-2 py-3">{i + 1}</td>
-                <td >{u.name}</td>
-                <td >{u.email}</td>
-                <td >
-                  <span className="px-2 py-1 text-sm rounded-full">
-                    {u.plan}
-                  </span>
-                </td>
-                <td >
-                  <div className="w-[50px]  flex justify-center h-[50px]">
-<img
-  className="w-[70%] h-[70%] my-auto mx-auto rounded-md cursor-pointer"
-  onClick={() => showStatement(u.bill)}
-  src={u.bill}
-/>
+  <tbody className="rounded-md">
+    {filtered.map((u, i) => (
+      <tr key={u.id} className="table-body-row">
+        <td className="table-td">{i + 1}</td>
+        <td className="table-td">{u.name}</td>
+        <td className="table-td">{u.email}</td>
 
-                  </div>
-                </td>
-                <td  >{u.dateCreated} </td>
+        <td className="table-td">
+          <span className="text-sm rounded-full">{u.plan}</span>
+        </td>
 
-                <td className="flex gap-2  py-3 pr-3 justify-center items-center" >
-                  <div className="flex space-x-3">
-                    <button onClick={() => acceptRequest(u.id)} className="p-1 text-secondary hover:bg-primary hover:text-primary-foreground rounded">
-                      <Check size={15} />
-                    </button>
-                    <button onClick={() => rejectRequest(u.id)} className="px-1 py-1 text-destructive hover:bg-destructive hover:text-destructive-foreground rounded">
-                      <X size={15} />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-            {filtered.length === 0 && (
-              <tr>
-                <td colSpan="6" className="p-4 text-center text-gray-500">
-                  No potential users found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        <td className="table-td">
+          <div className="w-[25px] flex justify-center h-[25px]">
+            <img
+              className="w-[70%] h-[70%] my-auto mx-auto rounded-md cursor-pointer"
+              onClick={() => showStatement(u.bill)}
+              src={u.bill}
+            />
+          </div>
+        </td>
+
+        <td className="table-td">{u.dateCreated}</td>
+
+        <td className="table-td flex gap-2 justify-center items-center">
+          <div className="flex space-x-3">
+            <button
+              onClick={() => acceptRequest(u.id)}
+              className="p-1 text-secondary hover:bg-primary hover:text-primary-foreground rounded"
+            >
+              <Check size={15} />
+            </button>
+
+            <button
+              onClick={() => rejectRequest(u.id)}
+              className="px-1 py-1 text-destructive hover:bg-destructive hover:text-destructive-foreground rounded"
+            >
+              <X size={15} />
+            </button>
+          </div>
+        </td>
+      </tr>
+    ))}
+
+    {filtered.length === 0 && (
+      <tr>
+        <td colSpan="6" className="p-4 text-center text-gray-500">
+          No potential users found.
+        </td>
+      </tr>
+    )}
+  </tbody>
+</table>
+
       </div>
     </>
   )

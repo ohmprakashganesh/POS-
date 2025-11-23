@@ -66,70 +66,69 @@ const CustomerList = () => {
         />
       </div>
 
-      <div className="overflow-x-auto bg-white dark:bg-dark rounded-md shadow-sm">
-        <table className="min-w-full text-sm text-muted">
-          <thead className="uppercase  text-sm text-left  bg-secondary text-secondary-foreground">
-            <tr>
-              <th className="px-2 py-3">{t("customer.sn")}</th>
-              <th className="text-center">{t("customer.name")}</th>
-              <th className="text-center">{t("customer.phone")}</th>
-              <th className="text-center">{t("customer.email")}</th>
-              <th className="text-center">{t("customer.address")}</th>
-              <th className="text-center">{t("customer.totalOrders")}</th>
-              <th className="text-center">{t("customer.totalSpent")}</th>
-              <th className="text-center">{t("customer.actions")}</th>
+      <div className="overflow-x-auto flex rounded-md shadow-sm">
+        <table className="table">
+          <thead >
+            <tr className="table-head-row">
+              <th className="table-th">{t("customer.sn")}</th>
+              <th className=" table-th">{t("customer.name")}</th>
+              <th className="table-th">{t("customer.phone")}</th>
+              <th className="table-th">{t("customer.email")}</th>
+              <th className="table-th">{t("customer.address")}</th>
+              <th className="table-th">{t("customer.totalOrders")}</th>
+              <th className=" table-th">{t("customer.totalSpent")}</th>
+              <th className="table-th">{t("customer.actions")}</th>
             </tr>
           </thead>
 
-          <tbody>
+          <tbody className="table-body">
             {filteredCustomers.map((customer, index) => (
-              <tr key={customer.id} className="hover:bg-background">
-                <td className="px-4 py-3 truncate max-w-[180px]">
+              <tr key={customer.id} className="table-body-row">
+                <td className="table-td">
                   {index + 1}
                 </td>
                 {/* Customer Name + Icon */}
-                <td className="px-2 py-2 flex items-center gap-2">
-                  <UserIcon className="size-9 p-1.5 bg-primary/10 rounded-full text-primary" />
-                  <div>
-                    <p className="font-semibold ">{customer.name}</p>
-                    <p className="text-xs text-muted">Customer</p>
-                  </div>
+                <td className="table-td">
+            {customer.name}
+            
                 </td>
 
                 {/* Phone */}
-                <td className="">{customer.phone}</td>
+                <td className="table-td">
+                  {customer.phone}</td>
 
                 {/* Email */}
-                <td className="truncate max-w-[200px]">
+                <td className="table-td">
                   {customer.email}
                 </td>
 
                 {/* Address */}
-                <td className=" truncate max-w-[180px]">
+                <td className="table-td">
                   {customer.address}
                 </td>
 
                 {/* Total Orders */}
-                <td className="font-semibold">12</td>
+                <td className="table-td">
+                  12</td>
 
                 {/* Total Spent */}
-                <td className=" font-semibold text-constructive">
+                <td className=" table-td text-constructive">
                   2,450.00
                 </td>
 
                 {/* Actions */}
-                <td className=" flex items-center gap-2">
+                <td className=" table-td flex gap-2">
                   <Link
                     to={`/customers/edit/${customer.id}`}
                     className="p-1.5 rounded-full hover:bg-primary/10 text-primary"
                   >
-                    <PencilIcon className="h-4 w-4" />
+                    <PencilIcon className="action-icon" />
                   </Link>
                   <button
                     onClick={() => handleDelete(customer.id)}
                     className="p-1.5 rounded-full hover:bg-red-50 text-destructive dark:text-destructive-hover transition"
                   >
-                    <TrashIcon className="h-4 w-4" />
+                    <TrashIcon className="action-icon" />
                   </button>
                 </td>
               </tr>

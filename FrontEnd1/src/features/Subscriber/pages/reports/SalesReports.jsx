@@ -180,36 +180,36 @@ const SalesReports = () => {
             <h3 className="text-xl md:text-2xl font-semibold mb-3">
               {t("report.detailedSales")}
             </h3>
-            <div className="overflow-x-auto  bg-white dark:bg-dark rounded-md shadow-sm">
-              <table className="min-w-full text-sm text-left text-muted">
-                <thead className="bg-secondary text-secondary-foreground tracking-wider">
-                  <tr>
-                    <th className="px-2 py-3 ">
+            <div className="overflow-x-auto  rounded-md shadow-sm">
+              <table className="table">
+                <thead >
+                  <tr className="table-head-row">
+                    <th className="table-td">
                       {reportType === "daily"
                         ? t("report.date")
                         : reportType === "weekly"
                         ? t("report.week")
                         : t("report.month")}
                     </th>
-                    <th className="">{t("report.salesAmount")}</th>
-                    <th className="">{t("report.numberOfOrders")}</th>
-                    <th className="">{t("report.averageOrderValue")}</th>
+                    <th className="table-td">{t("report.salesAmount")}</th>
+                    <th className="table-td">{t("report.numberOfOrders")}</th>
+                    <th className="table-td">{t("report.averageOrderValue")}</th>
                   </tr>
                 </thead>
-                <tbody className="">
+                <tbody className="table-body">
                   {salesData.map((item, index) => (
-                    <tr key={index} className="hover:bg-background">
-                      <td className="p-2 whitespace-nowrap text-sm">
+                    <tr key={index} className="table-body-row">
+                      <td className="table-td ">
                         {item.date || item.week || item.month}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        ${item.sales.toLocaleString()}
+                      <td className="table-td ">
+                        {item.sales.toLocaleString()}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="table-td ">
                         {item.orders}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        ${(item.sales / item.orders).toFixed(2)}
+                      <td className="table-td ">
+                        {(item.sales / item.orders).toFixed(2)}
                       </td>
                     </tr>
                   ))}
@@ -221,7 +221,7 @@ const SalesReports = () => {
           {/* Export Options */}
           <div className="flex justify-end gap-4 mb-5">
             <Button outline>{t("report.exportToCSV")}</Button>
-            <Button>{t("report.printReport")}</Button>
+            <Button outline>{t("report.printReport")}</Button>
           </div>
         </>
       )}

@@ -138,28 +138,28 @@ const Report = () => {
 return (
     <div className="mt-4 rounded-xl shadow-md overflow-x-auto">
       <h3 className="text-xl font-semibold mb-4 bg-background text-dark dark:text-white">Subscription Breakdown</h3>
-     <table className="min-w-full bg-white dark:bg-dark">
-        <thead className=' '>
+     <table className="table">
+        <thead >
           <tr className="bg-secondary ">
             {tableHeaders.map((head, i) => (
               <th
                 key={i}
-                className="px-2 py-3  text-left text-xs font-medium text-primary-foreground uppercase tracking-wider"
+                className="table-th "
               >
                 {head}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className=" text-muted-hover divide-muted/40">
+        <tbody className=" table-tbody">
           {data.map((row) => (
-            <tr key={row.id || row.month} className="hover:bg-background">
-              <td className="p-2 whitespace-nowrap text-sm ">{row.month}</td>
-              <td className="p-2 whitespace-nowrap text-sm ">{row.totalSubscribers.toLocaleString()}</td>
-              <td className="p-2 whitespace-nowrap text-sm ">{row.activeSubscribers.toLocaleString()}</td>
-              <td className="p-2 whitespace-nowrap text-sm  ">${row.revenue.toLocaleString()}</td>
-              <td className="p-2 whitespace-nowrap text-sm ">{row.status}</td>
-              <td className="p-2 whitespace-nowrap text-sm ">{row.plan}</td>
+            <tr key={row.id || row.month} className="table-body-row">
+              <td className="table-td  ">{row.totalSubscribers.toLocaleString()}</td>
+              <td className="table-td  ">{row.month}</td>
+              <td className="table-td ">{row.activeSubscribers.toLocaleString()}</td>
+              <td className="table-td ">${row.revenue.toLocaleString()}</td>
+              <td className="table-td ">{row.status}</td>
+              <td className="table-td  ">{row.plan}</td>
             </tr>
           ))}
         </tbody>
@@ -216,7 +216,7 @@ return (
     className="mt-1 w-[150px] md:w-[200px] bg-white dark:bg-dark border border-muted/40 text-muted rounded-md"
   >
     {SUBSCRIPTION_STATUSES.map((status) => (
-      <OptionComponent key={status} value={status}>
+      <OptionComponent key={status} value={status} className="h-10">
         {status}
       </OptionComponent>
     ))}

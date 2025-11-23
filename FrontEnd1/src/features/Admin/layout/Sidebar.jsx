@@ -34,7 +34,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       
       {/* Sidebar */}
       <aside className={`
-        fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-dark  shadow-xl transform transition-transform duration-500 ease-in-out
+        fixed inset-y-0 left-0 z-50 w-65 bg-white dark:bg-dark  shadow-sm transform transition-transform duration-500 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0
       `}>
         <div className="flex items-center justify-between h-16 px-4">

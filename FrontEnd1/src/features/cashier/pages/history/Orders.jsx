@@ -201,51 +201,46 @@ const TransactionHistory = () => {
       {/* Transactions Table */}
       <div className=" rounded-lg shadow-sm border border-muted/40 overflow-hidden">
         <div className="overflow-x-auto bg-white rounded-md shadow-sm">
-          <table className="min-w-full uppercase text-xs text-left font-semibold text">
-            <thead className="uppercase text-xs font-semibold bg-secondary text-secondary-foreground">
-              <tr>
+          <table className="table">
+            <thead >
+              <tr className='table-head-row'>
                 {HeaderFields.map((head, ind) => (
-                  <th key={ind} className="p-2 py-3">
+                  <th key={ind} className="table-th">
                     {t(`transactions.tableHeaders.${head}`)}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="bg-white dark:bg-dark ">
+            <tbody className="table-body ">
               {filteredTransactions.map((transaction) => (
-                <tr key={transaction.id} className=' hover:bg-background'>
-                  <td className="p-2 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <DocumentTextIcon className="h-5 w-5 text-muted mr-2" />
-                      <div className="text-sm font-medium text-muted">
+                <tr key={transaction.id} className=' table-body-row'>
+                  <td className="table-td">
                         {transaction.invoiceNumber}
-                      </div>
-                    </div>
                   </td>
-                  <td className="p-2 whitespace-nowrap text-sm text-muted">
+                  <td className="table-td">
                     {transaction.customer}
                   </td>
-                  <td className="p-2 whitespace-nowrap text-sm text-muted">
+                  <td className="table-td">
                     {new Date(transaction.date).toLocaleDateString()}
                   </td>
-                  <td className="p-2 text-sm text-gray-500">
+                  <td className="table-td">
                     {transaction.items.length} {t("transactions.tableHeaders.items")}
                   </td>
-                  <td className="p-2 whitespace-nowrap text-sm font-semibold text-muted">
-                    ${transaction.amount.toFixed(2)}
+                  <td className="table-td">
+                    {transaction.amount.toFixed(2)}
                   </td>
-                  <td className="p-2 whitespace-nowrap">
+                  <td className="table-td">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(transaction.status)}`}>
                       {t(`transactions.${transaction.status}`)}
                     </span>
                   </td>
-                  <td className="p-2 text-left whitespace-nowrap  text-sm font-medium">
+                  <td className="table-td">
                     <button
                       onClick={() => viewInvoice(transaction.id)}
                       className="text-blue-600  text-center hover:text-blue-900 flex items-center  w-full"
                     >
                       {/* // this will be the image  url */}
-                      <EyeIcon className="h-4 w-4 mr-1" />
+                      <EyeIcon className="action-icon" />
                       {t("transactions.view")}
                     </button>
                   </td>

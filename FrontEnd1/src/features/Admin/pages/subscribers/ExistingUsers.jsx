@@ -53,89 +53,84 @@ export const ExistingUsers = () => {
       />
 
       <div className="overflow-x-auto shadow-md rounded-md">
-        <table className="w-full border-collapse shadow-md rounded-md">
-          <thead>
-            <tr className="bg-secondary text-secondary-foreground text-left ">
-              <th className="pl-2 py-2">SN</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Status</th>
-              <th>Plan</th>
-              <th>Expire</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+     <table className="w-full border-collapse shadow-md rounded-md">
+  <thead>
+    <tr className="table-head-row">
+      <th className="table-th">SN</th>
+      <th className="table-th">Name</th>
+      <th className="table-th">Email</th>
+      <th className="table-th">Status</th>
+      <th className="table-th">Plan</th>
+      <th className="table-th">Expire</th>
+      <th className="table-th">Actions</th>
+    </tr>
+  </thead>
 
-          <tbody >
-            {filtered.map((s, i) => (
-              <tr
-                key={s.id}
-                className=" dark:hover:bg-black/15 bg-white dark:bg-dark hover:bg-primary-foreground/30"
-              >
-                <td className="p-3">{i + 1}</td>
+  <tbody>
+    {filtered.map((s, i) => (
+      <tr key={s.id} className="table-body-row">
+        <td className="table-td">{i + 1}</td>
 
-                <td className="p-3">{s.name}</td>
-                <td className="p-3">{s.email}</td>
+        <td className="table-td">{s.name}</td>
+        <td className="table-td">{s.email}</td>
 
-                {/* --------update status -------- */}
-                <td className="p-3">
-                  {editId === s.id ? (
-                    <SelectComponent
-                      autoFocus
-                      onChange={(e) => handleStatusChange(s.id, e.target.value)}
-                      className="px-2 py-1 border-muted/40 rounded border  focus:ring-2"
-                      defaultValue={s.active ? "active" : "inactive"}
-                    >
-                      <OptionComponent value="active"> Active
+        {/* --------update status -------- */}
+        <td className="table-td">
+          {editId === s.id ? (
+            <SelectComponent
+              autoFocus
+              onChange={(e) => handleStatusChange(s.id, e.target.value)}
+              className=" border-muted/40 rounded border focus:ring-2"
+              defaultValue={s.active ? "active" : "inactive"}
+            >
+              <OptionComponent value="active">Active</OptionComponent>
+              <OptionComponent value="inactive">Inactive</OptionComponent>
+            </SelectComponent>
+          ) : (
+            <span
+              className={`px-2 text-xs rounded-full ${
+                s.active
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-600"
+              }`}
+            >
+              {s.active ? "Active" : "Inactive"}
+            </span>
+          )}
+        </td>
 
-                      </OptionComponent>
-                       <OptionComponent value="Inactive"> Active
-                      </OptionComponent>
-                    </SelectComponent>
-                  ) : (
-                    <span
-                      className={`px-2 py-1 text-sm rounded-full ${
-                        s.active
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-600"
-                      }`}
-                    >
-                      {s.active ? "Active" : "Inactive"}
-                    </span>
-                  )}
-                </td>
+        <td className="table-td">{s.plan}</td>
+        <td className="table-td">67 days</td>
 
-                <td className="p-3">{s.plan}</td>
-                <td className="p-3">67 days</td>
+        {/* ACTION BUTTONS */}
+        <td className="table-td flex justify-center items-center space-x-2">
+          <button
+            onClick={() => handleEdit(s.id)}
+            className="px-1 py-1 text-primary rounded hover:bg-primary hover:text-primary-foreground"
+          >
+            <PencilIcon className="w-4 h-4" />
+          </button>
 
-                {/* ACTION BUTTONS */}
-                <td className="p-3 flex justify-center items-center space-x-2">
-                  <button
-                    onClick={() => handleEdit(s.id)}
-                    className="px-1 py-1 text-primary rounded hover:bg-primary hover:text-primary-foreground"
-                  >
-                    <PencilIcon className="w-4 h-4" />
-                  </button>
+          <button
+            onClick={() => handleDelete(s.id)}
+            className="px-1 py-1 text-destructive rounded hover:bg-red-600 hover:text-primary-foreground"
+          >
+            <TrashIcon className="w-4 h-4" />
+          </button>
+        </td>
+      </tr>
+    ))}
 
-                  <button
-                    onClick={() => handleDelete(s.id)}
-                    className="px-1 py-1 text-destructive rounded hover:bg-red-600 hover:text-primary-foreground"
-                  >
-                    <TrashIcon className="w-4 h-4" />
-                  </button>
-                </td>
-              </tr>
-            ))}
+    {filtered.length === 0 && (
+      <tr>
+        <td colSpan="7" className="p-4 text-center text-gray-500">
+          No subscribers found.
+        </td>
+      </tr>
+    )}
+  </tbody>
+</table>
 
-            {filtered.length === 0 && (
-              <tr>
-                <td colSpan="7" className="p-4 text-center text-gray-500">
-                  No subscribers found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
       </div>
     </>
   );

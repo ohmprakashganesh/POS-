@@ -47,49 +47,49 @@ const Purchase = ({ back }) => {
              {t("purchase.button")}
             </Link>
           </div>
-      <div className="overflow-x-auto bg-white dark:bg-dark rounded-md shadow-sm">
-        <table className="min-w-full text-sm text-muted">
-          <thead className="uppercase text-sm text-left bg-secondary text-secondary-foreground">
-            <tr>
-              <th className="px-1 py-3">{t("purchase.th.sn")}</th>
-              <th >{t("purchase.th.vendor")}</th>
-              <th className="px-1 py-3" >{t("purchase.th.product")}</th>
-              <th className="px-1 py-3">{t("purchase.th.category")}</th>
-              <th className="px-1 py-3">{t("purchase.th.costRs")}</th>
-              <th className="px-2 py-3">{t("purchase.th.saleRs")}</th>
-              <th className="px-1 py-3">{t("purchase.th.purchaseDate")}</th>
-              <th className="px-1 py-3">{t("purchase.th.expiryDate")}</th>
-              <th className="px-1 py-3">{t("purchase.th.stock")}</th>
-              <th className="px-1 py-3">{t("purchase.th.sku")}</th>
-              <th className="px-1 py-3">{t("purchase.th.image")}</th>
-              <th className="px-1 py-3">{t("purchase.th.actions")}</th>
+      <div className="overflow-x-auto  rounded-md shadow-sm">
+        <table className="table ">
+          <thead >
+            <tr className="table-head-row">
+              <th className="table-th">{t("purchase.th.sn")}</th>
+              <th className="table-th" >{t("purchase.th.vendor")}</th>
+              <th className="table-th" >{t("purchase.th.product")}</th>
+              <th className="table-th">{t("purchase.th.category")}</th>
+              <th className="table-th">{t("purchase.th.costRs")}</th>
+              <th className="table-th">{t("purchase.th.saleRs")}</th>
+              <th className="table-th">{t("purchase.th.purchaseDate")}</th>
+              <th className="table-th">{t("purchase.th.expiryDate")}</th>
+              <th className="table-th">{t("purchase.th.stock")}</th>
+              <th className="table-th">{t("purchase.th.sku")}</th>
+              <th className="table-th">{t("purchase.th.image")}</th>
+              <th className="table-th">{t("purchase.th.actions")}</th>
             </tr>
           </thead>
 
           <tbody>
             {purchaseData.map((product, key) => (
-              <tr key={product.id} className="hover:bg-background">
-                <td className="px-2 py-2">{key + 1}</td>
-                <td className="px-2 py-2 ">{product.name}</td>
-                <td className="px-2 py-2 ">{product.vendor}</td>
-                <td className="px-2 py-2 ">{product.category}</td>
-                <td className="px-2 py-2">{product.cost}</td>
-                <td className="px-2 py-2">{product.price}</td>
-                <td className="px-2 py-2 ">{product.purchase_date}</td>
-                <td className="px-2 py-2">
+              <tr key={product.id} className="table-body-row">
+                <td className="table-td">{key + 1}</td>
+                <td className="table-td ">{product.name}</td>
+                <td className="table-td ">{product.vendor}</td>
+                <td className="table-td ">{product.category}</td>
+                <td className="table-td">{product.cost}</td>
+                <td className="table-td">{product.price}</td>
+                <td className="table-td ">{product.purchase_date}</td>
+                <td className="table-td">
                   {product.expiry_date || "-"}
                 </td>
-                <td className="px-2 py-2">{product.stock}</td>
-                <td className="px-2 py-2">{product.sku}</td>
+                <td className="table-td">{product.stock}</td>
+                <td className="table-td">{product.sku}</td>
 
-                <td className="px-2 py-2">
+                <td className="table-td">
                   <img
                     src={test}
                     alt={product.name}
                     className="h-8 w-8 object-cover  rounded-md border border-muted/40"
                   />
                 </td>
-                <td className="px-4 py-3 flex items-center gap-2">
+                <td className="table-td flex items-center gap-2">
                   <Link
                   to={`/products/edit/${product.id}`}
                  state={{from:returnPath}}

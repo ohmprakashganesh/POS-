@@ -52,10 +52,10 @@ const SupportReq = () => {
       ) : (
         <div className="overflow-x-auto shadow-md rounded-md">
           <table className="min-w-full divide-y divide-muted/40">
-            <thead className="bg-secondary text-sm  w-fit shrink  text-secondary-foreground">
-              <tr>
+            <thead className="">
+              <tr className='table-head-row'>
                 {tableHeaders.map((head,ind)=>(
-                <th  key={ind} className="px-2 py-3  text-left text-xs font-medium uppercase tracking-wider">
+                <th  key={ind} className="table-th">
                  {head}
                 </th>
                 ))}
@@ -63,23 +63,23 @@ const SupportReq = () => {
             </thead>
                <tbody className=" w-screen shrink  bg-white dark:bg-dark text-muted-hover">
               {requests.map((request) => (
-                <tr  className='hover:bg-background'
+                <tr  className='table-body-row'
                 >
-                  <td className="px-2  ">
+                  <td className="table-td">
                     {request.userId}
                   </td>
-                  <td className="px-2  ">
+                  <td className="table-td">
                     {request.category}
                   </td>
 
-                  <td className="px-2  ">
+                 <td className="table-td">
                     {request.requestDate ? request.requestDate.toLocaleString().slice(0,10) : 'N/A'}
                   </td>
-                  <td className="px-2  ">
+                 <td className="table-td">
                     {request.servedDate ? request.servedDate.toLocaleString().slice(0,10) : 'N/A'}
                   </td>
-                  <td className="px-2  ">
-                    <span className={`px-2  inline-flex text-xs leading-5 font-bold rounded-full shadow-inner ${
+                 <td className="table-td">
+                    <span className={` px-2 inline-flex text-xs leading-5  rounded-full shadow-inner ${
                       request.status === 'New' ? 'bg-red-100  text-red-700' :
                       request.status === 'inProgress' ? 'bg-yellow-100  r text-yellow-700' :
                       'bg-green-100   text-green-700'
@@ -87,7 +87,7 @@ const SupportReq = () => {
                       {request.status}
                     </span>
                   </td>
-                  <td className="px-2 w-20  ">
+                  <td className=" w-15 text-xs  ">
                      <SelectComponent
                      className='h-1.5 focus:ring-0 outline-0 border-0 '
                         id="timeRange"
@@ -96,7 +96,7 @@ const SupportReq = () => {
                      
                       >
                          {STATUS_OPTIONS.map(status => (
-                      <OptionComponent className="truncate w-20 text-xs "  key={status}  value={status}>{status}  </OptionComponent>
+                      <OptionComponent className="truncate w-15 text-xs "  key={status}  value={status}>{status}  </OptionComponent>
                       ))}
                 
                       </SelectComponent>

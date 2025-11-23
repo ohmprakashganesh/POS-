@@ -69,70 +69,68 @@ const CashierList = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto bg-white dark:bg-dark rounded-md shadow-sm">
-        <table className="min-w-full text-sm text-muted ">
-          <thead className="uppercase  text-sm text-left  bg-secondary text-secondary-foreground">
-            <tr>
-              <th className="px-2 py-3">{t("cashier.sn")}</th>
-              <th className="t">{t("cashier.name")}</th>
-              <th >{t("cashier.phone")}</th>
-              <th >{t("cashier.email")}</th>
-              <th >{t("cashier.address")}</th>
-              <th >{t("cashier.totalOrders")}</th>
-              <th >{t("cashier.totalSales")}</th>
-              <th >{t("cashier.actions")}</th>
+      <div className="overflow-x-auto rounded-md shadow-sm">
+        <table className="table ">
+          <thead>
+            <tr className="table-head-row">
+              <th className="table-th">{t("cashier.sn")}</th>
+              <th className="table-th">{t("cashier.name")}</th>
+              <th className="table-th">{t("cashier.phone")}</th>
+              <th className="table-th">{t("cashier.email")}</th>
+              <th className="table-th" >{t("cashier.address")}</th>
+              <th className="table-th">{t("cashier.totalOrders")}</th>
+              <th className="table-th">{t("cashier.totalSales")}</th>
+              <th className="table-th">{t("cashier.actions")}</th>
             </tr>
           </thead>
 
-          <tbody>
+          <tbody className="table-tbody">
             {filteredCashiers.map((cashier,index) => (
               <tr
                 key={cashier.id}
-                className="hover:bg-background"
+                className="table-body-row"
               >
-                 <td className="px-2 py-2 truncate max-w-[180px]">{index + 1}</td>
+                 <td className="table-td">{index + 1}</td>
                 {/* Name + Icon */}
-                <td className="px-4 py-3 flex items-center gap-2">
-                  <UserIcon className="size-9 p-1.5 bg-primary/10 rounded-full text-primary" />
-                  <div>
-                    <p className="font-semibold ">{cashier.name}</p>
-                  </div>
+                <td className="table-td">
+               
+                   {cashier.name}
                 </td>
 
                 {/* Phone */}
-                <td className="">{cashier.phone}</td>
+                <td className="table-td ">{cashier.phone}</td>
 
                 {/* Email */}
-                <td className=" truncate max-w-[200px]">
+                <td className="table-td ">
                   {cashier.email}
                 </td>
 
                 {/* Address */}
-                <td className=" truncate max-w-[180px]">
+                <td className="table-td  ">
                   {cashier.address}
                 </td>
 
                 {/* Total Orders */}
-                <td className=" font-semibold"> {cashier.totalOrders}</td>
+                <td className= "table-td  "> {cashier.totalOrders}</td>
 
                 {/* Total Sales */}
-                <td className=" font-semibold text-constructive">
+                <td className="table-td ">
                   {cashier.totalSales}
                 </td>
 
                 {/* Actions */}
-                <td className=" flex items-center gap-2">
+                <td className="table-td  flex items-center gap-2">
                   <Link
                     to={`/cashier/edit/${cashier.id}`}
                     className="p-1.5 rounded-full hover:bg-primary/10 text-primary"
                   >
-                    <PencilIcon className="h-4 w-4" />
+                    <PencilIcon className="action-icon" />
                   </Link>
                   <button
                     onClick={() => handleDelete(cashier.id)}
                     className="p-1.5 rounded-full hover:bg-red-50 text-destructive hover:text-destructive-hover transition"
                   >
-                    <TrashIcon className="h-4 w-4" />
+                    <TrashIcon className="action-icon" />
                   </button>
                 </td>
               </tr>

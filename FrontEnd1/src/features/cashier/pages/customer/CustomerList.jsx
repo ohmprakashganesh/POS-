@@ -274,11 +274,11 @@ const CustomerList = () => {
 
         {/* Table */}
         <div className="overflow-x-auto bg-card bg-white dark:bg-dark rounded-md shadow-sm border border-muted/40 ">
-          <table className="min-w-full text-sm text-foreground">
-            <thead className="uppercase text-xs text-secondary-foreground font-semibold bg-secondary">
-              <tr>
+          <table className="table">
+            <thead >
+              <tr className="table-head-row">
                 {headers.map((field, ind) => (
-                  <th key={ind} className="px-2 py-3">
+                  <th key={ind} className="table-th">
                     {field}
                   </th>
                 ))}
@@ -287,43 +287,41 @@ const CustomerList = () => {
 
             <tbody>
               {filteredCustomers.map((customer, index) => (
-                <tr key={customer.id} className="hover:bg-background ">
-                  <td className="p-2 text-muted truncate max-w-[180px]">
+                <tr key={customer.id} className="table-body-row ">
+                  <td className="table-td">
                     {index + 1}
                   </td>
 
-                  <td className="p-2 flex items-center gap-2">
-                    <UserIcon className="size-7 p-1.5 bg-primary/10 rounded-full text-muted" />
-                    <div>
-                      <p className=" text-muted">{customer.name}</p>
-                    </div>
+                  <td className="table-td">
+                 
+                     {customer.name}
                   </td>
-                  <td className="p-2 text-muted py-3">{customer.phone}</td>
+                  <td className="table-td">{customer.phone}</td>
 
-                  <td className="p-2 truncate text-muted max-w-[200px]">
+                  <td className="table-td">
                     {customer.email}
                   </td>
 
-                  <td className="p-2 truncate text-muted max-w-[180px]">
+                  <td className="table-td">
                     {customer.address}
                   </td>
 
-                  <td className="p-2 text-muted font-semibold">12</td>
+                  <td className="table-td">12</td>
 
-                  <td className="p-2 font-semibold text-muted ">
+                  <td className="table-td">
                   {t("products.rs")} 2,450.00
                   </td>
 
-                  <td className="p-2 flex items-center gap-2">
+                  <td className="table-td flex gap-2 ">
                     <span onClick={() => openCustomerForm(customer.id)}>
-                      <PencilIcon className="h-4 w-4 cursor-pointer text-primary" />
+                      <PencilIcon className="action-icon text-primary" />
                     </span>
 
                     <button
                       onClick={() => handleDelete(customer.id)}
                       className="p-1  rounded-full hover:bg-red-50 text-red-600 cursor-pointer hover:text-red-800 transition"
                     >
-                      <TrashIcon className="h-4 w-4" />
+                      <TrashIcon className="action-icon text-destructive" />
                     </button>
                   </td>
                 </tr>
