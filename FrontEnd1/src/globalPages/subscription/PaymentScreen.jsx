@@ -156,7 +156,7 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-dark p-6 sm:p-10 font-sans">
+    <div className="min-h-screen p-6 sm:p-10 font-sans">
       <div className="mb-6">
         <div className="flex justify-center rounded-md">
           <h1 className="bg-secondary  text-secondary-foreground py-1 font-semibold px-5 rounded-full flex mb-5 items-center justify-center gap-3">

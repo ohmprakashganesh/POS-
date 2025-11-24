@@ -57,7 +57,7 @@ export const SelectComponent = ({
         </button>
 
         {open && (
-          <div className="absolute mt-1.5 w-full min-w-10 bg-white dark:bg-dark overflow-hidden rounded-md shadow-sm z-50 ">
+          <div className="absolute animate-fade-slide-in mt-1.5 w-full min-w-10 bg-white dark:bg-dark overflow-hidden rounded-md shadow-sm z-50 ">
             {children}
           </div>
         )}

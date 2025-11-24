@@ -1,12 +1,12 @@
 
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {  Link, useParams, useLocation } from "react-router-dom";
 import { purchase } from "@/data/mockData";
-import { PencilIcon, PlusIcon, Trash, TrashIcon } from "lucide-react";
+import { Eye, PencilIcon, PlusIcon, Trash, TrashIcon } from "lucide-react";
 import { Image } from "lucide-react";
-import test from "@/assets/test.png";
 import { useTranslation } from "react-i18next";
+import PurchaseDetailsCard from "./PurchaseDetailsCard";
 
 const Purchase = ({ back }) => {
   const {t}= useTranslation("subscriber");
@@ -26,6 +26,12 @@ const Purchase = ({ back }) => {
   const { id } = useParams();
   const isEdit = Boolean(id);
   if (back) setBackState(true);
+
+  //purchase details card
+  const [activePurchase,setActivePurchase]=useState(null)
+  const onClose=useCallback(()=>{
+      setActivePurchase(null)
+  },[])
 
 
 
@@ -48,48 +54,37 @@ const Purchase = ({ back }) => {
             </Link>
           </div>
       <div className="overflow-x-auto  rounded-md shadow-sm">
-        <table className="table ">
+        <table>
           <thead >
-            <tr className="table-head-row">
-              <th className="table-th">{t("purchase.th.sn")}</th>
-              <th className="table-th" >{t("purchase.th.vendor")}</th>
-              <th className="table-th" >{t("purchase.th.product")}</th>
-              <th className="table-th">{t("purchase.th.category")}</th>
-              <th className="table-th">{t("purchase.th.costRs")}</th>
-              <th className="table-th">{t("purchase.th.saleRs")}</th>
-              <th className="table-th">{t("purchase.th.purchaseDate")}</th>
-              <th className="table-th">{t("purchase.th.expiryDate")}</th>
-              <th className="table-th">{t("purchase.th.stock")}</th>
-              <th className="table-th">{t("purchase.th.sku")}</th>
-              <th className="table-th">{t("purchase.th.image")}</th>
-              <th className="table-th">{t("purchase.th.actions")}</th>
+            <tr>
+              <th>{t("purchase.th.sn")}</th>
+              <th >{t("purchase.th.vendor")}</th>
+              <th >{t("purchase.th.product")}</th>
+              <th>{t("purchase.th.category")}</th>
+              <th>{t("purchase.th.costRs")}</th>
+              <th>{t("purchase.th.saleRs")}</th>
+              <th>{t("purchase.th.purchaseDate")}</th>
+              <th>{t("purchase.th.expiryDate")}</th>
+              <th>{t("purchase.th.quantity")}</th>
+              <th>{t("purchase.th.actions")}</th>
             </tr>
           </thead>
 
           <tbody>
             {purchaseData.map((product, key) => (
-              <tr key={product.id} className="table-body-row">
-                <td className="table-td">{key + 1}</td>
-                <td className="table-td ">{product.name}</td>
-                <td className="table-td ">{product.vendor}</td>
-                <td className="table-td ">{product.category}</td>
-                <td className="table-td">{product.cost}</td>
-                <td className="table-td">{product.price}</td>
-                <td className="table-td ">{product.purchase_date}</td>
-                <td className="table-td">
+              <tr key={product.id}>
+                <td >{key + 1}</td>
+                <td >{product.name}</td>
+                <td >{product.vendor}</td>
+                <td >{product.category}</td>
+                <td >{product.cost}</td>
+                <td >{product.price}</td>
+                <td >{product.purchase_date}</td>
+                <td >
                   {product.expiry_date || "-"}
                 </td>
-                <td className="table-td">{product.stock}</td>
-                <td className="table-td">{product.sku}</td>
-
-                <td className="table-td">
-                  <img
-                    src={test}
-                    alt={product.name}
-                    className="h-8 w-8 object-cover  rounded-md border border-muted/40"
-                  />
-                </td>
-                <td className="table-td flex items-center gap-2">
+                <td>{product.stock}</td>
+                <td className="flex items-center gap-2">
                   <Link
                   to={`/products/edit/${product.id}`}
                  state={{from:returnPath}}
@@ -103,12 +98,16 @@ const Purchase = ({ back }) => {
                   >
                     <TrashIcon className="h-4 w-4" />
                   </button>
+                  <Eye onClick={()=>setActivePurchase(product)} className="size-4 text-secondary"/>
+                  
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
     </div>
+
+    {!!activePurchase && <PurchaseDetailsCard onClose={onClose} purchase={activePurchase}/> }
     </div>
   );
 };

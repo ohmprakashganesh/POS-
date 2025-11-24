@@ -82,7 +82,7 @@ const SalesReports = () => {
   };
 
   return isLoading ? (
-    <div className="flex items-center justify-center h-screen w-full dark:bg-dark ">
+    <div className="flex items-center justify-center h-screen w-full">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" />
     </div>
   ) : (
@@ -239,7 +239,7 @@ function SalesChart({ salesData, reportType }) {
       <div className="w-full max-w-150 h-72">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={salesData}>
-            <CartesianGrid strokeDasharray="3" className="stroke-muted" />
+            {/* <CartesianGrid strokeDasharray="3" className="stroke-muted" /> */}
             <XAxis
               dataKey={
                 reportType === "daily"
@@ -282,7 +282,7 @@ function OrderChart({ salesData, reportType }) {
       <div className="w-full max-w-xl h-72">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={salesData}>
-            <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+            {/* <CartesianGrid strokeDasharray="3 3" className="stroke-muted" /> */}
 
             <Tooltip
               contentStyle={{
