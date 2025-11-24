@@ -184,18 +184,18 @@ const SalesReports = () => {
               <table className="table">
                 <thead >
                   <tr className="table-head-row">
-                    <th className="table-td">
+                    <th className="table-th">
                       {reportType === "daily"
                         ? t("report.date")
                         : reportType === "weekly"
                         ? t("report.week")
                         : t("report.month")}
                     </th>
-                    <th className="table-td">{t("report.salesAmount")}</th>
-                    <th className="table-td">{t("report.numberOfOrders")}</th>
-                    <th className="table-td">{t("report.averageOrderValue")}</th>
+                    <th className="table-th">{t("report.salesAmount")}</th>
+                    <th className="table-th">{t("report.numberOfOrders")}</th>
+                    <th className="table-th">{t("report.averageOrderValue")}</th>
                   </tr>
-                </thead>
+                </thead >
                 <tbody className="table-body">
                   {salesData.map((item, index) => (
                     <tr key={index} className="table-body-row">

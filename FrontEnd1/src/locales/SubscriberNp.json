@@ -102,6 +102,7 @@
     "totalProducts": "कुल उत्पादनहरू",
     "totalExpenses": "कुल खर्च",
     "totalPaid": "कुल भुक्तानी",
+    "totalDue": "कुल बाँकी",
     "actions": "कार्यहरू",
     "details": {
       "description": "विक्रेता विवरण अवलोकन",
@@ -116,6 +117,12 @@
       "categories": "क्याटेगरीहरू",
       "PANNumber": "PAN नम्बर",
       "financialSummary": "वित्तीय सारांश"
+    },
+    "dues": {
+      "totalPaid": " जम्मा भुक्तानी",
+      "totalDues": "बाकी रकम",
+      "paymentAmount": "भुक्तानी रकम",
+      "enterAmount": "रकम प्रविष्ट गर्नुहोस्"
     }
   },
   "cashier": {

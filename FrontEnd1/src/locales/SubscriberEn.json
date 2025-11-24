@@ -102,6 +102,7 @@
     "totalProducts": "Total Products",
     "totalExpenses": "Total Expenses",
     "totalPaid": "Total Paid",
+    "totalDue": "Total Due",
     "actions": "Actions",
     "details": {
       "description": "Vendor Details Overview",
@@ -116,6 +117,12 @@
       "categories": "Categories",
       "PANNumber": "PAN Number",
       "financialSummary": "Financial Summary"
+    },
+    "dues": {
+      "totalPaid": "Total Paid",
+      "totalDues": "Total Dues",
+      "paymentAmount": "Payment Amount",
+      "enterAmount": "Enter amount"
     }
   },
   "cashier": {
@@ -201,7 +208,7 @@
     "getFullAccess": "Get Full Access"
   },
   "purchase": {
-   "title": "Purchase",
+    "title": "Purchase",
     "subTitle": "Purchase Details",
     "description": "Over View of a Purchase summary",
     "button": "Add-Product",

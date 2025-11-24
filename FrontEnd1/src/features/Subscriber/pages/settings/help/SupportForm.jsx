@@ -151,7 +151,7 @@ const SupportForm = () => {
         </div>
 
         {/* Submit Button */}
-        <div className="flex ">
+        <div className="flex justify-center ">
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
