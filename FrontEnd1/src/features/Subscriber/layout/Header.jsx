@@ -119,7 +119,7 @@ const Header = ({ openSidebar }) => {
        {notification && (
         <div
           ref={panelRef}
-          className="absolute md:w-3/7 lg:w-2/6 w-full bg-white dark:bg-gray-800 right-1 top-16 z-40 flex justify-end "
+         className="fixed animate-fade-slide-left w-full max-w-130 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100"
         >
           <NotificationScreen />
         </div>

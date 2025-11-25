@@ -50,12 +50,10 @@ const NotificationScreen = () => {
     return `${isActive?"bg-primary text-white dark:bg-primary/40 dark:text-muted-hover":"bg-muted/30 dark:bg-muted/20 "}`;
   };
   return (
-    <div className="w-full min-h-screen max-h-screen overflow-scroll  shadow-lg bg-white dark:bg-dark  font-base">
+    <div className="w-full h-full overflow-y-auto scrollbar-hide  shadow-sm  font-base">
       {/* Header */}
-      <div className="p-4 border-b text-muted">
-        <div className="flex justify-between items-center mb-2">
-          <h1 className="text-2xl text-muted-hover font-bold">Notifications</h1>
-        </div>
+      <div className="p-4 border-b border-b-muted/40">
+          <h1 className="text-2xl mb-2 font-bold">Notifications</h1>
         {/* Tab/Filter Bar */}
         <div className="flex items-center space-x-2">
           <button onClick={()=>{setActiveFilter("All")}} className={`px-4 py-1 text-muted    text-sm font-semibold  ${getActivated("All")} rounded-full`}>

@@ -1,25 +1,25 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useAuth } from '../../../contexts/AuthContext';
-import { useTranslation } from 'react-i18next';
-import { useNotifications } from '../../../contexts/NotificationContext';
+import React, { useState, useRef, useEffect } from "react";
+import { useAuth } from "../../../contexts/AuthContext";
+import { useTranslation } from "react-i18next";
+import { useNotifications } from "../../../contexts/NotificationContext";
 import {
   BellIcon,
   Bars3Icon,
-  UserCircleIcon
-} from '@heroicons/react/24/outline';
-import LanguageToggle from '@/locales/LanguageToggle';
-import NotificationScreen from '../pages/notification/Notification';
-import { LogOutIcon, Moon, Sun } from 'lucide-react';
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
+import LanguageToggle from "@/locales/LanguageToggle";
+import NotificationScreen from "../pages/notification/Notification";
+import { LogOutIcon, Moon, Sun } from "lucide-react";
 // UPDATED import: point to your ThemeContext provider hook
-import { useTheme } from '@/contexts/ThemeContext';
-import ThemeButton from '@/features/ui/ThemeButton';
+import { useTheme } from "@/contexts/ThemeContext";
+import ThemeButton from "@/features/ui/ThemeButton";
 
 const Header = ({ onMenuClick, user }) => {
   // now useTheme returns { theme, setTheme, toggleTheme }
   const { theme, setTheme } = useTheme();
-  const { t } = useTranslation('cashier');
+  const { t } = useTranslation("cashier");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-    const { logout } = useAuth();
+  const { logout } = useAuth();
   const { unreadCount, markAsRead } = useNotifications();
   const [notification, setNotification] = useState(false);
 
@@ -37,9 +37,9 @@ const Header = ({ onMenuClick, user }) => {
         setNotification(false);
       }
     }
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -56,14 +56,14 @@ const Header = ({ onMenuClick, user }) => {
           </button>
           <div className="ml-4 lg:ml-0">
             <h1 className="text-3xl  text-dark dark:text-white mask- font-bold ">
-              {t('general.dashboard')}
+              {t("general.dashboard")}
             </h1>
           </div>
         </div>
 
         {/* Right section */}
         <div className="flex items-center space-x-2">
-          <ThemeButton/>
+          <ThemeButton />
           <LanguageToggle />
           {/* Notifications */}
           <div ref={buttonRef} className="relative">
@@ -85,30 +85,29 @@ const Header = ({ onMenuClick, user }) => {
 
           {/* User menu */}
           <div className="relative">
-                      <button
-                        onClick={() => setUserMenuOpen(!userMenuOpen)}
-                        className="flex items-center space-x-3 text-sm focus:outline-none"
-                      >
-                        <UserCircleIcon className="h-8 w-8 text-muted" />
-                        <div className="hidden md:block text-left">
-                          <p className="font-medium text-nowrap">{user?.name}</p>
-                          <p className="text-muted text-xs">{user?.role}</p>
-                        </div>
-                      </button>
+            <button
+              onClick={() => setUserMenuOpen(!userMenuOpen)}
+              className="flex items-center space-x-3 text-sm focus:outline-none"
+            >
+              <UserCircleIcon className="h-8 w-8 text-muted" />
+              <div className="hidden md:block text-left">
+                <p className="font-medium text-nowrap">{user?.name}</p>
+                <p className="text-muted text-xs">{user?.role}</p>
+              </div>
+            </button>
 
-                        {userMenuOpen && (
-                        <div className="absolute right-0 mt-4 w-38 shadow-md text-muted-hover bg-white dark:bg-dark rounded-md   py-1 z-50">
-                             <div className='flex flex-row text-destructive text-sm justify-start py-2 gap-2  px-5'>
-                                <LogOutIcon/> 
-                               <button
-                               onClick={logout}
-                               className="block w-full text-left  text-sm "
-                             >
-                             {t("general.logOut")}
-                             </button>
-                             </div>
-                            
-                           </div>
+            {userMenuOpen && (
+              <div className="absolute animate-fade-slide-in right-0 mt-4 w-38 shadow-md text-muted-hover bg-white dark:bg-dark rounded-md   py-1 z-50">
+                <div className="flex flex-row text-destructive text-sm justify-start py-2 gap-2  px-5">
+                  <LogOutIcon />
+                  <button
+                    onClick={logout}
+                    className="block w-full text-left  text-sm "
+                  >
+                    {t("general.logOut")}
+                  </button>
+                </div>
+              </div>
             )}
           </div>
         </div>
@@ -117,7 +116,7 @@ const Header = ({ onMenuClick, user }) => {
       {notification && (
         <div
           ref={panelRef}
-          className="absolute md:w-2/6 lg:w-2/7 w-full bg-white dark:bg-gray-800 right-1 top-17 z-40 flex justify-end "
+          className="fixed animate-fade-slide-left w-full max-w-130 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100"
         >
           <NotificationScreen />
         </div>

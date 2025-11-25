@@ -39,7 +39,7 @@ const Header = ({ onMenuClick, user }) => {
   
 
   return (
-    <header className="bg-white dark:bg-dark shadow-sm z-50 ">
+    <header className="bg-white dark:bg-dark shadow-sm z-50">
       <div className="flex items-center justify-between h-16 px-4 sm:px-6">
         {/* Left section */}
         <div className="flex items-center">
@@ -96,7 +96,7 @@ const Header = ({ onMenuClick, user }) => {
                                  </button>
 
             {userMenuOpen && (
-              <div className="absolute right-0 mt-4 w-48 bg-white dark:bg-dark rounded-md  shadow-md py-1 z-50">
+              <div className="absolute animate-fade-slide-in right-0 mt-4 w-48 bg-white dark:bg-dark rounded-md  shadow-md py-1 z-50">
                 <div className='flex flex-row justify-start py-2 gap-2 text-destructive  px-5'>
                    <LogOutIcon/> 
                   <button
@@ -116,7 +116,7 @@ const Header = ({ onMenuClick, user }) => {
       {notification && (
         <div
           ref={panelRef}
-          className="absolute md:w-2/6 lg:w-2/7 w-full bg-white dark:bg-gray-800 right-1 top-17 z-40 flex justify-end border border-gray-200 dark:border-gray-700"
+          className="fixed animate-fade-slide-left w-full max-w-130 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100"
         >
           <NotificationScreen />
         </div>

@@ -48,7 +48,7 @@ const NotificationScreen = () => {
     return `${isActive?"bg-primary text-white dark:bg-primary/40 dark:text-muted-hover":"bg-muted/30 dark:bg-muted/20 "}`;
   };
   return (
-    <div className="w-full min-w[200px] min-h-screen max-h-screen overflow-scroll  shadow-lg bg-white dark:bg-dark  font-base">
+    <div className="w-full h-full overflow-y-auto scrollbar-hide  shadow-sm  font-base">
       {/* Header */}
       <div className="p-4 border-b text-muted">
         <div className="flex justify-between items-center mb-2">
