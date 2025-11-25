@@ -6,7 +6,7 @@ import { X, XCircle } from "lucide-react";
 import { Check } from "lucide-react";
 import { BillViewer } from "./BillView";
 
-import { XCircleIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, XCircleIcon } from "@heroicons/react/24/outline";
 
 export const NewUsers = () => {
 
@@ -71,13 +71,16 @@ function downloadBill() {
   return (
     <>
 
-      <Input
+     <div className="relative">
+      <MagnifyingGlassIcon className="absolute size-5 text-muted top-1/2 left-2 -translate-y-1/2"/>
+       <Input
         type="text"
         placeholder="Search potential users..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className=" mb-4 max-w-sm bg-white dark:bg-dark "
+        className="max-w-lg my-2 pl-9 bg-white dark:bg-dark "
       />
+     </div>
 
       <div className="overflow-x-auto shadow-md rounded-md">
         <BillViewer

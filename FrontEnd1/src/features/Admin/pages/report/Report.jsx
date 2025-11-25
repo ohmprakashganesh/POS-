@@ -114,10 +114,10 @@ const Report = () => {
   return(
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {cards.map((card,ind)=>(
-      <div className="bg-white text-dark dark:text-white dark:bg-dark p-6 rounded-xl shadow-md">
-        <p className="text-xl font-medium   ">{card.title}</p>
+      <div key={ind} className="bg-white dark:bg-dark p-6 rounded-md shadow-sm">
+        <p className="text-xl font-semibold">{card.title}</p>
         <p className="text-2xl font-bold  mt-1">{card.value}</p>
-        <span className="text-muted-hover text-xs mt-2  block">As of {card.note}</span>
+        <span className="text-secondary text-xs mt-2  block">As of {card.note}</span>
       </div>
  
       ))}
@@ -137,7 +137,7 @@ const Report = () => {
 ];
 return (
     <div className="mt-4 rounded-xl shadow-md overflow-x-auto">
-      <h3 className="text-xl font-semibold mb-4 bg-background text-dark dark:text-white">Subscription Breakdown</h3>
+      <h3 className="text-xl font-semibold mb-4">Subscription Breakdown</h3>
      <table className="table">
         <thead >
           <tr className="bg-secondary ">
@@ -170,27 +170,21 @@ return (
 
   return (
     <div className="rounded-md  min-h-screen">
-      <h1 className="text-2xl font-bold text-dark dark:text-white">Subscription Analytics Report</h1>
+      <h1 className="text-2xl font-bold">Subscription Analytics Report</h1>
 
       {/* 1. Filters & Controls Section */}
-      <div className=" p-2 rounded-xl  mb-2">
-        <h2 className="text-xl  mb-4 text-muted-hover font-semibold">Report Criteria</h2>
-        <div className="flex md:gap-10 sm:justify-start  md:justify-start lg:justify-start lg:gap-10 justify-between bg-background  gap-10 items-end">
+      <div className="rounded-xl  mb-2 p-2">
+        <h2 className="text-muted text-lg font-semibold">Report Criteria</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
 
     
-<div className=''>
-  <label
-    htmlFor="timeRange"
-    className="block text-sm font-medium text-muted"
-  >
-    Time Range
-  </label>
+
 
   <SelectComponent
+  label="Time Range"
     id="timeRange"
     value={timeRange}
     onChange={(e) => setTimeRange(e.target.value)}
-    className="mt-1 w-[150px] md:w-[200px] bg-white dark:bg-dark border border-muted/40 text-muted rounded-md"
   >
     {TIME_RANGES.map((range) => (
       <OptionComponent key={range} value={range}>
@@ -198,22 +192,15 @@ return (
       </OptionComponent>
     ))}
   </SelectComponent>
-</div>
 
 {/* Status Filter */}
-<div>
-  <label
-    htmlFor="statusFilter"
-    className="block text-sm font-medium text-muted"
-  >
-    Subscription Status
-  </label>
 
   <SelectComponent
     id="statusFilter"
+    label="Subscription Status"
     value={statusFilter}
     onChange={(e) => setStatusFilter(e.target.value)}
-    className="mt-1 w-[150px] md:w-[200px] bg-white dark:bg-dark border border-muted/40 text-muted rounded-md"
+    
   >
     {SUBSCRIPTION_STATUSES.map((status) => (
       <OptionComponent key={status} value={status} className="h-10">
@@ -221,7 +208,6 @@ return (
       </OptionComponent>
     ))}
   </SelectComponent>
-</div>
 
         </div>
       </div>
