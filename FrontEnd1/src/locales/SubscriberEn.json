@@ -163,6 +163,9 @@
     "search": "Search by invoice or customer...",
     "startDate": "Start Date",
     "endDate": "End Date",
+     "all": "All ",
+  "completed": "Completed",
+  "pending": "Pending ",
     "showing": "Showing",
     "transactions": "transactions",
     "sn": "S.N",
@@ -183,6 +186,7 @@
     "monthly": "Monthly",
     "startDate": "Start Date",
     "endDate": "End Date",
+    "applyFilter":"Apply Filter",
     "generateReport": "Generate Report",
     "totalSales": "Total Sales",
     "totalOrders": "Total Orders",
@@ -197,7 +201,9 @@
     "week": "Week",
     "date": "Date",
     "exportToCSV": "Export to CSV",
-    "printReport": "Print Report"
+    "printReport": "Print Report",
+     "addData": "Add more data to see trends",  
+     "noData": "Not enough data to display chart"
   },
   "plan": {
     "statusActive": "You're Fully Active",

@@ -32,11 +32,15 @@ const ProductList = () => {
 
     if (searchTerm) {
       filtered = filtered.filter(
-        (product) =>
-          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          product.sku?.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
+        (product) =>{
+        const term=searchTerm.toLowerCase();
+        return(
+          product.name.toLowerCase().includes(searchTerm) ||
+             product.category.toLowerCase().includes(searchTerm)||
+              product.price.toString().includes(term)
+    );
+  });
+}
 
     if (selectedCategory !== "all") {
       filtered = filtered.filter(
@@ -44,7 +48,7 @@ const ProductList = () => {
       );
     }
     setFilteredProducts(filtered);
-  }, [searchTerm, selectedCategory, products]);
+}, [searchTerm, selectedCategory, products]);
   const categories = ["all", ...new Set(products.map((p) => p.category))];
 
   const handleDelete = (productId) => {

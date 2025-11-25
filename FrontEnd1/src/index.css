@@ -98,7 +98,7 @@ select option:checked {
   @apply bg-primary text-primary-foreground;
 }
 
-@layer components {
+/* @layer components {
   .table{
     @apply  min-w-fit max-w-full w-full  bg-white dark:bg-dark  border-collapse shadow-md rounded-md; 
 
@@ -121,4 +121,28 @@ select option:checked {
   .action-icon{
     @apply w-4 h-4 gap-4
   }
+} */
+
+@layer components {
+  table{
+    @apply  min-w-fit max-w-full w-full  bg-white dark:bg-dark  border-collapse shadow-md rounded-md; 
+}
+  tbody{
+    @apply text-muted-hover divide-muted/40;
+  }
+  thead tr{
+    @apply bg-secondary text-secondary-foreground  text-left text-wrap;
+  }
+  tbody tr{
+    @apply  dark:hover:bg-black/15 border-b-muted/40 bg-white dark:bg-dark hover:bg-background;
+  }
+  thead th{
+    @apply  px-2 py-3 text-left text-xs font-bold text-primary-foreground uppercase tracking-wider;
+  }
+  tbody td{
+    @apply  px-2 py-1 whitespace-nowrap text-sm;
+  }
+  .action-icon{
+    @apply w-4 h-4 gap-4
+  }
 }

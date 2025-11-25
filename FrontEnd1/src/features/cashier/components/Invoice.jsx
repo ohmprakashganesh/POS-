@@ -64,152 +64,146 @@ const InvoiceViewer = ({ setInvoice, invoice }) => {
     remarks: "Thank you for shopping with Bhatbhateni!",
   };
 
-  // Generate and download CSV file
+  // ----- Download CSV -----
   const handleDownloadCSV = () => {
-    const header = "Item,Quantity,Price\n";
-    const rows = invoice.items
-      .map((i) => `${i.name},${i.quantity},${i.price}`)
+    const header = "Item,Quantity,Unit Price,Discount,Total\n";
+    const rows = data.items
+      .map(
+        (i) =>
+          `${i.name},${i.quantity},${i.unitPrice},${i.discount},${i.total}`
+      )
       .join("\n");
-    const csvContent = header + rows + `\n\nTotal,,${invoice.total}`;
+
+    const csvContent =
+      `Invoice ID: ${data.billId}\nCustomer: ${data.customer.name}\nDate: ${data.timestamp}\n\n` +
+      header +
+      rows +
+      `\n\nSubtotal,,${data.subtotal}\nGrand Total,,${data.grandTotal}`;
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = `${invoice.id}.csv`;
+    link.download = `${data.billId}.csv`;
     link.click();
   };
 
-  // Generate and download PDF file (using browser’s built-in print-to-PDF)
+  // ----- Download PDF -----
   const handleDownloadPDF = () => {
     const win = window.open("", "_blank");
     const html = `
       <html>
       <head>
-        <title>Invoice ${invoice.id}</title>
+        <title>Invoice ${data.billId}</title>
       </head>
       <body style="font-family: Arial; padding: 20px;">
-        <h2>Invoice #${invoice.id}</h2>
-        <p><strong>Customer:</strong> ${invoice.customerName}</p>
-        <p><strong>Date:</strong> ${invoice.date}</p>
+        <div style="display:flex; flex-direction:column; align-items: center;">
+              <p style="margin:0;">${data.branch.name}</p>
+              <p style="margin:0;">${data.branch.address}</p>
+              <p style="margin:0;">${data.branch.contact}</p>
+         </div>
+        <h2>Invoice #${data.billId}</h2>
+        <p style="margin:0;"><strong>Customer:</strong> ${data.customer.name}</p>
+        <p style="margin:0;"><strong>Phone:</strong> ${data.customer.phone}</p>
+        <p style="margin:0;"><strong>Address:</strong> ${data.customer.address}</p>
+        <p style="margin:0; padding-bottom:10px;"><strong>Date:</strong> ${data.timestamp}</p>
         <table border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse: collapse;">
           <thead>
             <tr>
               <th>Item</th>
               <th>Quantity</th>
-              <th>Price ($)</th>
+              <th>Unit Price</th>
+              <th>Discount</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>
-            ${invoice.items
+            ${data.items
               .map(
                 (i) =>
-                  `<tr><td>${i.name}</td><td>${i.quantity}</td><td>${i.price}</td></tr>`
+                  `<tr><td>${i.name}</td><td>${i.quantity}</td><td>${i.unitPrice}</td><td>${i.discount}</td><td>${i.total}</td></tr>`
               )
               .join("")}
           </tbody>
         </table>
-        <h3 style="text-align:right; margin-top: 10px;">Total: $${
-          invoice.total
-        }</h3>
+        <h3 style="text-align:right; margin-top: 10px;">Subtotal: ${data.subtotal}</h3>
+        <h3 style="text-align:right;">Grand Total: ${data.grandTotal}</h3>
       </body>
       </html>`;
     win.document.write(html);
     win.document.close();
-    win.print(); // User can save as PDF
+    win.print(); // user can save as PDF
   };
 
   return (
     <div className="p-6">
       {invoice && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-dark p-6 rounded-2xl shadow-lg max-w-[200] min-w-[200] relative">
-            <button
-              onClick={() => setInvoice(false)}
-              className="absolute top-2 bg-gray-300 w-8 h-8 rounded-sm right-3 text-gray-600 hover:text-black text-xl"
-            >
-              ×
-            </button>
-            {/* header section */}
-
-            <div className="header-section mb-3   text-sm font-serif">
-              <p className="w-full text-center">{data.branch.name}</p>
-              <p className="w-full text-center">{data.branch.address}</p>
-              <p className="w-full text-center">{data.branch.contact}</p>
+          <button
+            onClick={() => setInvoice(false)}
+            className="absolute top-2 bg-gray-300 w-8 h-8 rounded-sm right-3 text-gray-600 hover:text-black text-xl"
+          >
+            ×
+          </button>
+          <div className="bg-white dark:bg-dark p-6 rounded-2xl shadow-lg max-w-[500px] w-full relative">
+            {/* Header */}
+            <div className="text-center mb-3 text-sm font-serif">
+              <p>{data.branch.name}</p>
+              <p>{data.branch.address}</p>
+              <p>{data.branch.contact}</p>
             </div>
 
-            {/* section */}
-
-            <div className="text-gray-black  text-sm">
-              <p>BILL NO: {data.billId}</p>
-              <p>transaction Date: {data.timestamp}</p>
+            {/* Customer & Payment */}
+            <div className="text-sm mb-2">
+              <p><strong>BILL NO:</strong> {data.billId}</p>
+              <p><strong>Date:</strong> {data.timestamp}</p>
+              <p><strong>Customer:</strong> {data.customer.name}</p>
+              <p><strong>Phone:</strong> {data.customer.phone}</p>
+              <p><strong>Address:</strong> {data.customer.address}</p>
+              <p><strong>Payment:</strong> {data.payment.type}</p>
             </div>
 
-            {/* customer details */}
-            <div className="text-gray-black  text-sm">
-              <p>
-                <strong>Name:</strong> {data.customer.name}
-              </p>
-              <p>
-                <strong>phone:</strong> {invoice.phone}
-              </p>
-              <p>
-                <strong>Address</strong> {invoice.address}
-              </p>
-            </div>
-            <div>
-              <p>payment:{data.payment.type} </p>
-            </div>
-
+            {/* Items Table */}
             <table className="w-full mt-4 border border-black border-dotted border-collapse">
               <thead>
-                <tr className=" border border-black border-dotted">
-                  <td>sn </td>
-                  <td className="border border-black border-dotted ">
-                    product
-                  </td>
-                  <td className="border border-black border-dotted ">Qty </td>
-                  <td className=" border border-black border-dotted">rate</td>
-                  <td className=" border border-black border-dotted">amount</td>
+                <tr>
+                  <th className="border border-black border-dotted p-1">SN</th>
+                  <th className="border border-black border-dotted p-1">Item</th>
+                  <th className="border border-black border-dotted p-1">Qty</th>
+                  <th className="border border-black border-dotted p-1">Unit Price</th>
+                  <th className="border border-black border-dotted p-1">Discount</th>
+                  <th className="border border-black border-dotted p-1">Total</th>
                 </tr>
               </thead>
               <tbody>
                 {data.items.map((item, index) => (
-                  <tr key={index} border border-black border-dotted>
-                    <td className="p-2 border border-black border-dotted">
-                      {index + 1}
-                    </td>
-                    <td className="p-2 border border-black border-dotted">
-                      {item.name}
-                    </td>
-                    <td className="p-2 border border-black border-dotted">
-                      {item.quantity} {item.unit}
-                    </td>
-                    <td className="p-2 border border-black border-dotted">
-                      {item.unitPrice}
-                    </td>
-                    <td className="p-2 border border-black border-dotted">
-                      {item.total}{" "}
-                    </td>
-                    <td></td>
+                  <tr key={index}>
+                    <td className="border border-black border-dotted p-1">{index + 1}</td>
+                    <td className="border border-black border-dotted p-1">{item.name}</td>
+                    <td className="border border-black border-dotted p-1">{item.quantity} {item.unit}</td>
+                    <td className="border border-black border-dotted p-1">{item.unitPrice}</td>
+                    <td className="border border-black border-dotted p-1">{item.discount}</td>
+                    <td className="border border-black border-dotted p-1">{item.total}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
 
-            <h3 className="text-right mt-3 font-semibold">
-              Total: Rs {data.subtotal}
-            </h3>
+            <div className="text-right mt-3 font-semibold">
+              <p>Subtotal: Rs {data.subtotal}</p>
+              <p>Grand Total: Rs {data.grandTotal}</p>
+            </div>
 
+            {/* Download Buttons */}
             <div className="mt-5 flex justify-center space-x-4">
               <button
                 onClick={handleDownloadCSV}
-                className="bg-gray-400 text-black hover:text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+                className="bg-secondary text-black hover:text-white px-4 py-2 rounded-lg hover:bg-secondary-hover transition"
               >
                 Download CSV
               </button>
               <button
                 onClick={handleDownloadPDF}
-                className="bg-gray-400 text-black hover:text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                className="bg-secondary text-black hover:text-white px-4 py-2 rounded-lg hover:bg-secondary-hover transition"
               >
                 Download PDF
               </button>

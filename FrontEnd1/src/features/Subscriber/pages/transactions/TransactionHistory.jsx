@@ -8,12 +8,15 @@ import { transactionsData } from "@/data/mockData";
 import InvoiceViewer from "./Invoice";
 import Input from "@/features/ui/Input";
 import { useTranslation } from "react-i18next";
+import {RotateCcwIcon } from "lucide-react";
+import { OptionComponent, SelectComponent } from "@/features/ui/Select";
 
 const TransactionHistory = () => {
   const {t}=useTranslation()
   const [transactions, setTransactions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const[paymentState,setPaymentState]=useState("completed");
   const [dateRange, setDateRange] = useState({
     start: "",
     end: "",
@@ -28,16 +31,21 @@ const TransactionHistory = () => {
 
   useEffect(() => {
     let filtered = transactions;
+     if (searchTerm) {
+    const term = searchTerm.toLowerCase();
 
-    if (searchTerm) {
-      filtered = filtered.filter(
-        (transaction) =>
-          transaction.invoiceNumber
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase()) ||
-          transaction.customer.toLowerCase().includes(searchTerm.toLowerCase())
+    filtered = filtered.filter((transaction) => {
+      const dateString = new Date(transaction.date)
+        .toISOString()
+        .slice(0, 10); // yyyy-mm-dd
+
+      return (
+        transaction.invoiceNumber.toLowerCase().includes(term) ||
+        transaction.customer.toLowerCase().includes(term) ||
+        dateString.includes(term)
       );
-    }
+    });
+  }
 
     if (dateRange.start) {
       filtered = filtered.filter(
@@ -51,8 +59,14 @@ const TransactionHistory = () => {
       );
     }
 
+      if (paymentState !== "all") {
+      filtered = filtered.filter(
+        (trans) => trans.status === paymentState
+      );
+    }
+   
     setFilteredTransactions(filtered);
-  }, [searchTerm, dateRange, transactions]);
+  }, [searchTerm, dateRange,paymentState, transactions]);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -146,6 +160,15 @@ const TransactionHistory = () => {
           onChange={(e) =>
             setDateRange((prev) => ({ ...prev, start: e.target.value }))
           }
+           reset={
+                      <RotateCcwIcon
+                        size={16} 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setDateRange((prev) => ({ ...prev, start: "" }));
+                        }}
+                      />
+                    }
           className="bg-white dark:bg-dark"
         />
         <Input
@@ -156,8 +179,30 @@ const TransactionHistory = () => {
           onChange={(e) =>
             setDateRange((prev) => ({ ...prev, end: e.target.value }))
           }
+           reset={
+                      <RotateCcwIcon
+                        size={18}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setDateRange((prev) => ({ ...prev, end: "" }));
+                        }}
+                      />
+                    }
           className="bg-white dark:bg-dark"
         />
+         <SelectComponent value={paymentState} onChange={(e) => setPaymentState(e.target.value)} placeholder="Select a status" className="bg-white dark:bg-dark">
+            <OptionComponent  value={"all"}>
+                    {t("transactionHistory.all")}
+                    </OptionComponent>
+                    <OptionComponent  value={"completed"}>
+                       {t("transactionHistory.completed")}
+                    </OptionComponent>
+                       <OptionComponent  value={"pending"}>
+                       {t("transactionHistory.pending")}
+                    </OptionComponent>
+                </SelectComponent>
+ 
+    
         <div className="md:pt-5 flex items-center h-full"><p className="text-muted">
          {t("transactionHistory.showing")} {filteredTransactions.length} {t("transactionHistory.transactions")}
         </p></div>

@@ -1,9 +1,9 @@
 {
   "customer": {
-    "titleU": "Register New Customer",
-    "descriptionU": "Fill in the details to register a new customer.",
-    "title": "Update Customer Information",
-    "description": "Modify the customer details below.",
+    "title": "Register New Customer",
+    "description": "Fill in the details to register a new customer.",
+    "titleU": "Update Customer Information",
+    "descriptionU": "Modify the customer details below.",
     "fields": {
       "fullName": {
         "label": "Full Name *",

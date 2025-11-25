@@ -1,16 +1,15 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { MagnifyingGlassIcon, DocumentTextIcon, EyeIcon } from '@heroicons/react/24/outline';
 import { transactionsData } from '@/data/mockData';
 import InvoiceViewer from '../../components/Invoice';
 import { useTranslation } from 'react-i18next';
 import Input from '@/features/ui/Input';
-
+import { RotateCcw  } from 'lucide-react';
 const TransactionHistory = () => {
   const { t } = useTranslation("cashier");
   const [transactions, setTransactions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
   const [invoice, setInvoice] = useState(false);
 
@@ -24,31 +23,32 @@ const TransactionHistory = () => {
     "actions"
   ];
 
+
+
   useEffect(() => {
     setTransactions(transactionsData);
-    setFilteredTransactions(transactionsData);
   }, []);
 
-  useEffect(() => {
-    let filtered = transactions;
+  const filteredTransactions = useMemo(() => {
+  const term = searchTerm.toLowerCase();
 
-    if (searchTerm) {
-      filtered = filtered.filter(transaction =>
-        transaction.invoiceNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        transaction.customer.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
+  return transactions.filter(transaction => {
+    const matchesSearch =
+      transaction.invoiceNumber.toLowerCase().includes(term) ||
+      transaction.customer.toLowerCase().includes(term);
 
-    if (dateRange.start) {
-      filtered = filtered.filter(transaction => transaction.date >= dateRange.start);
-    }
+    const matchesStartDate = dateRange.start
+      ? transaction.date >= dateRange.start
+      : true;
 
-    if (dateRange.end) {
-      filtered = filtered.filter(transaction => transaction.date <= dateRange.end);
-    }
+    const matchesEndDate = dateRange.end
+      ? transaction.date <= dateRange.end
+      : true;
 
-    setFilteredTransactions(filtered);
-  }, [searchTerm, dateRange, transactions]);
+    return matchesSearch && matchesStartDate && matchesEndDate;
+  });
+}, [searchTerm, dateRange, transactions]);
+
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -66,9 +66,6 @@ const TransactionHistory = () => {
   const viewInvoice = (transactionId) => {
     setInvoice(true);
   };
-
-
-
   
   return (
     <div className="space-y-6">
@@ -179,14 +176,23 @@ const TransactionHistory = () => {
           </div>
 
           {/* Date filters */}
-          <div className="flex justify-between md:flex-row lg:flex-row gap-2 w-full">
+          <div className="flex md:justify-between items-center md:flex-row lg:flex-row gap-2 w-full">
             <Input
               type="date"
               placeholder={t("transactions.startDate")}
               value={dateRange.start}
               onChange={(e) => setDateRange(prev => ({ ...prev, start: e.target.value }))}
               className="w-full max-w-sm bg-white dark:bg-dark  "
-            />
+            /> 
+             {dateRange.start && (
+             <span
+                onClick={() =>
+                 setDateRange(prev => ({ ...prev, start: "" }))
+                  }
+                  >
+               <RotateCcw  size={18} className=' rounded-md scale-110 transition-transform duration-1000' />
+            </span>
+  )}
             <Input
               type="date"
               placeholder={t("transactions.endDate")}
@@ -194,6 +200,15 @@ const TransactionHistory = () => {
               onChange={(e) => setDateRange(prev => ({ ...prev, end: e.target.value }))}
               className="w-full bg-white dark:bg-dark  max-w-sm rounded-lg"
             />
+             {dateRange.end && (
+             <span className='cursor-pointer '
+                onClick={() =>
+                 setDateRange(prev => ({ ...prev, end: "" }))
+                  }
+                  >
+               <RotateCcw  size={18} className=' rounded-md scale-110 transition-transform duration-1000' />
+            </span>
+  )}
           </div>
         </div>
       </div>

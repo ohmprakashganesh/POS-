@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   PlusIcon,
@@ -15,23 +15,24 @@ const CustomerList = () => {
   const {t}=useTranslation()
   const [customers, setCustomers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredCustomers, setFilteredCustomers] = useState([]);
 
   useEffect(() => {
     // In real app, this would be an API call
     setCustomers(customersData);
-    setFilteredCustomers(customersData);
   }, []);
 
-  useEffect(() => {
-    const filtered = customers.filter(
-      (customer) =>
-        customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        customer.phone.includes(searchTerm) ||
-        customer.email.toLowerCase().includes(searchTerm.toLowerCase())
+ const filteredCustomers = useMemo(() => {
+  const term = searchTerm.toLowerCase();
+  return customers.filter((customer) => {
+    return (
+      customer.name.toLowerCase().includes(term) ||
+      customer.phone.includes(term) ||
+      customer.email.toLowerCase().includes(term)||
+      customer.address.toLowerCase().includes(term)
     );
-    setFilteredCustomers(filtered);
-  }, [searchTerm, customers]);
+  });
+}, [searchTerm, customers]);
+
 
   const handleDelete = (customerId) => {
     if (window.confirm("Are you sure you want to delete this customer?")) {

@@ -14,11 +14,6 @@ const CartEmpty = () => {
  <ShoppingCart width={200} height={200} />
 
       <h1 className=" text-4xl font-bold text-dark dark:text-white mt-3">{t("cart.emptyCart")}</h1>
-
-      <p className="text-center mt-2 px-4">
-        {t("cart.addItems")}
-      </p>
-
       <Button onClick={() => navigate("/")} className="mt-4 w-full max-w-sm">
        {t("cart.addItems")}
       </Button>

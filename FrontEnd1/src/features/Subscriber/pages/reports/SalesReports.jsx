@@ -4,7 +4,6 @@ import { OptionComponent, SelectComponent } from "@/features/ui/Select";
 import Input from "@/features/ui/Input";
 import Button from "@/features/ui/Button";
 import { useTranslation } from "react-i18next";
-
 import {
   BarChart,
   Bar,
@@ -16,70 +15,134 @@ import {
   LineChart,
   Line,
 } from "recharts";
+import { RotateCcw } from "lucide-react";
+
+// 🌟 Single Source of Daily Data 🌟
+const fullSalesData = [
+  { date: "2024-01-01", sales: 2540, orders: 12 },
+  { date: "2024-01-02", sales: 1870, orders: 8 },
+  { date: "2024-01-03", sales: 3210, orders: 15 },
+  { date: "2024-01-04", sales: 2890, orders: 13 },
+  { date: "2024-01-05", sales: 2150, orders: 10 },
+  { date: "2024-01-06", sales: 3400, orders: 16 },
+  { date: "2024-01-07", sales: 3100, orders: 14 },
+  { date: "2024-01-08", sales: 2750, orders: 11 },
+  { date: "2024-01-09", sales: 2980, orders: 13 },
+  { date: "2024-01-10", sales: 3500, orders: 17 },
+  { date: "2024-01-11", sales: 2400, orders: 10 },
+  { date: "2024-01-12", sales: 3800, orders: 18 },
+  { date: "2024-01-13", sales: 2250, orders: 9 },
+  { date: "2024-01-14", sales: 3050, orders: 14 },
+  { date: "2024-01-15", sales: 3300, orders: 15 },
+  { date: "2024-01-16", sales: 2600, orders: 12 },
+  { date: "2024-01-17", sales: 3750, orders: 18 },
+  { date: "2024-01-18", sales: 2050, orders: 9 },
+  { date: "2024-01-19", sales: 3900, orders: 19 },
+  { date: "2024-01-20", sales: 2800, orders: 13 },
+  { date: "2024-01-21", sales: 3150, orders: 14 },
+  { date: "2024-01-22", sales: 2450, orders: 11 },
+  { date: "2024-01-23", sales: 3550, orders: 16 },
+  { date: "2024-01-24", sales: 2950, orders: 13 },
+  { date: "2024-01-25", sales: 3250, orders: 15 },
+  { date: "2024-01-26", sales: 2700, orders: 12 },
+  { date: "2024-01-27", sales: 4000, orders: 20 },
+  { date: "2024-01-28", sales: 2350, orders: 10 },
+  { date: "2024-01-29", sales: 3650, orders: 17 },
+  { date: "2024-01-30", sales: 2500, orders: 11 },
+  { date: "2024-01-31", sales: 3450, orders: 16 },
+];
+
+// Helper to format date into "YYYY-MM-DD" string
+const formatDate = (date) => date.toISOString().split('T')[0];
 
 const SalesReports = () => {
   const { t } = useTranslation();
   const [dateRange, setDateRange] = useState({
-    start: "2024-01-01",
-    end: "2024-01-31",
+    start: formatDate(new Date(fullSalesData[0].date)),
+    end: formatDate(new Date(fullSalesData[fullSalesData.length - 1].date)),
   });
   const [reportType, setReportType] = useState("daily");
   const [salesData, setSalesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [confirmedDateRange, setConfirmedDateRange] = useState(dateRange);
+
+  // 🌟 Aggregation Functions (based on daily data) 🌟
+  const getWeeklyData = (data) => {
+    // Simple mock aggregation by weeks (grouping 7 days)
+    const weeks = {};
+    data.forEach((item, index) => {
+      const weekIndex = Math.floor(index / 7);
+      const weekKey = `Week ${weekIndex + 1}`;
+      if (!weeks[weekKey]) {
+        weeks[weekKey] = { week: weekKey, sales: 0, orders: 0 };
+      }
+      weeks[weekKey].sales += item.sales;
+      weeks[weekKey].orders += item.orders;
+    });
+    return Object.values(weeks);
+  };
+
+  const getMonthlyData = (data) => {
+    // Simple mock aggregation by months (using month from date string)
+    const months = {};
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    data.forEach((item) => {
+      const monthIndex = new Date(item.date).getMonth();
+      const monthKey = monthNames[monthIndex];
+      if (!months[monthKey]) {
+        months[monthKey] = { month: monthKey, sales: 0, orders: 0 };
+      }
+      months[monthKey].sales += item.sales;
+      months[monthKey].orders += item.orders;
+    });
+    return Object.values(months);
+  };
+
   useEffect(() => {
-    // Simulate API call
     const loadSalesData = async () => {
       setIsLoading(true);
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Mock data based on report type
-      const mockData = {
-        daily: [
-          { date: "Day 1", sales: 2540, orders: 12 },
-          { date: "Day 2", sales: 1870, orders: 8 },
-          { date: "Day 3", sales: 3210, orders: 15 },
-          { date: "Day 4", sales: 2890, orders: 13 },
-          { date: "Day 5", sales: 2150, orders: 10 },
-          { date: "Day 6", sales: 3400, orders: 16 },
-        ],
-        weekly: [
-          { week: "week 1", sales: 12540, orders: 58 },
-          { week: "week 2", sales: 11870, orders: 52 },
-          { week: "week 3", sales: 13210, orders: 61 },
-          { week: "Week 4", sales: 12890, orders: 59 },
-          { week: "week 5", sales: 13500, orders: 65 },
-          { week: "week 6", sales: 14230, orders: 70 },
-        ],
-        monthly: [
-          { month: "Jan", sales: 50510, orders: 230 },
-          { month: "Feb", sales: 48760, orders: 215 },
-          { month: "Mar", sales: 52340, orders: 245 },
-          { month: "Apr", sales: 54000, orders: 255 },
-          { month: "May", sales: 56020, orders: 270 },
-          { month: "June", sales: 57500, orders: 280 },
-        ],
-      };
+      // 1. Apply Date Filter (only relevant for daily reports, but limits the source data)
+      let filteredData = fullSalesData;
 
-      setSalesData(mockData[reportType]);
+      if (confirmedDateRange.start && confirmedDateRange.end) {
+        filteredData = fullSalesData.filter((item) => {
+          const itemDate = new Date(item.date);
+          const startDate = new Date(confirmedDateRange.start);
+          const endDate = new Date(confirmedDateRange.end);
+          
+          startDate.setHours(0, 0, 0, 0);
+          endDate.setHours(23, 59, 59, 999); 
+          
+          return itemDate >= startDate && itemDate <= endDate;
+        });
+      }
+
+      let dataToSet;
+      if (reportType === "daily") {
+        dataToSet = filteredData;
+      } else if (reportType === "weekly") {
+        dataToSet = getWeeklyData(filteredData);
+      } else if (reportType === "monthly") {
+        dataToSet = getMonthlyData(filteredData);
+      }
+
+      setSalesData(dataToSet);
       setIsLoading(false);
     };
 
     loadSalesData();
-  }, [reportType, dateRange]);
+  }, [reportType, confirmedDateRange]);
+
+  const handleFilter = () => {
+    setConfirmedDateRange(dateRange);
+  };
 
   const totalSales = salesData.reduce((sum, item) => sum + item.sales, 0);
   const totalOrders = salesData.reduce((sum, item) => sum + item.orders, 0);
-  const averageOrderValue = totalSales / totalOrders;
-
-  // 2. A formatter function for the value axis/tooltip
-  const salesValueFormatter = (value) => {
-    // Simple function to format the value as currency (e.g., $15k)
-    if (value >= 1000) {
-      return `$${(value / 1000).toFixed(0)}k`;
-    }
-    return `$${value}`;
-  };
+  const averageOrderValue = totalOrders > 0 ? totalSales / totalOrders : 0;
 
   return isLoading ? (
     <div className="flex items-center justify-center h-screen w-full dark:bg-dark ">
@@ -91,7 +154,6 @@ const SalesReports = () => {
         <h1 className="text-2xl font-bold">{t("report.title")}</h1>
         <p className="text-muted">{t("report.description")}</p>
       </div>
-      {/* Filters */}
       <div className="grid items-end grid-cols-1 md:grid-cols-4 gap-4">
         <SelectComponent
           label={t("report.type")}
@@ -105,6 +167,7 @@ const SalesReports = () => {
             {t("report.monthly")}
           </OptionComponent>
         </SelectComponent>
+
         <Input
           label={t("report.startDate")}
           type="date"
@@ -112,9 +175,17 @@ const SalesReports = () => {
           onChange={(e) =>
             setDateRange((prev) => ({ ...prev, start: e.target.value }))
           }
+          reset={
+            <RotateCcw
+              size={18}
+              onClick={(e) => {
+                e.stopPropagation();
+                setDateRange((prev) => ({ ...prev, start: "" }));
+              }}
+            />
+          }
           className=" bg-white dark:bg-dark"
         />
-
         <Input
           label={t("report.endDate")}
           type="date"
@@ -122,20 +193,29 @@ const SalesReports = () => {
           onChange={(e) =>
             setDateRange((prev) => ({ ...prev, end: e.target.value }))
           }
+          reset={
+            <RotateCcw
+              size={18}
+              onClick={(e) => {
+                e.stopPropagation();
+                setDateRange((prev) => ({ ...prev, end: "" }));
+              }}
+            />
+          }
           className=" bg-white dark:bg-dark"
         />
 
         <div className="flex items-end">
-          <Button>{t("report.generateReport")}</Button>
+             <Button onClick={handleFilter}>
+       {t("report.applyFilter")}</Button>
         </div>
       </div>
-      {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
           <ChartBarIcon className="size-8 text-primary" />
           <div className="details">
             <p className="font-medium ">{t("report.totalSales")}</p>
-            <p className="text-2xl font-bold"> ${totalSales.toLocaleString()}</p>
+            <p className="text-2xl font-bold"> {totalSales.toLocaleString()}</p>
           </div>
         </div>
         <div className="bg-white dark:bg-dark rounded-md shadow-sm flex items-center p-5 gap-4">
@@ -151,19 +231,20 @@ const SalesReports = () => {
           </span>
           <div className="details">
             <p className="font-medium ">{t("report.averageOrderValue")}</p>
-            <p className="text-2xl font-bold">${averageOrderValue.toFixed(2)}</p>
+            <p className="text-2xl font-bold">
+              ${averageOrderValue.toFixed(2)}
+            </p>
           </div>
         </div>
       </div>
-      {/* Sales Chart */}
       {salesData.length <= 2 ? (
         <div className="no-date w-full h-72 flex flex-col items-center justify-center">
           <ChartBarIcon className="w-16 h-16 mb-4 text-gray-400 dark:text-gray-500" />
-          <p className="text-gray-500 dark:text-gray-400 text-lg font-medium">
-            Not enough data to display chart
+          <p className="text-gray-500 dark: text-gray-400 text-lg font-medium">
+           {t("report.noData")} 
           </p>
           <p className="text-gray-400 dark:text-gray-500 text-sm">
-            Add more data to see trends
+          {t("report.addData")} 
           </p>
         </div>
       ) : (
@@ -175,14 +256,13 @@ const SalesReports = () => {
 
       {salesData.length > 0 && (
         <>
-          {/* Sales Data Table */}
           <div>
             <h3 className="text-xl md:text-2xl font-semibold mb-3">
               {t("report.detailedSales")}
             </h3>
             <div className="overflow-x-auto  rounded-md shadow-sm">
               <table className="table">
-                <thead >
+                <thead>
                   <tr className="table-head-row">
                     <th className="table-th">
                       {reportType === "daily"
@@ -195,21 +275,21 @@ const SalesReports = () => {
                     <th className="table-th">{t("report.numberOfOrders")}</th>
                     <th className="table-th">{t("report.averageOrderValue")}</th>
                   </tr>
-                </thead >
+                </thead>
                 <tbody className="table-body">
                   {salesData.map((item, index) => (
                     <tr key={index} className="table-body-row">
-                      <td className="table-td ">
+                      <td className="table-td">
                         {item.date || item.week || item.month}
                       </td>
-                      <td className="table-td ">
+                      <td className="table-td">
                         {item.sales.toLocaleString()}
                       </td>
-                      <td className="table-td ">
-                        {item.orders}
-                      </td>
-                      <td className="table-td ">
-                        {(item.sales / item.orders).toFixed(2)}
+                      <td className="table-td">{item.orders}</td>
+                      <td className="table-td">
+                        {item.orders > 0
+                          ? (item.sales / item.orders).toFixed(2)
+                          : "0.00"}
                       </td>
                     </tr>
                   ))}
@@ -218,7 +298,6 @@ const SalesReports = () => {
             </div>
           </div>
 
-          {/* Export Options */}
           <div className="flex justify-end gap-4 mb-5">
             <Button outline>{t("report.exportToCSV")}</Button>
             <Button outline>{t("report.printReport")}</Button>
@@ -272,7 +351,6 @@ function SalesChart({ salesData, reportType }) {
     </div>
   );
 }
-
 function OrderChart({ salesData, reportType }) {
   return (
     <div className="w-full">
@@ -283,7 +361,6 @@ function OrderChart({ salesData, reportType }) {
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={salesData}>
             <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-
             <Tooltip
               contentStyle={{
                 backgroundColor: "var(--color-background)",
@@ -292,7 +369,6 @@ function OrderChart({ salesData, reportType }) {
               labelStyle={{ color: "var(--color-foreground)" }}
               itemStyle={{ color: "var(--color-foreground)" }}
             />
-
             <Line
               type="monotone"
               dataKey="orders"
@@ -300,7 +376,6 @@ function OrderChart({ salesData, reportType }) {
               strokeWidth={2}
               dot={false}
             />
-
             <XAxis
               dataKey={
                 reportType === "daily"
@@ -311,7 +386,6 @@ function OrderChart({ salesData, reportType }) {
               }
               tick={{ fill: "currentColor" }}
             />
-
             <YAxis tick={{ fill: "currentColor" }} />
           </LineChart>
         </ResponsiveContainer>

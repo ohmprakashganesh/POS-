@@ -12,6 +12,7 @@ import { useForm } from '../../context/FormContext';
 import AddEditCustomer from '../customer/AddEditCustomer';
 import { QRGenerator } from './Qrgenreator';
 import EmptyCart from './EmptyCart';
+import { RotateCcw } from 'lucide-react';
 
 
 
@@ -155,10 +156,13 @@ const Cart = () => {
           {/* search section */}
        <div className="flex justify-between  gap-3 p-3 rounded-sm ">
   {/* Dropdown */}
+  <div className='flex gap-4'>
+
+
  <select
   value={selectedId || ""}
   onChange={(e) => setSelectedId(e.target.value)}
-  className="w-[48%] md:w-[30%] lg:w-[30%] h-[45px] border border-muted/40 rounded-md bg-white 
+  className="w-full max-w-lg border border-muted/40 rounded-md bg-white 
              dark:bg-dark focus:outline-none focus:ring-0 ring-0"
 >
   <option value="" className="text-muted">{t("general.selectCustomer")}</option>
@@ -169,6 +173,8 @@ const Cart = () => {
   ))}
 </select>
 
+
+  </div>
 
   {/* Button */}
    <Button onClick={()=>openCustomerForm()} className=" px-5 h-[45px] w-[48%] md:w-[30%] ">

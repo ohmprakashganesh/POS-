@@ -19,10 +19,16 @@ const Pos = () => {
     setProducts(productsData);
   }, []);
 
-  const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredProducts = products.filter(product =>{
+    const term=searchTerm.toLowerCase();
+    return(
+  product.name.toLowerCase().includes(searchTerm) ||
+    product.category.toLowerCase().includes(searchTerm)||
+    product.price.toString().includes(term)
+    );
+  });
+  
+
 
   return (
     <div className="h-full w-full flex flex-col lg:flex-row gap-6">

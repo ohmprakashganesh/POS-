@@ -178,7 +178,7 @@
 // export default CustomerList;
 
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   PlusIcon,
@@ -192,13 +192,13 @@ import Input from "@/features/ui/Input";
 import AddEditCustomer from "./AddEditCustomer";
 import { useTranslation } from "react-i18next";
 import { useForm } from "../../context/FormContext";
+import { custom } from "zod";
 
 const CustomerList = () => {
   const { openForm, openCustomerForm } = useForm();
   const { t } = useTranslation("cashier");
   const [customers, setCustomers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredCustomers, setFilteredCustomers] = useState([]);
 
   const headers = [
     t("customers.tableHeaders.sn"),
@@ -211,19 +211,19 @@ const CustomerList = () => {
     t("customers.tableHeaders.actions"),
   ];
 
-  useEffect(() => {
+ useEffect(() => {
     setCustomers(customersData);
-    setFilteredCustomers(customersData);
   }, []);
 
-  useEffect(() => {
-    const filtered = customers.filter(
-      (customer) =>
-        customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        customer.phone.includes(searchTerm) ||
-        customer.email.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCustomers = useMemo(() => {
+    const term = searchTerm.toLowerCase();
+
+    return customers.filter((customer) =>
+      customer.name.toLowerCase().includes(term) ||
+      customer.phone.includes(term) ||
+      customer.email.toLowerCase().includes(term)||
+      customer.address.toLowerCase().includes(term)
     );
-    setFilteredCustomers(filtered);
   }, [searchTerm, customers]);
 
   const handleDelete = (customerId) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   PlusIcon,
@@ -20,17 +20,19 @@ const CashierList = () => {
   useEffect(() => {
     // In real app, this would be an API call
     setCashiers(customersData);
-    setFilteredCashiers(customersData);
-  }, []);
+  }, [])
 
-  useEffect(() => {
-    const filtered = cashiers.filter(
-      (cashier) =>
-        cashier.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        cashier.phone.includes(searchTerm) ||
-        cashier.email.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredCashiers(filtered);
+
+    const filtered =useMemo(()=>{
+      const term= searchTerm.toLowerCase();
+      return cashiers.filter((cashier)=>{
+       return(
+          cashier.name.toLowerCase().includes(term) ||
+          cashier.phone.includes(term) ||
+           cashier.email.toLowerCase().includes(term)||
+           cashier.address.toLowerCase().includes(term)
+        )
+       });
   }, [searchTerm, cashiers]);
 
   const handleDelete = (cashierId) => {
@@ -85,7 +87,7 @@ const CashierList = () => {
           </thead>
 
           <tbody className="table-tbody">
-            {filteredCashiers.map((cashier,index) => (
+            {filtered.map((cashier,index) => (
               <tr
                 key={cashier.id}
                 className="table-body-row"
@@ -140,7 +142,7 @@ const CashierList = () => {
      
 
       {/* Empty state */}
-      {filteredCashiers.length === 0 && (
+      {filtered.length === 0 && (
         <div className="text-center min-h-50 flex items-center justify-center flex-col">
           <UserIcon className="mx-auto h-12 w-12 text-muted" />
           <h3 className="mt-2 font-semibold">
