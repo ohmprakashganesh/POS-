@@ -1,157 +1,180 @@
-import { useAuth } from "@/contexts/AuthContext";
-import React from "react";
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Globe,
-  Star,
-  Facebook,
-  Instagram,
-} from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { DevicePhoneMobileIcon } from "@heroicons/react/24/outline";
+import { companyData } from '@/data/mockData';
 
-const Profile = () => {
-  const navigate = useNavigate();
-  const { user } = useAuth();
-  const business = {
-    id: 1,
-    name: "Glow Beauty & Spa",
-    category: "Beauty & Wellness",
-    description:
-      "Glow Beauty & Spa offers luxurious skincare, massage, and wellness treatments designed to rejuvenate your body and mind. Our experienced staff ensures an unforgettable self-care experience.",
-    address: "123 Lakeside Street, Kathmandu, Nepal",
-    phone: "+977 9801234567",
-    email: "contact@glowspa.com",
-    website: "https://glowspa.com",
-    customer: 200,
-    cashier: 20,
-    joined: "January 2022",
-    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
-  };
+  import React from 'react';
+import { Mail, Phone, MapPin, Building2, CreditCard, Users, CalendarDays, Clock, CheckCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import Button from '@/features/ui/Button';
 
-  // Mock data for the profile page
-  const profileData = {
-    adminID: "KME-0001",
-    userName: "Kode Made Eazy",
-    role: "Administrator",
-    phone: "+234703-331-5307",
-    email: "admin@kode.com",
-    registeredDate: "July 12th, 2023",
-    lastLogin: "Wednesday 12th, July, 2023 @ 11:07:22 am",
-    userRegistrationDate: "July 12th, 2023",
-    companyName: "Kode Made Eazy POS",
-    companyEmail: "kodemade@pos.ocm",
-    companyPhone: "010101010",
-    companyAddress: "Sample address",
-    // Assuming a placeholder image for the profile picture
-    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
-  };
+const StatusBadge = ({ status }) => {
+
+
+  let color = 'bg-gray- text-gray-800';
+  if (status === 'Active') color = 'bg-green-100 text-green-700 ';
+  if (status === 'Expired') color = 'bg-red-100 text-red-700 border-red-300';
+  if (status === 'Trial') color = 'bg-yellow-100 text-yellow-700 border-yellow-300';
+
   return (
-    user && (
-      //  <div className="min-h-screen bg-gray-100 py-10 px-5 flex justify-center">
-      //       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-4xl">
-      //         {/* Header Section */}
-      //         <div className="flex flex-col md:flex-row items-center gap-8 border-b pb-6">
-      //           <img
-      //             src={business.image}
-      //             alt="Business"
-      //             className="w-40 h-40 rounded-full object-cover shadow-md"
-      //           />
-      //           <div className="text-center md:text-left">
-      //             <h1 className="text-3xl font-bold text-gray-800">{business.name}</h1>
-      //             <p className="text-gray-500">{business.category}</p>
-      //             <p className="text-sm text-gray-400 mt-1">Joined {business.joined}</p>
-      //           </div>
-      //         </div>
+    <span className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-semibold border ${color}`}>
+      {status === 'Active' && <CheckCircle className="w-4 h-4" />}
+      {status}
+    </span>
+  );
+};
 
-      //         {/* Description */}
-      //         <div className="mt-6">
-      //           <h2 className="text-lg font-semibold text-gray-800 mb-2">About</h2>
-      //           <p className="text-gray-600 leading-relaxed">{business.description}</p>
-      //         </div>
+// Helper component for detail rows
+const DetailRow = ({ icon: Icon, label, value }) => (
+  <div className="flex items-center gap-3 py-2 border-b border-muted/20 last:border-b-0">
+    <Icon className="w-5 h-5 text-primary/70" />
+    <div>
+      <p className="text-sm font-medium text-muted">{label}</p>
+      <p className="text-base font-semibold">{value}</p>
+    </div>
+  </div>
+);
 
-      //         {/* Contact & Info */}
-      //         <div className="grid md:grid-cols-2 gap-6 mt-8">
-      //           <div className="space-y-3">
-      //             <h2 className="text-lg font-semibold text-gray-800">Contact Info</h2>
-      //             <p className="flex items-center text-gray-600">
-      //               <MapPin className="w-5 h-5 mr-2 text-blue-500" /> {business.address}
-      //             </p>
-      //             <p className="flex items-center text-gray-600">
-      //               <Phone className="w-5 h-5 mr-2 text-blue-500" /> {business.phone}
-      //             </p>
-      //             <p className="flex items-center text-gray-600">
-      //               <Mail className="w-5 h-5 mr-2 text-blue-500" /> {business.email}
-      //             </p>
-      //           </div>
-      //         </div>
+const CompanyProfile = () => {
+  const company = companyData[0] || {};
+  const {
+    name,
+    type,
+    pan,
+    email,
+    phone,
+    address,
+    logoUrl,
+    subscription,
+  } = company;
 
-      //         {/* Action Buttons */}
-      //         <div className="mt-8 flex justify-center md:justify-end gap-4">
-      //           <button onClick={navigate(`/profile/edit/${business.id}`)} className="px-5 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
-      //             Edit Profile
-      //           </button>
-      //           <button className="px-5 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition">
-      //             Message
-      //           </button>
-      //         </div>
-      //       </div>
-      //     </div>
+    const {t} = useTranslation("subscriber");
+    const navigate=useNavigate();
 
-      <div className=" bg-gray-50 min-h-screen">
-        <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-4">
-          My Profile
+  const daysRemaining = (subscription && subscription.endDate) 
+    ? Math.ceil((new Date(subscription.endDate) - new Date()) / (1000 * 60 * 60 * 24))
+    : 'N/A';
+  // -----------------------------------------------------------------
+
+  // Fallback for when data hasn't loaded (e.g., initial state from a real API call)
+  if (!company.id) {
+    return <div className="p-8 text-center text-gray-500">Loading company data...</div>;
+  }
+  return (
+    <div className="container mx-auto ">
+      {/* Page Header */}
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold tracking-tight">
+          {name} Profile Overview
         </h1>
+        <p className="text-muted">Manage your company details and subscription status.</p>
+      </div>
 
-        {/* Main Profile Grid */}
-        <div className="flex justify-center items-center">
-          {/* === Left Column: Profile and Authentication Details === */}
-          <div className="bg-white gap-3 flex flex-col p-6 grid-cols-6 col-span-6 rounded-lg shadow-md border border-gray-100">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        {/* --- LEFT COLUMN: COMPANY DETAILS --- */}
+        <div className="lg:col-span-2 bg-white dark:bg-dark p-6 rounded-xl shadow-md space-y-6">
+          <h2 className="text-xl font-bold border-b pb-3 mb-4">
+            Company Information
+          </h2>
 
-            <div className="flex flex-col  mb-3 items-center ">
-              <logo className="w-25 h-25 text-center items-center flex justify-center rounded-full bg-red-500">
-                hello
-              </logo>
-            </div>
-            <div className="flex justify-center flex-col items-center">
-              <p>om Beakery and Custmatic</p>
-              <p>availe for you </p>
-              <p>barhadashu 2 new roead </p>
-            </div>
+          {/* Logo and Name */}
+          <div className="flex items-center gap-4 border-b pb-4">
+            <img 
+              src={logoUrl} 
+              alt={` Logo`} 
+              className="w-20 h-20 rounded-lg object-cover border" 
+            />
             <div>
-              <p>
-                phone: <span></span>
-              </p>
-              <p>
-                email:<span></span>
-              </p>
-              <p>
-                role : <span></span>
-              </p>
+              <p className="text-xl font-extrabold">{name}</p>
+              <p className="text-muted font-medium">{type} - PAN: {pan}</p>
             </div>
-
-            <div  className=" border-t-2  w-full">
-             <h1 className=" mb-3 font-semibold ">
-            Auth Details
-             </h1>
-              <p className="grid grid-cols-2">
-                <p className="flex flex-col">
-                 <span>Last Login:</span>
-                <span>Registered On:</span>
-                </p>
-
-               <p className="flex flex-col">
-                 <span>Wednesday 12 th , 2025 @11:09:22 am</span>
-                 <span>july 12th, 2023</span>
-               </p>
-                 </p>
+            {/* Action button */}
+            <div className="ml-auto">
+              {/* Assuming Button is importe` */}
+              <Button onClick={()=>navigate(`/signUp/${company.id}`)}  >
+                Update 
+              </Button>
+            </div>
+          </div>
+          
+          {/* Contact Details Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+            <DetailRow icon={Mail} label="Email Address" value={email} />
+            <DetailRow icon={Phone} label="Phone Number" value={phone} />
+            <DetailRow icon={Building2} label="Business Type" value={type} />
+            <DetailRow icon={CreditCard} label="PAN/VAT Number" value={pan} />
+          </div>
+          
+          {/* Address */}
+          <div className="pt-4">
+            <div className="flex items-start gap-3">
+              <MapPin className="w-5 h-5 text-primary/70 mt-1" />
+              <div>
+                <p className="text-sm font-medium text-muted">Business Address</p>
+                <p className="text-base font-semibold">{address}</p>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* --- RIGHT COLUMN: SUBSCRIPTION STATUS --- */}
+        <div className="lg:col-span-1 bg-white dark:bg-dark p-6 rounded-xl shadow-md h-fit space-y-6">
+          <h2 className="text-xl font-bold border-b pb-3">
+            Subscription Status
+          </h2>
+          
+          {/* Plan Name & Status */}
+          <div className="flex flex-col gap-2">
+            <p className="text-lg font-bold flex justify-between items-center">
+              {subscription.planName}
+            </p>
+            <StatusBadge status={subscription.status} />
+          </div>
+
+          {/* Key Dates and Usage */}
+          <div className="space-y-3 pt-3 border-t border-muted/20">
+            {/* Start Date */}
+            <div className="flex items-center justify-between">
+              <div className='flex items-center gap-2 text-muted'>
+                <CalendarDays className="w-5 h-5" />
+                Start Date:
+              </div>
+              <span className='font-semibold'>{subscription.startDate}</span>
+            </div>
+
+            {/* End Date */}
+            <div className="flex items-center justify-between">
+              <div className='flex items-center gap-2 text-muted'>
+                <CalendarDays className="w-5 h-5" />
+                Renewal Date:
+              </div>
+              <span className='font-semibold'>{subscription.endDate}</span>
+            </div>
+
+            {/* Days Remaining */}
+            <div className="flex items-center justify-between text-lg font-bold py-2 bg-primary/10 rounded-md px-3">
+              <div className='flex items-center gap-2 text-primary'>
+                <Clock className="w-5 h-5" />
+                Days Remaining:
+              </div>
+              <span>{daysRemaining} days</span>
+            </div>
+
+            {/* User Capacity */}
+            <div className="flex items-center justify-between border-t border-muted/20 pt-3">
+              <div className='flex items-center gap-2 text-muted'>
+                <Users className="w-5 h-5" />
+                User Capacity:
+              </div>
+              <span className='font-semibold'>{subscription.users} / {subscription.maxUsers} Users</span>
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
-    )
+    </div>
   );
 };
-export default Profile;
+
+export default CompanyProfile;

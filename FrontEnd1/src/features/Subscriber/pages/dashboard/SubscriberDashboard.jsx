@@ -1,37 +1,24 @@
-
-
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { 
-  ShoppingCartIcon, 
-  CurrencyDollarIcon, 
-  ChartBarIcon, 
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import {
+  ShoppingCartIcon,
+  CurrencyDollarIcon,
+  ChartBarIcon,
   ArrowUpIcon,
   ArrowDownIcon,
   CubeIcon,
   UsersIcon,
   ExclamationTriangleIcon,
   PlusIcon,
-  CheckIcon
-} from '@heroicons/react/24/outline';
+  CheckIcon,
+} from "@heroicons/react/24/outline";
 // import { useNotifications } from '../../../../contexts/NotificationContext';
-import { useTranslation } from 'react-i18next';
-import { getMetricCards } from './SubDatas';
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-
-const dailySalesMockData = [
-  { day: "Sun", sales: 2540, orders: 12 },
-  { day: "Mon", sales: 1870, orders: 8 },
-  { day: "Tue", sales: 3210, orders: 15 },
-  { day: "Wed", sales: 2890, orders: 13 },
-  { day: "Thu", sales: 2150, orders: 10 },
-  { day: "Fri", sales: 3400, orders: 16 },
-  { day: "Sat", sales: 3000, orders: 14 },
-];
-
-
+import { useTranslation } from "react-i18next";
+import { getMetricCards } from "./SubDatas";
 
 const Dashboard = () => {
+    const location=useLocation();
+   const returnPath=location.pathname;
   const { t } = useTranslation();
   const [metrics, setMetrics] = useState({
     todaySales: 0,
@@ -41,7 +28,7 @@ const Dashboard = () => {
     expenses: 0,
     totalProducts: 0,
     totalCustomers: 0,
-    lowStockItems: 0
+    lowStockItems: 0,
   });
 
   const [recentTransactions, setRecentTransactions] = useState([]);
@@ -52,67 +39,97 @@ const Dashboard = () => {
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 1000)); 
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setMetrics({
-        todaySales: 2540.00,
-        totalSales: 45678.00,
-        monthlySales: 18450.00,
-        profit: 8234.00,
-        expenses: 2340.00,
+        todaySales: 2540.0,
+        totalSales: 45678.0,
+        monthlySales: 18450.0,
+        profit: 8234.0,
+        expenses: 2340.0,
         totalProducts: 45,
         totalCustomers: 128,
-        lowStockItems: 3
+        lowStockItems: 3,
       });
-      
+
       setRecentTransactions([
-        { id: 1, customer: 'John Doe', amount: 120.00, items: 2, time: '2 hours ago' },
-        { id: 2, customer: 'Jane Smith', amount: 85.50, items: 3, time: '4 hours ago' },
-        { id: 3, customer: 'Raj Kumar', amount: 210.00, items: 1, time: '5 hours ago' },
-        { id: 4, customer: 'Mike Johnson', amount: 45.99, items: 2, time: '6 hours ago' },
-        { id: 5, customer: 'Sarah Wilson', amount: 299.99, items: 1, time: '1 day ago' }
+        {
+          id: 1,
+          customer: "John Doe",
+          amount: 120.0,
+          items: 2,
+          time: "2 hours ago",
+        },
+        {
+          id: 2,
+          customer: "Jane Smith",
+          amount: 85.5,
+          items: 3,
+          time: "4 hours ago",
+        },
+        {
+          id: 3,
+          customer: "Raj Kumar",
+          amount: 210.0,
+          items: 1,
+          time: "5 hours ago",
+        },
+        {
+          id: 4,
+          customer: "Mike Johnson",
+          amount: 45.99,
+          items: 2,
+          time: "6 hours ago",
+        },
+        {
+          id: 5,
+          customer: "Sarah Wilson",
+          amount: 299.99,
+          items: 1,
+          time: "1 day ago",
+        },
       ]);
 
       setLowStockProducts([
-        { id: 1, name: 'Wireless Mouse', stock: 3, minStock: 10 },
-        { id: 2, name: 'Headphones', stock: 7, minStock: 15 },
-        { id: 3, name: 'Keyboard', stock: 0, minStock: 5 }
+        { id: 1, name: "Wireless Mouse", stock: 3, minStock: 10 },
+        { id: 2, name: "Headphones", stock: 7, minStock: 15 },
+        { id: 3, name: "Keyboard", stock: 0, minStock: 5 },
       ]);
 
       setLoading(false);
     };
     loadData();
   }, []);
-  
-  const metricCards=getMetricCards(t,metrics);
+
+  const metricCards = getMetricCards(t, metrics);
   const quickActions = [
     {
-      title: t('dashboard.quickActions.cashiers'),
-      description: t('dashboard.quickActions.viewCashiers'),
+      title: t("dashboard.quickActions.cashiers"),
+      description: t("dashboard.quickActions.viewCashiers"),
       icon: ShoppingCartIcon,
       link: "/cashierList",
-      color: "blue"
+      color: "blue",
     },
     {
-      title: t('dashboard.quickActions.addProduct'),
-      description: t('dashboard.quickActions.addNewProduct'),
+      title: t("dashboard.quickActions.addProduct"),
+      description: t("dashboard.quickActions.addNewProduct"),
       icon: PlusIcon,
       link: "/products/add",
-      color: "green"
+      color: "green",
     },
     {
-      title: t('dashboard.quickActions.addCustomer'),
-      description: t('dashboard.quickActions.registerCustomer'),
+      title: t("dashboard.quickActions.addCustomer"),
+      description: t("dashboard.quickActions.registerCustomer"),
       icon: UsersIcon,
       link: "/customers/add",
-      color: "purple"
+      color: "purple",
     },
     {
-      title: t('dashboard.quickActions.viewReports'),
-      description: t('dashboard.quickActions.salesAndAnalytics'),
+      title: t("dashboard.quickActions.viewReports"),
+      description: t("dashboard.quickActions.salesAndAnalytics"),
       icon: ChartBarIcon,
       link: "/reports/sales",
-      color: "orange"
-    }
+      color: "orange",
+    },
   ];
 
   if (loading) {
@@ -127,33 +144,45 @@ const Dashboard = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold">{t('dashboard.title')}</h1>
-          <p className="text-muted">{t('dashboard.subtitle')}</p>
+          <h1 className="text-2xl font-bold">{t("dashboard.title")}</h1>
+          <p className="text-muted">{t("dashboard.subtitle")}</p>
         </div>
         <div className="text-sm text-muted">
-          {t('dashboard.lastUpdated')}: {new Date().toLocaleDateString()}
+          {t("dashboard.lastUpdated")}: {new Date().toLocaleDateString()}
         </div>
       </div>
 
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
         {metricCards.map((card) => (
-          <div key={card.title} className="bg-linear-to-r bg-white dark:bg-dark rounded-md shadow-sm p-5">
+          <div
+            key={card.title}
+            className="bg-linear-to-r bg-white dark:bg-dark rounded-md shadow-sm p-5"
+          >
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xl font-semibold ">{card.title}</p>
                 <p className="text-2xl font-bold mt-2">
-                  {(card.title.includes(t('dashboard.metrics.monthlyRevenue')) || 
-                    card.title.includes(t('dashboard.metrics.todaysSales')) || 
-                    card.title.includes(t('dashboard.metrics.netProfit')))
+                  {card.title.includes(t("dashboard.metrics.monthlyRevenue")) ||
+                  card.title.includes(t("dashboard.metrics.todaysSales")) ||
+                  card.title.includes(t("dashboard.metrics.netProfit"))
                     ? `$${card.value.toLocaleString()}`
-                    : card.value.toLocaleString()
-                  }
+                    : card.value.toLocaleString()}
                 </p>
                 <p className="text-sm text-muted mt-1">{card.description}</p>
-                <div className={`flex items-center mt-1 text-sm ${card.change >= 0 ? 'text-constructive' : 'text-destructive'}`}>
-                  {card.change >= 0 ? <ArrowUpIcon className="h-4 w-4 mr-1" /> : <ArrowDownIcon className="h-4 w-4 mr-1" />}
-                  {t('dashboard.metrics.percentChange', { value: Math.abs(card.change) })}
+                <div
+                  className={`flex items-center mt-1 text-sm ${
+                    card.change >= 0 ? "text-constructive" : "text-destructive"
+                  }`}
+                >
+                  {card.change >= 0 ? (
+                    <ArrowUpIcon className="h-4 w-4 mr-1" />
+                  ) : (
+                    <ArrowDownIcon className="h-4 w-4 mr-1" />
+                  )}
+                  {t("dashboard.metrics.percentChange", {
+                    value: Math.abs(card.change),
+                  })}
                 </div>
               </div>
               <div className={`p-3 rounded-full bg-${card.color}-100`}>
@@ -169,9 +198,13 @@ const Dashboard = () => {
         <div className="bg-white dark:bg-dark rounded-lg shadow-sm  p-5">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xl font-semibold">{t('dashboard.metrics.totalProducts')}</p>
+              <p className="text-xl font-semibold">
+                {t("dashboard.metrics.totalProducts")}
+              </p>
               <p className="text-2xl font-bold ">{metrics.totalProducts}</p>
-              <p className="text-sm text-muted">{t('dashboard.metrics.inInventory')}</p>
+              <p className="text-sm text-muted">
+                {t("dashboard.metrics.inInventory")}
+              </p>
             </div>
             <CubeIcon className="h-8 w-8 text-primary" />
           </div>
@@ -180,9 +213,15 @@ const Dashboard = () => {
         <div className="bg-white dark:bg-dark rounded-md shadow-sm p-5">
           <div className="flex items-center justify-between">
             <div>
-              <p className=" text-xl font-semibold  ">{t('dashboard.metrics.monthlyExpenses')}</p>
-              <p className="text-2xl font-bold ">${metrics.expenses.toLocaleString()}</p>
-              <p className="text-sm text-muted">{t('dashboard.metrics.operatingCosts')}</p>
+              <p className=" text-xl font-semibold  ">
+                {t("dashboard.metrics.monthlyExpenses")}
+              </p>
+              <p className="text-2xl font-bold ">
+                ${metrics.expenses.toLocaleString()}
+              </p>
+              <p className="text-sm text-muted">
+                {t("dashboard.metrics.operatingCosts")}
+              </p>
             </div>
             <CurrencyDollarIcon className="h-8 w-8 text-secondary" />
           </div>
@@ -191,9 +230,13 @@ const Dashboard = () => {
         <div className="bg-white dark:bg-dark rounded-md  shadow-sm p-5">
           <div className="flex items-center justify-between">
             <div>
-              <p className=" text-xl font-semibold ">{t('dashboard.metrics.lowStockItems')}</p>
+              <p className=" text-xl font-semibold ">
+                {t("dashboard.metrics.lowStockItems")}
+              </p>
               <p className="text-2xl font-bold ">{metrics.lowStockItems}</p>
-              <p className="text-sm text-muted">{t('dashboard.metrics.needRestocking')}</p>
+              <p className="text-sm text-muted">
+                {t("dashboard.metrics.needRestocking")}
+              </p>
             </div>
             <ExclamationTriangleIcon className="h-8 w-8 text-tertiary" />
           </div>
@@ -202,15 +245,19 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <div className="quick-actions">
-        <h3 className="font-semibold  mb-4">{t('dashboard.quickActions.title')}</h3>
+        <h3 className="font-semibold  mb-4">
+          {t("dashboard.quickActions.title")}
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {quickActions.map((action) => (
             <Link
-              key={action.title}
               to={action.link}
+               state={{from:returnPath}}
               className="p-4 bg-white dark:bg-dark border border-transparent hover:border-primary/50  shadow-sm rounded-md   text-center group"
             >
-              <action.icon className={`h-8 w-8 text-${action.color}-600 mx-auto`} />
+              <action.icon
+                className={`h-8 w-8 text-${action.color}-600 mx-auto`}
+              />
               <p className="mt-2 font-medium">{action.title}</p>
               <p className="text-sm text-muted">{action.description}</p>
             </Link>
@@ -222,24 +269,39 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
         <div className="bg-white dark:bg-dark rounded-md shadow-sm p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold">{t('dashboard.sections.recentTransactions')}</h3>
-            <Link to="/transactions" className="text-sm text-primary hover:text-primary-hover">{t('dashboard.sections.viewAll')}</Link>
+            <h3 className="text-lg font-semibold">
+              {t("dashboard.sections.recentTransactions")}
+            </h3>
+            <Link
+              to="/transactions"
+              state={{from:returnPath}}
+              className="text-sm text-primary hover:text-primary-hover"
+            >
+              {t("dashboard.sections.viewAll")}
+            </Link>
           </div>
           <div className="space-y-2">
             {recentTransactions.map((transaction) => (
-              <div key={transaction.id} className="flex items-center justify-between p-2 bg-background rounded-md">
+              <div
+                key={transaction.id}
+                className="flex items-center justify-between p-2 bg-background rounded-md"
+              >
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center">
                     <ShoppingCartIcon className="h-5 w-5 text-green-500" />
                   </div>
                   <div className="flex-col">
                     <p className="font-medium ">{transaction.customer}</p>
-                    <p className="text-sm text-muted">{transaction.items} items • {transaction.time}</p>
+                    <p className="text-sm text-muted">
+                      {transaction.items} items • {transaction.time}
+                    </p>
                   </div>
                 </div>
                 <div className="text-right">
                   <p className="font-semibold">${transaction.amount}</p>
-                  <p className="text-sm text-green-500">{t('dashboard.metrics.completed')}</p>
+                  <p className="text-sm text-green-500">
+                    {t("dashboard.metrics.completed")}
+                  </p>
                 </div>
               </div>
             ))}
@@ -248,85 +310,63 @@ const Dashboard = () => {
 
         <div className="bg-white dark:bg-dark h-fit rounded-md shadow-sm p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold ">{t('dashboard.sections.lowStockAlerts')}</h3>
-            <Link to="/products" className="text-sm text-primary hover:text-primary-hover">{t('dashboard.sections.manageInventory')}</Link>
+            <h3 className="text-lg font-semibold ">
+              {t("dashboard.sections.lowStockAlerts")}
+            </h3>
+            <Link
+              to="/products"
+                 state={{from:returnPath}}
+              className="text-sm text-primary hover:text-primary-hover"
+            >
+              {t("dashboard.sections.manageInventory")}
+            </Link>
           </div>
           <div className="space-y-3">
             {lowStockProducts.map((product) => (
-              <div key={product.id} className="flex items-center justify-between p-3 bg-background rounded-md">
+              <div
+                key={product.id}
+                className="flex items-center justify-between p-3 bg-background rounded-md"
+              >
                 <div className="flex items-center space-x-3">
-                  <ExclamationTriangleIcon className={`h-5 w-5 ${product.stock===0? "text-destructive" :"text-tertiary"}`} />
+                  <ExclamationTriangleIcon
+                    className={`h-5 w-5 ${
+                      product.stock === 0 ? "text-destructive" : "text-tertiary"
+                    }`}
+                  />
                   <div>
                     <p className="font-medium">{product.name}</p>
                     <p className="text-sm text-muted">
-                      {product.stock === 0 
-                        ? t('dashboard.metrics.outOfStock') 
-                        : t('dashboard.metrics.unitsLeft', { count: product.stock })}
+                      {product.stock === 0
+                        ? t("dashboard.metrics.outOfStock")
+                        : t("dashboard.metrics.unitsLeft", {
+                            count: product.stock,
+                          })}
                     </p>
                   </div>
                 </div>
                 <Link
                   to={`/products/edit/${product.id}`}
-                  className={`px-3 py-1 text-sm  rounded ${product.stock===0 ? "bg-destructive text-destructive-foreground":"bg-tertiary text-tertiary-foreground"}`}
+                   state={{from:returnPath}}
+                  className={`px-3 py-1 text-sm  rounded ${
+                    product.stock === 0
+                      ? "bg-destructive text-destructive-foreground hover:bg-destructive-hover"
+                      : "bg-tertiary text-tertiary-foreground hover:bg-tertiary-hover"
+                  }`}
                 >
-                  {t('dashboard.sections.restock')}
+                  {t("dashboard.sections.restock")}
                 </Link>
               </div>
             ))}
             {lowStockProducts.length === 0 && (
               <div className="text-center py-4 text-muted">
                 <CheckIcon className="h-8 w-8 text-constructive mx-auto" />
-                <p className="mt-2">{t('dashboard.metrics.allProductsWellStocked')}</p>
+                <p className="mt-2">
+                  {t("dashboard.metrics.allProductsWellStocked")}
+                </p>
               </div>
             )}
           </div>
         </div>
-      </div>
-
-      {/* Sales Overview */}
-      <div className="bg-white dark:bg-dark rounded-md shadow-sm  h-fit flex flex-col">
-       {dailySalesMockData.length<=3 ?  <div className="grow flex items-center justify-center">
-          <div className="text-center text-muted">
-            <ChartBarIcon className="mx-auto size-12" />
-            <p className="mt-2 ">{t('dashboard.sections.dailySalesChart')}</p>
-            <p className="text-sm">{t('dashboard.sections.visualization')}</p>
-          </div>
-        </div>:
-        <div className=" p-5 charts w-full min-h-100  grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className='w-full max-w-xl h-72'>
-          <h3 className="text-lg font-semibold mb-5">{t('dashboard.sections.salesOverview')}</h3>
-         <ResponsiveContainer width="100%" height="100%">
-                   <LineChart data={dailySalesMockData}>
-                     <Tooltip
-                       contentStyle={{
-                         backgroundColor: "var(--color-background)",
-                         borderRadius: "8px",
-                       }}
-                       labelStyle={{ color: "var(--color-foreground)" }}
-                       itemStyle={{ color: "var(--color-foreground)" }}
-                     />
-         
-                     <Line
-                       type="monotone"
-                       dataKey="sales"
-                       stroke="var(--color-primary)"
-                       strokeWidth={2}
-                       dot={false}
-                     />
-         
-                     <XAxis
-                       dataKey="day"
-                       tick={{ fill: "currentColor" }}
-                     />
-         
-                     <YAxis tick={{ fill: "currentColor" }} />
-                   </LineChart>
-                 </ResponsiveContainer>
-        </div>
-        <div className='w-full h-full max-w-xl'>
-          </div>
-        </div>
-        }
       </div>
     </div>
   );

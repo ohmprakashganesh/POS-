@@ -53,9 +53,9 @@ const SupportReq = () => {
         <div className="overflow-x-auto shadow-md rounded-md">
           <table className="min-w-full divide-y divide-muted/40">
             <thead className="">
-              <tr className='table-head-row'>
+              <tr>
                 {tableHeaders.map((head,ind)=>(
-                <th  key={ind} className="table-th">
+                <th  key={ind}>
                  {head}
                 </th>
                 ))}
@@ -63,22 +63,22 @@ const SupportReq = () => {
             </thead>
                <tbody className=" w-screen shrink  bg-white dark:bg-dark text-muted-hover">
               {requests.map((request) => (
-                <tr  className='table-body-row'
+                <tr
                 >
-                  <td className="table-td">
+                  <td >
                     {request.userId}
                   </td>
-                  <td className="table-td">
+                  <td>
                     {request.category}
                   </td>
 
-                 <td className="table-td">
+                 <td >
                     {request.requestDate ? request.requestDate.toLocaleString().slice(0,10) : 'N/A'}
                   </td>
-                 <td className="table-td">
+                 <td>
                     {request.servedDate ? request.servedDate.toLocaleString().slice(0,10) : 'N/A'}
                   </td>
-                 <td className="table-td">
+                 <td >
                     <span className={` px-2 inline-flex text-xs leading-5  rounded-full shadow-inner ${
                       request.status === 'New' ? 'bg-red-100  text-red-700' :
                       request.status === 'inProgress' ? 'bg-yellow-100  r text-yellow-700' :
@@ -88,18 +88,17 @@ const SupportReq = () => {
                     </span>
                   </td>
                   <td className=" w-15 text-xs  ">
-                     <SelectComponent
-                     className='h-1.5 focus:ring-0 outline-0 border-0 '
+                     <select
+                     className='outline-none'
                         id="timeRange"
                       value={request.status}
                       onChange={(e) => updateRequestStatus(request.id, e.target.value)}
-                     
                       >
                          {STATUS_OPTIONS.map(status => (
-                      <OptionComponent className="truncate w-15 text-xs "  key={status}  value={status}>{status}  </OptionComponent>
+                      <option className="truncate w-15 text-xs "  key={status}  value={status}>{status}  </option>
                       ))}
                 
-                      </SelectComponent>
+                      </select>
 
                   </td>
                 </tr>

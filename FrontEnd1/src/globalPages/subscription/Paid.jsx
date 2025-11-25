@@ -23,7 +23,9 @@ const Paid = () => {
         <p>    Account will be activated with 12 To 14 hours</p> 
          <p>  credentials will be provided through Gmail</p> 
          <div>
-          
+
+          {/* //this is for developemtn  */}
+
         <Button
         onClick={() => navigate("/login")} 
         className="w-full mt-7"
@@ -31,6 +33,10 @@ const Paid = () => {
         <ArrowLeft strokeWidth={2.5}/>
         Back to Home Page
       </Button>
+
+          {/* //for production  */} 
+          {/* there will not be any button segment to get to dashboard , after the activation of company user will redirect to dasboard */}
+          
          </div>
               
          </div>

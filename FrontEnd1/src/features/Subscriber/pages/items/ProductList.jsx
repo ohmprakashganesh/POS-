@@ -10,6 +10,7 @@ import { OptionComponent, SelectComponent } from "@/features/ui/Select";
 import Input from "@/features/ui/Input";
 import { useTranslation } from "react-i18next";
 
+
 const ProductList = () => {
     const location=useLocation();
    const returnPath=location.pathname;
@@ -106,14 +107,14 @@ const ProductList = () => {
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="group relative flex flex-col  bg-white dark:bg-dark shadow-sm rounded-md"
+            className="group  relative flex flex-col  bg-white dark:bg-dark shadow-sm rounded-md hover:-translate-y-px transition-transform"
           >
             <div className="top-options  w-full flex items-center justify-between p-2 h-12">
               {/* Stock badge */}
               <span
-                className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${product.stock <= 10
-                    ? "bg-red-100 text-red-700"
-                    : "bg-green-100 text-green-700"
+                className={`inline-flex  items-center px-2.5 py-1 rounded-full text-xs font-medium ${product.stock <= 10
+                    ? "bg-destructive/15 hover:bg-destructive/20 text-destructive"
+                    : "bg-constructive/15 hover:bg-constructive/20 text-constructive"
                   }`}
               >
                 {product.stock <= 10 ? product.stock == 0 ? t("item.outOfStock") : t("item.lowStock") : t("item.inStock")}
@@ -132,7 +133,7 @@ const ProductList = () => {
 
               {openDropdownId === product.id && <>
                 <div
-                  className="absolute z-100 right-2 top-12  w-44 bg-background  rounded-md shadow-lg  overflow-hidden"
+                  className="absolute animate-fade-slide-in z-100 right-2 top-12  w-44 bg-background  rounded-md shadow-lg  overflow-hidden"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Link
@@ -173,8 +174,8 @@ const ProductList = () => {
                 </h3>
                 <div className="details">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-xs text-muted">{t("item.rs")}</span>
-                    <span className="text-2xl font-bold">
+                    <span className="text-sm text-muted">{t("item.rs")}</span>
+                    <span className="text-xl text-muted-hover font-bold">
                       {product.price}
                     </span>
                   </div>

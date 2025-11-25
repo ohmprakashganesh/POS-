@@ -18,7 +18,7 @@ const LanguageToggle = () => {
     <SelectComponent
       value={i18n.language}
       onChange={handleLanguageChange}
-      className="border-none  mx-0 px-0 focus:ring-0 text-xs sm:text-base"
+      className="border-none mx-0 px-0 focus:ring-0 text-xs sm:text-base"
     >
       <OptionComponent value="en">🇺🇸 En</OptionComponent>
       <OptionComponent value="np">🇳🇵 Np</OptionComponent>

@@ -37,15 +37,10 @@ const Sidebar = ({closeSidebar,className=""}) => {
     {name: t("subscriber.reports"),href: "/reports/sales", icon: ChartBarIcon,}
   ];
   const settings = [
-    {
-      name: t("settings.activePlan"),
-      href: "/subscription",
-      icon: Settings2Icon,
-    },
     { name: t("settings.help"), href: "/help", icon: HelpingHandIcon },
     {
       name: t("settings.updateProfile"),
-      href: "/update-profile",
+      href: "/companyProfile",
       icon: UserIcon,
     },
     {

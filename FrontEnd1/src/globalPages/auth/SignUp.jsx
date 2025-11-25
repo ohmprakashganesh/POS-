@@ -1,19 +1,42 @@
 import Button from "@/features/ui/Button";
 import Input from "@/features/ui/Input";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { companyData } from "@/data/mockData";
+// NOTE: Removed the unused custom imports
+// import { OptionComponent, SelectComponent } from "@/features/ui/Select"; 
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { ArrowLeftIcon } from "lucide-react";
 
-const SignUp = () => {
+const SignUp = ({}) => {
+  const {id}=useParams();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    type: "",
+    type: "", // This value is now bound to the <select>
     pan: "",
     phone: "",
     businessName: "",
     address: "",
     file: null,
   });
+   useEffect(()=>{
+    if(id && companyData.length >0){
+      const company= companyData.find((obj)=>obj.id===id);
+      console.log(company);
+        if(company){
+          setFormData({
+            name: company.name,
+            email: company.email,
+            type: company.type,
+            pan: company.pan,
+            phone: company.phone,
+            address: company.address,
+          })
+        }
+      }
+    },[]);
+  // Corrected 'cusmatic' typo
+  const businessTypes = ["cosmetic", "mechanic", "retail", "medical", "sport"];
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -26,14 +49,11 @@ const SignUp = () => {
     if (name === "file") {
       setFormData({ ...formData, file: files[0] });
     } else {
+      // Handles native <input>, <textarea>, and <select>
       setFormData({ ...formData, [name]: value });
     }
   };
-
   const validateForm = () => {
-    // Note: The original validation message for 'name' checked for 'Business Name'
-    // but the input label says 'Business Name *' and state uses 'name'. I'm
-    // preserving the original logic, assuming 'name' in state is 'Business Name'.
     if (!formData.name.trim()) return "Business Name is required";
     if (!formData.type.trim()) return "Business Type is required";
     if (!formData.pan.trim()) return "PAN Number is required";
@@ -60,7 +80,6 @@ const SignUp = () => {
 
     try {
       // Mock success (replace later with API)
-      // Simulate an async operation
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       setSuccessMsg("Account created successfully! Redirecting...");
@@ -74,14 +93,26 @@ const SignUp = () => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center  px-4">
-      <div className="w-full md:w-[40%] bg-white dark:bg-dark rounded-xl shadow-sm p-8">
+    <>
+    {id && (
+      <Link 
+          to={"/profile"}
+          className="bg-primary/10 absolute z-40 text-left ml-0 hover:bg-primary/30 rounded-full"
+        >
+          <ArrowLeftIcon className="size-10 p-2" strokeWidth={2.5} />
+        </Link>
+    )}
+        
+    <div className="min-h-screen flex items-center justify-center  px-4">
+    
+      <div className="w-full md:w-[50%] bg-white dark:bg-dark rounded-xl shadow-sm md:px-4 px-2 lg:px-4 py-5">
+        
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-extrabold  tracking-tight">
+        <div className="text-center mb-3">
+          <h1 className="text-3xl font-extrabold  tracking-tight">
             Register Your Company
           </h1>
-          <p className="text-muted mt-2 text-sm">
+          <p className="text-muted mt-1 text-sm">
             Already have an account?{" "}
             <Link
               to="/login"
@@ -94,7 +125,7 @@ const SignUp = () => {
 
         {/* Alerts */}
         {error && (
-          <div className="mb-4 rounded-lg border border-destructive bg-destructive/10 px-4 py-3 text-destructive text-sm" role="alert">
+          <div className="mb-2 rounded-lg border border-destructive bg-destructive/10 px-4 py-2 text-destructive text-sm" role="alert">
             * {error}
           </div>
         )}
@@ -105,43 +136,63 @@ const SignUp = () => {
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-2 text-sm">
             {/* Name (Business Name) */}
             <Input label="Business Name *" name="name"
                 type="text"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Enter your business name"/>
-                {/* Type */}
-             <Input label="Business Type *" name="type"
-                type="text"
+
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* PAN */}
+            <Input
+              label="PAN / VAT Number *"
+              name="pan"
+              type="text"
+              value={formData.pan}
+              onChange={handleChange}
+              placeholder="E.g. 48305B"
+            />
+
+            {/* Business Type: Now using native <select> */}
+            <div className="w-full">
+              <label className="block mb-1">Business Type *</label>
+              <select
+                name="type"
                 value={formData.type}
                 onChange={handleChange}
-                placeholder="Enter type of business"/>
-      
-            
-            {/* PAN */}
-            <Input label="PAN Number *"  name="pan"
-                type="text"
-                value={formData.pan}
-                onChange={handleChange}
-                placeholder="E.g. 48305B"/>
+                // Tailwind classes for standard select styling (adjust as needed)
+                className="w-full border border-muted/40 rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-primary/40 focus:border-transparent"
+              >
+                <option value="">Select Business Type</option>
+                {businessTypes.map((item, ind) => (
+                  <option key={ind} value={item}>
+                    {/* Capitalize for presentation */}
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           {/* Email and Phone: Grouped in one row */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Email */}
-            <Input label="Email Address *"  name="email"
+            <Input label="Email Address *"  name="email"
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="example@company.com" />
                 {/* Phone */}
-            <Input label="Phone Number *"  name="phone"
+            <Input label="Phone Number *"  name="phone"
                 type="tel"
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="+977 98XXXXXXXX"/>
 
-           </div>
+            </div>
 
           {/* Address */}
           <div>
@@ -163,8 +214,8 @@ const SignUp = () => {
               type="file"
               accept="image/*"
               onChange={handleChange}
-               className="cursor-pointer focus:outline-none p-0 file:mr-3  file:py-3 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary-hover transition duration-150 ease-in-out"
-              
+              // Tailwind styles for file input
+             className="cursor-pointer focus:outline-none p-0 file:mr-3 file:py-3 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary-hover transition duration-150 ease-in-out"
               />
           {/* Terms */}
           <div className="flex items-start gap-2 pt-2">
@@ -204,6 +255,7 @@ const SignUp = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

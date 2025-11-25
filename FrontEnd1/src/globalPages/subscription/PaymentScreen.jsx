@@ -156,7 +156,7 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-dark p-6 sm:p-10 font-sans">
+    <div className="min-h-screen p-6 sm:p-10 font-sans">
       <div className="mb-6">
         <div className="flex justify-center rounded-md">
           <h1 className="bg-secondary  text-secondary-foreground py-1 font-semibold px-5 rounded-full flex mb-5 items-center justify-center gap-3">
@@ -178,10 +178,10 @@ const App = () => {
         <div className="w-full pt-12 lg:w-2/3 space-y-8">
           {/* 1. Choose Payment Method */}
           <div className="bg-white dark:bg-dark p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100">
-            <h1 className="text-2xl font-bold mb-6 text-gray-800">
+            <h1 className="text-2xl font-bold mb-6 text-muted-hover">
               Choose Payment Method
             </h1>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col text-dark dark:text-white sm:flex-row gap-4">
               <PaymentMethodCard
                 icon={CreditCard}
                 title="eSewa"

@@ -143,7 +143,7 @@ const AdminDashboard = () => {
     <div key={ind} className="bg-white dark:bg-dark rounded-lg shadow-md p-6">
       <div className="flex items-center justify-between">
         <div className='text-muted-hover'>
-          <p className="text-sm font-medium "> {obj.title}</p>
+          <p className="text-sm font-medium capitalize"> {obj.title}</p>
           <p className="text-2xl font-bold ">{obj.value}</p>
         </div>
 
@@ -248,7 +248,7 @@ const AdminDashboard = () => {
           </Link>
          )
         })
-      };
+      }
         </div>
       </div>
     </div>

@@ -27,7 +27,6 @@ const Vendor = () => {
   const handleVendorDueFormClose = useCallback(() => {
     setActiveVendor(null);
   }, []);
-
   useEffect(() => {
     // In real app, this would be an API call
     setVendors(VENDORS);
@@ -198,7 +197,7 @@ function VendorDueForm({ vendor, onClose }) {
           onClick={onClose}
           className="fixed inset-0 bg-black/30 dark:bg-black/70 z-50"
         />
-        <div className="bg-white dark:bg-dark rounded-lg shadow-lg w-full max-w-md p-6 relative z-50">
+        <div className="bg-white animate-fade-slide-in dark:bg-dark rounded-lg shadow-lg w-full max-w-md p-6 relative z-50">
           <button
             onClick={onClose}
             className="absolute top-3 right-3 text-muted"

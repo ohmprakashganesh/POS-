@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { customersData } from '@/data/mockData';
 import { z } from 'zod';
@@ -17,6 +17,8 @@ const formSchema = z.object({
 });
 
 const AddEditCustomer = () => {
+  const location= useLocation();
+  const from = location.state?.from||"/customers"
   const { t } = useTranslation("form")
   const { id } = useParams();
   const navigate = useNavigate();
@@ -61,7 +63,7 @@ const AddEditCustomer = () => {
     <>
       <div className="flex items-center space-x-4">
         <Link
-          to="/customers"
+          to={from}
           className="bg-primary/10 hover:bg-primary/30 rounded-full"
         >
           <ArrowLeftIcon className="size-10 p-2" strokeWidth={2.5} />

@@ -227,7 +227,7 @@
       "saleRs": "बिक्री (रु)",
       "purchaseDate": "खरिद मिति",
       "expiryDate": "म्याद सकिने मिति",
-      "stock": "स्टक",
+      "quantity": "परिमाण",
       "sku": "SKU कोड",
       "image": "फोटो",
       "actions": "कार्यहरू"

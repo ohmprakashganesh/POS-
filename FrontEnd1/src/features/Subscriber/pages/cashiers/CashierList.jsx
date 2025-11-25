@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   PlusIcon,
   MagnifyingGlassIcon,
@@ -10,12 +10,14 @@ import {
 import { customersData } from "@/data/mockData";
 import Input from "@/features/ui/Input";
 import { useTranslation } from "react-i18next";
+import { ArrowLeft } from "lucide-react";
 
 const CashierList = () => {
+    const location = useLocation();
+  const from= location.state?.from;
   const {t}=useTranslation()
   const [cashiers, setCashiers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredCashiers, setFilteredCashiers] = useState([]);
 
   useEffect(() => {
     // In real app, this would be an API call
@@ -45,10 +47,26 @@ const CashierList = () => {
     <div className="space-y-6 ">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
+        
+           {from ?(
+            <div className="flex gap-10">
+
+            <Link
+            to={from}
+            className="p-2 text-muted w-fi h-fit bg-primary/10 hover:bg-primary/30 rounded-full"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Link>
+           <div>
           <h1 className="text-2xl font-bold">{t("cashier.title")}</h1>
           <p className="text-muted">{t("cashier.description")}</p>
         </div>
+        </div>
+           ): <div>
+          <h1 className="text-2xl font-bold">{t("cashier.title")}</h1>
+          <p className="text-muted">{t("cashier.description")}</p>
+        </div>}
+
         <Link
           to="/cashier/add"
           className="inline-flex items-center gap-2 px-4 py-2 font-semibold bg-primary hover:bg-primary-hover text-primary-foreground rounded-md"

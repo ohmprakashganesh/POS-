@@ -76,7 +76,7 @@ const Header = ({ openSidebar }) => {
                 className="overlay fixed inset-0 z-10"
                 onClick={() => setUserMenuOpen(false)}
               />
-              <div className="dropdown absolute w-70 z-20 top-10 right-0 h-fit bg-white dark:bg-dark shadow-sm  py-3 px-2">
+              <div className="dropdown animate-fade-slide-in absolute w-70 z-20 top-10 right-0 h-fit bg-white dark:bg-dark shadow-sm  py-3 px-2">
                 <X
                   className="absolute right-2 top-2 size-8 p-1.5  rounded-full hover:bg-background"
                   onClick={() => setUserMenuOpen(false)}

@@ -469,6 +469,27 @@ export const transactionsData = [
   }
   
 ];
+
+ export const companyData = [{
+  id:"d22",
+  name: "NexGen Retail Solutions Pvt. Ltd.",
+  type: "Retail & E-commerce",
+  pan: "48305B",
+  email: "support@nexgenretail.com",
+  phone: "+977 9841XXXXXX",
+  address: "Putalisadak, Kathmandu, Nepal",
+  logoUrl: "path/to/company/logo.png",
+  // Subscription Details
+  subscription: {
+    planName: "Premium Business Plan",
+    status: "Active", // Status can be Active, Expired, Trial, Pending
+    startDate: "2024-01-15",
+    endDate: "2025-01-14",
+    users: 15,
+    maxUsers: 20,
+  },
+}
+ ]
 // src/data/pricingData.js or simply define this array inside the component file
 
 export const pricingPlans = [

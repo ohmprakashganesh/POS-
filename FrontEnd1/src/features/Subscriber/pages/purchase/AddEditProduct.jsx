@@ -62,6 +62,7 @@ const AddEditProduct = () => {
   
 
   const from = location.state?.from || "/products"; 
+  
   const { id } = useParams();
   const isEdit = Boolean(id);
 

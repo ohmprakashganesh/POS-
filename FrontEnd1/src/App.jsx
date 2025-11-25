@@ -23,7 +23,7 @@ import AddEditCustomer from './features/Subscriber/pages/customers/AddEditCustom
 import TransactionHistory from './features/Subscriber/pages/transactions/TransactionHistory';
 import SalesReports from './features/Subscriber/pages/reports/SalesReports';
 import ProfitLoss from './features/Subscriber/pages/dashboard/ProfitLoss';
-import Subscription from './features/Subscriber/pages/settings/active-plan/Subscription';
+// import Subscription from './features/Subscriber/pages/settings/active-plan/Subscription';
 import AddEditCashier from './features/Subscriber/pages/cashiers/AddEditCashier';
 import CashierList from './features/Subscriber/pages/cashiers/CashierList';
 import Product from './features/Subscriber/pages/items/Product';
@@ -53,6 +53,7 @@ import CProduct from './features/cashier/pages/products/Product';
 import { FormProvider } from './features/cashier/context/FormContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Cart from './features/cashier/pages/cart/Cart';
+import CompanyProfile from './features/Subscriber/pages/settings/profile/Profile';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
@@ -139,9 +140,11 @@ function App() {
                 <Route path="/product/:id" element={<Product />} />
                 <Route path="/reports/sales" element={<SalesReports />} />
                 <Route path="/reports/profit-loss" element={<ProfitLoss />} />
-                <Route path="/subscription" element={<Subscription />} />
+                {/* <Route path="/subscription" element={<Subscription />} /> */}
                  <Route path="/help" element={ <SupportForm/>}/>
                  <Route path='/purchase' element={<Purchase />}/>
+                 <Route path='/companyProfile' element={<CompanyProfile />} />
+                 <Route path="/signUp/:id" element={<SignUp />} />
               </Route>
               {/* cashier============================================================================= routes  */}
              

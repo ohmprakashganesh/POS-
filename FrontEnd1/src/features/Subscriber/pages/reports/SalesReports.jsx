@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { CalendarIcon, ChartBarIcon } from "@heroicons/react/24/outline";
 import { OptionComponent, SelectComponent } from "@/features/ui/Select";
 import Input from "@/features/ui/Input";
+import PrintTable from "./PrintTable";
+import PrintButton from "./PrintButton";
 import Button from "@/features/ui/Button";
 import { useTranslation } from "react-i18next";
 import {
@@ -10,12 +12,12 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  CartesianGrid,
   ResponsiveContainer,
   LineChart,
   Line,
 } from "recharts";
-import { RotateCcw } from "lucide-react";
+import { ArrowLeftIcon, RotateCcw } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 // 🌟 Single Source of Daily Data 🌟
 const fullSalesData = [
@@ -56,6 +58,9 @@ const fullSalesData = [
 const formatDate = (date) => date.toISOString().split('T')[0];
 
 const SalesReports = () => {
+  const printRef=useRef();
+  const location= useLocation();
+  const from= location.state?.from;
   const { t } = useTranslation();
   const [dateRange, setDateRange] = useState({
     start: formatDate(new Date(fullSalesData[0].date)),
@@ -67,9 +72,7 @@ const SalesReports = () => {
 
   const [confirmedDateRange, setConfirmedDateRange] = useState(dateRange);
 
-  // 🌟 Aggregation Functions (based on daily data) 🌟
   const getWeeklyData = (data) => {
-    // Simple mock aggregation by weeks (grouping 7 days)
     const weeks = {};
     data.forEach((item, index) => {
       const weekIndex = Math.floor(index / 7);
@@ -84,7 +87,6 @@ const SalesReports = () => {
   };
 
   const getMonthlyData = (data) => {
-    // Simple mock aggregation by months (using month from date string)
     const months = {};
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
     data.forEach((item) => {
@@ -112,13 +114,13 @@ const SalesReports = () => {
           const itemDate = new Date(item.date);
           const startDate = new Date(confirmedDateRange.start);
           const endDate = new Date(confirmedDateRange.end);
-          
           startDate.setHours(0, 0, 0, 0);
           endDate.setHours(23, 59, 59, 999); 
           
           return itemDate >= startDate && itemDate <= endDate;
         });
       }
+
 
       let dataToSet;
       if (reportType === "daily") {
@@ -145,14 +147,27 @@ const SalesReports = () => {
   const averageOrderValue = totalOrders > 0 ? totalSales / totalOrders : 0;
 
   return isLoading ? (
-    <div className="flex items-center justify-center h-screen w-full dark:bg-dark ">
+    <div className="flex items-center justify-center h-screen w-full">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" />
     </div>
   ) : (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">{t("report.title")}</h1>
+   
+       
+      <div className="flex gap-10 ">
+            {from && (
+           <Link
+          to={from}
+          className="bg-primary/10 w-fit h-fit hover:bg-primary/30 rounded-full"
+        >
+          <ArrowLeftIcon className="size-10 p-2" strokeWidth={2.5} />
+        </Link>
+      )}
+        <div>
+         <h1 className="text-2xl font-bold">{t("report.title")}</h1>
         <p className="text-muted">{t("report.description")}</p>
+        </div>
+       
       </div>
       <div className="grid items-end grid-cols-1 md:grid-cols-4 gap-4">
         <SelectComponent
@@ -299,8 +314,13 @@ const SalesReports = () => {
           </div>
 
           <div className="flex justify-end gap-4 mb-5">
-            <Button outline>{t("report.exportToCSV")}</Button>
-            <Button outline>{t("report.printReport")}</Button>
+             <div>
+    <PrintButton printRef={printRef} t={t} />
+    <div className="hidden">
+    <PrintTable  salesData={salesData} reportType={reportType} t={t} ref={printRef} />
+
+    </div>
+  </div>
           </div>
         </>
       )}
@@ -318,7 +338,6 @@ function SalesChart({ salesData, reportType }) {
       <div className="w-full max-w-150 h-72">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={salesData}>
-            <CartesianGrid strokeDasharray="3" className="stroke-muted" />
             <XAxis
               dataKey={
                 reportType === "daily"
@@ -360,7 +379,8 @@ function OrderChart({ salesData, reportType }) {
       <div className="w-full max-w-xl h-72">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={salesData}>
-            <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+            {/* <CartesianGrid strokeDasharray="3 3" className="stroke-muted" /> */}
+
             <Tooltip
               contentStyle={{
                 backgroundColor: "var(--color-background)",
