@@ -8,14 +8,12 @@ import { ExistingUsers } from "./ExistingUsers";
 import Button from "@/features/ui/Button";
 
 const SubscriberList = () => {
- 
 
   const [activeView, setActiveView] = useState('existing');
   return (
     <div className="min-w-2xl max-w-full mx-auto  text-muted-hover rounded-xl ">
       <h1 className="text-2xl font-bold text-dark dark:text-white mb-3">Subscriber Management</h1>
 
-      {/* ↔️ Tab/Section Switcher */}
       <div className="flex space-x-4 mb-4">
         <button
           onClick={() => {

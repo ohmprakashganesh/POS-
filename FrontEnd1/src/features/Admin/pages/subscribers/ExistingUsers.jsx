@@ -28,12 +28,10 @@ export const ExistingUsers = () => {
     );
   });
 
-  // Handle pencil click
   const handleEdit = (id) => {
     setEditId(id);
   };
 
-  // Handle dropdown change (Active/Inactive)
   const handleStatusChange = (id, value) => {
     const updated = users.map((u) =>
       u.id === id ? { ...u, active: value === "active" } : u
