@@ -78,9 +78,9 @@ const AddEditCustomer = () => {
    
   };
   return (
-    <div className="fixed inset-0 bg-prim flex  items-center justify-center z-50">
+    <div className="fixed inset-0  flex  items-center justify-center z-50">
       {/* Theme-aware popup */}
-      <div className="bg-card lg:w-2/5 md:w-4/6 sm:w-1/2  w-full bg-white dark:bg-dark max-w-xl mx-4 rounded-xl shadow-lg p-6 
+      <div className="bg-card animate-fade-slide-in lg:w-2/5 md:w-4/6 sm:w-1/2  w-full bg-white dark:bg-dark max-w-xl mx-4 rounded-xl shadow-lg p-6 
                       overflow-y-auto max-h-[90vh] text-muted border border-border">
 
         <div className="flex items-center  justify-between mb-4">

@@ -15,7 +15,7 @@ import { MinusIcon, PlusIcon, TrashIcon } from 'lucide-react';
   return(
   
      //  Remove item automatically if quantity <= 0
-    <div className="flex flex-row md:flex-row md:items-center md:justify-between w-full border-b border-muted/40 bg-white dark:bg-dark gap-2 py-2 px-2">
+    <div className="flex flex-row md:flex-row md:items-center md:justify-between w-full bg-white dark:bg-dark gap-2 py-2 px-2">
       <div className="flex-shrink-0 my-auto md:w-12 md:h-12 lg:w-14 lg:h-12 w-10 h-10flex items-center justify-center rounded-md overflow-hidden">
         <img src={test} alt="product" className="object-cover w-full h-full" />
       </div>

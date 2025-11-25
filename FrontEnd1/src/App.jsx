@@ -162,8 +162,8 @@ function App() {
                   <Route path="/c-product/:id" element={<CProduct />} />
               </Route>
               {/* public routes ============================================================================= routes  */}
-              <Route path="/publicSubscription" element={<PublicSubscription />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/publicSubscription" element={<PublicSubscription />} />
               <Route path="/signup" element={<SignUp />} />
                 <Route path="/success" element={<Paid />} />
             <Route path="/payment" element={<PaymentScreen />} />

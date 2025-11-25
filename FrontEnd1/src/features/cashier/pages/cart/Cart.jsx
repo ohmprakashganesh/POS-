@@ -12,6 +12,7 @@ import { useForm } from '../../context/FormContext';
 import AddEditCustomer from '../customer/AddEditCustomer';
 import { QRGenerator } from './Qrgenreator';
 import EmptyCart from './EmptyCart';
+import { OptionComponent, SelectComponent } from '@/features/ui/Select';
 
 
 
@@ -154,29 +155,32 @@ const Cart = () => {
         <>
           {/* search section */}
        <div className="flex justify-between  gap-3 p-3 rounded-sm ">
+        <div className='w-lg'>
+
   {/* Dropdown */}
- <select
+ <SelectComponent
   value={selectedId || ""}
   onChange={(e) => setSelectedId(e.target.value)}
-  className="w-[48%] md:w-[30%] lg:w-[30%] h-[45px] border border-muted/40 rounded-md bg-white 
-             dark:bg-dark focus:outline-none focus:ring-0 ring-0"
+  placeholder="Select a Customer"
+  className="bg-white dark:bg-dark"
 >
-  <option value="" className="text-muted">Select Customer</option>
+  
   {filteredCustomers.slice(0, 3).map((user) => (
-    <option key={user.id} value={user.id}>
+    <OptionComponent key={user.id} value={user.id}>
       {user.name}
-    </option>
+    </OptionComponent>
   ))}
-</select>
+</SelectComponent>
+  </div>
 
 
   {/* Button */}
-   <Button onClick={()=>openCustomerForm()} className=" px-5 h-[45px] w-[48%] md:w-[30%] ">
+   <Button onClick={()=>openCustomerForm()} className="px-5 h-[45px] w-[48%] md:w-[30%] ">
      {t("customers.addCustomer")}
   </Button>
   </div>
           <div className="flex md:flex-row lg:flex-row flex-col gap-5 mt-4">
-            <div className="flex flex-col md:w-[70%] lg:w-[70%] w-full gap-0.5">
+            <div className="flex flex-col md:w-[70%] lg:w-[70%] w-full divide-y divide-muted/30">
 
               {/* rendering the cart items */}
               {cart.map((item, ind) => <OrderItem key={ind} item={item} t={t} />)}
