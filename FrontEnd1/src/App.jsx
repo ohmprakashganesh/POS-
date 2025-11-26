@@ -56,6 +56,7 @@ import Cart from './features/cashier/pages/cart/Cart';
 import CompanyProfile from './features/Subscriber/pages/settings/profile/Profile';
 import Companies from './features/Admin/pages/companies/Companies';
 import DetailsModal from './features/Admin/pages/companies/DetailModule';
+import SmoothScrollWrapper from './features/smoothWrapper/SmoothScrollWrapper';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
@@ -90,8 +91,18 @@ function ProtectedRoute({ children, requireAdmin = false }) {
 function App() {
   return (
     <Router>
+      <SmoothScrollWrapper
+       options={{
+          lerp: 0.1,
+          duration: 1.2,
+          orientation: "vertical",
+          gestureOrientation: "vertical",
+          smoothWheel: true,
+          wheelMultiplier: 1,
+          smoothTouch: true,
+          touchMultiplier: 2,
+        }}>
        <ThemeProvider>
-
       <AuthProvider>
         <NotificationProvider>
           <FormProvider>
@@ -181,6 +192,7 @@ function App() {
         </NotificationProvider>
       </AuthProvider>
       </ThemeProvider>
+        </SmoothScrollWrapper>
     </Router>
   );
 }

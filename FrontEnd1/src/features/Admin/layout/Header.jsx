@@ -8,14 +8,17 @@ import {
   UserCircleIcon
 } from '@heroicons/react/24/outline';
 import { LogOutIcon, Moon, Sun } from 'lucide-react';
-import NotificationScreen from '../notifications/NotificationScreen';
+import NotificationScreen from '../notifications/NotificationScreen';import { useNavigate } from 'react-router-dom';
+
+
 
 const Header = ({ onMenuClick, user }) => {
+  const navigate= useNavigate();
   const{theme,setTheme}=useTheme();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { unreadCount, markAsRead } = useNotifications();
   const { logout } = useAuth();
-  const[notification,setNotification]=useState();
+  const[notification,setNotification]=useState(false);
   
     const buttonRef = useRef(null);
     const panelRef = useRef(null);
@@ -49,8 +52,8 @@ const Header = ({ onMenuClick, user }) => {
           >
             <Bars3Icon className="h-6 w-6" />
           </button>
-          <div className="ml-4 lg:ml-0">
-            <h1 className="text-3xl  text-dark dark:text-white mask- font-bold ">Dashboard</h1>
+          <div className="ml-4 lg:ml-0" >
+            <h1 className="text-3xl  text-dark dark:text-white mask- font-bold " >Dashboard</h1>
           </div>
         </div>
 
@@ -65,7 +68,7 @@ const Header = ({ onMenuClick, user }) => {
             <Moon className="h-5 w-5 hidden dark:block" />
           </button>
           {/* Notifications */}
-          <div ref={buttonRef} className="relative">
+               <div ref={buttonRef} className="relative">
                      <button
                        onClick={() => {
                          markAsRead();
@@ -82,9 +85,8 @@ const Header = ({ onMenuClick, user }) => {
                      </button>
                    </div>
 
-          {/* User menu */}
-          <div className="relative">
-            <button
+                             <div className="relative">
+                                       <button
                                    onClick={() => setUserMenuOpen(!userMenuOpen)}
                                    className="flex items-center space-x-3 text-sm focus:outline-none"
                                  >
@@ -95,7 +97,7 @@ const Header = ({ onMenuClick, user }) => {
                                    </div>
                                  </button>
 
-            {userMenuOpen && (
+            {userMenuOpen ?(
               <div className="absolute animate-fade-slide-in right-0 mt-4 w-48 bg-white dark:bg-dark rounded-md  shadow-md py-1 z-50">
                 <div className='flex flex-row justify-start py-2 gap-2 text-destructive  px-5'>
                    <LogOutIcon/> 
@@ -108,19 +110,37 @@ const Header = ({ onMenuClick, user }) => {
                 </div>
                
               </div>
-            )}
+            ): <div className="absolute animate-fade-slide-out right-0 mt-4 w-48 bg-white dark:bg-dark rounded-md  shadow-md py-1 z-50">
+                <div className='flex flex-row justify-start py-2 gap-2 text-destructive  px-5'>
+                   <LogOutIcon/> 
+                  <button
+                  onClick={logout}
+                  className="block w-full text-left  text-sm "
+                >
+                 Sign out
+                </button>
+                </div>
+               
+              </div>}
           </div>
         </div>
       </div>
       
-      {notification && (
-        <div
-          ref={panelRef}
-          className="fixed animate-fade-slide-left w-full max-w-130 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100"
-        >
-          <NotificationScreen />
-        </div>
-      )}
+     {notification ? (
+  <div
+    ref={panelRef}
+    className="fixed animate-fade-slide-in w-full md:max-w-80 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100"
+  >
+    <NotificationScreen />
+  </div>
+) : (
+  <div
+    className="fixed animate-fade-slide-out w-full md:max-w-80 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100"
+  >
+    <NotificationScreen />
+  </div>
+)}
+
     </header>
   );
 };

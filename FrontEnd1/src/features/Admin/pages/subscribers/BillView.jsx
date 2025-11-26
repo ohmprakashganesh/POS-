@@ -6,13 +6,13 @@ export const BillViewer = ({ show, billImage, onClose, onDownload }) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-10">
-      <div className="bg-white dark:bg-black rounded-xl p-4 shadow-xl  max-w-[90%] w-fit h-fit max-h-[90%] overflow-hidden flex flex-col">
+      <div className=" rounded-xl p-4 shadow-xl  w-[80%]   h-full overflow-hidden flex items-center  flex-col">
         
         {/* BILL IMAGE */}
-        <div className="flex justify-center items-center flex-grow overflow-auto">
+        <div className="flex flex-1 w-[80%]  h-full justify-center items-center  overflow-hidden">
           <img
             src={billImage}
-            className="max-w-full max-h-full rounded-lg border"
+            className="w-full h-full  object-contain  rounded-lg "
           />
         </div>
 

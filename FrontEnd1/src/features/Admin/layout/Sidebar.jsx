@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, useLocation } from 'react-router-dom';
+import {Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   HomeIcon, 
   ShoppingCartIcon, 
@@ -24,6 +24,7 @@ const navigation = [
 
 const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
+  const navigate=useNavigate();
 
   return (
     <>
@@ -41,7 +42,7 @@ const Sidebar = ({ isOpen, onClose }) => {
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0
       `}>
         <div className="flex items-center justify-between h-16 px-4">
-          <div className="flex text-dark dark:text-white font-bold items-center">
+          <div className="flex text-dark dark:text-white font-bold items-center cursor-pointer" onClick={()=>navigate("/admin")} >
             <ShoppingCartIcon className="h-8 w-8  " />
             <span className="ml-2 text-2xl  ">Smart Bill </span>
           </div>

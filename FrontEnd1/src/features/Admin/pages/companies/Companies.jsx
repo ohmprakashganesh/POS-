@@ -136,6 +136,7 @@ const handleAction = (id) => {
           <table className="w-full shadow-sm">
             <thead>
               <tr>
+                <th>SN</th>
                 <th>Company</th>
                 <th>Type</th>
                 <th>Plan</th>
@@ -144,44 +145,43 @@ const handleAction = (id) => {
                 <th>Actions</th>
               </tr>
             </thead>
-
             <tbody>
               {paginatedData.length > 0 ? (
-                paginatedData.map((c) => (
-                  <tr key={c.id}>
-                    <td className="flex gap-2">
-                      <img src={c.logoUrl} alt="" className="w-8 h-8 rounded-full border" />
-                      <div>
-                        <div className="">{c.name}</div>
-                        <div className="text-xs text-muted">{c.subscriber.email}</div>
-                      </div>
-                    </td>
-                    <td>{c.type}</td>
-                    <td>{c.subscription.planName}</td>
-                    <td>
-                      <StatusBadge status={c.subscription.status} />
-                    </td>
-                    <td>{(c.subscription.endDate)}</td>
-                    <td>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => navigate(`/companies/detail/${c.id}`)}
-                          className="text-secondary hover:text-secondary-hover"
-                        >
-                          <EyeIcon size={18} />
-                        </button>
-                        <button
-                          onClick={() => handleAction(c.id)}
-                          className="text-red-600 hover:text-red-900 text-xs"
-                        >
-                          {c.subscription.status=="Active" ? <Shield size={18} />:<ShieldBan  size={18}/>
-                          }
-                          
-                          
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                paginatedData.map((c,ind) => (
+                <tr key={ind} onClick={() => navigate(`/companies/detail/${c.id}`)}>
+  <td>{ind + 1}</td>
+  <td className="flex gap-2">
+    <img src={c.logoUrl} alt="" className="w-8 h-8 rounded-full border" />
+    <div>
+      <div>{c.name}</div>
+      <div className="text-xs text-muted">{c.subscriber.email}</div>
+    </div>
+  </td>
+  <td>{c.type}</td>
+  <td>{c.subscription.planName}</td>
+  <td>
+    <StatusBadge status={c.subscription.status} />
+  </td>
+  <td>{c.subscription.endDate}</td>
+  {/* Action TD - prevent row click */}
+  <td onClick={(e) => e.stopPropagation()}>
+    <div className="flex gap-2">
+      <button
+        onClick={() => navigate(`/companies/detail/${c.id}`)}
+        className="text-secondary hover:text-secondary-hover"
+      >
+        <EyeIcon size={18} />
+      </button>
+      <button
+        onClick={() => handleAction(c.id)}
+        className="text-red-600 hover:text-red-900 text-xs"
+      >
+        {c.subscription.status === "Active" ? <Shield size={18} /> : <ShieldBan size={18} />}
+      </button>
+    </div>
+  </td>
+</tr>
+
                 ))
               ) : (
                 <tr>

@@ -13,19 +13,19 @@ const NotificationItem = ({ title,stock, time,status, isNew ,id}) => {
   };
   const getIcon = () => {
         return (
-          <div className="w-12 h-12 overflow-hidden rounded-full flex items-center justify-center bg-white dark:bg-dark relative">
-             <img className=' w-full h-full' src={logo} alt="" />
+          <div className="w-8 mx-auto my-auto h-8 overflow-hidden rounded-full flex items-center justify-center bg-white dark:bg-dark relative">
+             <img className=' w-full h-full ' src={logo} alt="" />
           </div>
         );
   };
   return (
-    <div   onClick={handleClick}  className={`flex items-start p-2 ${status=="read"?"dark:bg-dark bg-white":"dark:bg-muted/15 text-muted-hover bg-muted/15" }   cursor-pointer nd `}>
-      <div className="mr-3 flex-shrink-0 ">
+    <div   onClick={handleClick}  className={`flex rounded-lg items-start px-2 ${status=="read"?"dark:bg-dark bg-white":"dark:bg-muted/15 text-muted-hover bg-muted/15" }   cursor-pointer nd `}>
+      <div className=" my-auto mx-2 flex-shrink-0 ">
         {getIcon()}
       </div>
       <div className="flex-grow font-base  ">
-        <div className="text-sm">
-         <span className='text-muted-hover'> {title? title:"added new product"}</span>
+        <div className="text-sm gap-0">
+         <span className='text-muted-hover text-sm'> {title? title:"added new product"}</span>
          <p className='text-muted'>stock level <span>{stock?stock:"20"}</span></p>
         </div>
         <p className={`text-xs ${isNew ? 'text-primary' : 'text-muted-hover'}`}>{time}</p>

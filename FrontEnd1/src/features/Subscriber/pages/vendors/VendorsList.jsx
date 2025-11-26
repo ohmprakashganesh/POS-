@@ -93,7 +93,7 @@ const Vendor = () => {
           </thead>
           <tbody className="">
             {filteredVendors.map((vendor, key) => (
-              <tr key={vendor.id} className=" table-body-row">
+              <tr key={vendor.id} className=" table-body-row" onClick={()=>navigate(`/vendor/detail/${vendor.id}`)}>
                 <td className=" table-td">{key + 1}</td>
                 <td className="table-td ">{vendor.name}</td>
                 <td className="table-td  ">  {vendor.address}</td>
@@ -123,18 +123,21 @@ const Vendor = () => {
                 <td className="table-td flex gap-2">
                   <Link
                     to={`/vendor/edit/${vendor.id}`}
+                    onClick={(e)=>e.stopPropagation()}
                     className="p-1.5 rounded-full hover:primary/10 text-primary"
                   >
                     <PencilIcon className="action-icon" />
                   </Link>
                   <button
-                    onClick={() => handleDelete(vendor.id)}
+                    onClick={(e) =>{ handleDelete(vendor.id)
+                        e.stopPropagation()}}
                     className="p-1.5 rounded-full hover:bg-destructive/10 text-destructive"
                   >
                     <TrashIcon className="action-icon" />
                   </button>
                   <Link
                     to={`/vendor/detail/${vendor.id}`}
+                     onClick={(e)=>e.stopPropagation()}
                     className="p-1.5 rounded-full hover:bg-secondary/10 text-secondary"
                   >
                     <EyeIcon className="action-icon" />
