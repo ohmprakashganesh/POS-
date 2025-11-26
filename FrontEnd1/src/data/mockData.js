@@ -114,7 +114,6 @@ export const notificationsData = [
     enterprise: {
       name: 'Enterprise',
      status:'inactive',
-
       price: 1990,
       time:12,
       features: [
@@ -470,7 +469,8 @@ export const transactionsData = [
   
 ];
 
- export const companyData = [{
+ export const companyData = [
+  {
   id:"d22",
   name: "NexGen Retail Solutions Pvt. Ltd.",
   type: "Retail & E-commerce",
@@ -479,7 +479,6 @@ export const transactionsData = [
   phone: "+977 9841XXXXXX",
   address: "Putalisadak, Kathmandu, Nepal",
   logoUrl: "path/to/company/logo.png",
-  // Subscription Details
   subscription: {
     planName: "Premium Business Plan",
     status: "Active", // Status can be Active, Expired, Trial, Pending
@@ -488,7 +487,167 @@ export const transactionsData = [
     users: 15,
     maxUsers: 20,
   },
-}
+    subscriber: {
+      userId: "user_abc123",
+      email: "support@nexgenretail.com",
+      phone: "+977 9841000000",
+      signupDate: "2024-05-01T10:30:00Z"
+    },
+       metrics: {
+      lastLogin: "2024-11-25T09:45:00Z",
+      storageUsedGB: 2.5,
+      totalInvoicesGenerated: 583
+    }
+},
+  {
+    id: "e91",
+    name: "Cosmo Aesthetics Inc.",
+    type: "Cosmetic",
+    panVatNumber: "90011C",
+    address: "123 Main St, New York, USA",
+    logoUrl: "https://placehold.co/40x40/ec4899/ffffff?text=CA",
+    subscriber: {
+      userId: "user_def456",
+      email: "jane.doe@cosmo.com",
+      phone: "+1 555-123-4567",
+      signupDate: "2024-10-20T14:00:00Z"
+    },
+    subscription: {
+      planName: "Trial Basic",
+      status: "Trial",
+      paymentCycle: "Monthly",
+      startDate: "2024-11-01",
+      endDate: "2024-12-01",
+      cost: 0.00,
+      currency: "USD",
+      users: 1,
+      maxUsers: 5
+    },
+    metrics: {
+      lastLogin: "2024-11-25T10:10:00Z",
+      storageUsedGB: 0.1,
+      totalInvoicesGenerated: 12
+    }
+  },
+  {
+    id: "f03",
+    name: "Mechanic's Hub LTD",
+    type: "Mechanic",
+    panVatNumber: "77788D",
+    address: "45 Industrial Zone, London, UK",
+    logoUrl: "https://placehold.co/40x40/f97316/ffffff?text=MH",
+    subscriber: {
+      userId: "user_ghi789",
+      email: "ops@mechhub.co.uk",
+      phone: "+44 20 7946 0000",
+      signupDate: "2023-01-15T08:00:00Z"
+    },
+    subscription: {
+      planName: "Starter Tier",
+      status: "Expired",
+      paymentCycle: "Monthly",
+      startDate: "2024-10-01",
+      endDate: "2024-11-01",
+      cost: 99.00,
+      currency: "Rs",
+      users: 5,
+      maxUsers: 5
+    },
+    metrics: {
+      lastLogin: "2024-11-02T11:00:00Z",
+      storageUsedGB: 5.8,
+      totalInvoicesGenerated: 1200
+    }
+  },
+    {
+  id:"d220",
+  name: "NexGen Retail Solutions Pvt. Ltd.",
+  type: "Retail & E-commerce",
+  pan: "48305B",
+  email: "support@nexgenretail.com",
+  phone: "+977 9841XXXXXX",
+  address: "Putalisadak, Kathmandu, Nepal",
+  logoUrl: "path/to/company/logo.png",
+  subscription: {
+    planName: "Premium Business Plan",
+    status: "Active", // Status can be Active, Expired, Trial, Pending
+    startDate: "2024-01-15",
+    endDate: "2025-01-14",
+    users: 15,
+    maxUsers: 20,
+  },
+    subscriber: {
+      userId: "user_abc123",
+      email: "support@nexgenretail.com",
+      phone: "+977 9841000000",
+      signupDate: "2024-05-01T10:30:00Z"
+    },
+       metrics: {
+      lastLogin: "2024-11-25T09:45:00Z",
+      storageUsedGB: 2.5,
+      totalInvoicesGenerated: 583
+    }
+},
+  {
+    id: "e981",
+    name: "Cosmo Aesthetics Inc.",
+    type: "Cosmetic",
+    panVatNumber: "90011C",
+    address: "123 Main St, New York, USA",
+    logoUrl: "https://placehold.co/40x40/ec4899/ffffff?text=CA",
+    subscriber: {
+      userId: "user_def456",
+      email: "jane.doe@cosmo.com",
+      phone: "+1 555-123-4567",
+      signupDate: "2024-10-20T14:00:00Z"
+    },
+    subscription: {
+      planName: "Trial Basic",
+      status: "Trial",
+      paymentCycle: "Monthly",
+      startDate: "2024-11-01",
+      endDate: "2024-12-01",
+      cost: 0.00,
+      currency: "USD",
+      users: 1,
+      maxUsers: 5
+    },
+    metrics: {
+      lastLogin: "2024-11-25T10:10:00Z",
+      storageUsedGB: 0.1,
+      totalInvoicesGenerated: 12
+    }
+  },
+  {
+    id: "f073",
+    name: "Mechanic's Hub LTD",
+    type: "Mechanic",
+    panVatNumber: "77788D",
+    address: "45 Industrial Zone, London, UK",
+    logoUrl: "https://placehold.co/40x40/f97316/ffffff?text=MH",
+    subscriber: {
+      userId: "user_ghi789",
+      email: "ops@mechhub.co.uk",
+      phone: "+44 20 7946 0000",
+      signupDate: "2023-01-15T08:00:00Z"
+    },
+    subscription: {
+      planName: "Starter Tier",
+      status: "Expired",
+      paymentCycle: "Monthly",
+      startDate: "2024-10-01",
+      endDate: "2024-11-01",
+      cost: 99.00,
+      currency: "Rs",
+      users: 5,
+      maxUsers: 5
+    },
+    metrics: {
+      lastLogin: "2024-11-02T11:00:00Z",
+      storageUsedGB: 5.8,
+      totalInvoicesGenerated: 1200
+    }
+  }
  ]
 // src/data/pricingData.js or simply define this array inside the component file
 

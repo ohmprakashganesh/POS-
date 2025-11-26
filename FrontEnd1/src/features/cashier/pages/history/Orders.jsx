@@ -88,7 +88,7 @@ const TransactionHistory = () => {
         {/* Total Transactions */}
         <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-muted/40 p-6">
           <div className="flex items-center">
-            <div className="flex-shrink-0 bg-green-100  rounded-full">
+            <div className="shrink-0 bg-green-100  rounded-full">
               <DocumentTextIcon className="h-8 w-8 text-muted-hover  " />
             </div>
             <div className="ml-4">
@@ -106,7 +106,7 @@ const TransactionHistory = () => {
         <div className="bg-white dark:bg-dark
          rounded-lg shadow-sm border border-muted/40 p-6">
           <div className="flex items-center w-fit">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center">
                 <span className="text-green-600 font-bold">Rs</span>
               </div>
@@ -125,7 +125,7 @@ const TransactionHistory = () => {
         {/* Completed */}
         <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-muted/40 p-6">
           <div className="flex items-center">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center">
                 <span className="text-green-600 text-sm">✓</span>
               </div>
@@ -144,7 +144,7 @@ const TransactionHistory = () => {
         {/* Pending */}
         <div className="bg-white dark:bg-dark rounded-lg shadow-sm border border-muted/40 p-6">
           <div className="flex items-center">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <div className="h-8 w-8 bg-yellow-100 rounded-full flex items-center justify-center">
                 <span className="text-yellow-600 text-sm">⏱</span>
               </div>

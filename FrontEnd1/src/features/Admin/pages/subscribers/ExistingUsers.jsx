@@ -1,54 +1,49 @@
 import Input from "@/features/ui/Input";
-import { PencilIcon, TrashIcon } from "lucide-react";
+import {  Shield, ShieldBan, TrashIcon } from "lucide-react";
 import { existingUsers } from "../../mockdata/mockAdminData";
-import { useEffect, useState } from "react";
-import { OptionComponent, SelectComponent } from "@/features/ui/Select";
+import { useEffect, useMemo, useState } from "react";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export const ExistingUsers = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(existingUsers); // use imported data
   const [search, setSearch] = useState("");
 
-  const [editId, setEditId] = useState(null);
+  const filteredUsers = useMemo(() => {
+    if (!search.trim()) return users;
 
-  useEffect(() => {
-    try {
-      if (existingUsers) {
-        setUsers(existingUsers);
-      }
-    } catch (error) {
-      console.log("unable to fetch new users");
-    }
-  }, []);
-
-  const filtered = users.filter((s) => {
     const term = search.toLowerCase();
-    return (
-      s.name.toLowerCase().includes(term) ||
-      s.email.toLowerCase().includes(term)
+    return users.filter(
+      (user) =>
+        user.name.toLowerCase().includes(term) ||
+        user.email.toLowerCase().includes(term)
     );
-  });
+  }, [users, search]);
 
-  const handleEdit = (id) => {
-    setEditId(id);
-  };
 
-  const handleStatusChange = (id, value) => {
-    const updated = users.map((u) =>
-      u.id === id ? { ...u, active: value === "active" } : u
+  const handleToggle = (id) => {
+     const updated = users.map((u) =>
+      u.id === id ? { ...u, active:!u.active } : u
     );
     setUsers(updated);
-    setEditId(null); // hide dropdown
   };
+  
+  const handleDelete=(id)=>{
+    setUsers(prev=>(prev.filter(s=>s.id!==id)))
+  }
 
   return (
     <>
-      <Input
+     <div className="relative">
+      <MagnifyingGlassIcon className="absolute size-5 text-muted top-1/2 left-2 -translate-y-1/2"/>
+       <Input
         type="text"
         placeholder="Search existing subscribers..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full max-w-sm p-2 mb-4 bg-white dark:bg-dark border border-muted/40 rounded-lg focus:outline-none focus:ring-2"
+      className="w-full max-w-sm my-2 pl-9  bg-white dark:bg-dark "
       />
+     </div>
+     
 
       <div className="overflow-x-auto shadow-md rounded-md">
      <table className="w-full border-collapse shadow-md rounded-md">
@@ -65,7 +60,7 @@ export const ExistingUsers = () => {
   </thead>
 
   <tbody>
-    {filtered.map((s, i) => (
+    {filteredUsers.map((s, i) => (
       <tr key={s.id} className="table-body-row">
         <td className="table-td">{i + 1}</td>
 
@@ -73,28 +68,10 @@ export const ExistingUsers = () => {
         <td className="table-td">{s.email}</td>
 
         {/* --------update status -------- */}
-        <td className="table-td">
-          {editId === s.id ? (
-            <SelectComponent
-              autoFocus
-              onChange={(e) => handleStatusChange(s.id, e.target.value)}
-              className=" border-muted/40 rounded border focus:ring-2"
-              defaultValue={s.active ? "active" : "inactive"}
-            >
-              <OptionComponent value="active">Active</OptionComponent>
-              <OptionComponent value="inactive">Inactive</OptionComponent>
-            </SelectComponent>
-          ) : (
-            <span
-              className={`px-2 text-xs rounded-full ${
-                s.active
-                  ? "bg-green-100 text-green-700"
-                  : "bg-red-100 text-red-600"
-              }`}
-            >
-              {s.active ? "Active" : "Inactive"}
-            </span>
-          )}
+        <td >
+          <span className={` rounded-full  px-2 text-sm ${s.active ? "bg-green-100 text-constructive":"bg-red-100 text-destructive"}`}>
+          {s.active ? "Active" : "Inactive"}
+          </span>
         </td>
 
         <td className="table-td">{s.plan}</td>
@@ -103,15 +80,16 @@ export const ExistingUsers = () => {
         {/* ACTION BUTTONS */}
         <td className="table-td flex justify-center items-center space-x-2">
           <button
-            onClick={() => handleEdit(s.id)}
-            className="px-1 py-1 text-primary rounded hover:bg-primary hover:text-primary-foreground"
+          title={s.active ? "deactivate":"activate"}
+            onClick={() => handleToggle(s.id)}
+            className="p-1.5 text-tertiary hover:bg-tertiary/30 rounded-full transform-colors"
           >
-            <PencilIcon className="w-4 h-4" />
+            {s.active ? <Shield className="size-4"/> :<ShieldBan className="size-4"/> }
           </button>
 
           <button
             onClick={() => handleDelete(s.id)}
-            className="px-1 py-1 text-destructive rounded hover:bg-red-600 hover:text-primary-foreground"
+            className="p-1.5 text-destructive rounded-full hover:bg-destructive/30"
           >
             <TrashIcon className="w-4 h-4" />
           </button>
@@ -119,9 +97,9 @@ export const ExistingUsers = () => {
       </tr>
     ))}
 
-    {filtered.length === 0 && (
+    {filteredUsers.length === 0 && (
       <tr>
-        <td colSpan="7" className="p-4 text-center text-gray-500">
+        <td colSpan="7" className="p-4  text-center text-muted">
           No subscribers found.
         </td>
       </tr>

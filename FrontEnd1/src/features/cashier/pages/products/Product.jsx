@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 // Ensure the path to your mock data is correct!
 import { productsData } from '@/data/mockData'; 
 import Button from '@/features/ui/Button';
 import { useCart } from '../../context/CartContext';
 import toast, { Toaster } from 'react-hot-toast';
+import { ArrowLeftIcon } from 'lucide-react';
 const CProduct = () => {
+  const navigate=useNavigate()
   // Get the product id from the URL, e.g., /product/8
   const { id } = useParams();
   const productId = parseInt(id, 10); // Convert URL string to a number
@@ -35,7 +37,15 @@ const CProduct = () => {
   );
 
   return (
-    <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-10   rounded-2xl">
+    <>
+    <button
+          onClick={()=>navigate(-1)}
+          className="bg-primary/10 hover:bg-primary/30 rounded-full"
+        >
+          <ArrowLeftIcon className="size-10 p-2" strokeWidth={2.5} />
+        </button>
+
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-10 rounded-2xl">
       {/* TOP SECTION: Image and Details */}
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-10 mb-8 lg:mb-12">
         {/* IMAGE SECTION */}
@@ -118,6 +128,7 @@ const CProduct = () => {
   }}
 />
     </div>
+    </>
   );
 };
 

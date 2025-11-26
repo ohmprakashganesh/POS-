@@ -54,6 +54,8 @@ import { FormProvider } from './features/cashier/context/FormContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Cart from './features/cashier/pages/cart/Cart';
 import CompanyProfile from './features/Subscriber/pages/settings/profile/Profile';
+import Companies from './features/Admin/pages/companies/Companies';
+import DetailsModal from './features/Admin/pages/companies/DetailModule';
 
 
 function ProtectedRoute({ children, requireAdmin = false }) {
@@ -108,6 +110,8 @@ function App() {
                 <Route  path="/subscriberList" element={<SubscriberList />} />
                  <Route path='/support' element={ <SupportReq />}/>
                  <Route path='/report' element={ <Report />}/>
+                 <Route path='/companies' element={<Companies />}/>
+                <Route path='/companies/detail/:id' element={<DetailsModal />}/>
               </Route>
 
               {/* subscriber ============================================================================= routes  */}
@@ -165,8 +169,8 @@ function App() {
                   <Route path="/c-product/:id" element={<CProduct />} />
               </Route>
               {/* public routes ============================================================================= routes  */}
-              <Route path="/publicSubscription" element={<PublicSubscription />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/publicSubscription" element={<PublicSubscription />} />
               <Route path="/signup" element={<SignUp />} />
                 <Route path="/success" element={<Paid />} />
             <Route path="/payment" element={<PaymentScreen />} />

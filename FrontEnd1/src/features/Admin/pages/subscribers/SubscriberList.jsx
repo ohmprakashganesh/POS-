@@ -14,8 +14,8 @@ const SubscriberList = () => {
   // State to manage which view is active: 'subscribers' or 'potential'
   const [activeView, setActiveView] = useState('existing');
   return (
-    <div className="min-w-2xl max-w-full mx-auto  text-muted-hover rounded-xl ">
-      <h1 className="text-2xl font-bold text-dark dark:text-white mb-5">Subscriber Management</h1>
+    <div className="min-w-2xl max-w-full mx-auto  rounded-xl ">
+      <h1 className="text-2xl font-bold  mb-5">Subscriber Management</h1>
 
       {/* ↔️ Tab/Section Switcher */}
       <div className="flex space-x-4 mb-6 border-b border-muted/40">

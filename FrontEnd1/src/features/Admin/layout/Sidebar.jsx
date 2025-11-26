@@ -7,7 +7,8 @@ import {
   ChartBarIcon,
   CreditCardIcon,
   XMarkIcon,
-  BuildingStorefrontIcon
+  BuildingStorefrontIcon,
+  BuildingOffice2Icon
 } from '@heroicons/react/24/outline';
 const navigation = [
   { name: 'Dashboard', href: '/admin', icon: HomeIcon },
@@ -15,6 +16,8 @@ const navigation = [
   { name: 'Report', href: '/report', icon: ChartBarIcon },
   { name: 'Manage-plans', href: '/subscriptionPlans', icon: CreditCardIcon },
     { name: 'Support', href: '/support', icon: BuildingStorefrontIcon },
+      { name: 'Companies', href: '/companies', icon: BuildingOffice2Icon },
+
    
 
 ];

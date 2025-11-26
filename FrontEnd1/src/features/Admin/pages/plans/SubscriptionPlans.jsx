@@ -3,12 +3,16 @@ import { plans as initialPlans } from "@/data/mockData";
 import PlanForm from "./PlanForm";
 import Button from "@/features/ui/Button";
 import { tr } from "zod/v4/locales";
-import { PencilIcon, Trash2Icon } from "lucide-react";
+import { ArrowLeft, PencilIcon, Trash2Icon } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const PlanManagement = () => {
   const [plans2, setPlans2] = useState(initialPlans);
   const [editKey, setEditKey] = useState(null);
   const [openForm, setOpenForm] = useState(false);
+  const navigate= useNavigate();
+  const location= useLocation();
+  const returnPath= location.state?.from;
 
   const tableHeaders = [
     "SN",
@@ -32,6 +36,11 @@ const PlanManagement = () => {
 
   return (
     <div className="w-full mx-auto  rounded-lg">
+      {returnPath && (
+         <div>
+          <ArrowLeft onClick={()=> navigate(`${returnPath}`)} size={25} className="rounded-full cursor-pointer font-bold bg-gray-300 dark:bg-gray-700 mb-2 p-2 w-fit h-fit" />
+        </div>
+      )}
       <div className="flex flex-wrap lg:justify-between justify-between ">
         <h1 className="text-2xl font-bold text-dark dark:text-white mb-4">Manage Subscription Plans</h1>
         {!openForm && (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { metricCards ,recentSubscriptions,quickActions} from '../mockdata/mockAdminData';
 import { 
   UsersIcon, 
@@ -9,10 +9,11 @@ import {
   CreditCardIcon
 } from '@heroicons/react/24/outline';
 import Button from '@/features/ui/Button';
-import Timeline from './Timeline';
 import TimelineRevenueChart from './Timeline';
 
 const AdminDashboard = () => {
+  const location= useLocation();
+   const returnPath = location.pathname;
   const [cardMetrics, setCardMetrics]=useState([]);
     const [newSubscriptions, setNewSubscriptions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -237,7 +238,8 @@ const AdminDashboard = () => {
           
              <Link
              key={ind}
-          to={item.link}
+             to={item.link}
+           state={{from:returnPath}}
             className="p-4  bg-background  rounded-lg hover:bg-primary/20  transition-colors text-center"
           >
             <div className="h-8 w-8 text-primary mx-auto" >

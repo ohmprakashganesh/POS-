@@ -74,14 +74,14 @@ const ProductList = () => {
               placeholder={t("products.searchProducts")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-white dark:bg-dark max-w-sm  border border-muted/40 rounded-lg focus:ring-2"
+              className="w-full bg-white dark:bg-dark"
             />
           </div>
 
           <SelectComponent
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className=" text-muted border-muted/40 bg-white dark:bg-dark border rounded-lg px-4 py-2 "
+            className="bg-white dark:bg-dark"
           >
             {categories.map((category) => (
               <OptionComponent  key={category} value={category}>
@@ -119,7 +119,7 @@ const ProductList = () => {
                   "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=800&q=80"
                 }
                 alt={product.name}
-                className="inline-block w-full aspect-[16/9]  rounded-md"
+                className="inline-block w-full aspect-video  rounded-md"
               />
               {/* Product Details */}
               <div className="mt-1.5 grow  flex flex-col justify-between">

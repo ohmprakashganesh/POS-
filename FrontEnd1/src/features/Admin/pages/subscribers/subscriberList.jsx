@@ -1,20 +1,30 @@
 
 
-import Input from "@/features/ui/Input";
-import { DeleteIcon, Edit3Icon, EditIcon, FilterXIcon, SaveIcon, UsersIcon, UserPlusIcon } from "lucide-react";
+import { UsersIcon, UserPlusIcon, ArrowLeft } from "lucide-react";
 import React, { useState } from "react";
 import { NewUsers } from "./NewUsers"; 
 import { ExistingUsers } from "./ExistingUsers";
 import Button from "@/features/ui/Button";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SubscriberList = () => {
+  const navigate=useNavigate();
+   const location = useLocation();
+    const returnPath= location.state?.from;
+   
 
   const [activeView, setActiveView] = useState('existing');
   return (
-    <div className="min-w-2xl max-w-full mx-auto  text-muted-hover rounded-xl ">
-      <h1 className="text-2xl font-bold text-dark dark:text-white mb-3">Subscriber Management</h1>
+    <div className="min-w-2xl max-w-full mx-auto  rounded-xl ">
+      {returnPath && (
+         <div>
+          <ArrowLeft onClick={()=> navigate(`${returnPath}`)} size={25} className="rounded-full cursor-pointer font-bold bg-gray-300 dark:bg-gray-700 mb-2 p-2 w-fit h-fit" />
+        </div>
+      )}
+     
+      <h1 className="text-2xl font-bold  mb-4">Subscriber Management</h1>
 
-      <div className="flex space-x-4 mb-4">
+      <div className="flex space-x-4  mb-2 ">
         <button
           onClick={() => {
             setActiveView('existing');
@@ -41,7 +51,6 @@ const SubscriberList = () => {
         
       </div>
 
-      {/* 📋 Conditional Table Rendering */}
       {activeView === 'existing' ? (
         <ExistingUsers/>
       ) : (

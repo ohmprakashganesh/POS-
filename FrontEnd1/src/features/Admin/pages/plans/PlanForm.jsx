@@ -27,7 +27,6 @@ const PlanForm = ({ editKey, setOpenForm, setEditKey }) => {
       }
     }
   }, [editKey]);
-
   // Update existing plan
   const handleUpdate = () => {
     if (!plans[editKey]) return;

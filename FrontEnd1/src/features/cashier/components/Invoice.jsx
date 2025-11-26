@@ -138,18 +138,19 @@ const InvoiceViewer = ({ setInvoice, invoice }) => {
     <div className="p-6">
       {invoice && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <button
-            onClick={() => setInvoice(false)}
-            className="absolute top-2 bg-gray-300 w-8 h-8 rounded-sm right-3 text-gray-600 hover:text-black text-xl"
-          >
-            ×
-          </button>
-          <div className="bg-white dark:bg-dark p-6 rounded-2xl shadow-lg max-w-[500px] w-full relative">
-            {/* Header */}
-            <div className="text-center mb-3 text-sm font-serif">
-              <p>{data.branch.name}</p>
-              <p>{data.branch.address}</p>
-              <p>{data.branch.contact}</p>
+          <div className="bg-white dark:bg-dark animate-fade-slide-in p-6 rounded-2xl shadow-lg max-w-[200] min-w-[200] relative">
+            <button
+              onClick={() => setInvoice(false)}
+              className="absolute top-2 bg-gray-300 w-8 h-8 rounded-sm right-3 text-gray-600 hover:text-black text-xl"
+            >
+              ×
+            </button>
+            {/* header section */}
+
+            <div className="header-section mb-3   text-sm font-serif">
+              <p className="w-full text-center">{data.branch.name}</p>
+              <p className="w-full text-center">{data.branch.address}</p>
+              <p className="w-full text-center">{data.branch.contact}</p>
             </div>
 
             {/* Customer & Payment */}

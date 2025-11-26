@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { supportRequests } from '../../mockdata/mockAdminData';
-import { OptionComponent, SelectComponent } from '@/features/ui/Select';
-
-const STATUS_OPTIONS = ['New', 'inProgress', 'Resolved'];
-
+import { ArrowLeft } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
+const STATUS_OPTIONS = ["All",'New', 'Progress', 'Resolved'];
 const tableHeaders = [
   "Request ID",
   "Category",
@@ -15,7 +14,23 @@ const tableHeaders = [
 
 
 const SupportReq = () => {
+  const[selectedStatus,setSelectedStatus]=useState();
+  const location= useLocation();
+  const  navigate= useNavigate();
+  const returnPath= location.state?.from;  
    const [requests, setRequests] = useState(supportRequests);
+
+      const filtered= useMemo(()=>{
+        if(!selectedStatus || selectedStatus.toLowerCase()==="all") return requests;
+       
+        const term= selectedStatus.toLowerCase();
+
+        return requests.filter(
+          (req)=>
+            req.status.toLowerCase()===term
+        );
+         
+      },[selectedStatus,requests])
 
   // Function to handle local status updates AND API integration
   const updateRequestStatus = async (requestId, newStatus) => {
@@ -26,14 +41,9 @@ const SupportReq = () => {
         request.id === requestId ? { ...request, status: newStatus } : request
       )
     );
-
-    try {
-      const apiEndpoint = `/api/support/request/${requestId}/status`; // <-- Replace with your actual API endpoint
-      
-      // Example of a fetch call to your backend
-      console.log(` call to update ${requestId} to ${newStatus}`);
-
- 
+    try { 
+      //implement the api here
+      console.log(` call to update ${requestId} to ${newStatus}`)
     } catch (error) {
       console.error('API Update Error:', error);
     }
@@ -41,6 +51,11 @@ const SupportReq = () => {
 
   return (
     <div className=" rounded-md  max-w-6xl mx-auto">
+      {returnPath && (
+         <div>
+          <ArrowLeft onClick={()=> navigate(`${returnPath}`)} size={25} className="rounded-full cursor-pointer font-bold bg-gray-300 dark:bg-gray-700 mb-2 p-2 w-fit h-fit" />
+        </div>
+      )}
       <h2 className="text-2xl font-bold text-dark dark:text-white  pb-3">
         Admin Support Dashboard
       </h2>
@@ -50,7 +65,16 @@ const SupportReq = () => {
           No support requests currently available.
         </div>
       ) : (
-        <div className="overflow-x-auto shadow-md rounded-md">
+        <div className="overflow-x-auto shadow-md  max-h-fit rounded-lg">
+           <div className="relative max-w-sm mb-4">
+               <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)} placeholder="Select a status" className="bg-white dark:bg-dark w-full px-4 py-2 rounded-md focus:ring-0 border border-muted/40 focus:outline-primary/40  max-w-sm">
+                {STATUS_OPTIONS.map((item, index) => (
+                  <option key={index} value={item} className="">
+                    {item === "all" ? t("item.all") : item}
+                  </option>
+                ))}
+              </select>
+     </div>
           <table className="min-w-full divide-y divide-muted/40">
             <thead className="">
               <tr>
@@ -62,7 +86,7 @@ const SupportReq = () => {
               </tr>
             </thead>
                <tbody className=" w-screen shrink  bg-white dark:bg-dark text-muted-hover">
-              {requests.map((request) => (
+              {filtered.map((request) => (
                 <tr
                 >
                   <td >
@@ -97,9 +121,7 @@ const SupportReq = () => {
                          {STATUS_OPTIONS.map(status => (
                       <option className="truncate w-15 text-xs "  key={status}  value={status}>{status}  </option>
                       ))}
-                
                       </select>
-
                   </td>
                 </tr>
               ))}
