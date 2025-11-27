@@ -212,7 +212,7 @@ const Cart = () => {
                 </div>
 
                 <hr className="border-muted/40" />
-
+                
                 <div className="flex justify-between text-xl font-bold mt-2 mb-2">
                   <span className="text-muted-hover">{t("cart.netAmount")}</span>
                   <span className='text-muted-hover'>${payment.totalAmount.toFixed(2)}</span>
@@ -266,7 +266,6 @@ const Cart = () => {
                     </p>
                   </div>
                 )}
-
                 <Button
                   disabled={!payment.paymentType || !selectedId}
                   onClick={() => {
@@ -281,7 +280,6 @@ const Cart = () => {
                         payment: payment,
                         date: new Date().toLocaleString(),
                       });
-
                       setShowBill(true);
                     }
                   }}
