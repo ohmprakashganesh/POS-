@@ -13,6 +13,7 @@ import AddEditCustomer from '../customer/AddEditCustomer';
 import { QRGenerator } from './Qrgenreator';
 import EmptyCart from './EmptyCart';
 import { OptionComponent, SelectComponent } from '@/features/ui/Select';
+import SearchSelect from '@/features/ui/SearchSelect';
 
 
 
@@ -38,7 +39,7 @@ const EsewaPayment = ({ payment, setQrOpen }) => {
         {error && (
           <div className="p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
             <p>{t("cart.errorGeneratingQR")} {error}</p>
-            <button onClick={()=>generateDynamicQr()} className="mt-2 text-sm font-semibold underline">{t("cart.tryAgain")}</button>
+            <button onClick={() => generateDynamicQr()} className="mt-2 text-sm font-semibold underline">{t("cart.tryAgain")}</button>
           </div>
         )}
         {!error && !isLoading && (
@@ -47,7 +48,7 @@ const EsewaPayment = ({ payment, setQrOpen }) => {
 
             {/* Display QR code area */}
             <div className="flex justify-center items-center w-full aspect-square bg-gray-50 p-2 rounded-md">
-              <QRGenerator payment={payment} type={"payment"}/>
+              <QRGenerator payment={payment} type={"payment"} />
             </div>
 
             <p className="text-sm text-center text-gray-500 mt-4">
@@ -73,8 +74,8 @@ const Cart = () => {
   const [discountRate, setDiscountRate] = useState(0);
   const [qrOpen, setQrOpen] = useState(false);
   const [selectedId, setSelectedId] = useState("");
- const { openForm, openCustomerForm } = useForm();
- 
+  const { openForm, openCustomerForm } = useForm();
+
 
   useEffect(() => {
     setCustomers(customersData);
@@ -97,7 +98,7 @@ const Cart = () => {
     }
   }, [cartItems]);
 
- 
+
 
   const discountAmount = useMemo(
     () => (discountRate > 0 ? (subtotal * discountRate) / 100 : 0),
@@ -106,11 +107,11 @@ const Cart = () => {
 
   const netAmount = useMemo(() => subtotal - discountAmount, [subtotal, discountAmount]);
 
- const [payment, setPayment] = useState({
-    merchantAccount:"9803748378483",
-    orderId:"5",
-    paymentType:"",
-    totalAmount: netAmount?netAmount:0,
+  const [payment, setPayment] = useState({
+    merchantAccount: "9803748378483",
+    orderId: "5",
+    paymentType: "",
+    totalAmount: netAmount ? netAmount : 0,
   });
 
   useEffect(() => {
@@ -136,190 +137,182 @@ const Cart = () => {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
     <div>
-    <div>
-      {/* Order Header with Count */}
-      <h2 className="text-2xl font-bold border-b pb-2 text-shadow-dark dark:text-white border-muted/40">
-        {t("cart.cartOverview")}
-        {totalItems > 0 && (
-          <span className="text-sm font-medium text-muted ml-2">
-            ({totalItems} {totalItems === 1 ? t("cart.item") : t("cart.items")})
-          </span>
-        )}
-      </h2>
-      {cart.length === 0 ? (
-        <div className=' w-full   flex flex-col justify-center items-center  '>
-          <EmptyCart />
-        </div>
-      ) : (
-
-        <>
-          {/* search section */}
-       <div className="flex justify-between  gap-3 p-3 rounded-sm ">
-        <div className='w-lg'>
-
-  {/* Dropdown */}
- <SelectComponent
-  value={selectedId || ""}
-  onChange={(e) => setSelectedId(e.target.value)}
-  placeholder="Select a Customer"
-  className="bg-white dark:bg-dark"
->
-  
-  {filteredCustomers.slice(0, 3).map((user) => (
-    <OptionComponent key={user.id} value={user.id}>
-      {user.name}
-    </OptionComponent>
-  ))}
-</SelectComponent>
-  </div>
-
-
-  {/* Button */}
-   <Button onClick={()=>openCustomerForm()} className="px-5 h-[45px] w-[48%] md:w-[30%] ">
-     {t("customers.addCustomer")}
-  </Button>
-  </div>
-          <div className="flex md:flex-row lg:flex-row flex-col gap-5 mt-4">
-            <div className="flex flex-col md:w-[70%] lg:w-[70%] w-full divide-y divide-muted/30">
-
-              {/* rendering the cart items */}
-              {cart.map((item, ind) => <OrderItem key={ind} item={item} t={t} />)}
-            </div>
-            {/* Payment Summary */}
-            <div className="lg:w-[30%] md:w-[30%] w-full p-2 bg-white dark:bg-dark rounded-lg shadow">
-              <h2 className="text-2xl text-muted-hover font-bold pb-4">
-                {t("cart.paymentSummary")}
-              </h2>
-              <hr className="border-gray-200" />
-
-              <div className="space-y-1">
-                <div className="flex justify-between text-muted">
-                  <span>{t("cart.subtotal")}</span>
-                  <span className="font-semibold">${subtotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-muted">
-                  <span>{t("cart.discount")} ({discountRate}%)</span>
-                  <span className="font-semibold text-red-500">
-                    {t("cart.rs")}{discountAmount.toFixed(2)}
-                  </span>
-                </div>
-                <div className="flex justify-between text-muted items-center">
-                  <span>{t("cart.discountRate")} (%)</span>
-                  <input
-                    onChange={handleDiscountChange}
-                    value={discountRate}
-                    className="w-20 p-1 text-right border rounded"
-                    type="number"
-                    name="discount"
-                    min="0"
-                    max="100"
-                    placeholder="0.0"
-                  />
-                </div>
-              </div>
-
-              <hr className="border-muted/40" />
-
-              <div className="flex justify-between text-xl font-bold mt-2 mb-2">
-                <span className="text-muted-hover">{t("cart.netAmount")}</span>
-                <span className='text-muted-hover'>${payment.totalAmount.toFixed(2)}</span>
-              </div>
-
-              <h3 className="text-lg text-muted-hover font-semibold mb-3">{t("cart.selectPaymentMethod")}</h3>
-
-              <div className="flex lg:gap-10 md:gap-5 gap-5 items-center h-[50px] justify-around text-lg font-bold text-muted-hover mb-4">
-                <div
-                  onClick={() => {
-                    updatePayment("paymentType", "esewa");
-                    setQrOpen(true);
-                  }}
-                  className={`cursor-pointer border-2 p-1 rounded-lg transition-all ${payment.paymentType === "esewa"
-                    ? "border-green-500 shadow-md"
-                    : "border-muted hover:border-muted-hover"
-                    }`}
-                >
-                  <img
-                    src={esewa}
-                    alt="eSewa Logo"
-                    className="h-full object-contain max-h-[40px]"
-                  />
-                </div>
-                <div
-                  onClick={() => updatePayment("paymentType", "Cash")}
-                  className={`cursor-pointer border-2 p-1 rounded-lg transition-all ${payment.paymentType === "Cash"
-                    ? "border-blue-500 shadow-md"
-                    : "border-muted/40 hover:border-muted/20"
-                    }`}
-                >
-                  <img
-                    src={money}
-                    alt="Cash Logo"
-                    className="h-full object-cover max-h-[40px]"
-                  />
-                </div>
-              </div>
-              {payment.paymentType === "esewa" && qrOpen && (
-                <div className="mt-6">
-                  <EsewaPayment
-                    payment={payment}
-                    setQrOpen={setQrOpen}
-                  />
-                </div>
-              )}
-              {payment.paymentType === "Cash" && (
-                <div className="mt-6 p-4 bg-background border border-blue-200 rounded-lg text-center">
-                  <p className="font-semibold text-muted">
-                    {t("cart.prepareMessage", "cart.rs")}{payment.totalAmount.toFixed(2)} {t("cart.cashOnDelivery")}
-                  </p>
-                </div>
-              )}
-
-              <Button
-  disabled={!payment.paymentType || !selectedId}
-  onClick={() => {
-    if (payment.paymentType && selectedId) {
-      setBillDetail({
-        items: cart,
-        customerId: selectedId,
-        subtotal: subtotal,
-        discountRate: discountRate,
-        discountAmount: discountAmount,
-        netAmount: netAmount,
-        payment: payment,
-        date: new Date().toLocaleString(),
-      });
-
-      setShowBill(true);
-    }
-  }}
-  className={`w-full mt-6 cursor-pointer 
-  ${payment.paymentType ? "bg-secondary hover:bg-secondary-hover" : "bg-primary/30 cursor-not-allowed"
-  }`}
->
-  {!payment.paymentType ? t("cart.selectType") : t("cart.generateBill")}
-</Button>
-
-            </div>
+      <div>
+        {/* Order Header with Count */}
+        <h2 className="text-2xl font-bold border-b pb-2 text-shadow-dark dark:text-white border-muted/40">
+          {t("cart.cartOverview")}
+          {totalItems > 0 && (
+            <span className="text-sm font-medium text-muted ml-2">
+              ({totalItems} {totalItems === 1 ? t("cart.item") : t("cart.items")})
+            </span>
+          )}
+        </h2>
+        {cart.length === 0 ? (
+          <div className=' w-full   flex flex-col justify-center items-center  '>
+            <EmptyCart />
           </div>
-        </>
-      )}
-      <div className="flex">
-        {showBill && (
-         <BillDetails
-          bill={billDetail}
-          onClose={() => setShowBill(false)}
-              />
+        ) : (
 
+          <>
+
+            <div className="flex justify-between  gap-3 p-3 rounded-sm ">
+              <div className='w-lg'>
+                 {/* select the customer with search function */}
+                <SearchSelect
+                  value={selectedId}
+                  onChange={(id) => setSelectedId(id)}
+                  customers={filteredCustomers}
+                />
+
+              </div>
+
+
+              {/* Button */}
+              <Button onClick={() => openCustomerForm()} className="px-5 h-[45px] w-[48%] md:w-[30%] ">
+                {t("customers.addCustomer")}
+              </Button>
+            </div>
+            <div className="flex md:flex-row lg:flex-row flex-col gap-5 mt-4">
+              <div className="flex flex-col md:w-[70%] lg:w-[70%] w-full divide-y divide-muted/30">
+
+                {/* rendering the cart items */}
+                {cart.map((item, ind) => <OrderItem key={ind} item={item} t={t} />)}
+              </div>
+              {/* Payment Summary */}
+              <div className="lg:w-[30%] md:w-[30%] w-full p-2 bg-white dark:bg-dark rounded-lg shadow">
+                <h2 className="text-2xl text-muted-hover font-bold pb-4">
+                  {t("cart.paymentSummary")}
+                </h2>
+                <hr className="border-gray-200" />
+
+                <div className="space-y-1">
+                  <div className="flex justify-between text-muted">
+                    <span>{t("cart.subtotal")}</span>
+                    <span className="font-semibold">${subtotal.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-muted">
+                    <span>{t("cart.discount")} ({discountRate}%)</span>
+                    <span className="font-semibold text-red-500">
+                      {t("cart.rs")}{discountAmount.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-muted items-center">
+                    <span>{t("cart.discountRate")} (%)</span>
+                    <input
+                      onChange={handleDiscountChange}
+                      value={discountRate}
+                      className="w-20 p-1 text-right border rounded"
+                      type="number"
+                      name="discount"
+                      min="0"
+                      max="100"
+                      placeholder="0.0"
+                    />
+                  </div>
+                </div>
+
+                <hr className="border-muted/40" />
+
+                <div className="flex justify-between text-xl font-bold mt-2 mb-2">
+                  <span className="text-muted-hover">{t("cart.netAmount")}</span>
+                  <span className='text-muted-hover'>${payment.totalAmount.toFixed(2)}</span>
+                </div>
+
+                <h3 className="text-lg text-muted-hover font-semibold mb-3">{t("cart.selectPaymentMethod")}</h3>
+
+                <div className="flex lg:gap-10 md:gap-5 gap-5 items-center h-[50px] justify-around text-lg font-bold text-muted-hover mb-4">
+                  <div
+                    onClick={() => {
+                      updatePayment("paymentType", "esewa");
+                      setQrOpen(true);
+                    }}
+                    className={`cursor-pointer border-2 p-1 rounded-lg transition-all ${payment.paymentType === "esewa"
+                      ? "border-green-500 shadow-md"
+                      : "border-muted hover:border-muted-hover"
+                      }`}
+                  >
+                    <img
+                      src={esewa}
+                      alt="eSewa Logo"
+                      className="h-full object-contain max-h-[40px]"
+                    />
+                  </div>
+                  <div
+                    onClick={() => updatePayment("paymentType", "Cash")}
+                    className={`cursor-pointer border-2 p-1 rounded-lg transition-all ${payment.paymentType === "Cash"
+                      ? "border-blue-500 shadow-md"
+                      : "border-muted/40 hover:border-muted/20"
+                      }`}
+                  >
+                    <img
+                      src={money}
+                      alt="Cash Logo"
+                      className="h-full object-cover max-h-[40px]"
+                    />
+                  </div>
+                </div>
+                {payment.paymentType === "esewa" && qrOpen && (
+                  <div className="mt-6">
+                    <EsewaPayment
+                      payment={payment}
+                      setQrOpen={setQrOpen}
+                    />
+                  </div>
+                )}
+                {payment.paymentType === "Cash" && (
+                  <div className="mt-6 p-4 bg-background border border-blue-200 rounded-lg text-center">
+                    <p className="font-semibold text-muted">
+                      {t("cart.prepareMessage", "cart.rs")}{payment.totalAmount.toFixed(2)} {t("cart.cashOnDelivery")}
+                    </p>
+                  </div>
+                )}
+
+                <Button
+                  disabled={!payment.paymentType || !selectedId}
+                  onClick={() => {
+                    if (payment.paymentType && selectedId) {
+                      setBillDetail({
+                        items: cart,
+                        customerId: selectedId,
+                        subtotal: subtotal,
+                        discountRate: discountRate,
+                        discountAmount: discountAmount,
+                        netAmount: netAmount,
+                        payment: payment,
+                        date: new Date().toLocaleString(),
+                      });
+
+                      setShowBill(true);
+                    }
+                  }}
+                  className={`w-full mt-6 cursor-pointer 
+  ${payment.paymentType ? "bg-secondary hover:bg-secondary-hover" : "bg-primary/30 cursor-not-allowed"
+                    }`}
+                >
+                  {!payment.paymentType ? t("cart.selectType") : t("cart.generateBill")}
+                </Button>
+
+              </div>
+            </div>
+          </>
         )}
+        <div className="flex">
+          {showBill && (
+            <BillDetails
+              bill={billDetail}
+              onClose={() => setShowBill(false)}
+            />
+
+          )}
+        </div>
       </div>
-    </div>
-     {openForm && (
-  <div
-    className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center"  // close on background click
-  >
-      <AddEditCustomer/>
-  </div>
-   )}
+      {openForm && (
+        <div
+          className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center"  // close on background click
+        >
+          <AddEditCustomer />
+        </div>
+      )}
     </div>
   );
 };

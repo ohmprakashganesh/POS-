@@ -6,7 +6,9 @@ import Button from '@/features/ui/Button';
 import { useCart } from '../../context/CartContext';
 import toast, { Toaster } from 'react-hot-toast';
 import { ArrowLeftIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 const CProduct = () => {
+  const {t}=useTranslation("cashier")
   const navigate=useNavigate()
   // Get the product id from the URL, e.g., /product/8
   const { id } = useParams();
@@ -22,10 +24,10 @@ const CProduct = () => {
     return (
       <div className="max-w-5xl mx-auto p-6 sm:p-8 lg:p-12 shadow-xl rounded-2xl text-center">
         <p className="text-2xl font-bold text-red-500 dark:text-red-400">
-          Product not found.
+         {t("details.checkId")}
         </p>
         <p className="text-lg mt-2 text-gray-600 dark:text-gray-400">
-          Please check the product ID in the URL. ID received: {id}
+          {t("details.notFound")}{id}
         </p>
       </div>
     );
@@ -70,22 +72,22 @@ const CProduct = () => {
           {/* Price and Rating */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 dark:border-gray-700 pb-4">
             <p className="text-3xl sm:text-4xl font-bold text-secondary">
-              ${productData.price.toFixed(2)}
+              {t("details.rs")} {productData.price.toFixed(2)}
             </p>
           </div>
 
           {/* Meta Info */}
           <div className="space-y-1 text-muted">
             <p className="text-lg text-muted">
-              <span className="font-semibold">Category:</span>{" "}
+              <span className="font-semibold">{t("details.category")}</span>{" "}
               {productData.category}
             </p>
             <p className="text-lg ">
-              <span className="font-semibold">SKU :</span>{" "}
+              <span className="font-semibold">{t("details.sku")}</span>{" "}
               {productData.sku}
             </p>
             <p className="text-lg ">
-              <span className="font-semibold">Total stock:</span>{" "}
+              <span className="font-semibold">{t("details.totalStock")}</span>{" "}
               {productData.stock}
             </p>
           </div>
@@ -106,10 +108,10 @@ const CProduct = () => {
          <Button  onClick={() => {
       addToCart(productData); 
       toast.success("successfully added to cart")
-    }}className="lg:w-1/2 md:w-1/2 w-full   ">Add To Cart </Button>
+    }}className="lg:w-1/2 md:w-1/2 w-full   ">{t("details.addToCart")} </Button>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold mb-5 text-muted-hover">
-          Product Details
+         {t("details.productDetails")}
         </h2>
         <p className="text-base sm:text-lg text-muted leading-relaxed">
           This product is from {productData.source}. It belongs to the{" "}

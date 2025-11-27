@@ -49,6 +49,16 @@
     "available": "Available",
     "units": "units"
   },
+  "details":{
+  "rs": "Rs",
+  "category": "Category:",
+  "sku": "SKU :",
+  "totalStock": "Total stock:",
+  "addToCart": "Add To Cart",
+  "productDetails": "Product Details",
+  "checkId": "Please check the product ID in the URL.",
+  "notFound": "Product not found."
+},
   "customers": {
     "customers":"customers",
      "search": "Search customer by name, email, number ...",

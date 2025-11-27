@@ -47,6 +47,16 @@
     "available": "उपलब्ध",
     "units": "एकाइहरू"
   },
+  "details":{
+  "rs": "रु",
+  "category": "श्रेणी:",
+  "label_sku": "SKU :",
+  "totalStock": "जम्मा स्टक:",
+  "addToCart": "कार्टमा थप्नुहोस्",
+  "productDetails": "उत्पादन विवरण",
+  "checkId": "कृपया URL मा भएको उत्पादन ID जाँच गर्नुहोस्।",
+  "notFound": "उत्पादन फेला परेन।"
+},
   "customers": {
     "customers":"ग्राहकहरू",
     "search": "नाम, इमेल वा नम्बरद्वारा ग्राहक खोज्नुहोस्",
