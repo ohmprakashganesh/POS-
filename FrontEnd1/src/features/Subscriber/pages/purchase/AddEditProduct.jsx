@@ -10,8 +10,6 @@ import Input from "@/features/ui/Input";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
-
-
 const categories = [
     "Electronics",
     "Accessories",
@@ -23,7 +21,20 @@ const categories = [
 
 const AddEditProduct = () => {
   const { t } = useTranslation(["form"]); 
-  
+  const [imagePreview, setImagePreview] = useState(""); 
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const isEdit = Boolean(id);
+  const from = location.state?.from || "/products"; 
+
+  const productData = useMemo(() =>
+    isEdit ? DUMMY_PRODUCTS.find((prod) => prod.id == id) : null, 
+    [id, isEdit]
+  );
+
   const productSchema = z.object({
     name: z.string().min(1, t("purchase.name.required")),
     vendor: z.string().min(1, t("purchase.vendor.required")),
@@ -57,23 +68,9 @@ const AddEditProduct = () => {
     message: t("purchase.price.minCostError"),
     path: ["price"], 
   });
-  const location = useLocation();
-  const navigate = useNavigate();
-  
 
-  const from = location.state?.from || "/products"; 
-  
-  const { id } = useParams();
-  const isEdit = Boolean(id);
+ 
 
-  const productData = useMemo(() => 
-    isEdit ? DUMMY_PRODUCTS.find((prod) => prod.id == id) : null, 
-    [id, isEdit]
-  );
-  
-  const [imagePreview, setImagePreview] = useState(""); 
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const {
     register,
@@ -103,6 +100,7 @@ const AddEditProduct = () => {
   const watchedStock = watch("stock");
   const watchedCategory = watch("category");
 
+
   useEffect(() => {
     if (isEdit && productData) {
         reset({
@@ -122,6 +120,9 @@ const AddEditProduct = () => {
   }, [isEdit, productData, reset]);
 
 
+
+  
+
   const generateSKU = () => {
     const prefix = watchedCategory 
       ? watchedCategory.substring(0, 3).toUpperCase()
@@ -135,16 +136,13 @@ const AddEditProduct = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-
       setValue("image", file, { shouldValidate: true, shouldDirty: true });
-
       setImagePreview(URL.createObjectURL(file)); 
     } else {
         setValue("image", undefined, { shouldValidate: true, shouldDirty: true });
         setImagePreview("");
     }
   };
-
 
 
   const onSubmit = async (data) => {
@@ -155,7 +153,7 @@ const AddEditProduct = () => {
       console.log(isEdit ? "Product updated:" : "Product added:", data);
       setIsLoading(false);
       toast.success(isEdit ? "Product successfully updated!" : "Product successfully added!");
-      
+
       navigate(from, { replace: true });
       
     }, 1000);
@@ -201,10 +199,10 @@ const AddEditProduct = () => {
 
       <div className="bg-white dark:bg-dark rounded-md shadow-sm overflow-hidden">
 
-        <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
-            <div className="space-y-5">
+            <div className="space-y-2">
               <Input
                 label={t("purchase.name.label")}
                 type="text"

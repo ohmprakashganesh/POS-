@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   HomeIcon,
@@ -24,6 +24,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const Sidebar = ({closeSidebar,className=""}) => {
+  const navigate= useNavigate();
   const { t } = useTranslation("subscriber");
   const navigation = [
     { name: t("subscriber.dashboard"), href: "/subscriber", icon: HomeIcon },
@@ -39,7 +40,7 @@ const Sidebar = ({closeSidebar,className=""}) => {
   const settings = [
     { name: t("settings.help"), href: "/help", icon: HelpingHandIcon },
     {
-      name: t("settings.updateProfile"),
+      name: t("settings.profile"),
       href: "/companyProfile",
       icon: UserIcon,
     },
@@ -61,7 +62,7 @@ const Sidebar = ({closeSidebar,className=""}) => {
   };
   return (
       <aside className={cn("min-w-65 overflow-y-auto max-w-80 h-screen bg-white dark:bg-dark shadow-sm",className)}>
-        <div className="flex items-center justify-start h-16 px-4">
+        <div onClick={()=>navigate("/subscriber")}  className="flex cursor-pointer items-center justify-start h-16 px-4">
           <ShoppingCartIcon className="h-8 w-8 text-primary" />
           <span className="ml-2 text-xl font-bold">POS System</span>
         </div>
@@ -78,8 +79,7 @@ const Sidebar = ({closeSidebar,className=""}) => {
                         : "text-muted hover:bg-background hover:text-foreground"
                     }
                   `}
-                  onClick={handleLinkCLick}
-            >
+                  onClick={handleLinkCLick} >
               <item.icon
                 className="mr-3 h-5 w-5 shrink-0 "/>
               {item.name}
@@ -119,10 +119,8 @@ const Sidebar = ({closeSidebar,className=""}) => {
               </NavLink>
             ))}
           </div>
-          
         </nav>
       </aside>
     );
   };
-
 export default Sidebar;

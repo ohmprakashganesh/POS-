@@ -18,7 +18,7 @@ export default function PurchaseDetailsCard({ onClose, purchase }) {
           <XMarkIcon className="size-8" />
         </button>
       </div>
-      <div className="bg-white animate-fade-slide-in  dark:bg-dark rounded-xl shadow-lg w-full max-w-md overflow-hidden  relative z-50">
+      <div className="bg-white animate-fade-slide-down  dark:bg-dark rounded-xl shadow-lg w-full max-w-md overflow-hidden  relative z-50">
         <span className="absolute top-1 right-1 bg-primary text-primary-foreground font-semibold rounded-full px-1.5 py-px">
           {purchase.category}
         </span>

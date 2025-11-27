@@ -6,7 +6,7 @@ import App from './App.jsx'
 import "./locales/i18n.js"; 
 
 createRoot(document.getElementById('root')).render(
- <div className='overflow-x-hidden'>
+ <div className='overflow-x-hidden '>
  <App />
  </div>
    

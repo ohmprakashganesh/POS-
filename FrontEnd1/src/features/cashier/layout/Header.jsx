@@ -13,6 +13,7 @@ import { LogOutIcon, Moon, Sun } from "lucide-react";
 // UPDATED import: point to your ThemeContext provider hook
 import { useTheme } from "@/contexts/ThemeContext";
 import ThemeButton from "@/features/ui/ThemeButton";
+import { tr } from "zod/v4/locales";
 
 const Header = ({ onMenuClick, user }) => {
   // now useTheme returns { theme, setTheme, toggleTheme }
@@ -22,6 +23,11 @@ const Header = ({ onMenuClick, user }) => {
   const { logout } = useAuth();
   const { unreadCount, markAsRead } = useNotifications();
   const [notification, setNotification] = useState(false);
+   const[nState,setNState]= useState(false);
+  const[logState,setLogState]= useState(false);
+   const[langState,setLangState]= useState(false);
+
+  
 
   const buttonRef = useRef(null);
   const panelRef = useRef(null);
@@ -62,14 +68,15 @@ const Header = ({ onMenuClick, user }) => {
         </div>
 
         {/* Right section */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center z-50 space-x-2">
           <ThemeButton />
-          <LanguageToggle />
+          <LanguageToggle setLangState={setLangState} langState={langState} />
           {/* Notifications */}
           <div ref={buttonRef} className="relative">
             <button
               onClick={() => {
                 markAsRead();
+                setNState(true);
                 setNotification((prev) => !prev);
               }}
               className="p-2 text-gray-400 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100 relative"
@@ -84,39 +91,34 @@ const Header = ({ onMenuClick, user }) => {
           </div>
 
           {/* User menu */}
-          <div className="relative">
-            <button
-              onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="flex items-center space-x-3 text-sm focus:outline-none"
-            >
-              <UserCircleIcon className="h-8 w-8 text-muted" />
-              <div className="hidden md:block text-left">
-                <p className="font-medium text-nowrap">{user?.name}</p>
-                <p className="text-muted text-xs">{user?.role}</p>
-              </div>
-            </button>
-
-            {userMenuOpen && (
-              <div className="absolute animate-fade-slide-in right-0 mt-4 w-38 shadow-md text-muted-hover bg-white dark:bg-dark rounded-md   py-1 z-50">
-                <div className="flex flex-row text-destructive text-sm justify-start py-2 gap-2  px-5">
-                  <LogOutIcon />
-                  <button
-                    onClick={logout}
-                    className="block w-full text-left  text-sm "
-                  >
-                    {t("general.logOut")}
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
+  <div className="relative">
+  <button
+    onClick={() =>{ setUserMenuOpen(!userMenuOpen), setLogState(true)}}
+    className="flex items-center space-x-3 text-sm focus:outline-none relative z-50"
+  >
+    <UserCircleIcon className="h-8 w-8 text-muted" />
+    <div className="hidden md:block text-left">
+      <p className="font-medium text-nowrap">{user?.name}</p>
+      <p className="text-muted text-xs">{user?.role}</p>
+    </div>
+  </button>
+</div>
         </div>
       </div>
-
-      {notification && (
+        {logState && (
+    <div className={`fixed w-[140px] right-0 top-16 ${userMenuOpen ?"animate-fade-slide-down":"animate-fade-slide-up"}   bg-white dark:bg-dark rounded-md shadow-md py-1 origin-top-right  z-40 `}>
+      <div className="flex items-center text-destructive text-sm gap-2 px-4 py-2">
+        <LogOutIcon size={18} />
+        <button onClick={logout} className="text-left w-full">
+          {t("general.logOut")}
+        </button>
+      </div>
+    </div>
+  ) }
+      {nState &&(
         <div
           ref={panelRef}
-          className="fixed animate-fade-slide-left w-full max-w-130 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100"
+    className={`fixed ${notification?"animate-fade-slide-in":"animate-fade-slide-out"}  w-full md:max-w-80 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100`}
         >
           <NotificationScreen />
         </div>

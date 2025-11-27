@@ -7,8 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@/features/ui/Button';
 
 const StatusBadge = ({ status }) => {
-
-
   let color = 'bg-gray- text-gray-800';
   if (status === 'Active') color = 'bg-green-100 text-green-700 ';
   if (status === 'Expired') color = 'bg-red-100 text-red-700 border-red-300';
@@ -22,7 +20,7 @@ const StatusBadge = ({ status }) => {
   );
 };
 
-// Helper component for detail rows
+//  component for detail rows 
 const DetailRow = ({ icon: Icon, label, value }) => (
   <div className="flex items-center gap-3 py-2 border-b border-muted/20 last:border-b-0">
     <Icon className="w-5 h-5 text-primary/70" />
@@ -52,7 +50,6 @@ const CompanyProfile = () => {
   const daysRemaining = (subscription && subscription.endDate) 
     ? Math.ceil((new Date(subscription.endDate) - new Date()) / (1000 * 60 * 60 * 24))
     : 'N/A';
-  // -----------------------------------------------------------------
 
   // Fallback for when data hasn't loaded (e.g., initial state from a real API call)
   if (!company.id) {
@@ -62,10 +59,10 @@ const CompanyProfile = () => {
     <div className="container mx-auto ">
       {/* Page Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold tracking-tight">
-          {name} Profile Overview
+        <h1 className="text-2xl font-bold tra cking-tight">
+          {name} {t("company.profileOverview")}
         </h1>
-        <p className="text-muted">Manage your company details and subscription status.</p>
+        <p className="text-muted">{t("company.profileOverview")} {t("company.manageDetails")}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -73,7 +70,7 @@ const CompanyProfile = () => {
         {/* --- LEFT COLUMN: COMPANY DETAILS --- */}
         <div className="lg:col-span-2 bg-white dark:bg-dark p-6 rounded-xl shadow-md space-y-6">
           <h2 className="text-xl font-bold border-b pb-3 mb-4">
-            Company Information
+            {t("company.companyInformation")}
           </h2>
 
           {/* Logo and Name */}
@@ -91,17 +88,17 @@ const CompanyProfile = () => {
             <div className="ml-auto">
               {/* Assuming Button is importe` */}
               <Button onClick={()=>navigate(`/signUp/${company.id}`)}  >
-                Update 
+                {t("company.update")}
               </Button>
             </div>
           </div>
           
           {/* Contact Details Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-            <DetailRow icon={Mail} label="Email Address" value={email} />
-            <DetailRow icon={Phone} label="Phone Number" value={phone} />
-            <DetailRow icon={Building2} label="Business Type" value={type} />
-            <DetailRow icon={CreditCard} label="PAN/VAT Number" value={pan} />
+            <DetailRow icon={Mail} label=  {t("company.emailAddress")} value={email} />
+            <DetailRow icon={Phone} label=  {t("company.phoneNumber")} value={phone} />
+            <DetailRow icon={Building2} label=  {t("company.businessType")} value={type} />
+            <DetailRow icon={CreditCard} label=  {t("company.panVatNumber")} value={pan} />
           </div>
           
           {/* Address */}
@@ -109,7 +106,7 @@ const CompanyProfile = () => {
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-primary/70 mt-1" />
               <div>
-                <p className="text-sm font-medium text-muted">Business Address</p>
+                <p className="text-sm font-medium text-muted">  {t("company.businessAddress")}</p>
                 <p className="text-base font-semibold">{address}</p>
               </div>
             </div>
@@ -119,7 +116,7 @@ const CompanyProfile = () => {
         {/* --- RIGHT COLUMN: SUBSCRIPTION STATUS --- */}
         <div className="lg:col-span-1 bg-white dark:bg-dark p-6 rounded-xl shadow-md h-fit space-y-6">
           <h2 className="text-xl font-bold border-b pb-3">
-            Subscription Status
+              {t("company.subscriptionStatus")}
           </h2>
           
           {/* Plan Name & Status */}
@@ -136,7 +133,7 @@ const CompanyProfile = () => {
             <div className="flex items-center justify-between">
               <div className='flex items-center gap-2 text-muted'>
                 <CalendarDays className="w-5 h-5" />
-                Start Date:
+                {t("company.startDate")}
               </div>
               <span className='font-semibold'>{subscription.startDate}</span>
             </div>
@@ -145,7 +142,7 @@ const CompanyProfile = () => {
             <div className="flex items-center justify-between">
               <div className='flex items-center gap-2 text-muted'>
                 <CalendarDays className="w-5 h-5" />
-                Renewal Date:
+                 {t("company.renewalDate")}
               </div>
               <span className='font-semibold'>{subscription.endDate}</span>
             </div>
@@ -154,16 +151,16 @@ const CompanyProfile = () => {
             <div className="flex items-center justify-between text-lg font-bold py-2 bg-primary/10 rounded-md px-3">
               <div className='flex items-center gap-2 text-primary'>
                 <Clock className="w-5 h-5" />
-                Days Remaining:
+                {t("company.remainingDays")}
               </div>
-              <span>{daysRemaining} days</span>
+              <span>{daysRemaining} {t("company.days")}</span>
             </div>
 
             {/* User Capacity */}
             <div className="flex items-center justify-between border-t border-muted/20 pt-3">
               <div className='flex items-center gap-2 text-muted'>
                 <Users className="w-5 h-5" />
-                User Capacity:
+                  {t("company.userCapacity")}
               </div>
               <span className='font-semibold'>{subscription.users} / {subscription.maxUsers} Users</span>
             </div>

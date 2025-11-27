@@ -209,5 +209,44 @@
         "profitMargin": "नाफा मार्जिन:",
         "totalStockValue": "कुल स्टक मूल्य:"
       }
-    }
+    },
+  "signUp": {
+    "registerCompany": "तपाईंको कम्पनी दर्ता गर्नुहोस्",
+    "alreadyHaveAccount": "पहिले नै खाता छ?",
+    "signInHere": "यहाँ लगइन गर्नुहोस्",
+    "businessName": "व्यवसायको नाम",
+    "businessNamePlaceholder": "तपाईंको व्यवसायको नाम लेख्नुहोस्",
+    "panVatNumber": "PAN / VAT नम्बर",
+    "panVatPlaceholder": "जस्तै: 48305B",
+    "businessType": "व्यवसाय प्रकार",
+    "selectBusinessType": "व्यवसाय प्रकार छान्नुहोस्",
+    "emailAddress": "इमेल ठेगाना",
+    "emailPlaceholder": "example@company.com",
+    "phoneNumber": "फोन नम्बर",
+    "phonePlaceholder": "+९७७ ९८XXXXXXXX",
+    "businessAddress": "व्यवसाय ठेगाना",
+    "addressPlaceholder": "जस्तै: बर्हदशी ४, झापा, नेपाल",
+    "uploadLogo": "लोगो अपलोड गर्नुहोस्",
+    "termsAgreement": "म सहमत छु",
+    "termsAndConditions": "नियम तथा सर्तहरू",
+    "createAccount": "खाता बनाउनुहोस्",
+    "creatingAccount": "खाता बनाइँदै...",
+    "profileBack": "प्रोफाइलमा फर्कनुहोस्",
+    "update": "प्रोफाइल अपडेट गर्नुहोस्",
+    "updateDescription":"अस्तित्वमा रहेका डेटा अपडेट गर्नुहोस्"
+  },
+   "signUpErrors": {
+    "businessNameRequired": "व्यवसायको नाम आवश्यक छ",
+    "businessTypeRequired": "व्यवसाय प्रकार आवश्यक छ",
+    "panRequired": "PAN नम्बर आवश्यक छ",
+    "invalidEmail": "अवैध इमेल ठेगाना",
+    "invalidPhone": "अवैध फोन नम्बर",
+    "uploadLogo": "कृपया लोगो फाइल अपलोड गर्नुहोस्",
+    "generic": "केहि गडबड भयो। कृपया पुन: प्रयास गर्नुहोस्।"
+  },
+  "signUpSuccess": {
+    "accountCreated": "खाता सफलतापूर्वक बनाइयो! रिडाइरेक्ट गर्दै..."
   }
+}
+
+  

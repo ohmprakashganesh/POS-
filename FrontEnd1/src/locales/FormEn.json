@@ -209,6 +209,43 @@
         "profitMargin": "Profit margin:",
         "totalStockValue": "Total stock value:"
       }
-    }
+    },
+    "signUp": {
+    "registerCompany": "Register Your Company",
+    "alreadyHaveAccount": "Already have an account?",
+    "signInHere": "Sign in here",
+    "businessName": "Business Name",
+    "businessNamePlaceholder": "Enter your business name",
+    "panVatNumber": "PAN / VAT Number",
+    "panVatPlaceholder": "E.g. 48305B",
+    "businessType": "Business Type",
+    "selectBusinessType": "Select Business Type",
+    "emailAddress": "Email Address",
+    "emailPlaceholder": "example@company.com",
+    "phoneNumber": "Phone Number",
+    "phonePlaceholder": "+977 98XXXXXXXX",
+    "businessAddress": "Business Address",
+    "addressPlaceholder": "E.g. Barhadashi 4, Jhapa, Nepal",
+    "uploadLogo": "Upload Logo",
+    "termsAgreement": "I agree to the",
+    "termsAndConditions": "Terms and Conditions",
+    "createAccount": "Create Account",
+    "creatingAccount": "Creating account...",
+    "profileBack": "Back to Profile",
+    "update": "Update Profile", 
+    "updateDescription" :"Update your existing details"
+  },
+  "signUpErrors": {
+    "businessNameRequired": "Business Name is required",
+    "businessTypeRequired": "Business Type is required",
+    "panRequired": "PAN Number is required",
+    "invalidEmail": "Invalid email format",
+    "invalidPhone": "Invalid phone number",
+    "uploadLogo": "Please upload a logo file",
+    "generic": "Something went wrong. Please try again."
+  },
+  "signUpSuccess": {
+    "accountCreated": "Account created successfully! Redirecting..."
+  }
   }
 

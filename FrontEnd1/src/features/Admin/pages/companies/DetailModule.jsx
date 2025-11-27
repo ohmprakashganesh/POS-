@@ -4,6 +4,30 @@ import { companyData } from "@/data/mockData";
 import { useEffect, useState } from "react";
 
 
+  const StatusBadge = ({ status }) => {
+    let color = "bg-gray-200 text-muted-hover ";
+    let Icon = AlertTriangle;
+
+    if (status === "Active") {
+      color = "bg-green-100 text-green-700 ";
+      Icon = CheckCircle;
+    } else if (status === "Expired") {
+      color = "bg-red-100 text-red-700 ";
+      Icon = XCircle;
+    } else if (status === "Trial" || status === "Pending") {
+      color = "bg-yellow-100 text-yellow-700";
+      Icon = AlertTriangle;
+    }
+    return (
+      <span
+        className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold border ${color}`}
+      >
+        <Icon className="w-3 h-3" />
+        {status}
+      </span>
+    );
+  };
+
 const DetailsModal = () => {
   const navigate= useNavigate();
   
@@ -29,11 +53,6 @@ if(loading || !c){
   )
 
 }
-
-
-
-
-
   const formatDate = (iso) =>
     iso ? new Date(iso).toISOString().split("T")[0] : "N/A";
 
@@ -48,30 +67,7 @@ if(loading || !c){
         })
       : "N/A";
 
-  const StatusBadge = ({ status }) => {
-    let color = "bg-gray-200 text-muted-hover ";
-    let Icon = AlertTriangle;
 
-    if (status === "Active") {
-      color = "bg-green-100 text-green-700 ";
-      Icon = CheckCircle;
-    } else if (status === "Expired") {
-      color = "bg-red-100 text-red-700 ";
-      Icon = XCircle;
-    } else if (status === "Trial" || status === "Pending") {
-      color = "bg-yellow-100 text-yellow-700";
-      Icon = AlertTriangle;
-    }
-
-    return (
-      <span
-        className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold border ${color}`}
-      >
-        <Icon className="w-3 h-3" />
-        {status}
-      </span>
-    );
-  };
 
   const DetailRow = ({ icon: Icon, label, value }) => (
     <div className="flex  items-center gap-4 py-1  ">

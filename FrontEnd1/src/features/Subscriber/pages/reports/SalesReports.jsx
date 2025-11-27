@@ -62,15 +62,21 @@ const SalesReports = () => {
   const location= useLocation();
   const from= location.state?.from;
   const { t } = useTranslation();
-  const [dateRange, setDateRange] = useState({
-    start: formatDate(new Date(fullSalesData[0].date)),
-    end: formatDate(new Date(fullSalesData[fullSalesData.length - 1].date)),
-  });
+  const initialRange = {
+  start: formatDate(new Date(fullSalesData[0].date)),
+  end: formatDate(new Date(fullSalesData[fullSalesData.length - 1].date)),
+};
+
+const [dateRange, setDateRange] = useState({
+  start: "",
+  end: "",
+});
+
+const [confirmedDateRange, setConfirmedDateRange] = useState(initialRange);
   const [reportType, setReportType] = useState("daily");
   const [salesData, setSalesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const [confirmedDateRange, setConfirmedDateRange] = useState(dateRange);
+   const[langState,setLangState]=useState(false);
 
   const getWeeklyData = (data) => {
     const weeks = {};
@@ -100,6 +106,8 @@ const SalesReports = () => {
     });
     return Object.values(months);
   };
+
+
 
   useEffect(() => {
     const loadSalesData = async () => {
@@ -152,8 +160,6 @@ const SalesReports = () => {
     </div>
   ) : (
     <div className="space-y-6">
-   
-       
       <div className="flex gap-10 ">
             {from && (
            <Link
@@ -167,13 +173,14 @@ const SalesReports = () => {
          <h1 className="text-2xl font-bold">{t("report.title")}</h1>
         <p className="text-muted">{t("report.description")}</p>
         </div>
-       
       </div>
       <div className="grid items-end grid-cols-1 md:grid-cols-4 gap-4">
         <SelectComponent
           label={t("report.type")}
+          langState={langState}
+          setLangState={setLangState}
           value={reportType}
-          className=" bg-white dark:bg-dark"
+          className=" bg-white  focus:border-primary/40 dark:bg-dark"
           onChange={(e) => setReportType(e.target.value)}
         >
           <OptionComponent value="daily">{t("report.daily")}</OptionComponent>

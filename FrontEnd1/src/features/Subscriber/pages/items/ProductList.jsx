@@ -20,6 +20,7 @@ const ProductList = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [product, setProduct] = useState(null);
+  const[langState,setLangState]=useState(false);
   const col = "";
 
   const [openDropdownId, setOpenDropdownId] = useState(null);
@@ -92,7 +93,7 @@ const ProductList = () => {
             onChange={(e) => setSearchTerm(e.target.value)} className="pl-9  bg-white dark:bg-dark" />
 
         </div>
-        <SelectComponent value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} placeholder="Select a Category" className="bg-white dark:bg-dark">
+        <SelectComponent value={selectedCategory} setLangState={setLangState} langState={langState} onChange={(e) => setSelectedCategory(e.target.value)} placeholder="Select a Category" className="bg-white dark:bg-dark">
           {categories.map((category, index) => (
             <OptionComponent key={index} value={category}>
               {category === "all" ? t("item.all") : category}

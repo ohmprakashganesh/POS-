@@ -9,10 +9,9 @@ import React, {
 } from "react";
 
 const SelectContext = createContext();
-
-
-
 export const SelectComponent = ({
+   setLangState,
+   langState,
   children,
   placeholder = "Select",
   value,
@@ -45,9 +44,9 @@ export const SelectComponent = ({
          {label && <label className="block mb-1  capitalize">{label}</label>}
         <button
           type="button"
-          onClick={() => setOpen(!open)}
+          onClick={() =>{setOpen(!open), setLangState(true)}}
           className={cn(
-            `w-full focus:ring-primary focus:ring-2 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed  border-muted/40  border rounded-md  px-3 py-2 flex items-center justify-between gap-2 min-h-10 ${className}`
+            `w-full focus:ring-primary active:border-primary-hover focus:ring-1 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed  border-muted/40  border rounded-md  px-3 py-2 flex items-center justify-between gap-2 min-h-10 ${className}`
           )}
         >
           {selectedLabel || (
@@ -56,8 +55,8 @@ export const SelectComponent = ({
           <ChevronDown />
         </button>
 
-        {open && (
-          <div className="absolute animate-fade-slide-in mt-1.5 w-full min-w-10 bg-white dark:bg-dark overflow-hidden rounded-md shadow-sm z-50 ">
+        {langState && (
+          <div className={`absolute ${open ? "animate-fade-slide-down":"animate-fade-slide-up"}  mt-1.5 w-full min-w-10 bg-white dark:bg-dark overflow-hidden rounded-md shadow-sm z-50 `}>
             {children}
           </div>
         )}
@@ -72,7 +71,6 @@ export const OptionComponent = ({ children, value }) => {
   const isActive = ctx?.value === value;
 
   const handleSelect = () => {
-    // Create a synthetic event object like native select
     const syntheticEvent = {
       target: { value },
     };
@@ -86,7 +84,7 @@ export const OptionComponent = ({ children, value }) => {
       onClick={handleSelect}
       className={`w-full  px-3 py-2 flex items-center justify-start gap-2 min-h-10 ${
         isActive
-          ? "bg-primary/40 text-primary hover:bg-primary-hover/40"
+          ? "bg-primary/40 text-primary border-primary/40 hover:bg-primary-hover/40"
           : "hover:bg-neutral-200 dark:hover:bg-neutral-700"
       }`}
     >

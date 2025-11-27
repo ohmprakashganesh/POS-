@@ -13,14 +13,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const SUBSCRIPTION_STATUSES = ['All', 'Active', 'Pending', 'DeActive'];
 const TIME_RANGES = ['Monthly', 'Yearly']; // Simplified for static data
 
-// ----------------------------------------------------------------------
-// COMPONENT START
-// ----------------------------------------------------------------------
-
 const Report = () => {
   const [timeRange, setTimeRange] = useState('Monthly');
   const [statusFilter, setStatusFilter] = useState('Active');
   const [isGenerating, setIsGenerating] = useState(false);
+  const[langState, setLangState]=useState(false);
     const navigate=useNavigate();
      const location = useLocation();
       const returnPath= location.state?.from;
@@ -191,6 +188,8 @@ return (
   <SelectComponent
   label="Time Range"
     id="timeRange"
+    langState={langState}
+    setLangState={setLangState}
     value={timeRange}
     onChange={(e) => setTimeRange(e.target.value)}
   >
@@ -206,6 +205,8 @@ return (
   <SelectComponent
     id="statusFilter"
     label="Subscription Status"
+     langState={langState}
+    setLangState={setLangState}
     value={statusFilter}
     onChange={(e) => setStatusFilter(e.target.value)}
     

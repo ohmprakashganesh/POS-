@@ -101,23 +101,38 @@ const Vendor = () => {
                 <td className="table-td ">{vendor.total_cost}</td>
                 {/* Actions */}
                 <td className="table-td">{vendor.total_paid}</td>
-                <td className="table-tdp">
-                  <div
-                    onClick={() =>
-                      setActiveVendor({
-                        name: vendor.name,
-                        id: vendor.id,
-                        totalCost: vendor.total_cost,
-                        totalPaid: vendor.total_paid,
-                        totalDue: vendor.total_due,
-                      })
-                    }
-                    className="flex cursor-pointer group items-center h-full p-1 gap-2"
-                  >
-                    {vendor.total_due}
-                    <PencilIcon className="size-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto text-primary" />
-                  </div>
-                </td>
+               <td className="table-td">
+  <div
+    onClick={(e) => {
+      if (vendor.total_due > 0) {
+        e.stopPropagation();
+        setActiveVendor({
+          name: vendor.name,
+          id: vendor.id,
+          totalCost: vendor.total_cost,
+          totalPaid: vendor.total_paid,
+          totalDue: vendor.total_due,
+        });
+      }
+    }}
+    className={`flex items-center h-full p-1 gap-2 group ${
+      vendor.total_due > 0
+        ? "cursor-pointer"
+        : "cursor-not-allowed opacity-60"
+    }`}
+  >
+    {vendor.total_due}
+
+    <PencilIcon
+      className={`size-4 text-primary transition-opacity ${
+        vendor.total_due > 0
+          ? "opacity-0 group-hover:opacity-100"
+          : "opacity-0 pointer-events-none"
+      }`}
+    />
+  </div>
+</td>
+
 
                 {/* Actions */}
                 <td className="table-td flex gap-2">
@@ -200,7 +215,7 @@ function VendorDueForm({ vendor, onClose }) {
           onClick={onClose}
           className="fixed inset-0 bg-black/30 dark:bg-black/70 z-50"
         />
-        <div className="bg-white animate-fade-slide-in dark:bg-dark rounded-lg shadow-lg w-full max-w-md p-6 relative z-50">
+        <div className="bg-white animate-fade-slide-down dark:bg-dark rounded-lg shadow-lg w-full max-w-md p-6 relative z-50">
           <button
             onClick={onClose}
             className="absolute top-3 right-3 text-muted"

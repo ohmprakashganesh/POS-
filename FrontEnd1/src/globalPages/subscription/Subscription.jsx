@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { CheckIcon, HomeModernIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { CheckIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import { ArrowRight, HandIcon, HomeIcon, Move3dIcon, MoveRight } from 'lucide-react';
+import { ArrowRight, HomeIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { plans } from '@/data/mockData';
 import Button from '@/features/ui/Button';

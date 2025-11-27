@@ -16,7 +16,7 @@
     "title": "Settings",
     "activePlan": "Active Plan",
     "help": "Help",
-    "updateProfile": "Update Profile",
+    "profile": "Profile",
     "tutorials": "Tutorials"
   },
   "dashboard": {
@@ -260,5 +260,25 @@
   "responseTime": "Our team will respond within 24 hours.",
   "close": "Close",
   "submitting": "Submitting"
+},
+  "company": {
+    "manageDetails": "Manage your company details and subscription status",
+    "companyInformation": "Company Information",
+    "emailAddress": "Email Address",
+    "phoneNumber": "Phone Number",
+    "businessType": "Business Type",
+    "panVatNumber": "PAN/VAT Number",
+    "businessAddress": "Business Address",
+    "subscriptionStatus": "Subscription Status",
+    "startDate": "Start Date",
+    "renewalDate": "Renewal Date",
+    "remainingDays": "Remaining Days",
+    "userCapacity": "User Capacity",
+    "update": "Update",
+    "profileOverview": "Profile Overview",
+     "days": "Days"
+
+  }
 }
-}
+
+

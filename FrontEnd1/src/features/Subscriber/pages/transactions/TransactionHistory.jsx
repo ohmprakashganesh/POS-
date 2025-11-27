@@ -12,11 +12,13 @@ import {RotateCcwIcon } from "lucide-react";
 import { OptionComponent, SelectComponent } from "@/features/ui/Select";
 
 const TransactionHistory = () => {
+  
   const {t}=useTranslation()
   const [transactions, setTransactions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   const[paymentState,setPaymentState]=useState("completed");
+  const[langState,setLangState]=useState(false);
   const [dateRange, setDateRange] = useState({
     start: "",
     end: "",
@@ -190,7 +192,7 @@ const TransactionHistory = () => {
                     }
           className="bg-white dark:bg-dark"
         />
-         <SelectComponent value={paymentState} onChange={(e) => setPaymentState(e.target.value)} placeholder="Select a status" className="bg-white dark:bg-dark">
+         <SelectComponent value={paymentState} langState={langState} setLangState={setLangState} onChange={(e) => setPaymentState(e.target.value)} placeholder="Select a status" className="bg-white dark:bg-dark">
             <OptionComponent  value={"all"}>
                     {t("transactionHistory.all")}
                     </OptionComponent>

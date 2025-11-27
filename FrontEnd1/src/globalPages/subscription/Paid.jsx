@@ -36,7 +36,6 @@ const Paid = () => {
 
           {/* //for production  */} 
           {/* there will not be any button segment to get to dashboard , after the activation of company user will redirect to dasboard */}
-          
          </div>
               
          </div>

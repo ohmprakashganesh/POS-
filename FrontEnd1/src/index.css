@@ -125,10 +125,6 @@ select option:checked {
 }
 
 /* animations  */
-@theme {
-  --animate-fade-slide-in: fade-slide-in 300ms ease forwards;
-  --animate-fade-slide-left:fade-slide-left 500ms ease forwards;
-
 
 
   @keyframes fade-slide-left {
@@ -152,8 +148,6 @@ select option:checked {
     transform: translateX(100%);
   }
 }
-}
-
 .animate-fade-slide-in {
   animation: fade-slide-left 0.5s ease-out forwards;
 }
@@ -163,3 +157,37 @@ select option:checked {
   animation: fade-slide-right 0.5s ease-in forwards;
 }
 
+
+@keyframes fade-slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transform-origin: top right;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fade-slide-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transform-origin: top right;
+  }
+}
+
+.animate-fade-slide-down {
+  animation: fade-slide-down 0.2s ease-out forwards;
+}
+
+.animate-fade-slide-up {
+  animation: fade-slide-up 0.2s ease-in forwards;
+  pointer-events: none;
+  z-index: -1; 
+}

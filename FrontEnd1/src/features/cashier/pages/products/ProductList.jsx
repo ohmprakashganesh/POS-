@@ -20,6 +20,8 @@ const ProductList = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [product, setProduct] = useState(null);
+   const[langState,setLangState]=useState(false);
+  
   const col = "";
   useEffect(() => {
     // In real app, this would be an API call
@@ -80,6 +82,8 @@ const ProductList = () => {
 
           <SelectComponent
             value={selectedCategory}
+             langState={langState}
+             setLangState={setLangState}
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="bg-white dark:bg-dark"
           >

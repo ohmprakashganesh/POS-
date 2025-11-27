@@ -11,9 +11,9 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import LanguageToggle from "@/locales/LanguageToggle";
 import { LogOut, X } from "lucide-react";
-import Button from "@/features/ui/Button";
 import ThemeButton from "@/features/ui/ThemeButton";
 import NotificationScreen from "../pages/notification/Notification";
+import { tr } from "zod/v4/locales";
 const Header = ({ openSidebar }) => {
     const buttonRef = useRef(null);
     const panelRef = useRef(null);
@@ -23,6 +23,11 @@ const Header = ({ openSidebar }) => {
   const { logout, user } = useAuth();
    const { unreadCount, markAsRead } = useNotifications();
     const [notification, setNotification] = useState(false);
+    const[nState,setNState]= useState(false);
+  const[lState,setLState]= useState(false);
+  const [langState,setLangState]=useState(false);
+
+
 
   return (
     <header className="h-16 bg-white dark:bg-dark shadow-sm flex items-center justify-between px-2 sm:px-5 sticky top-0 z-10">
@@ -40,12 +45,14 @@ const Header = ({ openSidebar }) => {
       {/* Right section */}
       <div className="flex items-center gap-2">
         <ThemeButton/>
-        <LanguageToggle />
+          <LanguageToggle setLangState={setLangState} langState={langState} />
+          
            <div ref={buttonRef} className="relative">
                      <button
                        onClick={() => {
                          markAsRead();
                          setNotification((prev) => !prev);
+                         setNState(true);
                        }}
                        className="p-2 text-gray-400 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100 relative"
                      >
@@ -61,7 +68,7 @@ const Header = ({ openSidebar }) => {
         {/* User menu */}
         <div className="relative">
           <button
-            onClick={() => setUserMenuOpen(!userMenuOpen)}
+            onClick={() =>{setUserMenuOpen(!userMenuOpen) ,setLState(true) }}
             className="flex items-center space-x-3 text-sm focus:outline-none"
           >
             <UserCircleIcon className="h-8 w-8 text-muted" />
@@ -70,13 +77,13 @@ const Header = ({ openSidebar }) => {
               <p className="text-muted text-xs">{user?.role}</p>
             </div>
           </button>
-          {userMenuOpen && (
+          {lState && (
             <>
               <div
-                className="overlay fixed inset-0 z-10"
+                className="overlay fixed  z-0"
                 onClick={() => setUserMenuOpen(false)}
               />
-              <div className="dropdown animate-fade-slide-in absolute w-70 z-20 top-10 right-0 h-fit bg-white dark:bg-dark shadow-sm  py-3 px-2">
+              <div className={`fixed md:w-[240px]  w-[50%] right-3 top-16 bg-white  dark:bg-dark rounded-md shadow-md py-1 origin-top-right ${userMenuOpen ? "animate-fade-slide-down":"animate-fade-slide-up"}  z-40`}>
                 <X
                   className="absolute right-2 top-2 size-8 p-1.5  rounded-full hover:bg-background"
                   onClick={() => setUserMenuOpen(false)}
@@ -116,14 +123,19 @@ const Header = ({ openSidebar }) => {
           )}
         </div>
       </div>
-       {notification && (
-        <div
-          ref={panelRef}
-         className="fixed animate-fade-slide-left w-full max-w-130 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100"
-        >
-          <NotificationScreen />
-        </div>
-      )}
+
+     {nState && (
+  <div
+    ref={panelRef}
+    className={`fixed w-full md:max-w-80 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100 ${
+      notification ? "animate-fade-slide-in" : "animate-fade-slide-out"
+    }`}
+  >
+    <NotificationScreen />
+  </div>
+)}
+
+     
     </header>
   );
 };

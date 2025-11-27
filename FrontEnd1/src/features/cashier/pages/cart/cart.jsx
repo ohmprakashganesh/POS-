@@ -13,6 +13,7 @@ import AddEditCustomer from '../customer/AddEditCustomer';
 import { QRGenerator } from './Qrgenreator';
 import EmptyCart from './EmptyCart';
 import { OptionComponent, SelectComponent } from '@/features/ui/Select';
+import SearchSelect from '@/features/ui/SearchSelect';
 
 
 
@@ -73,7 +74,9 @@ const Cart = () => {
   const [discountRate, setDiscountRate] = useState(0);
   const [qrOpen, setQrOpen] = useState(false);
   const [selectedId, setSelectedId] = useState("");
+   const[langState,setLangState]=useState(false);
  const { openForm, openCustomerForm } = useForm();
+
  
 
   useEffect(() => {
@@ -158,19 +161,11 @@ const Cart = () => {
         <div className='w-lg'>
 
   {/* Dropdown */}
- <SelectComponent
-  value={selectedId || ""}
-  onChange={(e) => setSelectedId(e.target.value)}
-  placeholder="Select a Customer"
-  className="bg-white dark:bg-dark"
->
-  
-  {filteredCustomers.slice(0, 3).map((user) => (
-    <OptionComponent key={user.id} value={user.id}>
-      {user.name}
-    </OptionComponent>
-  ))}
-</SelectComponent>
+<SearchSelect 
+  value={selectedId}
+  onChange={(id) => setSelectedId(id)}
+  customers={filteredCustomers}
+/>
   </div>
 
 

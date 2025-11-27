@@ -14,8 +14,6 @@ const VendorDetailsCard = () => {
   }, [id]);
 
   if (!vendor) return <div className="text-center p-6">Vendor not found or loading...</div>;
-
-
   return (
     <div className="w-full relative">
        

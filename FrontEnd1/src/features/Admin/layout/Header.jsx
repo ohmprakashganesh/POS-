@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { LogOutIcon, Moon, Sun } from 'lucide-react';
 import NotificationScreen from '../notifications/NotificationScreen';import { useNavigate } from 'react-router-dom';
+import { tr } from 'zod/v4/locales';
 
 
 
@@ -19,6 +20,8 @@ const Header = ({ onMenuClick, user }) => {
   const { unreadCount, markAsRead } = useNotifications();
   const { logout } = useAuth();
   const[notification,setNotification]=useState(false);
+    const[nState,setNState]= useState(false);
+      const[lState,setLState]= useState(false);
   
     const buttonRef = useRef(null);
     const panelRef = useRef(null);
@@ -72,6 +75,7 @@ const Header = ({ onMenuClick, user }) => {
                      <button
                        onClick={() => {
                          markAsRead();
+                         setNState(true);
                          setNotification((prev) => !prev);
                        }}
                        className="p-2 rounded-full bg-muted/10 dark:bg-gray-700 relative"
@@ -84,10 +88,9 @@ const Header = ({ onMenuClick, user }) => {
                        )}
                      </button>
                    </div>
-
                              <div className="relative">
                                        <button
-                                   onClick={() => setUserMenuOpen(!userMenuOpen)}
+                                   onClick={() => {setUserMenuOpen(!userMenuOpen), setLState(true)}}
                                    className="flex items-center space-x-3 text-sm focus:outline-none"
                                  >
                                    <UserCircleIcon className="h-8 w-8 text-muted" />
@@ -96,50 +99,28 @@ const Header = ({ onMenuClick, user }) => {
                                      <p className="text-muted text-xs">{user?.role}</p>
                                    </div>
                                  </button>
-
-            {userMenuOpen ?(
-              <div className="absolute animate-fade-slide-in right-0 mt-4 w-48 bg-white dark:bg-dark rounded-md  shadow-md py-1 z-50">
-                <div className='flex flex-row justify-start py-2 gap-2 text-destructive  px-5'>
-                   <LogOutIcon/> 
-                  <button
-                  onClick={logout}
-                  className="block w-full text-left  text-sm "
-                >
-                 Sign out
-                </button>
-                </div>
-               
-              </div>
-            ): <div className="absolute animate-fade-slide-out right-0 mt-4 w-48 bg-white dark:bg-dark rounded-md  shadow-md py-1 z-50">
-                <div className='flex flex-row justify-start py-2 gap-2 text-destructive  px-5'>
-                   <LogOutIcon/> 
-                  <button
-                  onClick={logout}
-                  className="block w-full text-left  text-sm "
-                >
-                 Sign out
-                </button>
-                </div>
-               
-              </div>}
           </div>
         </div>
       </div>
+        {lState &&(
+          <div className={`fixed w-[140px] right-0 top-16   bg-white dark:bg-dark rounded-md shadow-md py-1 origin-top-right  ${userMenuOpen ?"animate-fade-slide-down":"animate-fade-slide-up"}   z-40 `}>
+            <div className="flex items-center text-destructive text-sm gap-2 px-4 py-2">
+              <LogOutIcon size={18} />
+              <button onClick={logout} className="text-left w-full">
+              Log Out
+              </button>
+            </div>
+          </div>
+        ) }
       
-     {notification ? (
+     {nState &&(
   <div
     ref={panelRef}
-    className="fixed animate-fade-slide-in w-full md:max-w-80 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100"
+    className={`fixed ${notification ?" animate-fade-slide-in":"animate-fade-slide-out"}  w-full md:max-w-80 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100`}
   >
     <NotificationScreen />
   </div>
-) : (
-  <div
-    className="fixed animate-fade-slide-out w-full md:max-w-80 h-[calc(100dvh-65px)] bg-white dark:bg-dark right-0 bottom-0 z-100"
-  >
-    <NotificationScreen />
-  </div>
-)}
+) }
 
     </header>
   );

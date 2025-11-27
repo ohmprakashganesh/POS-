@@ -90,13 +90,6 @@ export const existingUsers=[
     { id: 3, name: "Robert Lee", email: "robert@example.com", active: true, plan: 'enterprise', start: "2022.12.5", expiry: '2026.04.22' },
   ];
 
-  // 🆕 Hypothetical New/Potential Users Data (for demonstration)
-// =[
-//     { id: 101, name: "Emily Clark", email: "emily@potential.com", source: 'Trial Signup', created: "2024.11.01" },
-//     { id: 102, name: "David Wilson", email: "david@potential.com", source: 'Waitlist', created: "2024.10.15" },
-//     { id: 103, name: "Maria Garcia", email: "maria@potential.com", source: 'Unfinished Checkout', created: "2024.11.10" },
-//   ];
-
     export const newUsers = [
   {
     "id": 1,

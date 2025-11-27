@@ -117,7 +117,7 @@ const Purchase = ({ back }) => {
                   {product.expiry_date || "-"}
                 </td>
                 <td>{product.stock}</td>
-                <td className="flex items-center gap-2">
+                <td onClick={(e)=> e.stopPropagation()} className="flex items-center gap-2 ">
                   <Link
                   to={`/products/edit/${product.id}`}
                  state={{from:returnPath}}

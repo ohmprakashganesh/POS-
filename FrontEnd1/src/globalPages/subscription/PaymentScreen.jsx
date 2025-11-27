@@ -73,6 +73,7 @@ const EnrollmentSummary = ({ summary, totalAmount }) => {
   );
 };
 
+
 // --- 2. Payment Method Card Component ---
 const PaymentMethodCard = ({ icon: Icon, title, subtitle, selected, onClick }) => {
   const baseClasses =
@@ -104,6 +105,7 @@ const PaymentMethodCard = ({ icon: Icon, title, subtitle, selected, onClick }) =
     </div>
   );
 };
+
 
 const App = () => {
   const [selectedMethod, setSelectedMethod] = useState("eSewa");

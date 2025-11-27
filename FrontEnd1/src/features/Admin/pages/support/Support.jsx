@@ -65,9 +65,19 @@ const SupportReq = () => {
           No support requests currently available.
         </div>
       ) : (
-        <div className="overflow-x-auto shadow-md  max-h-fit rounded-lg">
-           <div className="relative max-w-sm mb-4">
-               <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)} placeholder="Select a status" className="bg-white dark:bg-dark w-full px-4 py-2 rounded-md focus:ring-0 border border-muted/40 focus:outline-primary/40  max-w-sm">
+
+      <div className="flex  flex-col  w-full">
+  {/* Search Box with Icon */}
+  <div className="relative mb-4 w-full md:w-sm">
+        <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)} placeholder="Select a status"
+        className="bg-white py-2 text-muted dark:bg-dark w-full max-w-sm px-4 h-10 rounded-lg
+    border border-muted/40
+    focus:outline-none
+    focus:ring-2
+    focus:border-transparent 
+   focus:ring-primary
+    transition-all duration-150" >
+
                 {STATUS_OPTIONS.map((item, index) => (
                   <option key={index} value={item} className="">
                     {item === "all" ? t("item.all") : item}

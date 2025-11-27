@@ -5,6 +5,8 @@ import Input from "@/features/ui/Input";
 import { useNavigate } from "react-router-dom";
 const STATUS_OPTIONS = ["All",'Active', 'Expired'];
 
+
+
 const StatusBadge = ({ status }) => {
   let color = "bg-gray-200 text-gray-700 border-gray-300";
   let Icon = AlertTriangle;
@@ -16,7 +18,6 @@ const StatusBadge = ({ status }) => {
     color = "bg-red-100 text-red-700 border-red-300";
     Icon = XCircle;
   }
-
   return (
     <span className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold border ${color}`}>
       <Icon className="w-3 h-3" />
@@ -24,6 +25,7 @@ const StatusBadge = ({ status }) => {
     </span>
   );
 };
+
 
 const Companies = () => {
   const navigate = useNavigate();
@@ -85,8 +87,6 @@ const handleAction = (id) => {
     )
   );
 };
-
-
   return (
     <div className="min-h-screen font-sans">
       <div className="max-w-7xl mx-auto">
@@ -116,12 +116,13 @@ const handleAction = (id) => {
   <select
     value={selectedStatus}
     onChange={(e) => setSelectedStatus(e.target.value)}
-    className="bg-white text-muted dark:bg-dark w-full max-w-sm px-4 border border-muted/40  h-10  rounded-lg 
-    focus:outline-primary/40
-    focus:border
-    active:outline
-    active:ring-1
-    active:border-primary/40"
+  className="bg-white text-muted dark:bg-dark w-full max-w-sm px-4 h-10 rounded-lg
+    border border-muted/40
+    focus:outline-none
+    focus:ring-2
+    focus:border-transparent 
+   focus:ring-primary
+    transition-all duration-150"
   >
     {STATUS_OPTIONS.map((item, index) => (
       <option key={index} value={item}>

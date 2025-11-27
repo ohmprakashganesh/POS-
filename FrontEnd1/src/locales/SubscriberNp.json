@@ -16,7 +16,7 @@
     "title": "सेटिङहरू",
     "activePlan": "सक्रिय योजना",
     "help": "सहयोग",
-    "updateProfile": "प्रोफाइल अद्यावधिक गर्नुहोस्",
+    "profile": "प्रोफाइल",
     "tutorials": "ट्युटोरियलहरू"
   },
   "dashboard": {
@@ -260,5 +260,24 @@
   "responseTime": "हाम्रो टोली २४ घण्टाभित्र जवाफ दिनेछ।",
     "close": "बन्द गर्नुहोस्",
   "submitting": "पठाइ भइरहेको छ"
+    },
+  "company": {
+    "manageDetails": "तपाईंको कम्पनी विवरण र सब्स्क्रिप्शन स्थिति व्यवस्थापन गर्नुहोस्",
+    "companyInformation": "कम्पनी जानकारी",
+    "emailAddress": "इमेल ठेगाना",
+    "phoneNumber": "फोन नम्बर",
+    "businessType": "व्यवसाय प्रकार",
+    "panVatNumber": "PAN/VAT नम्बर",
+    "businessAddress": "व्यवसाय ठेगाना",
+    "subscriptionStatus": "सब्स्क्रिप्शन स्थिति",
+    "startDate": "सुरु मिति",
+    "renewalDate": "नवीकरण मिति",
+    "remainingDays": "बाँकी दिनहरू",
+    "userCapacity": "प्रयोगकर्ता क्षमता",
+    "update": "अपडेट",
+    "profileOverview": "प्रोफाइल अवलोकन",
+    "days": "बाँकी दिनहरू"
+
+  }
 }
-}
+

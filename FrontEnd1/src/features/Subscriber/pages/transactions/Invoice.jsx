@@ -2,7 +2,8 @@ import Button from "@/features/ui/Button";
 import { X } from "lucide-react";
 
 const InvoiceViewer = ({ setInvoice, invoice }) => {
-  // Static invoice data
+
+  // Static invoice data fetch the real data from the backend
   const data = {
     billId: "BBSM-2025-10-14-001245",
     branch: {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { metricCards ,recentSubscriptions,quickActions} from '../mockdata/mockAdminData';
+import Button from '@/features/ui/Button';
+import TimelineRevenueChart from './Timeline';
 import { 
   UsersIcon, 
   BuildingStorefrontIcon,
@@ -8,14 +10,12 @@ import {
   ArrowTrendingUpIcon,
   CreditCardIcon
 } from '@heroicons/react/24/outline';
-import Button from '@/features/ui/Button';
-import TimelineRevenueChart from './Timeline';
 
 const AdminDashboard = () => {
   const location= useLocation();
    const returnPath = location.pathname;
   const [cardMetrics, setCardMetrics]=useState([]);
-    const [newSubscriptions, setNewSubscriptions] = useState([]);
+  const [newSubscriptions, setNewSubscriptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const[mode,setMode]=useState("monthly");
 
@@ -83,8 +83,7 @@ const AdminDashboard = () => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'active': return 'text-green-600 bg-green-50 dark:bg-primary-foreground';
-      case 'trial': return 'text-primary bg-blue-50 dark:bg-primary-foreground';
-      case 'cancelled': return 'text-destructive bg-red-50 dark:bg-primary-foreground';
+      case 'inactive': return 'text-destructive bg-red-50 dark:bg-primary-foreground';
       default: return 'text-gray-600 bg-gray-50';
     }
   };
@@ -155,16 +154,13 @@ const AdminDashboard = () => {
   )
 })}
  </div>
-
-
-
       {/* Recent Subscriptions & Revenue Chart */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {/* Recent Subscriptions */}
         <div className=" bg-white dark:bg-dark  rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-muted-hover">Recent Subscriptions</h3>
-            <Link to="/admin/subscriptions" className="text-sm dark:text-muted-hover text-primary hover:text-primary-hover">
+            <Link to="/subscriberList" state={{from:returnPath}} className="text-sm dark:text-muted-hover text-primary hover:text-primary-hover">
               View all
             </Link>
           </div>
@@ -183,7 +179,7 @@ const AdminDashboard = () => {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="font-semibold text-muted-hover">${subscription.amount}</p>
+                  <p className="font-semibold text-muted-hover">Rs.{subscription.amount}</p>
                   <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium dark:bg-primary-foreground ${getStatusColor(subscription.status)}`}>
                     {subscription.status}
                   </span>
@@ -207,7 +203,7 @@ const AdminDashboard = () => {
           className={`w-full rounded-lg  ${
             mode === "monthly"
               ? "bg-primary text-white  "
-              : "bg-white text-gray-700 "
+              : "bg-primary/40 text-muted "
           }`}
         >
           Monthly
@@ -217,7 +213,7 @@ const AdminDashboard = () => {
           className={`w-full rounded-lg  ${
             mode === "yearly"
               ? "bg-primary text-muted-hover"
-              : "bg-white text-gray-700 "
+             : "bg-primary/40 text-muted "
           }`}
         >
           Yearly
