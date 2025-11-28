@@ -15,7 +15,7 @@ const Paid = () => {
     const navigate= useNavigate();
      
   return (
-    <div className=' w-full fixed inset-0 flex justify-center items-center '>
+    <div className=' w-full flex justify-center h-screen items-center '>
          <div className='w-[95%]  max-w-xl h-fit p-10 bg-white dark:bg-dark rounded-md shadow-sm'>
          <p className='text-xl font-semibold text-center mb-2'>Thank You</p>
          <p>   Success fully  completed the PayMent </p>
@@ -24,7 +24,7 @@ const Paid = () => {
          <p>  credentials will be provided through Gmail</p> 
          <div>
 
-          {/* //this is for developemtn  */}
+          {/* this is for development  */}
 
         <Button
         onClick={() => navigate("/login")} 
@@ -37,10 +37,7 @@ const Paid = () => {
           {/* //for production  */} 
           {/* there will not be any button segment to get to dashboard , after the activation of company user will redirect to dasboard */}
          </div>
-              
          </div>
-      
-
     </div>
   )
 }
